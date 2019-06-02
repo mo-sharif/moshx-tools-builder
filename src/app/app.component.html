@@ -1,0 +1,4 @@
+<app-header [title]="title" [config]="(config$ | async)?.adminName"></app-header>
+<div class="container app-container">
+  <router-outlet></router-outlet>
+</div>
