@@ -11,7 +11,7 @@ import { selectConfig } from './store/selectors/config.selector';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ePay';
+  title = 'AngularX';
   config$ = this._store.pipe(select(selectConfig));
 
   constructor(private _store: Store<IAppState>) {}

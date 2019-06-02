@@ -1,17 +1,18 @@
-<table class="table table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Body</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let post of posts"
-      (click)="navigateToPost(post.id)">
-      <td>{{ post.userId }}</td>
-      <td>{{ post.title }}</td>
-      <td>{{ post.body }}</td>
-    </tr>
-  </tbody>
-</table>
+<mat-grid-list cols="2" rowHeight="2:1">
+	<mat-grid-tile *ngFor="let post of posts">
+		<mat-card class="card">
+			<mat-card-header>
+				<div mat-card-avatar mat-fab color="primary"><mat-icon>person</mat-icon></div>
+        <mat-card-title>{{ post.title }}</mat-card-title>
+				<mat-card-subtitle>Author #{{ post.userId }}</mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-content>
+				<p>{{ post.body }}</p>
+			</mat-card-content>
+			<mat-card-actions>
+				<button mat-button>LIKE</button>
+				<button mat-button>SHARE</button>
+			</mat-card-actions>
+		</mat-card>
+	</mat-grid-tile>
+</mat-grid-list>
