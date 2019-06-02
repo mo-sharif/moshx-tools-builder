@@ -1,19 +1,32 @@
-<table class="table table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Card Number</th>
-      <th scope="col">Card Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users"
-      (click)="navigateToUser(user.id)">
-      <td>{{ user.id }}</td>
-      <td>{{ user.name }}</td>
-      <td>{{ user.cardNumber }}</td>
-      <td>{{ user.cardType }}</td>
-    </tr>
-  </tbody>
+<table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> # </th>
+    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let user"> {{user.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="cardNumber">
+    <th mat-header-cell *matHeaderCellDef> Card Number </th>
+    <td mat-cell *matCellDef="let user"> {{user.cardNumber}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="cardType">
+    <th mat-header-cell *matHeaderCellDef> Card Type </th>
+    <td mat-cell *matCellDef="let user"> {{user.cardType}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

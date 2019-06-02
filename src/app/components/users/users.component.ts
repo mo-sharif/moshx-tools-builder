@@ -8,6 +8,8 @@ import { IUser } from '../../models/user.interface';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'name', 'cardType', 'cardNumber'];
+
   @Input()
   users: IUser[];
   @Output()
