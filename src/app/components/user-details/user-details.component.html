@@ -1,11 +1,11 @@
-<div>
-  <p>
-    Name: {{ user.name }}
-  </p>
-  <p>
-    Card Number: {{ user.cardNumber }}
-  </p>
-  <p>
-    Card Type: {{ user.cardType }}
-  </p>
-</div>
+<nz-row [nzGutter]="16">
+	<nz-col [nzSpan]="12">
+		<nz-statistic [nzValue]="user.name" [nzTitle]="'Name'"></nz-statistic>
+	</nz-col>
+	<nz-col [nzSpan]="12">
+		<nz-statistic
+			[nzValue]="user.cardNumber"
+			[nzTitle]="'Card number'"
+		></nz-statistic>
+	</nz-col>
+</nz-row>

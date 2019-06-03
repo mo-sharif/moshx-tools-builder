@@ -1,32 +1,24 @@
-<table mat-table [dataSource]="users" class="mat-elevation-z8">
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> # </th>
-    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let user"> {{user.name}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="cardNumber">
-    <th mat-header-cell *matHeaderCellDef> Card Number </th>
-    <td mat-cell *matCellDef="let user"> {{user.cardNumber}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="cardType">
-    <th mat-header-cell *matHeaderCellDef> Card Type </th>
-    <td mat-cell *matCellDef="let user"> {{user.cardType}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<nz-table #basicTable [nzData]="users">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Card Number</th>
+			<th>Card Type</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.id)">
+			<td>{{ user.id }}</td>
+			<td>{{ user.name }}</td>
+			<td>{{ user.cardNumber }}</td>
+			<td>{{ user.cardType }}</td>
+			<td>
+				<a>Action 一 {{ user.name }}</a>
+				<nz-divider nzType="vertical"></nz-divider>
+				<a>Delete</a>
+			</td>
+		</tr>
+	</tbody>
+</nz-table>
