@@ -27,6 +27,7 @@ import { MaterialModule } from "./material/material.module";
 import { HeaderComponent } from "./components/shared/header/header.component";
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { FooterComponent } from "./components/shared/footer/footer.component";
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
 	declarations: [
@@ -38,7 +39,8 @@ import { FooterComponent } from "./components/shared/footer/footer.component";
 		PostsComponent,
 		PostsComponentContainer,
 		HeaderComponent,
-		FooterComponent
+		FooterComponent,
+		SettingsComponent
 	],
 	imports: [
 		BrowserModule,

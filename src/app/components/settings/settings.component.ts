@@ -1,0 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.css']
+})
+export class SettingsComponent implements OnInit {
+
+  constructor() { }
+  selectedValue = new Date('2017-01-25');
+
+  selectChange(select: Date): void {
+    console.log(`Select value: ${select}`);
+  }
+  ngOnInit() {
+  }
+
+}

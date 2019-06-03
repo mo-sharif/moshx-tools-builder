@@ -5,10 +5,12 @@ import { UsersComponent } from './containers/users/users.component';
 import { UserComponent } from './containers/user/user.component';
 
 import { PostsComponent } from './containers/posts/posts.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'posts', component: PostsComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'user/:id', component: UserComponent },
   { path: '', redirectTo: '/users', pathMatch: 'full' }
 ];
