@@ -6,7 +6,7 @@ export const loadingReducers = (
   action: LoadingActions
 ): ILoadingState => {
   switch (action.type) {
-    case ELoadingActions.GetLoading: {
+    case ELoadingActions.SetLoading: {
       return {
         ...state,
         loading: action.payload

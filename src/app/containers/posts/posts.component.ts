@@ -1,5 +1,4 @@
 import { GetPosts } from "./../../store/actions/post.actions";
-import { GetLoading } from "./../../store/actions/loading.actions";
 
 import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";

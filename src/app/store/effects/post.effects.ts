@@ -12,9 +12,8 @@ import {
   GetPost,
   GetPostSuccess
 } from "../actions/post.actions";
-import { GetLoading, GetLoadingSuccess } from "../actions/loading.actions";
+import { SetLoading } from "../actions/loading.actions";
 import { PostService } from "../../services/post.service";
-import { IPostHttp } from "../../models/http-models/post-http.interface";
 import { IPost } from "../../models/post.interface";
 import { selectPostList } from "../selectors/post.selector";
 
@@ -33,11 +32,11 @@ export class PostEffects {
   @Effect()
   getPosts$ = this._actions$.pipe(
     ofType<GetPosts>(EPostActions.GetPosts),
-    tap(() => new GetLoading(true)),
+    tap(() => new SetLoading(true)),
     switchMap(() => this._postService.getPosts()),
     switchMap((postHttp: IPost[]) => [
       new GetPostsSuccess(postHttp),
-      new GetLoading(false)
+      new SetLoading(false)
     ])
   );
 

@@ -1,12 +1,12 @@
 import { Action } from "@ngrx/store";
 
 export enum ELoadingActions {
-  GetLoading = "[Loading] Get Loading",
+  SetLoading = "[Loading] Set Loading",
   GetLoadingSuccess = "[Loading] Get Loading Success"
 }
 
-export class GetLoading implements Action {
-  public readonly type = ELoadingActions.GetLoading;
+export class SetLoading implements Action {
+  public readonly type = ELoadingActions.SetLoading;
   constructor(public payload: Boolean) {}
 }
 
@@ -15,4 +15,4 @@ export class GetLoadingSuccess implements Action {
   constructor(public payload: Boolean) {}
 }
 
-export type LoadingActions = GetLoading | GetLoadingSuccess;
+export type LoadingActions = SetLoading | GetLoadingSuccess;
