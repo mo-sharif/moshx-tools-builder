@@ -5,8 +5,16 @@ Angular 7 + Ant Design + NGRX = AngularX 🏆
 
 ## TODO
 
-[-] Build Login/Register UI
-[-] Firebase Backend
+- [ ] Build Login/Register UI
+- [ ] Firebase Backend
+
+## Get Started
+
+```
+git clone https://github.com/Mosh-Media/AngularX.git
+npm install
+ng serve -o
+```
 
 ## File Structure
 
