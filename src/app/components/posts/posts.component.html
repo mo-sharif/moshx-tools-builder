@@ -4,4 +4,9 @@
 			<p>{{ post.body }}</p>
 		</nz-card>
 	</div>
+	<nz-spin nzTip="Loading..." *ngIf="loading">
+		<nz-alert nzType="info" nzMessage="Alert message title"
+			nzDescription="Further details about the context of this alert.">
+		</nz-alert>
+	</nz-spin>
 </div>

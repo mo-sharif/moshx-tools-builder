@@ -1,5 +1,12 @@
-# Angular with NGRX Boilerplate 🏆
+# AngularX 🏆
+Boilerplate to get you started quickly on your next web app!
 
+Angular 7 + Ant Design + NGRX = AngularX 🏆
+
+## TODO
+
+[-] Build Login/Register UI
+[-] Firebase Backend
 
 ## File Structure
 
