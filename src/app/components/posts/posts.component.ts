@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { IPost } from '../../models/post.interface';
-import { ILoading } from '../../models/loading.interface';
 
 @Component({
   selector: 'app-posts',
@@ -12,7 +11,7 @@ export class PostsComponent implements OnInit {
   @Input()
   posts: IPost[];
   @Input()
-  loading: ILoading;
+  loading: Boolean;
 
   @Output()
   postSelected: EventEmitter<number> = new EventEmitter();
