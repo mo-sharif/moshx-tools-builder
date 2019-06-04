@@ -1,4 +1,4 @@
-<nz-table #basicTable [nzData]="users">
+<nz-table #basicTable *ngIf="users" [nzData]="users">
 	<thead>
 		<tr>
 			<th>#</th>
