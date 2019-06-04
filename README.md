@@ -15,6 +15,11 @@ git clone https://github.com/Mosh-Media/AngularX.git
 npm install
 ng serve -o
 ```
+## Resources
+
+[Angular auth ngrx guide](https://angularfirebase.com/lessons/ngrx-with-firebase-auth-google-oauth-login/)
+[Ant Design Components](https://ng.ant.design/docs/introduce/en)
+
 
 ## File Structure
 
