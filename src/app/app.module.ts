@@ -28,6 +28,8 @@ import { HeaderComponent } from "./components/shared/header/header.component";
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { FooterComponent } from "./components/shared/footer/footer.component";
 import { SettingsComponent } from './components/settings/settings.component';
+import { LoginComponent } from './components/login/login.component';
+import  { LoginComponent as loginContainer } from './containers/login/login.component';
 
 @NgModule({
 	declarations: [
@@ -40,7 +42,9 @@ import { SettingsComponent } from './components/settings/settings.component';
 		PostsComponentContainer,
 		HeaderComponent,
 		FooterComponent,
-		SettingsComponent
+		SettingsComponent,
+    LoginComponent,
+    loginContainer
 	],
 	imports: [
 		BrowserModule,
