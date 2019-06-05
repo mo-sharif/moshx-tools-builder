@@ -1,64 +1,15 @@
-<div nz-row [nzGutter]="8">
-	<div nz-col [nzSpan]="8" *ngFor="let post of posts">
-    <nz-card
-      nzHoverable
-			style="width:300px;"
-			[nzActions]="[actionSetting, actionEdit, actionEllipsis]"
-		>
-			<nz-card-meta
-				[nzTitle]="post.title"
-				[nzDescription]="post.body"
-			></nz-card-meta>
-		</nz-card>
-		<ng-template #actionSetting>
-			<i nz-icon type="setting"></i>
-		</ng-template>
-		<ng-template #actionEdit>
-			<i nz-icon type="edit"></i>
-		</ng-template>
-		<ng-template #actionEllipsis>
-			<i nz-icon type="ellipsis"></i>
-		</ng-template>
-	</div>
-	<nz-spin nzTip="Loading..." *ngIf="loading">
-		<nz-card style="width: 300px;margin-top: 16px" [nzLoading]="loading">
-			<nz-card-meta
-				[nzAvatar]="avatarTemplate"
-				nzTitle="Card title"
-				nzDescription="This is the description"
-			>
-			</nz-card-meta>
-		</nz-card>
-		<nz-card
-			style="width: 300px;margin-top: 16px"
-			[nzActions]="[actionSetting, actionEdit, actionEllipsis]"
-		>
-			<nz-skeleton
-				[nzActive]="true"
-				[nzLoading]="loading"
-				[nzAvatar]="{ size: 'large' }"
-			>
-				<nz-card-meta
-					[nzAvatar]="avatarTemplate"
-					nzTitle="Card title"
-					nzDescription="This is the description"
-				>
-				</nz-card-meta>
-			</nz-skeleton>
-		</nz-card>
-		<ng-template #avatarTemplate>
-			<nz-avatar
-				nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-			></nz-avatar>
-		</ng-template>
-		<ng-template #actionSetting>
-			<i nz-icon type="setting"></i>
-		</ng-template>
-		<ng-template #actionEdit>
-			<i nz-icon type="edit"></i>
-		</ng-template>
-		<ng-template #actionEllipsis>
-			<i nz-icon type="ellipsis"></i>
-		</ng-template>
-	</nz-spin>
-</div>
+<nz-list [nzDataSource]="posts" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading" nzTip="Loading...">
+	<ng-template #item let-item>
+		<nz-list-item>
+			<nz-list-item-meta [nzTitle]="nzTitle"
+				nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" [nzDescription]="item.body">
+				<ng-template #nzTitle>
+					<a href="">{{ item.title }}</a>
+				</ng-template>
+			</nz-list-item-meta>
+		</nz-list-item>
+	</ng-template>
+</nz-list>
+<!-- <nz-spin nzTip="Loading...">
+	<nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+</nz-spin> -->
