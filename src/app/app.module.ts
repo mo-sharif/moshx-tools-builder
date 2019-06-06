@@ -27,41 +27,43 @@ import { MaterialModule } from "./material/material.module";
 import { HeaderComponent } from "./components/shared/header/header.component";
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { FooterComponent } from "./components/shared/footer/footer.component";
-import { SettingsComponent } from './components/settings/settings.component';
-import { LoginComponent } from './components/login/login.component';
-import  { LoginComponent as loginContainer } from './containers/login/login.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
+import { SettingsComponent } from "./components/settings/settings.component";
+import { LoginComponent } from "./components/login/login.component";
+import { LoginComponent as loginContainer } from "./containers/login/login.component";
+import { CalendarComponent } from "./components/calendar/calendar.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		UsersContainerComponent,
-		UsersComponent,
-		UserComponent,
-		UserDetailsComponent,
-		PostsComponent,
-		PostsComponentContainer,
-		HeaderComponent,
-		FooterComponent,
-		SettingsComponent,
+  declarations: [
+    AppComponent,
+    UsersContainerComponent,
+    UsersComponent,
+    UserComponent,
+    UserDetailsComponent,
+    PostsComponent,
+    PostsComponentContainer,
+    HeaderComponent,
+    FooterComponent,
+    SettingsComponent,
     LoginComponent,
     loginContainer,
     CalendarComponent
-	],
-	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
-		MaterialModule,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
 		HttpClientModule,
-		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects]),
-		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
-		!environment.production ? StoreDevtoolsModule.instrument() : [],
-		AppRoutingModule,
-		/** import ng-zorro-antd root module，you should import NgZorroAntdModule and avoid importing sub modules directly **/
-		NgZorroAntdModule
-	],
-	providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService],
-	bootstrap: [AppComponent]
+		ReactiveFormsModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects]),
+    StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    AppRoutingModule,
+    /** import ng-zorro-antd root module，you should import NgZorroAntdModule and avoid importing sub modules directly **/
+    NgZorroAntdModule
+  ],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
