@@ -30,6 +30,7 @@ import { FooterComponent } from "./components/shared/footer/footer.component";
 import { SettingsComponent } from './components/settings/settings.component';
 import { LoginComponent } from './components/login/login.component';
 import  { LoginComponent as loginContainer } from './containers/login/login.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
 	declarations: [
@@ -44,7 +45,8 @@ import  { LoginComponent as loginContainer } from './containers/login/login.comp
 		FooterComponent,
 		SettingsComponent,
     LoginComponent,
-    loginContainer
+    loginContainer,
+    CalendarComponent
 	],
 	imports: [
 		BrowserModule,

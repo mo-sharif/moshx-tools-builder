@@ -8,11 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsComponent implements OnInit {
 
   constructor() { }
-  selectedValue = new Date('2017-01-25');
 
-  selectChange(select: Date): void {
-    console.log(`Select value: ${select}`);
-  }
   ngOnInit() {
   }
 
