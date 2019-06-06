@@ -7,8 +7,10 @@ import { UserComponent } from "./containers/user/user.component";
 import { PostsComponent } from "./containers/posts/posts.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
+import { HomeComponent } from "./components/home/home.component";
 
 const routes: Routes = [
+  { path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
   { path: "users", component: UsersComponent, data: { breadcrumb: "Users" } },
   { path: "posts", component: PostsComponent, data: { breadcrumb: "Posts" }  },
   { path: "calendar", component: CalendarComponent, data: { breadcrumb: "Calendar" }  },

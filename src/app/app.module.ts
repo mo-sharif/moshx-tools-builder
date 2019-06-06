@@ -32,6 +32,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { LoginComponent as loginContainer } from "./containers/login/login.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     SettingsComponent,
     LoginComponent,
     loginContainer,
-    CalendarComponent
+    CalendarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
