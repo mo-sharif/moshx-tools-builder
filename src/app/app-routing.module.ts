@@ -6,10 +6,12 @@ import { UserComponent } from "./containers/user/user.component";
 
 import { PostsComponent } from "./containers/posts/posts.component";
 import { SettingsComponent } from "./components/settings/settings.component";
+import { CalendarComponent } from "./components/calendar/calendar.component";
 
 const routes: Routes = [
   { path: "users", component: UsersComponent, data: { breadcrumb: "Users" } },
   { path: "posts", component: PostsComponent, data: { breadcrumb: "Posts" }  },
+  { path: "calendar", component: CalendarComponent, data: { breadcrumb: "Calendar" }  },
   { path: "settings", component: SettingsComponent, data: { breadcrumb: "Settings" }  },
   { path: "user/:id", component: UserComponent, data: { breadcrumb: "User" }  },
   { path: "", redirectTo: "/users", pathMatch: "full" }
