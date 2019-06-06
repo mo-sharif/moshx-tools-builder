@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: "calendar", component: CalendarComponent, data: { breadcrumb: "Calendar" }  },
   { path: "settings", component: SettingsComponent, data: { breadcrumb: "Settings" }  },
   { path: "user/:id", component: UserComponent, data: { breadcrumb: "User" }  },
-  { path: "", redirectTo: "/users", pathMatch: "full" }
+  { path: "", redirectTo: "/home", pathMatch: "full" }
 ];
 
 @NgModule({

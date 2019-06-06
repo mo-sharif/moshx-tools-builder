@@ -1,11 +1,8 @@
 <nz-header>
-	<div class="logo">{{ title }}</div>
-	<ul
-		nz-menu
-		[nzTheme]="'dark'"
-		[nzMode]="'horizontal'"
-		style="line-height: 64px;"
-	>
+	<a routerLink="/users">
+		<div class="logo">{{ title }}</div>
+	</a>
+	<ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
 		<li nz-menu-item>
 			<a routerLink="/users"><i nz-icon type="user"></i>Users</a>
 		</li>
@@ -20,4 +17,3 @@
 		</li>
 	</ul>
 </nz-header>
-
