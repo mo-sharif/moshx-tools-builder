@@ -1,3 +1,69 @@
-<p>
-	Hello World
-</p>
+<nz-page-header nzTitle="AngularX">
+	<nz-page-header-content>
+		<div class="wrap">
+			<div class="content">
+				<div class="content">
+					<p>
+						Ant Design interprets the color system into two levels: a
+						system-level color system and a product-level color system.
+					</p>
+					<p>
+						Ant Design's design team preferred to design with the HSB color
+						model, which makes it easier for designers to have a clear
+						psychological expectation of color when adjusting colors, as well as
+						facilitate communication in teams.
+					</p>
+					<p class="content-link">
+						<a>
+							<img
+								src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
+								alt="start"
+							/>Quick Start
+						</a>
+						<a>
+							<img
+								src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
+								alt="info"
+							/>Product Info
+						</a>
+						<a>
+							<img
+								src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
+								alt="doc"
+							/>Product Doc
+						</a>
+					</p>
+				</div>
+			</div>
+			<div class="extra-content">
+				<img
+					src="https://gw.alipayobjects.com/mdn/mpaas_user/afts/img/A*KsfVQbuLRlYAAAAAAAAAAABjAQAAAQ/original"
+					alt="content"
+				/>
+			</div>
+		</div>
+	</nz-page-header-content>
+</nz-page-header>
+<br>
+<nz-timeline nzMode="alternate">
+	<nz-timeline-item>Create a services site 2015-09-01</nz-timeline-item>
+	<nz-timeline-item nzColor="green"
+		>Solve initial network problems 2015-09-01</nz-timeline-item
+	>
+	<nz-timeline-item [nzDot]="dotTemplate"
+		>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+		doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+		veritatis et quasi architecto beatae vitae dicta sunt
+		explicabo.</nz-timeline-item
+	>
+	<nz-timeline-item nzColor="red"
+		>Network problems being solved 2015-09-01</nz-timeline-item
+	>
+	<nz-timeline-item>Create a services site 2015-09-01</nz-timeline-item>
+	<nz-timeline-item [nzDot]="dotTemplate"
+		>Technical testing 2015-09-01</nz-timeline-item
+	>
+</nz-timeline>
+<ng-template #dotTemplate>
+	<i nz-icon type="clock-circle-o" style="font-size: 16px;"></i>
+</ng-template>
