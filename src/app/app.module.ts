@@ -1,38 +1,60 @@
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { StoreModule } from "@ngrx/store";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 
-import { appReducers } from "./store/reducers/app.reducers";
-import { environment } from "../environments/environment";
+
 import { AppRoutingModule } from "./app-routing.module";
+
+// Environment Variables
+import { environment } from "../environments/environment";
+
+// App Reducer
+import { appReducers } from "./store/reducers/app.reducers";
+
+// Effects
 import { ConfigEffects } from "./store/effects/config.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { PostEffects } from "./store/effects/post.effects";
-import { AppComponent } from "./app.component";
+
+// Services
 import { UserService } from "./services/user.service";
 import { PostService } from "./services/post.service";
-import { UsersComponent as UsersContainerComponent } from "./containers/users/users.component";
-import { UsersComponent } from "./components/users/users.component";
-import { UserComponent } from "./containers/user/user.component";
-import { UserDetailsComponent } from "./components/user-details/user-details.component";
-import { PostsComponent } from "./components/posts/posts.component";
-import { PostsComponent as PostsComponentContainer } from "./containers/posts/posts.component";
-import { MaterialModule } from "./material/material.module";
-import { HeaderComponent } from "./components/shared/header/header.component";
+
+// import { MaterialModule } from "./material/material.module";
+
+
+// Ant Design
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
+
+// Components
+import { AppComponent } from "./app.component";
 import { FooterComponent } from "./components/shared/footer/footer.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { LoginComponent } from "./components/login/login.component";
-import { LoginComponent as loginContainer } from "./containers/login/login.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from './components/home/home.component';
+import { UsersComponent } from "./components/users/users.component";
+import { UserDetailsComponent } from "./components/user-details/user-details.component";
+import { PostsComponent } from "./components/posts/posts.component";
+import { HeaderComponent } from "./components/shared/header/header.component";
+
+// Containers
+import { LoginComponent as loginContainer } from "./containers/login/login.component";
+import { UsersComponent as UsersContainerComponent } from "./containers/users/users.component";
+import { UserComponent } from "./containers/user/user.component";
+import { PostsComponent as PostsComponentContainer } from "./containers/posts/posts.component";
+
+// Firebase Imports
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -54,7 +76,7 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    // MaterialModule,
 		HttpClientModule,
 		ReactiveFormsModule,
     StoreModule.forRoot(appReducers),
