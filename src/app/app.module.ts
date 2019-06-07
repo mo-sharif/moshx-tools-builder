@@ -8,7 +8,6 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreRouterConnectingModule } from "@ngrx/router-store";
 
-
 import { AppRoutingModule } from "./app-routing.module";
 
 // Environment Variables
@@ -28,7 +27,6 @@ import { PostService } from "./services/post.service";
 
 // import { MaterialModule } from "./material/material.module";
 
-
 // Ant Design
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 
@@ -39,7 +37,7 @@ import { SettingsComponent } from "./components/settings/settings.component";
 import { LoginComponent } from "./components/login/login.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from "./components/home/home.component";
 import { UsersComponent } from "./components/users/users.component";
 import { UserDetailsComponent } from "./components/user-details/user-details.component";
 import { PostsComponent } from "./components/posts/posts.component";
@@ -52,42 +50,45 @@ import { UserComponent } from "./containers/user/user.component";
 import { PostsComponent as PostsComponentContainer } from "./containers/posts/posts.component";
 
 // Firebase Imports
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireAuthModule } from "@angular/fire/auth";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UsersContainerComponent,
-    UsersComponent,
-    UserComponent,
-    UserDetailsComponent,
-    PostsComponent,
-    PostsComponentContainer,
-    HeaderComponent,
-    FooterComponent,
-    SettingsComponent,
-    LoginComponent,
-    loginContainer,
-    CalendarComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    // MaterialModule,
+	declarations: [
+		AppComponent,
+		UsersContainerComponent,
+		UsersComponent,
+		UserComponent,
+		UserDetailsComponent,
+		PostsComponent,
+		PostsComponentContainer,
+		HeaderComponent,
+		FooterComponent,
+		SettingsComponent,
+		LoginComponent,
+		loginContainer,
+		CalendarComponent,
+		HomeComponent
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		// MaterialModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+		AngularFireAuthModule, // imports firebase/auth, only needed for auth features
 		HttpClientModule,
 		ReactiveFormsModule,
-    StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects]),
-    StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    AppRoutingModule,
-    /** import ng-zorro-antd root module，you should import NgZorroAntdModule and avoid importing sub modules directly **/
-    NgZorroAntdModule
-  ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService],
-  bootstrap: [AppComponent]
+		StoreModule.forRoot(appReducers),
+		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects]),
+		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
+		AppRoutingModule,
+		/** import ng-zorro-antd root module，you should import NgZorroAntdModule and avoid importing sub modules directly **/
+		NgZorroAntdModule
+	],
+	providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService],
+	bootstrap: [AppComponent]
 })
 export class AppModule {}
