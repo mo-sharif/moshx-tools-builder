@@ -8,20 +8,51 @@ import { PostsComponent } from "./containers/posts/posts.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
+
+import { RegisterComponent } from "./components/register/register.component";
+import { LoginComponent } from "./components/login/login.component";
 // TODO: https://ng.ant.design/components/breadcrumb/en
 // Change to use children routes
+
+// TODO: Implement auth guards canActivate: [AuthGuard]
 const routes: Routes = [
-  { path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
-  { path: "home/users", component: UsersComponent, data: { breadcrumb: "Users" } },
-  { path: "home/posts", component: PostsComponent, data: { breadcrumb: "Posts" }  },
-  { path: "home/calendar", component: CalendarComponent, data: { breadcrumb: "Calendar" }  },
-  { path: "home/settings", component: SettingsComponent, data: { breadcrumb: "Settings" }  },
-  { path: "home/user/:id", component: UserComponent, data: { breadcrumb: "User" }  },
-  { path: "", redirectTo: "/home", pathMatch: "full" }
+	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
+	{
+		path: "home/users",
+		component: UsersComponent,
+		data: { breadcrumb: "Users" }
+	},
+	{
+		path: "home/posts",
+		component: PostsComponent,
+		data: { breadcrumb: "Posts" }
+	},
+	{
+		path: "home/calendar",
+		component: CalendarComponent,
+		data: { breadcrumb: "Calendar" }
+	},
+	{
+		path: "home/settings",
+		component: SettingsComponent,
+		data: { breadcrumb: "Settings" }
+	},
+	{
+		path: "home/user/:id",
+		component: UserComponent,
+		data: { breadcrumb: "User" }
+	},
+	{ path: "login", component: LoginComponent, data: { breadcrumb: "Login" } },
+	{
+		path: "register",
+		component: RegisterComponent,
+		data: { breadcrumb: "Register" }
+	},
+	{ path: "", redirectTo: "/home", pathMatch: "full" }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule {}

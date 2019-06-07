@@ -30,6 +30,17 @@ import { PostService } from "./services/post.service";
 // Ant Design
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 
+// Firebase Imports
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+
+// Containers
+import { LoginComponent as loginContainer } from "./containers/login/login.component";
+import { UsersComponent as UsersContainerComponent } from "./containers/users/users.component";
+import { UserComponent } from "./containers/user/user.component";
+import { PostsComponent as PostsComponentContainer } from "./containers/posts/posts.component";
+
 // Components
 import { AppComponent } from "./app.component";
 import { FooterComponent } from "./components/shared/footer/footer.component";
@@ -42,17 +53,7 @@ import { UsersComponent } from "./components/users/users.component";
 import { UserDetailsComponent } from "./components/user-details/user-details.component";
 import { PostsComponent } from "./components/posts/posts.component";
 import { HeaderComponent } from "./components/shared/header/header.component";
-
-// Containers
-import { LoginComponent as loginContainer } from "./containers/login/login.component";
-import { UsersComponent as UsersContainerComponent } from "./containers/users/users.component";
-import { UserComponent } from "./containers/user/user.component";
-import { PostsComponent as PostsComponentContainer } from "./containers/posts/posts.component";
-
-// Firebase Imports
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
 	declarations: [
@@ -69,7 +70,8 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 		LoginComponent,
 		loginContainer,
 		CalendarComponent,
-		HomeComponent
+		HomeComponent,
+		RegisterComponent
 	],
 	imports: [
 		BrowserModule,
