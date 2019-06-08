@@ -4,16 +4,19 @@
 	</a>
 	<ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
 		<li nz-menu-item>
-			<a [routerLink]="'home/users'"><i nz-icon type="user"></i>Users</a>
+			<a routerLink="home/users"><i nz-icon type="user"></i>Users</a>
 		</li>
 		<li nz-menu-item>
-			<a [routerLink]="'home/posts'"><i nz-icon type="profile"></i>Posts</a>
+			<a routerLink="home/posts"><i nz-icon type="profile"></i>Posts</a>
 		</li>
 		<li nz-menu-item>
-			<a [routerLink]="'home/calendar'"><i nz-icon type="calendar"></i>Calendar</a>
+			<a routerLink="home/calendar"><i nz-icon type="calendar"></i>Calendar</a>
 		</li>
 		<li nz-menu-item>
-			<a [routerLink]="'home/settings'"><i nz-icon type="setting"></i>Settings</a>
+			<a routerLink="home/settings"><i nz-icon type="setting"></i>Settings</a>
+		</li>
+		<li nz-menu-item>
+			<a routerLink="home/login"><i nz-icon type="login"></i>login</a>
 		</li>
 	</ul>
 </nz-header>

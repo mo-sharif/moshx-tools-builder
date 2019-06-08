@@ -10,7 +10,7 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
 
 import { RegisterComponent } from "./components/register/register.component";
-import { LoginComponent } from "./components/login/login.component";
+import { LoginComponent } from "./containers/login/login.component";
 // TODO: https://ng.ant.design/components/breadcrumb/en
 // Change to use children routes
 
@@ -42,7 +42,7 @@ const routes: Routes = [
 		component: UserComponent,
 		data: { breadcrumb: "User" }
 	},
-	{ path: "login", component: LoginComponent, data: { breadcrumb: "Login" } },
+	{ path: "home/login", component: LoginComponent, data: { breadcrumb: "Login" } },
 	{
 		path: "register",
 		component: RegisterComponent,

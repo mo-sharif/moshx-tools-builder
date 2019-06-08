@@ -54,6 +54,7 @@ import { UserDetailsComponent } from "./components/user-details/user-details.com
 import { PostsComponent } from "./components/posts/posts.component";
 import { HeaderComponent } from "./components/shared/header/header.component";
 import { RegisterComponent } from './components/register/register.component';
+import { AuthEffects } from "./store/effects/auth.effects";
 
 @NgModule({
 	declarations: [
@@ -83,7 +84,7 @@ import { RegisterComponent } from './components/register/register.component';
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects]),
+		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects, AuthEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,

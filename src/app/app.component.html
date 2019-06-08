@@ -1,9 +1,9 @@
 <nz-layout class="layout">
-	<app-header [title]="title" [config]="(config$ | async)?.adminName"></app-header>
+	<app-header [title]="title" config="(config$ | async)?.adminName"></app-header>
 	<nz-content style="padding:0 50px;">
-		<nz-breadcrumb [nzAutoGenerate]="true" style="margin:16px 0;">
+		<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
 			<nz-breadcrumb-item>
-				<a [routerLink]="['../../']">Home</a>
+				<a routerLink="['../../']">Home</a>
 			</nz-breadcrumb-item>
 		</nz-breadcrumb>
 		<div style="background:#fff; padding: 24px; min-height: 280px;">

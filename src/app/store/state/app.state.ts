@@ -4,6 +4,7 @@ import { IUserState, initialUserState } from "./user.state";
 import { IPostState, initialPostState } from "./post.state";
 import { initialConfigState, IConfigState } from "./config.state";
 import { initialLoadingState, ILoadingState } from "./loading.state";
+import { initialAuthState, IAuthState } from "./auth.state";
 
 export interface IAppState {
   router?: RouterReducerState;
@@ -11,13 +12,15 @@ export interface IAppState {
   posts: IPostState;
   config: IConfigState;
   loading: ILoadingState;
+  auth: IAuthState;
 }
 
 export const initialAppState: IAppState = {
   users: initialUserState,
   config: initialConfigState,
   posts: initialPostState,
-  loading: initialLoadingState
+  loading: initialLoadingState,
+  auth: initialAuthState
 };
 
 export function getInitialState(): IAppState {
