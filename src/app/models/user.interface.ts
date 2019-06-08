@@ -10,6 +10,6 @@ export interface IUser {
   cardType?: string,
 }
 
-export class User implements IUser { 
+/* export class User implements IUser { 
   constructor(public uid: string, public displayName: string) {}
-}
+} */
