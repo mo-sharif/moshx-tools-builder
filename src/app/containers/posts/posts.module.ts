@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { PostsRoutingModule } from "./posts-routing.module";
 import { PostsComponent } from "../../components/posts/posts.component";
 import { PostsComponent as PostsComponentContainer } from "../../containers/posts/posts.component";
+
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 
 @NgModule({

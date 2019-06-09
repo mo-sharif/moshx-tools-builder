@@ -19,7 +19,7 @@ const routes: Routes = [
 	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
 	{
 		path: "home/users",
-		component: UsersComponent,
+		loadChildren: () => import('./containers/users/users.module').then(mod => mod.UsersModule),
 		data: { breadcrumb: "Users" }
 	},
 	{
