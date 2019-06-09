@@ -37,9 +37,6 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 
 // Containers
 import { LoginComponent as loginContainer } from "./containers/login/login.component";
-// import { UsersComponent as UsersContainerComponent } from "./containers/users/users.component";
-import { UserComponent } from "./containers/user/user.component";
-// import { PostsComponent as PostsComponentContainer } from "./containers/posts/posts.component";
 
 // Components
 import { AppComponent } from "./app.component";
@@ -49,7 +46,6 @@ import { LoginComponent } from "./components/login/login.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
-import { UserDetailsComponent } from "./components/user-details/user-details.component";
 import { HeaderComponent } from "./components/shared/header/header.component";
 import { RegisterComponent } from './components/register/register.component';
 import { AuthEffects } from "./store/effects/auth.effects";
@@ -57,8 +53,6 @@ import { AuthEffects } from "./store/effects/auth.effects";
 @NgModule({
 	declarations: [
 		AppComponent,
-		UserComponent,
-		UserDetailsComponent,
 		HeaderComponent,
 		FooterComponent,
 		SettingsComponent,

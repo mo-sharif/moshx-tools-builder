@@ -1,10 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { UsersComponent } from "./containers/users/users.component";
-import { UserComponent } from "./containers/user/user.component";
-
-// import { PostsComponent } from "./containers/posts/posts.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -36,11 +32,6 @@ const routes: Routes = [
 		path: "home/settings",
 		component: SettingsComponent,
 		data: { breadcrumb: "Settings" }
-	},
-	{
-		path: "home/user/:id",
-		component: UserComponent,
-		data: { breadcrumb: "User" }
 	},
 	{ path: "home/login", component: LoginComponent, data: { breadcrumb: "Login" } },
 	{
