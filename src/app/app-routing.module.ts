@@ -4,7 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { UsersComponent } from "./containers/users/users.component";
 import { UserComponent } from "./containers/user/user.component";
 
-import { PostsComponent } from "./containers/posts/posts.component";
+// import { PostsComponent } from "./containers/posts/posts.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -24,7 +24,7 @@ const routes: Routes = [
 	},
 	{
 		path: "home/posts",
-		component: PostsComponent,
+		loadChildren: () => import('./containers/posts/posts.module').then(mod => mod.PostsModule),
 		data: { breadcrumb: "Posts" }
 	},
 	{

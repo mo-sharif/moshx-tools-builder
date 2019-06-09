@@ -25,11 +25,12 @@ export class AuthEffects {
     @Effect()
     getUser$ = this._actions$.pipe(
         ofType<GetUser>(EAuthActions.GetUser),
-        map(action => action.payload),
+        map(action => {action.payload; console.log(action)}),
         withLatestFrom(this._store.pipe(select(selectCurrentUser))),
         switchMap(payload => this.afAuth.authState),
-        delay(2000),
+        delay(200),
         map(authData => {
+            console.log(authData)
             if (authData) {
                 const user = new User(authData.uid, authData.displayName);
                 return new Authenticated(user);
