@@ -8,9 +8,9 @@ before_script:
   - npm install -g @angular/cli
 script:
   - npm install
-  - npm run build
+  - npm run build --prod
 deploy:
   skip_cleanup: true
   provider: firebase
   token:
-    secure: ""
+    secure: "1/eRSFw2eKbkYwIV-FD3HTO3zkV7ZyOqv7flJgEfK2TtVUuQiOJCOV8njWnV9MT86-"
