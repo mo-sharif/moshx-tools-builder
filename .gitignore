@@ -265,7 +265,6 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
-src/environments/
 
 # Visual Studio 6 build log
 *.plg
@@ -335,6 +334,3 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
-
-src/environments/environment.prod.ts
-src/environments/environment.ts
