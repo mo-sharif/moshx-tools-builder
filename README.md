@@ -1,4 +1,6 @@
 # AngularX 🏆
+[![Build Status](https://travis-ci.com/Mosh-Media/AngularX.svg?branch=master)](https://travis-ci.com/Mosh-Media/AngularX)
+
 Boilerplate to get you started quickly on your next web app!
 
 Angular 7 + Ant Design + NGRX = AngularX 🏆
