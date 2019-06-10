@@ -9,15 +9,26 @@
 		</tr>
 	</thead>
 	<tbody>
+		<tr *ngFor="let user of basicTable.data"></tr>
 		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.id)">
 			<td>{{ user.id }}</td>
 			<td>{{ user.name }}</td>
 			<td>{{ user.cardNumber }}</td>
 			<td>{{ user.cardType }}</td>
 			<td>
-				<a>Action 一 {{ user.name }}</a>
+				<i
+					nz-icon
+					nzType="edit"
+					nzTheme="outline"
+					(click)="navigateToUser(user.id)"
+				></i>
 				<nz-divider nzType="vertical"></nz-divider>
-				<a>Delete</a>
+				<i
+					nz-icon
+					nzType="more"
+					nzTheme="outline"
+					(click)="navigateToUser(user.id)"
+				></i>
 			</td>
 		</tr>
 	</tbody>
