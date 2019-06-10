@@ -46,7 +46,6 @@ import { LoginComponent } from "./components/login/login.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
-import { HeaderComponent } from "./components/shared/header/header.component";
 import { RegisterComponent } from './components/register/register.component';
 import { AuthEffects } from "./store/effects/auth.effects";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -55,7 +54,6 @@ import { SideMenuComponent } from './components/shared/side-menu/side-menu.compo
 @NgModule({
 	declarations: [
 		AppComponent,
-		HeaderComponent,
 		FooterComponent,
 		SettingsComponent,
 		LoginComponent,

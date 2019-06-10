@@ -1,4 +1,6 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 .ant-menu-item, .ant-menu-submenu-title {
     transition: none !important;
 }
+body {
+    background-color: #f0f2f5;
+  }
