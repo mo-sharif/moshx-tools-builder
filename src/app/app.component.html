@@ -1,17 +1,37 @@
-<nz-layout class="layout">
-	<app-header [title]="title" config="(config$ | async)?.adminName"></app-header>
-	<nz-content style="padding:0 50px;">
-		<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
-			<nz-breadcrumb-item>
-				<a routerLink="['../../']">Home</a>
-			</nz-breadcrumb-item>
-		</nz-breadcrumb>
-		<div style="background:#fff; padding: 24px; min-height: 280px;">
-			<div class="container app-container">
-				<router-outlet></router-outlet>
+<nz-layout>
+	<nz-sider
+		nzCollapsible
+		[(nzCollapsed)]="isCollapsed"
+		[nzBreakpoint]="'lg'"
+		[nzCollapsedWidth]="0"
+		[nzZeroTrigger]="zeroTrigger"
+	>
+		<a routerLink="home/">
+			<div class="logo">
+				{{ title }}
 			</div>
-		</div>
-	</nz-content>
+		</a>
+		<app-side-menu></app-side-menu>
+	</nz-sider>
 
-	<app-footer [copyright]="copyright"></app-footer>
+	<ng-template #zeroTrigger>
+		<i nz-icon type="menu-fold" theme="outline"></i>
+	</ng-template>
+	<nz-layout>
+		<nz-header style="background: #fff; padding:0;"></nz-header>
+		<nz-content style="padding:0 50px;">
+			<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
+				<nz-breadcrumb-item>
+					<a routerLink="['../../']">Home</a>
+				</nz-breadcrumb-item>
+			</nz-breadcrumb>
+			<div style="background:#fff; padding: 24px; min-height: 280px;">
+				<div class="container app-container">
+					<router-outlet></router-outlet>
+				</div>
+			</div>
+		</nz-content>
+
+		<nz-footer style="text-align: center;">{{ copyright }}</nz-footer>
+	</nz-layout>
 </nz-layout>

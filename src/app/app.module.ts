@@ -50,6 +50,7 @@ import { HeaderComponent } from "./components/shared/header/header.component";
 import { RegisterComponent } from './components/register/register.component';
 import { AuthEffects } from "./store/effects/auth.effects";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 
 @NgModule({
 	declarations: [
@@ -62,7 +63,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 		CalendarComponent,
 		HomeComponent,
 		RegisterComponent,
-		PageNotFoundComponent
+		PageNotFoundComponent,
+		SideMenuComponent
 	],
 	imports: [
 		BrowserModule,

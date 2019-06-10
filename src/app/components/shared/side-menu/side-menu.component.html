@@ -1,14 +1,4 @@
-<nz-sider
-	nzCollapsible
-	[(nzCollapsed)]="isCollapsed"
-	[nzBreakpoint]="'lg'"
-	[nzCollapsedWidth]="0"
-	[nzZeroTrigger]="zeroTrigger"
->
-	<a routerLink="home/">
-		<div class="logo">{{ title }}</div>
-	</a>
-	<ul
+<ul
 	nz-menu
 	[nzTheme]="'dark'"
 	[nzMode]="'inline'"
@@ -75,8 +65,3 @@
 		</ul>
 	</li>
 </ul>
-
-</nz-sider>
-<ng-template #zeroTrigger>
-	<i nz-icon type="menu-fold" theme="outline"></i>
-</ng-template>
