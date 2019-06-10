@@ -7,6 +7,8 @@ import { HomeComponent } from "./components/home/home.component";
 
 import { RegisterComponent } from "./components/register/register.component";
 import { LoginComponent } from "./containers/login/login.component";
+import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+
 // TODO: https://ng.ant.design/components/breadcrumb/en
 // Change to use children routes
 
@@ -39,7 +41,8 @@ const routes: Routes = [
 		component: RegisterComponent,
 		data: { breadcrumb: "Register" }
 	},
-	{ path: "", redirectTo: "/home", pathMatch: "full" }
+	{ path: "", redirectTo: "/home", pathMatch: "full"},
+	{ path: '**', component: PageNotFoundComponent, data: { breadcrumb: "Oops!" }   }
 ];
 
 @NgModule({

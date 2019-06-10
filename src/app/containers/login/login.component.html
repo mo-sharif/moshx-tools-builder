@@ -1,18 +1,4 @@
-<div *ngIf="user$ | async as user">
-	<h1>Howdy, {{ user.displayName }}</h1>
-	<h4>{{ user.uid }}</h4>
-</div>
-	<button
-
-		(click)="googleLogin()"
-		[class.is-loading]="user?.loading"
-	>
-		Sign In with Google
-	</button>
-
-	<!-- New code: -->
-
-<!-- 	<div *ngIf="user$ | async as user">
+	<div *ngIf="user$ | async as user">
     
   
 
@@ -33,4 +19,4 @@
 					
 				  Logout
 			</button>
-		  </div> -->
+		  </div>
