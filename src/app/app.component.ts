@@ -12,6 +12,7 @@ import { selectConfig } from "./store/selectors/config.selector";
 })
 export class AppComponent implements OnInit {
 	title = "AngularX";
+	isCollapsed = false;
 	config$ = this._store.pipe(select(selectConfig));
 	copyright = "AngularX ©2019 ❤️";
 	constructor(private _store: Store<IAppState>) {}

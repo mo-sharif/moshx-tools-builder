@@ -9,4 +9,5 @@ export class SideMenuComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit() {}
+	isCollapsed = false;
 }

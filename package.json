@@ -1,6 +1,6 @@
 {
   "name": "AngularX",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "firebase deploy --only hosting:mosh-media"
+    "deploy": "firebase deploy --only hosting:mosh-media",
+    "testComponent": "ngentest src/app/compon…"
   },
   "private": true,
   "dependencies": {
