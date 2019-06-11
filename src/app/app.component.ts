@@ -19,5 +19,8 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		this._store.dispatch(new GetConfig());
+		if (this.isCollapsed) { 
+			
+		} 
 	}
 }
