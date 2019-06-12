@@ -1,8 +1,11 @@
 .logo {
-	margin-left: 20px;
+  margin-left: 20px;
 }
 .layout {
-  margin-top: 64px;
+  height: 100%;
+}
+.inner-layout {
+	margin-top:64px;
 }
 .header {
   background: #fff;
@@ -10,16 +13,25 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 10;
+ 
+  z-index: 100;
 }
 
 .content {
   padding: 0 50px;
+  margin-left: 200px;
 }
-
-@media only screen and (max-width: 600px) {
+.sidebar {
+  position: fixed;
+  z-index: 1;
+  height: 100%;
+}
+@media only screen and (max-width: 767px) {
   .content {
     margin-left: 0px;
     padding: 0px;
+  }
+  .sidebar {
+    position: relative;
   }
 }

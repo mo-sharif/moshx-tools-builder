@@ -1,16 +1,16 @@
 <nz-layout class="layout">
-	<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'md'" [nzCollapsedWidth]="0"
-		[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger">
-		<app-side-menu></app-side-menu>
-	</nz-sider>
-	<nz-layout>
-		<nz-header class="header">
-			<a routerLink="home/">
-				<div class="logo">
-					{{ title }}
-				</div>
-			</a>
-		</nz-header>
+	<nz-header class="header">
+		<a routerLink="home/">
+			<div class="logo">
+				{{ title }}
+			</div>
+		</a>
+	</nz-header>
+	<nz-layout class="inner-layout">
+		<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'md'" [nzCollapsedWidth]="0"
+			[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger" class="sidebar">
+			<app-side-menu></app-side-menu>
+		</nz-sider>
 		<nz-content class="content">
 			<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
 				<nz-breadcrumb-item>
@@ -22,9 +22,8 @@
 					<router-outlet></router-outlet>
 				</div>
 			</div>
-		</nz-content>
-
-		<nz-footer style="text-align: center;">{{ copyright }}</nz-footer>
+			<nz-footer style="text-align: center;">{{ copyright }}</nz-footer>
+		</nz-content>		
 	</nz-layout>
 </nz-layout>
 <ng-template #zeroTrigger>
