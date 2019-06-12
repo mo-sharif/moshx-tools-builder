@@ -1,7 +1,6 @@
 <nz-layout class="layout">
 	<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'md'" [nzCollapsedWidth]="0"
-		[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger"
-		style="overflow: auto; height: 100vh; position: fixed; left: 0">
+		[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger">
 		<app-side-menu></app-side-menu>
 	</nz-sider>
 	<nz-layout>
@@ -11,12 +10,6 @@
 					{{ title }}
 				</div>
 			</a>
-			<ng-template #zeroTrigger>
-				<i nz-icon type="menu-fold" theme="outline"></i>
-			</ng-template>
-			<ng-template #nonZeroTrigger>
-				<i nz-icon type="menu-fold" theme="outline"></i>
-			</ng-template>
 		</nz-header>
 		<nz-content class="content">
 			<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
@@ -34,3 +27,9 @@
 		<nz-footer style="text-align: center;">{{ copyright }}</nz-footer>
 	</nz-layout>
 </nz-layout>
+<ng-template #zeroTrigger>
+	<i nz-icon type="menu-fold" theme="outline"></i>
+</ng-template>
+<ng-template #nonZeroTrigger>
+	<i nz-icon type="menu-fold" theme="outline"></i>
+</ng-template>

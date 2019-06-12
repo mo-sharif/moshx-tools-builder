@@ -1,5 +1,5 @@
 .logo {
- 
+	margin-left: 20px;
 }
 .layout {
   margin-top: 64px;
@@ -15,7 +15,6 @@
 
 .content {
   padding: 0 50px;
-  margin-left: 200px;
 }
 
 @media only screen and (max-width: 600px) {
