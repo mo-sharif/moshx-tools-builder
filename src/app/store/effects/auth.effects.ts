@@ -34,7 +34,7 @@ export class AuthEffects {
 		map(action => {
 			action.payload;
 		}),
-		// withLatestFrom(this._store.pipe(select(selectCurrentUser))),
+		withLatestFrom(this._store.pipe(select(selectCurrentUser))),
 		switchMap(payload => this.afAuth.authState),
 		delay(200),
 		map(authData => {
@@ -42,7 +42,9 @@ export class AuthEffects {
 				const user = new User(authData.uid, authData.displayName);
 				return new Authenticated(user);
 			} else {
-				return new NotAuthenticated();
+				// CHANGE ME: Use initial state instead
+				const user = new User(null, 'Guest');
+				return new NotAuthenticated(user);
 			}
 		}),
 		catchError(err => of(new AuthError()))
@@ -55,6 +57,7 @@ export class AuthEffects {
 			action.payload;
 		}),
 		switchMap(payload => {
+			// CHANGE ME: this action can't be dispatched
 			return from(this.googleLoginPromise());
 		})
 	);

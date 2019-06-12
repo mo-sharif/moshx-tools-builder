@@ -1,13 +1,14 @@
-import { IUser } from '../../models/user.interface';
+import { IUser } from "../../models/user.interface";
 
-export interface IAuthState { 
-    currentUser: IUser;
-    loading?: boolean;
+export interface IAuthState {
+  currentUser: IUser;
+  loading?: boolean;
 }
 
 export const initialAuthState: IAuthState = {
-    currentUser: {
-        uid: null,
-        displayName: 'Guest'
-    }
-}
+  currentUser: {
+    uid: null,
+    displayName: "Guest"
+  },
+  loading: false
+};
