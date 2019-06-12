@@ -5,7 +5,7 @@
   height: 100%;
 }
 .inner-layout {
-	margin-top:64px;
+  margin-top: 64px;
 }
 .header {
   background: #fff;
@@ -13,7 +13,7 @@
   position: fixed;
   top: 0;
   width: 100%;
- 
+
   z-index: 100;
 }
 
@@ -26,6 +26,7 @@
   z-index: 1;
   height: 100%;
 }
+
 @media only screen and (max-width: 767px) {
   .content {
     margin-left: 0px;

@@ -1,6 +1,6 @@
 <nz-layout class="layout">
 	<nz-header class="header">
-		<a routerLink="home/">
+		<a [routerLink]="['home']">
 			<div class="logo">
 				{{ title }}
 			</div>
@@ -13,9 +13,6 @@
 		</nz-sider>
 		<nz-content class="content">
 			<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
-				<nz-breadcrumb-item>
-					<a routerLink="['../../']">Home</a>
-				</nz-breadcrumb-item>
 			</nz-breadcrumb>
 			<div style="background:#fff; padding: 24px; min-height: 280px;">
 				<div class="container app-container">

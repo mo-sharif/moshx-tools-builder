@@ -1,4 +1,4 @@
-<ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+<ul nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed" class="side-menu">
 	<li nz-submenu>
 		<span title><i nz-icon type="user"></i> Users</span>
 		<ul>
@@ -6,7 +6,7 @@
 				<span title>Finance</span>
 				<ul>
 					<li nz-menu-item>
-						<a routerLink="home/users"><i nz-icon type="credit-card"></i>User accounts</a>
+						<a [routerLink]="['home/users']"><i nz-icon type="credit-card"></i>User accounts</a>
 					</li>
 				</ul>
 			</li>
@@ -16,7 +16,7 @@
 		<span title><i nz-icon type="appstore"></i> Posts</span>
 		<ul>
 			<li nz-menu-item>
-				<a routerLink="home/posts"><i nz-icon type="interaction"></i>Latest Activities</a>
+				<a [routerLink]="['home/posts']"><i nz-icon type="interaction"></i>Latest Activities</a>
 			</li>
 		</ul>
 	</li>
@@ -24,10 +24,10 @@
 		<span title><i nz-icon type="tool"></i> Tools</span>
 		<ul>
 			<li nz-menu-item>
-				<a routerLink="home/calendar"><i nz-icon type="calendar"></i>Calendar</a>
+				<a [routerLink]="['home/calendar']"><i nz-icon type="calendar"></i>Calendar</a>
 			</li>
 			<li nz-menu-item>
-				<a routerLink="home/settings"><i nz-icon type="setting"></i>Settings</a>
+				<a [routerLink]="['home/settings']"><i nz-icon type="setting"></i>Settings</a>
 			</li>
 			<li nz-submenu>
 				<span title>Coming Soon</span>
@@ -49,7 +49,7 @@
 		<span title><i nz-icon type="profile"></i> Account</span>
 		<ul>
 			<li nz-menu-item>
-				<a routerLink="home/login"><i nz-icon type="login"></i>login</a>
+				<a [routerLink]="['home/login']"><i nz-icon type="login"></i>login</a>
 			</li>
 		</ul>
 	</li>
