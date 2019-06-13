@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 
 import {
-	GetUser,
+	GetUserAuth,
 	GoogleLogin,
 	Logout
 } from "./../../store/actions/auth.actions";
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 	constructor(private _store: Store<IAppState>, private _route: Router) {}
 
 	ngOnInit() {
-		this._store.dispatch(new GetUser());
+		this._store.dispatch(new GetUserAuth());
 	}
 
 	googleLogin() {

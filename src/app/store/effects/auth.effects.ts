@@ -14,7 +14,7 @@ import { Observable } from "rxjs";
 import { IAppState } from "../state/app.state";
 import {
   EAuthActions,
-  GetUser,
+  GetUserAuth,
   Authenticated,
   NotAuthenticated,
   GoogleLogin,
@@ -27,8 +27,8 @@ import { selectCurrentUser } from "../selectors/auth.selectors";
 @Injectable()
 export class AuthEffects {
   @Effect()
-  getUser$ = this._actions$.pipe(
-    ofType<GetUser>(EAuthActions.GetUser),
+  getUserAuth$ = this._actions$.pipe(
+    ofType<GetUserAuth>(EAuthActions.GetUserAuth),
     map(action => {
       action.payload;
     }),

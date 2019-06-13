@@ -2,7 +2,7 @@ import { Action } from "@ngrx/store";
 import { IUser } from "../../models/user.interface";
 
 export enum EAuthActions {
-  GetUser = "[Auth] GET user",
+  GetUserAuth = "[Auth] Get User Auth State",
   Authenticated = "[Auth] Authenticated",
   NotAuthenticated = "[Auth] Not Authenticated",
 
@@ -13,8 +13,8 @@ export enum EAuthActions {
 
 // Get user state auth
 
-export class GetUser implements Action {
-  public readonly type = EAuthActions.GetUser;
+export class GetUserAuth implements Action {
+  public readonly type = EAuthActions.GetUserAuth;
   constructor(public payload?: IUser) {}
 }
 
@@ -44,7 +44,7 @@ export class AuthError implements Action {
 }
 
 export type AuthActions =
-  | GetUser
+  | GetUserAuth
   | Authenticated
   | NotAuthenticated
   | GoogleLogin

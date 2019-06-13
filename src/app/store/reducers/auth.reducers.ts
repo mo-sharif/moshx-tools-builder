@@ -7,7 +7,7 @@ export function authReducers(
 	action: AuthActions
 ): IAuthState {
 	switch (action.type) {
-		case EAuthActions.GetUser: {
+		case EAuthActions.GetUserAuth: {
 			return {
 				...state,
 				currentUser: action.payload,
