@@ -24,6 +24,7 @@ import { PostEffects } from "./store/effects/post.effects";
 // Services
 import { UserService } from "./services/user.service";
 import { PostService } from "./services/post.service";
+import {AuthService } from "./services/auth.service";
 
 // import { MaterialModule } from "./material/material.module";
 
@@ -81,7 +82,7 @@ import { SideMenuComponent } from './components/shared/side-menu/side-menu.compo
 		/** import ng-zorro-antd root module，you should import NgZorroAntdModule and avoid importing sub modules directly **/
 		NgZorroAntdModule
 	],
-	providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService],
+	providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService, AuthService],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,6 +1,9 @@
 import { EAuthActions } from "./../actions/auth.actions";
 import { AuthActions } from "./../actions/auth.actions";
 import { initialAuthState, IAuthState } from "./../state/auth.state";
+import { User } from "../../models/user.interface";
+
+const defaultUser = new User(null, 'GUEST');
 
 export function authReducers(
 	state = initialAuthState,
@@ -10,7 +13,6 @@ export function authReducers(
 		case EAuthActions.GetUserAuth: {
 			return {
 				...state,
-				currentUser: action.payload,
 				loading: false
 			};
 		}
@@ -24,7 +26,7 @@ export function authReducers(
 		case EAuthActions.NotAuthenticated: {
 			return {
 				...state,
-				currentUser: action.payload,
+				currentUser: defaultUser,
 				loading: false
 			};
 		}
@@ -38,14 +40,12 @@ export function authReducers(
 		case EAuthActions.GoogleLogin: {
 			return {
 				...state,
-				currentUser: action.payload,
 				loading: true
 			};
 		}
 		case EAuthActions.Logout: {
 			return {
 				...state,
-				currentUser: action.payload,
 				loading: true
 			};
 		}
