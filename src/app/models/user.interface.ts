@@ -5,6 +5,8 @@ export interface IUser {
   error?: string,
   id?: number,
   name?: string,
+  email?: string;
+  photoURL?: string;
   cardNumber?: string,
   cardType?: string,
 }

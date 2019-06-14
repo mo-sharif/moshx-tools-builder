@@ -8,6 +8,7 @@ import {
 	map,
 	withLatestFrom,
 	delay,
+	tap,
 	catchError
 } from "rxjs/operators";
 import { Observable } from "rxjs";
@@ -34,18 +35,17 @@ export class AuthEffects {
 			action.payload;
 		}),
 		withLatestFrom(this._store.pipe(select(selectCurrentUser))),
-		map(() => console.log(this.authService.checkLocalStorage())),
+		map(() => {this.authService.checkLocalStorage(); return this.authService.authState;}),
 		switchMap(authData => {
 			if (authData) {
 				const user = new User(authData.uid, authData.displayName);
-				localStorage.setItem('user', JSON.stringify(user));
 				return of(new Authenticated(user));
 			} else {
 				return of(new NotAuthenticated());
 			}
 		}),
 		catchError(err => {
-			return of(new AuthError({error: err.message}));
+			return of(new AuthError({ error: err.message }));
 		})
 	);
 
@@ -55,12 +55,13 @@ export class AuthEffects {
 		map(action => {
 			action.payload;
 		}),
-    map(() => this.authService.loginWithGoogle()),
-    map(credential => {
-			// Successful login
-      return new GetUserAuth();
-    }),
-    catchError(err => of(new AuthError({error: err.message})))
+		map(() => this.authService.googleLogin()),
+		map(credential => {
+      // Successful login
+      console.log(credential)
+			return new GetUserAuth();
+		}),
+		catchError(err => of(new AuthError({ error: err.message })))
 	);
 
 	@Effect()
@@ -75,7 +76,7 @@ export class AuthEffects {
 		map(authData => {
 			return new NotAuthenticated();
 		}),
-		catchError(err => of(new AuthError({error: err.message})))
+		catchError(err => of(new AuthError({ error: err.message })))
 	);
 
 	constructor(
