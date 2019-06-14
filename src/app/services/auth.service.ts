@@ -80,7 +80,8 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) =>  {
           this.authState = credential.user
-          this.updateUserData()
+		  this.updateUserData()
+		  return this.authState
       })
       .catch(error => console.log(error));
   }

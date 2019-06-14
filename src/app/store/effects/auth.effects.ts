@@ -23,7 +23,8 @@ import {
 } from "../actions/auth.actions";
 import { User } from "../../models/user.interface";
 import { selectCurrentUser } from "../selectors/auth.selectors";
-
+// TODO Auth Guards
+// https://medium.com/@lemmusm/angular-firebase-authentication-with-localstorage-74d00a3e35db
 @Injectable()
 export class AuthEffects {
 	@Effect()
@@ -37,6 +38,7 @@ export class AuthEffects {
 		switchMap(authData => {
 			if (authData) {
 				const user = new User(authData.uid, authData.displayName);
+				localStorage.setItem('user', JSON.stringify(user));
 				return of(new Authenticated(user));
 			} else {
 				return of(new NotAuthenticated());
@@ -55,7 +57,7 @@ export class AuthEffects {
 		}),
     switchMap(() => this.authService.googleLogin()),
     map(credential => {
-      // Successful login
+			// Successful login
       return new GetUserAuth();
     }),
     catchError(err => of(new AuthError({error: err.message})))
