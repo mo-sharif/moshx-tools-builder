@@ -13,11 +13,9 @@ export class UserStorageService {
     console.log("saved on localStorage");
   }
   // get data on localStorage
-  getUserLoggedIn() {
+  getUserLoggedIn(): User {
     if (localStorage.getItem("user")) {
-      JSON.parse(localStorage.getItem("user"));
-    } else {
-      console.log("localStorage empty");
+			return JSON.parse(localStorage.getItem("user"));
     }
   }
   // Optional: clear localStorage

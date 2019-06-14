@@ -4,23 +4,23 @@ import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Store, select } from "@ngrx/store";
 import { of, from } from "rxjs";
 import {
-	switchMap,
-	map,
-	withLatestFrom,
-	delay,
-	tap,
-	catchError
+  switchMap,
+  map,
+  withLatestFrom,
+  delay,
+  tap,
+  catchError
 } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { IAppState } from "../state/app.state";
 import {
-	EAuthActions,
-	GetUserAuth,
-	Authenticated,
-	NotAuthenticated,
-	GoogleLogin,
-	Logout,
-	AuthError
+  EAuthActions,
+  GetUserAuth,
+  Authenticated,
+  NotAuthenticated,
+  GoogleLogin,
+  Logout,
+  AuthError
 } from "../actions/auth.actions";
 import { User } from "../../models/user.interface";
 import { selectCurrentUser } from "../selectors/auth.selectors";
@@ -28,60 +28,67 @@ import { selectCurrentUser } from "../selectors/auth.selectors";
 // https://medium.com/@lemmusm/angular-firebase-authentication-with-localstorage-74d00a3e35db
 @Injectable()
 export class AuthEffects {
-	@Effect()
-	getUserAuth$ = this._actions$.pipe(
-		ofType<GetUserAuth>(EAuthActions.GetUserAuth),
-		map(action => {
-			action.payload;
-		}),
-		withLatestFrom(this._store.pipe(select(selectCurrentUser))),
-		map(() => {this.authService.checkLocalStorage(); return this.authService.authState;}),
-		switchMap(authData => {
-			if (authData) {
-				const user = new User(authData.uid, authData.displayName);
-				return of(new Authenticated(user));
-			} else {
-				return of(new NotAuthenticated());
-			}
-		}),
-		catchError(err => {
-			return of(new AuthError({ error: err.message }));
-		})
-	);
+  @Effect()
+  getUserAuth$ = this._actions$.pipe(
+    ofType<GetUserAuth>(EAuthActions.GetUserAuth),
+    map(action => {
+      action.payload;
+    }),
+    // withLatestFrom(this._store.pipe(select(selectCurrentUser))),
+    // map(() => this.authService.authState),
+    map(() => this.authService.userFromStorage),
+    switchMap(authData => {
+      if (authData) {
+        const user = new User(authData.uid, authData.displayName);
+        return of(new Authenticated(user));
+      } else {
+				authData = this.authService.AuthStateFirebase;
+				console.log(authData)
+        if (authData) {
+          const user = new User(authData.uid, authData.displayName);
+          return of(new Authenticated(user));
+        } else {
+          return of(new NotAuthenticated());
+        }
+      }
+    }),
+    catchError(err => {
+      return of(new AuthError({ error: err.message }));
+    })
+  );
 
-	@Effect()
-	googleLogin$ = this._actions$.pipe(
-		ofType<GoogleLogin>(EAuthActions.GoogleLogin),
-		map(action => {
-			action.payload;
-		}),
-		map(() => this.authService.googleLogin()),
-		map(credential => {
+  @Effect()
+  googleLogin$ = this._actions$.pipe(
+    ofType<GoogleLogin>(EAuthActions.GoogleLogin),
+    map(action => {
+      action.payload;
+    }),
+    switchMap(() => this.authService.googleLogin()),
+    map(credential => {
       // Successful login
-      console.log(credential)
-			return new GetUserAuth();
-		}),
-		catchError(err => of(new AuthError({ error: err.message })))
-	);
+      return new GetUserAuth();
+    }),
+    catchError(err => of(new AuthError({ error: err.message })))
+  );
 
-	@Effect()
-	logout$ = this._actions$.pipe(
-		ofType<Logout>(EAuthActions.Logout),
-		map(action => {
-			action.payload;
-		}),
-		switchMap(payload => {
-			return of(this.authService.logout());
-		}),
-		map(authData => {
-			return new NotAuthenticated();
-		}),
-		catchError(err => of(new AuthError({ error: err.message })))
-	);
+  @Effect()
+  logout$ = this._actions$.pipe(
+    ofType<Logout>(EAuthActions.Logout),
+    map(action => {
+      action.payload;
+    }),
+    switchMap(payload => {
+      return of(this.authService.logout());
+    }),
+    map(authData => {
+      return new NotAuthenticated();
+    }),
+    catchError(err => of(new AuthError({ error: err.message })))
+  );
 
-	constructor(
-		private authService: AuthService,
-		private _actions$: Actions,
-		private _store: Store<IAppState>
-	) {}
+  constructor(
+    private authService: AuthService,
+    private _actions$: Actions,
+    private _store: Store<IAppState>
+  ) {}
 }
