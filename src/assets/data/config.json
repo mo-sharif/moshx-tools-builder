@@ -1,4 +1,7 @@
 {
   "adminName": "Bubbah",
-  "permissions": ["users"]
+  "permissions": ["users"],
+  "siteName": "AngularX",
+  "isCollapsed": false,
+  "copyright": "AngularX ©2019 ❤️" 
 }

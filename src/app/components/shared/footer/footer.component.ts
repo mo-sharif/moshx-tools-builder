@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { IConfig } from '../../../models/config.interface';
 
 @Component({
 	selector: "app-footer",
@@ -7,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class FooterComponent implements OnInit {
 	@Input()
-	copyright: string;
+	configs$: IConfig;
 
 	constructor() {}
 

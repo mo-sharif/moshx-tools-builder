@@ -1,4 +1,7 @@
 export interface IConfig {
-  adminName: string;
+  adminName?: string;
   permissions?: string[];
+  siteName: string;
+  copyright: string;
+  isCollapsed: boolean;
 }

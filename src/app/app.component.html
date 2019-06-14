@@ -1,27 +1,5 @@
 <nz-layout class="layout">
-	<nz-header class="header">
-		<div nz-row>
-			<div nz-col [nzXs]="{ span: 5, offset: 1 }" [nzLg]="{ span: 6, offset: 0 }">
-				<a [routerLink]="['home']">
-					<div class="logo">
-						{{ title }}
-					</div>
-				</a>
-			</div>
-			<div nz-col [nzXs]="{ span: 11, offset: 1 }" [nzLg]="{ span: 12, offset: 0 }">
-				<nz-input-group [nzSuffix]="suffixIconSearch">
-					<input type="text" nz-input placeholder="input search text" />
-				</nz-input-group>
-				<ng-template #suffixIconSearch>
-					<i nz-icon type="search"></i>
-				</ng-template>
-			</div>
-			<div nz-col [nzXs]="{ span: 5, offset: 1 }" [nzLg]="{ span: 6, offset: 0 }">
-				Login | Account
-			</div>
-		</div>
-
-	</nz-header>
+	<app-header [configs$]="configs$"></app-header>
 	<nz-layout class="inner-layout">
 		<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'md'" [nzCollapsedWidth]="0"
 			[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger" class="sidebar">
@@ -35,7 +13,7 @@
 					<router-outlet></router-outlet>
 				</div>
 			</div>
-			<nz-footer style="text-align: center;">{{ copyright }}</nz-footer>
+			<app-footer [configs$]="configs$"></app-footer>
 		</nz-content>
 	</nz-layout>
 </nz-layout>

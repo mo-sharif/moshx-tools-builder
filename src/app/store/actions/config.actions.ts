@@ -13,7 +13,7 @@ export class GetConfig implements Action {
 
 export class GetConfigSuccess implements Action {
   public readonly type = EConfigActions.GetConfigSuccess;
-  constructor(public payload: IConfig) {}
+  constructor(public payload?: IConfig) {}
 }
 
 export type ConfigActions =
