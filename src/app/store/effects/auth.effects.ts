@@ -34,7 +34,7 @@ export class AuthEffects {
 			action.payload;
 		}),
 		withLatestFrom(this._store.pipe(select(selectCurrentUser))),
-		map(() => this.authService.currentUser),
+		map(() => console.log(this.authService.checkLocalStorage())),
 		switchMap(authData => {
 			if (authData) {
 				const user = new User(authData.uid, authData.displayName);
@@ -55,7 +55,7 @@ export class AuthEffects {
 		map(action => {
 			action.payload;
 		}),
-    switchMap(() => this.authService.googleLogin()),
+    map(() => this.authService.loginWithGoogle()),
     map(credential => {
 			// Successful login
       return new GetUserAuth();
@@ -70,7 +70,7 @@ export class AuthEffects {
 			action.payload;
 		}),
 		switchMap(payload => {
-			return of(this.authService.signOut());
+			return of(this.authService.logout());
 		}),
 		map(authData => {
 			return new NotAuthenticated();
