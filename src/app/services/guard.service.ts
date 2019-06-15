@@ -5,14 +5,14 @@ import { AngularFireAuth } from "@angular/fire/auth";
 @Injectable({
   providedIn: "root"
 })
-export class GuardService {
+export class AuthGuard {
   constructor(private afauth: AngularFireAuth, private router: Router) {}
   canActivate() {
     // Option 1:
     if (localStorage.getItem("user")) {
       return true;
     } else {
-      this.router.navigate(["login"]);
+      this.router.navigate(["/"]);
       return false;
     }
     // Option 2:

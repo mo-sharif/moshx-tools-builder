@@ -24,7 +24,8 @@ import { PostEffects } from "./store/effects/post.effects";
 // Services
 import { UserService } from "./services/user.service";
 import { PostService } from "./services/post.service";
-import {AuthService } from "./services/auth.service";
+import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./services/guard.service";
 
 // import { MaterialModule } from "./material/material.module";
 
@@ -84,7 +85,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 		/** import ng-zorro-antd root module，you should import NgZorroAntdModule and avoid importing sub modules directly **/
 		NgZorroAntdModule
 	],
-	providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService, AuthService],
+	providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService, AuthService, AuthGuard],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

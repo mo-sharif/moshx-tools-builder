@@ -9,6 +9,8 @@ import { RegisterComponent } from "./components/register/register.component";
 import { LoginComponent } from "./containers/login/login.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 
+import { AuthGuard } from "./services/guard.service";
+
 // TODO: https://ng.ant.design/components/breadcrumb/en
 // Change to use children routes
 
@@ -33,7 +35,8 @@ const routes: Routes = [
 	{
 		path: "home/settings",
 		component: SettingsComponent,
-		data: { breadcrumb: "Settings" }
+		data: { breadcrumb: "Settings" },
+		canActivate: [AuthGuard],
 	},
 	{ path: "home/login", component: LoginComponent, data: { breadcrumb: "Login" } },
 	{
