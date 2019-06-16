@@ -3,7 +3,7 @@ import { AuthActions } from "./../actions/auth.actions";
 import { initialAuthState, IAuthState } from "./../state/auth.state";
 import { User } from "../../models/user.interface";
 
-const defaultUser = new User(null, 'GUEST');
+const defaultUser = new User(null, 'GUEST', '');
 
 export function authReducers(
 	state = initialAuthState,
