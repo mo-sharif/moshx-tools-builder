@@ -25,12 +25,12 @@ const routes: Routes = [
 	},
 	{
 		path: "home/users",
-		loadChildren: () => import('./containers/users/users.module').then(mod => mod.UsersModule),
+		loadChildren: "./containers/users/users.module#UsersModule",
 		data: { breadcrumb: "Users" }
 	},
 	{
 		path: "home/posts",
-		loadChildren: () => import('./containers/posts/posts.module').then(mod => mod.PostsModule),
+		loadChildren: "./containers/posts/posts.module#PostsModule",
 		data: { breadcrumb: "Posts" }
 	},
 	{

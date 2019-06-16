@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:4200/assets/',
+  apiUrl: 'https://mosh-media.web.app/assets/',
   firebase: {
 		apiKey: "AIzaSyCGGglBuxoBKJCfy5CXV8Tmy3R6k_SzU0g",
 		authDomain: "mosh-599d5.firebaseapp.com",

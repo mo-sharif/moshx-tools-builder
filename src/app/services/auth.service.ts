@@ -4,14 +4,16 @@ import { Router } from "@angular/router";
 import { User, IUser } from "../models/user.interface";
 import { UserStorageService } from "./user-storage.service";
 import * as firebase from "firebase/app";
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from "rxjs";
+
 @Injectable()
 export class AuthService {
   authState: User | any = null;
   user: User;
   constructor(
     private afAuth: AngularFireAuth,
-    // private db: AngularFireDatabase,
+    private db: AngularFireDatabase,
     public userStorageService: UserStorageService,
     private router: Router
   ) {
@@ -172,38 +174,13 @@ export class AuthService {
   private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    /*     let path = `users/${this.currentUserId}`; // Endpoint on firebase
+        let path = `users/${this.currentUserId}`; // Endpoint on firebase
 	let data = {
 				  email: this.authState.email,
 				  name: this.authState.displayName
 				}
 
 	this.db.object(path).update(data)
-	.catch(error => console.log(error)); */
+	.catch(error => console.log(error));
   }
 }
-/* @Injectable({
-  providedIn: "root"
-})
-export class AuthService {
-  constructor(public afAuth: AngularFireAuth) {}
-
-  public googleLoginPromise() {
-	return new Promise<any>((resolve, reject) => {
-	  let provider = new firebase.auth.GoogleAuthProvider();
-	  provider.addScope("profile");
-	  provider.addScope("email");
-	  this.afAuth.auth.signInWithPopup(provider).then(res => {
-		resolve(res);
-	  });
-	});
-  }
-  public signOut() {
-	return this.afAuth.auth.signOut();
-  }
-
-  public authState() {
-	this.afAuth.authState.subscribe(auth => auth);
-  }
-}
- */

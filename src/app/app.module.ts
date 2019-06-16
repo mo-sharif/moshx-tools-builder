@@ -35,6 +35,7 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 // Firebase Imports
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 
 // Containers
@@ -73,8 +74,8 @@ import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
-		// MaterialModule,
 		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireDatabaseModule,
 		AngularFirestoreModule, // imports firebase/firestore, only needed for database features
 		AngularFireAuthModule, // imports firebase/auth, only needed for auth features
 		HttpClientModule,
