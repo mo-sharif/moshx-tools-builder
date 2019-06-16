@@ -9,7 +9,7 @@ import {
 import { IUser } from "../../models/user.interface";
 import { IAppState } from "../../store/state/app.state";
 
-import { selectCurrentUser } from "../../store/selectors/auth.selectors";
+import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
 import { Router } from "@angular/router";
 
 @Component({
@@ -18,7 +18,7 @@ import { Router } from "@angular/router";
 	styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-	user$ = this._store.pipe(select(selectCurrentUser));
+	user$ = this._store.pipe(select(selectLoggedInUser));
 
 	constructor(private _store: Store<IAppState>, private _route: Router) {}
 

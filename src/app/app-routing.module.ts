@@ -8,6 +8,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { LoginComponent } from "./containers/login/login.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
 import { AuthGuard } from "./services/guard.service";
 
@@ -17,6 +18,11 @@ import { AuthGuard } from "./services/guard.service";
 // TODO: Implement auth guards canActivate: [AuthGuard]
 const routes: Routes = [
 	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
+	{
+		path: "home/not-allowed",
+		component: PageNotAllowedComponent,
+		data: { breadcrumb: "No Access!" }
+	},
 	{
 		path: "home/users",
 		loadChildren: () => import('./containers/users/users.module').then(mod => mod.UsersModule),
@@ -30,7 +36,8 @@ const routes: Routes = [
 	{
 		path: "home/calendar",
 		component: CalendarComponent,
-		data: { breadcrumb: "Calendar" }
+		data: { breadcrumb: "Calendar" },
+		canActivate: [AuthGuard]
 	},
 	{
 		path: "home/settings",

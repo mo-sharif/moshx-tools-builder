@@ -1,8 +1,15 @@
 <nz-layout class="layout">
-	<app-header [configs$]="configs$"></app-header>
+	<app-header [configs$]="configs$" [loggedInUser$]="loggedInUser$"></app-header>
 	<nz-layout class="inner-layout">
-		<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'md'" [nzCollapsedWidth]="0"
-			[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger" class="sidebar">
+		<nz-sider
+			nzCollapsible
+			[(nzCollapsed)]="isCollapsed"
+			[nzBreakpoint]="'md'"
+			[nzCollapsedWidth]="0"
+			[nzZeroTrigger]="zeroTrigger"
+			[nzTrigger]="nonZeroTrigger"
+			class="sidebar"
+		>
 			<app-side-menu></app-side-menu>
 		</nz-sider>
 		<nz-content class="content">
@@ -10,7 +17,10 @@
 			</nz-breadcrumb>
 			<div style="background:#fff; padding: 24px; min-height: 280px;">
 				<div class="container app-container">
-					<router-outlet></router-outlet>
+<!-- 					<main [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+						<router-outlet #o="outlet"></router-outlet>
+					</main> -->
+					<router-outlet #o="outlet"></router-outlet>
 				</div>
 			</div>
 			<app-footer [configs$]="configs$"></app-footer>

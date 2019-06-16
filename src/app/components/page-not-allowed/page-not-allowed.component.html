@@ -1,0 +1,14 @@
+<nz-empty
+[nzNotFoundImage]="
+  'https://madewithnetwork.ams3.cdn.digitaloceanspaces.com//spatie-space-production/3073/ant-design-1.jpg'
+"
+[nzNotFoundContent]="contentTpl"
+[nzNotFoundFooter]="footerTpl"
+>
+<ng-template #contentTpl>
+  <span>Login first to access this page</span>
+</ng-template>
+<ng-template #footerTpl>
+    <button nz-button nzType="primary" [routerLink]="['/home/login']">Login</button>
+  </ng-template>
+</nz-empty>

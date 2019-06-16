@@ -1,8 +1,18 @@
 .header {
-  background: #fff;
-  padding: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
+	background: #fff;
+	padding: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+}
+.avatar-button {
+	width: 34px;
+	height: 34px;
+}
+
+@media only screen and (max-width: 767px) {
+	.hide-small-screen {
+		display: none;
+	}
 }

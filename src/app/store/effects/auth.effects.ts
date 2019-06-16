@@ -23,9 +23,8 @@ import {
   AuthError
 } from "../actions/auth.actions";
 import { User } from "../../models/user.interface";
-import { selectCurrentUser } from "../selectors/auth.selectors";
-// TODO Auth Guards
-// https://medium.com/@lemmusm/angular-firebase-authentication-with-localstorage-74d00a3e35db
+import { selectLoggedInUser } from "../selectors/auth.selectors";
+
 @Injectable()
 export class AuthEffects {
   @Effect()
@@ -34,23 +33,15 @@ export class AuthEffects {
     map(action => {
       action.payload;
     }),
-    // withLatestFrom(this._store.pipe(select(selectCurrentUser))),
-    // map(() => this.authService.authState),
-    map(() => this.authService.userFromStorage),
+    // withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+    // map(() => this.authService.userFromStorage),
+    switchMap(() => this.authService.currentUserObservable),
     switchMap(authData => {
-      if (authData) {
-        const user = new User(authData.uid, authData.displayName);
-        return of(new Authenticated(user));
-      } else {
-				authData = this.authService.AuthStateFirebase;
-				console.log(authData)
-        if (authData) {
-          const user = new User(authData.uid, authData.displayName);
-          return of(new Authenticated(user));
-        } else {
-          return of(new NotAuthenticated());
-        }
+      if (authData == null) {
+        return of(new NotAuthenticated());
       }
+      const user = new User(authData.uid, authData.displayName, authData.photoURL);
+      return of(new Authenticated(user));
     }),
     catchError(err => {
       return of(new AuthError({ error: err.message }));

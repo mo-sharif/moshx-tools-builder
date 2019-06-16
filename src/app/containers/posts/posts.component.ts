@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 
 @Component({
   templateUrl: "./posts.component.html",
-  styleUrls: ["./posts.component.css"]
+  styleUrls: ["./posts.component.css"],
 })
 export class PostsComponent implements OnInit {
   posts$ = this._store.pipe(select(selectPostList));

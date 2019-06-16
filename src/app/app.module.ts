@@ -53,6 +53,7 @@ import { AuthEffects } from "./store/effects/auth.effects";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-allowed.component';
 
 @NgModule({
 	declarations: [
@@ -66,7 +67,8 @@ import { HeaderComponent } from './components/shared/header/header.component';
 		RegisterComponent,
 		PageNotFoundComponent,
 		SideMenuComponent,
-		HeaderComponent
+		HeaderComponent,
+		PageNotAllowedComponent
 	],
 	imports: [
 		BrowserModule,

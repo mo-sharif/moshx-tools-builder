@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 
 import { IConfig } from "../../../models/config.interface";
+import { IUser } from "src/app/models/user.interface";
 
 @Component({
   selector: "app-header",
@@ -11,6 +12,9 @@ export class HeaderComponent implements OnInit {
   @Input()
   configs$: IConfig;
 
+  @Input()
+  loggedInUser$: IUser;
+  
   constructor() {}
 
   ngOnInit() { }

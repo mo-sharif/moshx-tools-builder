@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { listStagger } from "../../animations/list-stagger.animation";
 import { IPost } from '../../models/post.interface';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
+  styleUrls: ['./posts.component.css'],
+	animations: [listStagger] // register the animation
 })
 export class PostsComponent implements OnInit {
   @Input()

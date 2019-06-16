@@ -1,15 +1,28 @@
-<nz-list [nzDataSource]="posts" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading" nzTip="Loading...">
-	<ng-template #item let-item>
-		<nz-list-item>
-			<nz-list-item-meta [nzTitle]="nzTitle"
-				nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" [nzDescription]="item.body">
-				<ng-template #nzTitle>
-					<a href="">{{ item.title }}</a>
-				</ng-template>
-			</nz-list-item-meta>
-		</nz-list-item>
-	</ng-template>
-</nz-list>
+<ng-container *ngIf="posts">
+	<nz-list
+		[@listStagger]="posts.length"
+		[nzDataSource]="posts"
+		[nzRenderItem]="item"
+		[nzItemLayout]="'horizontal'"
+		[nzLoading]="loading"
+		nzTip="Loading..."
+	>
+	
+		<ng-template #item let-item >
+			<nz-list-item >
+				<nz-list-item-meta
+					[nzTitle]="nzTitle"
+					nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+					[nzDescription]="item.body"
+				>
+					<ng-template #nzTitle>
+						<a href="">{{ item.title }}</a>
+					</ng-template>
+				</nz-list-item-meta>
+			</nz-list-item>
+		</ng-template>
+	</nz-list>
+</ng-container>
 <!-- <nz-spin nzTip="Loading...">
 	<nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
 </nz-spin> -->

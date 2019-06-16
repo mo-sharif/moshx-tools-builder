@@ -17,37 +17,16 @@ export class AuthService {
   ) {
     this.afAuth.authState.subscribe(auth => {
       this.authState = auth;
-      //   this.userStorageService.setUserLoggedIn(auth); // set user data from firebase on local storage
-    });
-  }
-  /*
-   * If localStorage is empty, we call getDataFromFirebase
-   * method set user data from firebase on localStorage
-   */
-  checkLocalStorage() {
-    if (!localStorage.getItem("user")) {
-      this.getDataFromFirebase();
-    } else {
-      console.log("localStorage ready!");
-    }
-  }
-  /*
-   * Call data from firebase and set data on local storage
-   */
-  getDataFromFirebase() {
-    this.afAuth.authState.subscribe(auth => {
-      if (auth) {
-        this.authState = auth;
-        this.userStorageService.setUserLoggedIn(auth); // set user data from firebase on local storage
-      }
     });
   }
 
+  getAuthState(): Observable<User> {
+    return this.afAuth.authState
+  }
   /*
    * logout
    */
   logout(): void {
-    this.userStorageService.clearLocalStorage(); // Optional to clear localStorage
     this.afAuth.auth.signOut().then(() => {
       this.router.navigate(["home/login"]);
     });
@@ -77,7 +56,7 @@ export class AuthService {
   }
 
   // Returns
-  get currentUserObservable(): Observable<IUser> {
+  get currentUserObservable(): Observable<User> {
     return this.afAuth.authState;
   }
 
@@ -131,7 +110,6 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(credential => {
         this.authState = credential.user;
-        this.userStorageService.setUserLoggedIn(credential.user);
         this.updateUserData();
         return this.authState;
       })

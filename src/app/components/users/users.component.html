@@ -8,7 +8,7 @@
 			<th>Action</th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody [@listStagger]="basicTable.data.length">
 		<tr *ngFor="let user of basicTable.data"></tr>
 		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.id)">
 			<td>{{ user.id }}</td>

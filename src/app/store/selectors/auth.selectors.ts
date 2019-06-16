@@ -5,7 +5,7 @@ import { IAuthState } from '../state/auth.state';
 
 const selectAuthState = (state: IAppState) => state.auth;
 
-export const selectCurrentUser = createSelector(
+export const selectLoggedInUser = createSelector(
     selectAuthState,
     (state: IAuthState) => state.currentUser
 );

@@ -1,29 +1,37 @@
 .logo {
-  margin-left: 20px;
+	margin-left: 20px;
 }
 .layout {
-  height: 100%;
+	height: 100%;
 }
 .inner-layout {
-  margin-top: 64px;
+	margin-top: 64px;
 }
 
 .content {
-  padding: 0 50px;
-  margin-left: 200px;
+	padding: 0 50px;
+	margin-left: 200px;
 }
 .sidebar {
-  position: fixed;
-  z-index: 1;
-  height: 100%;
+	position: fixed;
+	z-index: 1;
+	height: 100%;
 }
 
 @media only screen and (max-width: 767px) {
-  .content {
-    margin-left: 0px;
-    padding: 0px;
-  }
-  .sidebar {
-    position: relative;
-  }
+	.hide-small-screen {
+		display: none;
+	}
+	.content {
+		margin-left: 0px;
+		padding: 0px;
+	}
+	.sidebar {
+		position: relative;
+	}
 }
+/* router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+} */

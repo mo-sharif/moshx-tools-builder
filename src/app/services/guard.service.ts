@@ -1,28 +1,21 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AuthService } from "./auth.service";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root"
+	providedIn: "root"
 })
 export class AuthGuard {
-  constructor(private afauth: AngularFireAuth, private router: Router) {}
-  canActivate() {
-    // Option 1:
-    if (localStorage.getItem("user")) {
-      return true;
-    } else {
-      this.router.navigate(["/"]);
-      return false;
-    }
-    // Option 2:
-    // return this.afauth.authState.pipe(
-    //   map(auth => {
-    //     if (auth == null) {
-    //       this.router.navigate(['login']);
-    //     }
-    //     return auth != null;
-    //   })
-    // );
-  }
+	constructor(private authService: AuthService, private router: Router) {}
+	canActivate() {
+		return this.authService.currentUserObservable.pipe(
+			map(auth => {
+				if (auth == null) {
+					this.router.navigate(["/home/not-allowed"]);
+				}
+				return auth != null;
+			})
+		);
+	}
 }
