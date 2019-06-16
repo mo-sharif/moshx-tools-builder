@@ -1,20 +1,18 @@
 <nz-table #basicTable *ngIf="users" [nzData]="users">
 	<thead>
 		<tr>
-			<th>#</th>
 			<th>Name</th>
-			<th>Card Number</th>
-			<th>Card Type</th>
+			<th>Field</th>
+			<th>City</th>
 			<th>Action</th>
 		</tr>
 	</thead>
-	<tbody [@listStagger]="basicTable.data.length">
+	<tbody [@listStagger]="users.length">
 		<tr *ngFor="let user of basicTable.data"></tr>
 		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.id)">
-			<td>{{ user.id }}</td>
 			<td>{{ user.name }}</td>
-			<td>{{ user.cardNumber }}</td>
-			<td>{{ user.cardType }}</td>
+			<td>{{ user.job }}</td>
+			<td>{{ user.city }}</td>
 			<td>
 				<i
 					nz-icon

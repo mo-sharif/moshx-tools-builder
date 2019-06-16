@@ -19,6 +19,18 @@ export function userReducers(
 				selectedUser: action.payload
 			};
 		}
+		case EUserActions.AddUser: {
+			return {
+				...state,
+				addedUserForm: action.payload
+			};
+		}
+		case EUserActions.AddUserSuccess: {
+			return {
+				...state,
+				addedUserForm: action.payload
+			};
+		}
 
 		default:
 			return state;

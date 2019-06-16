@@ -1,0 +1,76 @@
+<form
+	nz-form
+	[formGroup]="userForm"
+	(ngSubmit)="submitForm()"
+>
+	<nz-form-item>
+		<nz-form-control>
+			<nz-input-group [nzPrefix]="prefixUser">
+				<input formControlName="name" nz-input placeholder="Fullname" />
+			</nz-input-group>
+			<nz-form-explain
+				*ngIf="
+					userForm.get('name')?.dirty &&
+					userForm.get('name')?.errors
+				"
+				>Please input your full name!</nz-form-explain
+			>
+		</nz-form-control>
+	</nz-form-item>
+	<nz-form-item>
+		<nz-form-control>
+			<nz-input-group [nzPrefix]="prefixCity">
+					<nz-select
+					formControlName="city"
+					nzShowSearch
+					nzAllowClear
+					nzPlaceHolder="Select a field"
+				  >
+					<nz-option nzLabel="San Francisco" nzValue="San Francisco"></nz-option>
+					<nz-option nzLabel="San Jose" nzValue="San Jose"></nz-option>
+					<nz-option nzLabel="Denver" nzValue="Denver"></nz-option>
+				  </nz-select>
+			</nz-input-group>
+			<nz-form-explain
+				*ngIf="
+					userForm.get('city')?.dirty &&
+					userForm.get('city')?.errors
+				"
+				>Please input your city!</nz-form-explain
+			>
+		</nz-form-control>
+	</nz-form-item>
+	<nz-form-item>
+		<nz-form-control>
+			<nz-input-group [nzPrefix]="prefixBulb">
+        <nz-select
+        formControlName="job"
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder="Select a field"
+      >
+        <nz-option nzLabel="Front-End Engineer" nzValue="Front-End Engineer"></nz-option>
+        <nz-option nzLabel="Back-End Engineer" nzValue="Back-End Engineer"></nz-option>
+        <nz-option nzLabel="Full-Stack Engineer" nzValue="Full-Stack Engineer"></nz-option>
+      </nz-select>
+			</nz-input-group>
+			<nz-form-explain
+				*ngIf="
+					userForm.get('job')?.dirty &&
+					userForm.get('job')?.errors
+				"
+				>Please input your job title!</nz-form-explain
+			>
+		</nz-form-control>
+	</nz-form-item>
+	<nz-form-item>
+		<nz-form-control>
+			<button nz-button nzType="primary" [disabled]="!userForm.valid">
+				Add User
+			</button>
+		</nz-form-control>
+	</nz-form-item>
+</form>
+<ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+<ng-template #prefixCity></ng-template>
+<ng-template #prefixBulb></ng-template>

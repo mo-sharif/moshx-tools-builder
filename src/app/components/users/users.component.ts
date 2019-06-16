@@ -9,7 +9,7 @@ import { IUser } from '../../models/user.interface';
   animations: [listStagger],
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'cardType', 'cardNumber'];
+  displayedColumns: string[] = ['id', 'name', 'job', 'location'];
 
   @Input()
   users: IUser[];

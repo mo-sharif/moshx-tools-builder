@@ -1,11 +1,11 @@
 <nz-row [nzGutter]="16">
 	<nz-col [nzSpan]="12">
-		<nz-statistic [nzValue]="user.name" [nzTitle]="'Name'"></nz-statistic>
+		<nz-statistic [nzValue]="(user$ | async)?.name" [nzTitle]="'Name'"></nz-statistic>
 	</nz-col>
 	<nz-col [nzSpan]="12">
 		<nz-statistic
-			[nzValue]="user.cardNumber"
-			[nzTitle]="'Card number'"
+			[nzValue]="user$.job"
+			[nzTitle]="'Field'"
 		></nz-statistic>
 	</nz-col>
 </nz-row>

@@ -10,7 +10,7 @@ import { LoginComponent } from "./containers/login/login.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
-import { AuthGuard } from "./services/guard.service";
+import { AuthGuard } from "./services/guard/guard.service";
 
 // TODO: https://ng.ant.design/components/breadcrumb/en
 // Change to use children routes
@@ -26,7 +26,13 @@ const routes: Routes = [
 	{
 		path: "home/users",
 		loadChildren: "./containers/users/users.module#UsersModule",
-		data: { breadcrumb: "Users" }
+		data: { breadcrumb: "Users" },
+		canActivate: [AuthGuard]
+	},
+	{
+		path: "home/add-user",
+		loadChildren: "./containers/add-user/add-user.module#AddUserModule",
+		data: { breadcrumb: "Add User"}
 	},
 	{
 		path: "home/posts",

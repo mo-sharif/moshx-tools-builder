@@ -22,12 +22,10 @@ import { UserEffects } from "./store/effects/user.effects";
 import { PostEffects } from "./store/effects/post.effects";
 
 // Services
-import { UserService } from "./services/user.service";
-import { PostService } from "./services/post.service";
-import { AuthService } from "./services/auth.service";
-import { AuthGuard } from "./services/guard.service";
-
-// import { MaterialModule } from "./material/material.module";
+import { UserService } from "./services/user/user.service";
+import { PostService } from "./services/post/post.service";
+import { AuthService } from "./services/auth/auth.service";
+import { AuthGuard } from "./services/guard/guard.service";
 
 // Ant Design
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
@@ -69,7 +67,7 @@ import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-
 		PageNotFoundComponent,
 		SideMenuComponent,
 		HeaderComponent,
-		PageNotAllowedComponent
+		PageNotAllowedComponent,
 	],
 	imports: [
 		BrowserModule,

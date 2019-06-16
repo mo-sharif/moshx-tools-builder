@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
-import { User, IUser } from "../models/user.interface";
-import { UserStorageService } from "./user-storage.service";
+import { User, IUser } from "../../models/user.interface";
+import { UserStorageService } from "../user/user-storage.service";
 import * as firebase from "firebase/app";
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from "rxjs";
 
 @Injectable()
@@ -14,6 +15,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
+    private store: AngularFirestore,
     public userStorageService: UserStorageService,
     private router: Router
   ) {
@@ -183,4 +185,15 @@ export class AuthService {
 	this.db.object(path).update(data)
 	.catch(error => console.log(error));
   }
+
+  public getItemsList(): Observable<any> {
+   return this.store.collection('/users').snapshotChanges()
+/*     return new Promise<any>((resolve, reject) => {
+      this.store.collection('/users').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots)
+      })
+    }) */
+  }
+
 }

@@ -7,10 +7,10 @@ export interface IUser {
 	name?: string;
 	email?: string;
 	photoURL?: string;
-	cardNumber?: string;
-	cardType?: string;
+	city?: string;
+	job?: string;
 }
 
 export class User implements IUser {
-	constructor(public uid: string, public displayName: string, public photoURL: string) {}
+	constructor(public uid: string, public displayName: string, public photoURL?: string) {}
 }

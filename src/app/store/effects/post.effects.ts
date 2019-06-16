@@ -13,7 +13,7 @@ import {
   GetPostSuccess
 } from "../actions/post.actions";
 import { SetLoading } from "../actions/loading.actions";
-import { PostService } from "../../services/post.service";
+import { PostService } from "../../services/post/post.service";
 import { IPost } from "../../models/post.interface";
 import { selectPostList } from "../selectors/post.selector";
 
