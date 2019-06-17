@@ -19,6 +19,7 @@ export class UserService {
 		return this.firestore.collection(`/users/${id}`).valueChanges();
 	}
 	addUser(user: IUser) {
-		return this.firestore.collection<IUser>("users").add(user);
+		const id = this.firestore.createId();
+		return this.firestore.collection<IUser>("users").doc(id).set(user);
 	}
 }

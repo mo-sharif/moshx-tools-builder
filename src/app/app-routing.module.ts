@@ -32,7 +32,8 @@ const routes: Routes = [
 	{
 		path: "home/add-user",
 		loadChildren: "./containers/add-user/add-user.module#AddUserModule",
-		data: { breadcrumb: "Add User"}
+		data: { breadcrumb: "Add User"},
+		canActivate: [AuthGuard]
 	},
 	{
 		path: "home/posts",
