@@ -26,7 +26,9 @@ import { IUser } from "../../models/user.interface";
 import { selectUserList } from "../selectors/user.selector";
 
 @Injectable()
+
 export class UserEffects {
+  
 	@Effect()
 	getUser$ = this._actions$.pipe(
 		ofType<GetUser>(EUserActions.GetUser),
@@ -64,6 +66,6 @@ export class UserEffects {
 	constructor(
 		private _userService: UserService,
 		private _actions$: Actions,
-		private _store: Store<IAppState>
+		private _store: Store<IAppState>,
 	) {}
 }
