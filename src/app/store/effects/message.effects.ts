@@ -24,8 +24,8 @@ export class MessageEffect {
 		ofType<SetSuccess>(EMessageActions.SetSuccess),
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectMessage))),
-		switchMap(message => {
-			return of(this.messageService.setSuccess(message));
+		map(message => {
+			this.messageService.setSuccess(message);
 		})
 	);
 

@@ -8,6 +8,7 @@ export class MessageService {
   constructor(public NzMessageService: NzMessageService) {}
   
   setSuccess = (message) => {
-    this.NzMessageService.success(message, { nzDuration: 2500 }).onClose!
+    this.NzMessageService.create('success',message, { nzDuration: 2500 })
+    // this.NzMessageService.success(message, { nzDuration: 2500 }).onClose!
   }
 }
