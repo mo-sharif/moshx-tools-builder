@@ -1,9 +1,6 @@
 import { EAuthActions } from "./../actions/auth.actions";
 import { AuthActions } from "./../actions/auth.actions";
-import { initialAuthState, IAuthState } from "./../state/auth.state";
-import { User } from "../../models/user.interface";
-
-const defaultUser = new User(null, 'GUEST', '');
+import { initialAuthState, IAuthState, defaultUser } from "./../state/auth.state";
 
 export function authReducers(
 	state = initialAuthState,

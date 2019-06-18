@@ -22,13 +22,13 @@ export function userReducers(
 		case EUserActions.AddUser: {
 			return {
 				...state,
-				addedUserForm: action.payload
+				addedUser: action.payload
 			};
 		}
 		case EUserActions.AddUserSuccess: {
 			return {
 				...state,
-				addedUserForm: action.payload
+				addedUser: action.payload
 			};
 		}
 

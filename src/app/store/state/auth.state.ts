@@ -12,3 +12,8 @@ export const initialAuthState: IAuthState = {
   },
   loading: false
 };
+
+export const defaultUser: IUser = {
+	uid: null,
+	displayName: "GUEST"
+};

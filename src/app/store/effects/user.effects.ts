@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Store, select } from "@ngrx/store";
-import { of } from "rxjs";
+import { of, from } from "rxjs";
 import {
 	switchMap,
 	map,
@@ -25,10 +25,12 @@ import { UserService } from "../../services/user/user.service";
 import { IUser } from "../../models/user.interface";
 import { selectUserList } from "../selectors/user.selector";
 
+import { SetSuccess } from "../actions/message.actions";
+
 @Injectable()
 
 export class UserEffects {
-  
+
 	@Effect()
 	getUser$ = this._actions$.pipe(
 		ofType<GetUser>(EUserActions.GetUser),
@@ -48,7 +50,7 @@ export class UserEffects {
 		map(action => action.payload),
 		switchMap((user: IUser) => {
 			this._userService.addUser(user);
-			return of(new AddUserSuccess(user));
+			return of([new AddUserSuccess(user), new SetSuccess('User Added Successfully')]);
 		}),
 		catchError(err => of(new GetUsersError({ error: err.message })))
 	);
