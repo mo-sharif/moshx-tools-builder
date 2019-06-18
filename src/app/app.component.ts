@@ -9,24 +9,20 @@ import { selectLoggedInUser } from "./store/selectors/auth.selectors";
 import { selectMessage } from "./store/selectors/message.selectors";
 
 @Component({
-	selector: "app-root",
-	templateUrl: "./app.component.html",
-	styleUrls: ["./app.component.css"]
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-	configs$ = this._store.pipe(select(selectConfig));
-	loggedInUser$ = this._store.pipe(select(selectLoggedInUser));
-	message$ = this._store.pipe(select(selectMessage));
+  configs$ = this._store.pipe(select(selectConfig));
+  loggedInUser$ = this._store.pipe(select(selectLoggedInUser));
+  message$ = this._store.pipe(select(selectMessage));
 
-	isCollapsed = true;
-	constructor(
-		private _store: Store<IAppState>
-	) {}
+  isCollapsed = true;
+  constructor(private _store: Store<IAppState>) {}
 
-
-	ngOnInit() {
-		this._store.dispatch(new GetConfig());
-		this._store.dispatch(new GetUserAuth());
-		this.message$.subscribe((message) => {console.log(message)})
-	}
+  ngOnInit() {
+    this._store.dispatch(new GetConfig());
+    this._store.dispatch(new GetUserAuth());
+  }
 }

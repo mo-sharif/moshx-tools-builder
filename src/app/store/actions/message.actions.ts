@@ -1,37 +1,43 @@
 import { Action } from "@ngrx/store";
 
 export enum EMessageActions {
-	SetSuccess = "[Message] Set Success Message",
-	SetError = "[Message] Set Error Message",
-	SetInfo = "[Message] Set Info Message",
-	SetWarning = "[Message] Set Warning Message",
-	SetLoading = "[Message] Set Loading Message"
+	SetSuccessMsg = "[Message] Set Success Message",
+	SetErrorMsg = "[Message] Set Error Message",
+	SetInfoMsg = "[Message] Set Info Message",
+	SetWarningMsg = "[Message] Set Warning Message",
+	SetLoadingMsg = "[Message] Set Loading Message",
+	MsgSent =  "[Message] Message Sent"
 }
 
-export class SetSuccess implements Action {
-	public readonly type = EMessageActions.SetSuccess;
+export class SetSuccessMsg implements Action {
+	public readonly type = EMessageActions.SetSuccessMsg;
 	constructor(public payload?: string) {}
 }
-export class SetError implements Action {
-	public readonly type = EMessageActions.SetError;
+export class SetErrorMsg implements Action {
+	public readonly type = EMessageActions.SetErrorMsg;
 	constructor(public payload?: string) {}
 }
-export class SetInfo implements Action {
-	public readonly type = EMessageActions.SetInfo;
+export class SetInfoMsg implements Action {
+	public readonly type = EMessageActions.SetInfoMsg;
 	constructor(public payload?: string) {}
 }
-export class SetWarning implements Action {
-	public readonly type = EMessageActions.SetWarning;
+export class SetWarningMsg implements Action {
+	public readonly type = EMessageActions.SetWarningMsg;
 	constructor(public payload?: string) {}
 }
-export class SetLoading implements Action {
-	public readonly type = EMessageActions.SetLoading;
+export class SetLoadingMsg implements Action {
+	public readonly type = EMessageActions.SetLoadingMsg;
 	constructor(public payload?: string) {}
+}
+
+export class MsgSent implements Action {
+	public readonly type = EMessageActions.MsgSent;
 }
 
 export type MessageActions =
-	| SetError
-	| SetInfo
-	| SetLoading
-	| SetSuccess
-	| SetWarning;
+	| SetErrorMsg
+	| SetInfoMsg
+	| SetLoadingMsg
+	| SetSuccessMsg
+	| SetWarningMsg
+	| MsgSent;

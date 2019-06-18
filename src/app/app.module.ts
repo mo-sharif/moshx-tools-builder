@@ -20,6 +20,7 @@ import { appReducers } from "./store/reducers/app.reducers";
 import { ConfigEffects } from "./store/effects/config.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { PostEffects } from "./store/effects/post.effects";
+import { MessageEffects } from "./store/effects/message.effects";
 
 // Services
 import { UserService } from "./services/user/user.service";
@@ -54,6 +55,7 @@ import { SideMenuComponent } from './components/shared/side-menu/side-menu.compo
 import { HeaderComponent } from './components/shared/header/header.component';
 import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-allowed.component';
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -79,7 +81,7 @@ import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects, AuthEffects]),
+		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects, AuthEffects, MessageEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,

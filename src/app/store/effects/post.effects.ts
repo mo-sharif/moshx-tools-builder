@@ -17,6 +17,8 @@ import { PostService } from "../../services/post/post.service";
 import { IPost } from "../../models/post.interface";
 import { selectPostList } from "../selectors/post.selector";
 
+import { SetSuccessMsg } from "../actions/message.actions";
+
 @Injectable()
 export class PostEffects {
   @Effect()
@@ -36,7 +38,8 @@ export class PostEffects {
     switchMap(() => this._postService.getPosts()),
     switchMap((postHttp: IPost[]) => [
       new GetPostsSuccess(postHttp),
-      new SetLoading(false)
+      new SetLoading(false),
+      new SetSuccessMsg("Posts Loaded Successfully!")
     ])
   );
 

@@ -7,34 +7,39 @@ export function messageReducers(
 	action: MessageActions
 ): IMessageState {
 	switch (action.type) {
-		case EMessageActions.SetSuccess: {
+		case EMessageActions.SetSuccessMsg: {
 			return {
 				...state,
 				message: action.payload
 			};
 		}
-		case EMessageActions.SetError: {
+		case EMessageActions.SetErrorMsg: {
 			return {
 				...state,
 				message: action.payload
 			};
 		}
-		case EMessageActions.SetInfo: {
+		case EMessageActions.SetInfoMsg: {
 			return {
 				...state,
 				message: action.payload
 			};
 		}
-		case EMessageActions.SetWarning: {
+		case EMessageActions.SetWarningMsg: {
 			return {
 				...state,
 				message: action.payload
 			};
 		}
-		case EMessageActions.SetLoading: {
+		case EMessageActions.SetLoadingMsg: {
 			return {
 				...state,
 				message: action.payload
+			};
+		}
+		case EMessageActions.MsgSent: {
+			return {
+				...state
 			};
 		}
 		default:
