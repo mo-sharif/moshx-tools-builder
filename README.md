@@ -2,14 +2,23 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6825a5f1db8f4856aa48f38121f2f993)](https://app.codacy.com/app/Mosh-Media/AngularX?utm_source=github.com&utm_medium=referral&utm_content=Mosh-Media/AngularX&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/Mosh-Media/AngularX.svg?branch=master)](https://travis-ci.com/Mosh-Media/AngularX)
 
-Boilerplate to get you started quickly on your next web app!
+Angular 7 + Ant Design + NGRX + Firebase = AngularX 🏆
 
-Angular 7 + Ant Design + NGRX = AngularX 🏆
+Boilerplate to get you started quickly on your next Full-stack Serverless web app!
+The Goal is to build an application that builds other Angular applications without any previous coding experience. We can achieve this by using the many cool features firebase and angular can deliver.
 
 ## TODO
 
-- [ ] Build Login/Register UI
-- [ ] Firebase Backend
+- [x] Initiate project with basic responsive layout
+- [x] Setup lazy loading for containers
+- [x] Setup Advanced file structure with Ngrx
+- [x] Build firebase auth services and effects
+- [x] Travis CI and Firebase deploy
+- [ ] Setup Lazy loading for Effects
+
+- [ ] Enhance UX/UI especially on mobile 
+- [ ] Setup login via email and text msg
+- [ ] Setup Schematics with Ant Design and Ngrx
 
 ## Get Started
 
@@ -24,7 +33,7 @@ ng serve -o
 [Ant Design Components](https://ng.ant.design/docs/introduce/en)
 
 
-## File Structure
+## Basic File Structure
 
 ```
 app 
