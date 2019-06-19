@@ -27,14 +27,14 @@ const routes: Routes = [
 		path: "home/users",
 		loadChildren: "./containers/users/users.module#UsersModule",
 		data: { breadcrumb: "Users" },
-		canActivate: [AuthGuard]
+		canActivate: [AuthGuard],
 	},
-	{
+/* 	{
 		path: "home/add-user",
 		loadChildren: "./containers/add-user/add-user.module#AddUserModule",
-		data: { breadcrumb: "Add User"},
+		data: { breadcrumb: "Add User" },
 		canActivate: [AuthGuard]
-	},
+	}, */
 	{
 		path: "home/posts",
 		loadChildren: "./containers/posts/posts.module#PostsModule",
@@ -50,16 +50,24 @@ const routes: Routes = [
 		path: "home/settings",
 		component: SettingsComponent,
 		data: { breadcrumb: "Settings" },
-		canActivate: [AuthGuard],
+		canActivate: [AuthGuard]
 	},
-	{ path: "home/login", component: LoginComponent, data: { breadcrumb: "Login" } },
+	{
+		path: "home/login",
+		component: LoginComponent,
+		data: { breadcrumb: "Login" }
+	},
 	{
 		path: "register",
 		component: RegisterComponent,
 		data: { breadcrumb: "Register" }
 	},
-	{ path: "", redirectTo: "/home", pathMatch: "full"},
-	{ path: '**', component: PageNotFoundComponent, data: { breadcrumb: "Oops!" }   }
+	{ path: "", redirectTo: "/home", pathMatch: "full" },
+	{
+		path: "**",
+		component: PageNotFoundComponent,
+		data: { breadcrumb: "Oops!" }
+	}
 ];
 
 @NgModule({
