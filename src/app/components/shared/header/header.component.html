@@ -2,9 +2,9 @@
 	<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
 		<div
 			nz-col
-			nzSpan="6"
+			nzSpan="5"
 			[nzXs]="{ span: 5, offset: 1 }"
-			[nzLg]="{ span: 5, offset: 1 }"
+			[nzLg]="{ span: 4, offset: 0 }"
 		>
 			<a [routerLink]="['home']">
 				<div class="logo">
@@ -37,7 +37,7 @@
 						<a nz-dropdown> Hover me <i nz-icon type="down"></i> </a>
 						<ul nz-menu nzSelectable>
 							<li nz-menu-item>
-								<a>1st menu item</a>
+								<a [routerLink]="['home/login']" >Login</a>
 							</li>
 							<li nz-menu-item>
 								<a>2nd menu item</a>
