@@ -7,19 +7,6 @@ Angular 7 + Ant Design + NGRX + Firebase = AngularX 🏆
 Boilerplate to get you started quickly on your next Full-stack Serverless web app!
 The Goal is to build an application that builds other Angular applications without any previous coding experience. We can achieve this by using the many cool features firebase and angular can deliver.
 
-## TODO
-
-- [x] Initiate project with basic responsive layout
-- [x] Setup lazy loading for containers
-- [x] Setup Advanced file structure with Ngrx
-- [x] Build firebase auth services and effects
-- [x] Travis CI and Firebase deploy
-- [ ] Setup Lazy loading for Effects
-
-- [ ] Enhance UX/UI especially on mobile 
-- [ ] Setup login via email and text msg
-- [ ] Setup Schematics with Ant Design and Ngrx
-
 ## Get Started
 
 ```
@@ -108,3 +95,17 @@ app
 │   app.component.ts
 └───app.module
 ```
+
+
+## Fun stuff
+
+- [x] Initiate project with basic responsive layout
+- [x] Setup lazy loading for containers
+- [x] Setup Advanced file structure with Ngrx
+- [x] Build firebase auth services and effects
+- [x] Travis CI and Firebase deploy
+- [ ] Setup Lazy loading for Effects
+
+- [ ] Enhance UX/UI especially on mobile 
+- [ ] Setup login via email and text msg
+- [ ] Setup Schematics with Ant Design and Ngrx
