@@ -54,6 +54,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-allowed.component';
+import { LayoutComponent } from './containers/layout/layout.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-
 		SideMenuComponent,
 		HeaderComponent,
 		PageNotAllowedComponent,
+		LayoutComponent,
 	],
 	imports: [
 		BrowserModule,
