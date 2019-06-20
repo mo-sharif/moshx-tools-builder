@@ -44,7 +44,6 @@ import { SettingsComponent } from "./components/settings/settings.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
-import { RegisterComponent } from './components/register/register.component';
 import { AuthEffects } from "./store/effects/auth.effects";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
@@ -59,7 +58,6 @@ import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-
 		SettingsComponent,
 		CalendarComponent,
 		HomeComponent,
-		RegisterComponent,
 		PageNotFoundComponent,
 		SideMenuComponent,
 		HeaderComponent,
