@@ -1,9 +1,9 @@
 <nz-layout class="inner-layout">
+	<app-header [configs$]="configs$" [loggedInUser$]="loggedInUser$"></app-header>
 	<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'md'" [nzCollapsedWidth]="0"
 		[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger" class="sidebar">
 		<app-side-menu></app-side-menu>
 	</nz-sider>
-	<app-header [configs$]="configs$" [loggedInUser$]="loggedInUser$"></app-header>
 	<nz-content class="content">
 		<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
 		</nz-breadcrumb>
