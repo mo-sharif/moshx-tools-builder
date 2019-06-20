@@ -1,15 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-
-import { SettingsComponent } from "./components/settings/settings.component";
-import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthGuard } from "./services/guard/guard.service";
 
-// TODO: https://ng.ant.design/components/breadcrumb/en
-// Change to use children routes
-
-// TODO: Implement auth guards canActivate: [AuthGuard]
 const routes: Routes = [
 	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
 	{
@@ -27,18 +20,6 @@ const routes: Routes = [
 		path: "home/posts",
 		loadChildren: "./containers/posts/posts.module#PostsModule",
 		data: { breadcrumb: "Posts" }
-	},
-	{
-		path: "home/calendar",
-		component: CalendarComponent,
-		data: { breadcrumb: "Calendar" },
-		canActivate: [AuthGuard]
-	},
-	{
-		path: "home/settings",
-		component: SettingsComponent,
-		data: { breadcrumb: "Settings" },
-		canActivate: [AuthGuard]
 	},
 	{
 		path: "home/login",

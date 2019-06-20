@@ -8,6 +8,6 @@ import { NzEmptyModule } from "ng-zorro-antd";
 
 @NgModule({
 	declarations: [PageNotFoundComponent, PageNotFoundContainer],
-	imports: [CommonModule, PageNotFoundRoutingModule, NzEmptyModule]
+  imports: [CommonModule, PageNotFoundRoutingModule, NzEmptyModule]
 })
 export class PageNotFoundModule {}

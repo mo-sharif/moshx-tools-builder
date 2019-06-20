@@ -40,8 +40,6 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 // Components
 import { AppComponent } from "./app.component";
 import { FooterComponent } from "./components/shared/footer/footer.component";
-import { SettingsComponent } from "./components/settings/settings.component";
-import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
@@ -52,8 +50,6 @@ import { HeaderComponent } from './components/shared/header/header.component';
 	declarations: [
 		AppComponent,
 		FooterComponent,
-		SettingsComponent,
-		CalendarComponent,
 		HomeComponent,
 		SideMenuComponent,
 		HeaderComponent,
