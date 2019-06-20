@@ -14,7 +14,6 @@ import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
 import { Router } from "@angular/router";
 
 @Component({
-	selector: "app-login",
 	templateUrl: "./login.component.html",
 	styleUrls: ["./login.component.css"],
 	animations: [listStagger]

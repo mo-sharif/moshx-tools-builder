@@ -37,14 +37,10 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 
-// Containers
-import { LoginComponent as loginContainer } from "./containers/login/login.component";
-
 // Components
 import { AppComponent } from "./app.component";
 import { FooterComponent } from "./components/shared/footer/footer.component";
 import { SettingsComponent } from "./components/settings/settings.component";
-import { LoginComponent } from "./components/login/login.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
@@ -61,8 +57,6 @@ import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-
 		AppComponent,
 		FooterComponent,
 		SettingsComponent,
-		LoginComponent,
-		loginContainer,
 		CalendarComponent,
 		HomeComponent,
 		RegisterComponent,

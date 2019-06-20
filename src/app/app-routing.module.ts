@@ -6,7 +6,6 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
 
 import { RegisterComponent } from "./components/register/register.component";
-import { LoginComponent } from "./containers/login/login.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
@@ -48,7 +47,7 @@ const routes: Routes = [
 	},
 	{
 		path: "home/login",
-		component: LoginComponent,
+		loadChildren: "./containers/login/login.module#LoginModule",
 		data: { breadcrumb: "Login" }
 	},
 	{

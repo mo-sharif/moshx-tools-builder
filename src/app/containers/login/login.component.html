@@ -1,12 +1,2 @@
-<div *ngIf="user$ | async as user" [@listStagger]="user$.length">
-
-	<h1>Howdy, {{ user.displayName }}</h1>
-
-	<button nz-button nzType="primary" *ngIf="!user.uid" (click)="googleLogin()" [class.is-loading]="user.loading">
-		Sign In with Google
-	</button>
-
-	<button nz-button nzType="primary" *ngIf="user.uid" (click)="logout()">
-		Logout
-	</button>
-</div>
+<app-login [user]="user$ | async" 
+(logoutEvent)="logout()" (googleLoginEvent)="googleLogin()"></app-login>
