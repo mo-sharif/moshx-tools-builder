@@ -6,7 +6,6 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
 
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
 import { AuthGuard } from "./services/guard/guard.service";
 
@@ -18,7 +17,7 @@ const routes: Routes = [
 	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
 	{
 		path: "home/not-allowed",
-		component: PageNotAllowedComponent,
+		loadChildren: "./containers/page-not-allowed.module#PageNotAllowedModule",
 		data: { breadcrumb: "No Access!" }
 	},
 	{
