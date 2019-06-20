@@ -4,9 +4,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { HomeComponent } from "./components/home/home.component";
-
-import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-
 import { AuthGuard } from "./services/guard/guard.service";
 
 // TODO: https://ng.ant.design/components/breadcrumb/en
@@ -17,7 +14,7 @@ const routes: Routes = [
 	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
 	{
 		path: "home/not-allowed",
-		loadChildren: "./containers/page-not-allowed.module#PageNotAllowedModule",
+		loadChildren: "./containers/page-not-allowed/page-not-allowed.module#PageNotAllowedModule",
 		data: { breadcrumb: "No Access!" }
 	},
 	{
@@ -56,7 +53,7 @@ const routes: Routes = [
 	{ path: "", redirectTo: "/home", pathMatch: "full" },
 	{
 		path: "**",
-		component: PageNotFoundComponent,
+		loadChildren:"./containers/page-not-found/page-not-found.module#PageNotFoundModule" ,
 		data: { breadcrumb: "Oops!" }
 	}
 ];

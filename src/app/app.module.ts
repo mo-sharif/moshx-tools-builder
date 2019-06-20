@@ -45,11 +45,8 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
-import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-allowed.component';
-
 
 @NgModule({
 	declarations: [
@@ -58,10 +55,8 @@ import { PageNotAllowedComponent } from './components/page-not-allowed/page-not-
 		SettingsComponent,
 		CalendarComponent,
 		HomeComponent,
-		PageNotFoundComponent,
 		SideMenuComponent,
 		HeaderComponent,
-		PageNotAllowedComponent
 	],
 	imports: [
 		BrowserModule,
