@@ -1,15 +1,24 @@
-<ul nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed" class="side-menu">
-	<li nz-submenu  [routerLinkActive]="['active']">
+<ul
+	nz-menu
+	[nzMode]="'inline'"
+	[nzInlineCollapsed]="isCollapsed"
+	class="side-menu"
+>
+	<li nz-submenu [routerLinkActive]="['active']">
 		<span title><i nz-icon type="user"></i> Users</span>
 		<ul>
 			<li nz-menu-group>
 				<span title>Users</span>
 				<ul>
 					<li nz-menu-item>
-						<a [routerLink]="['home/users']"><i nz-icon type="user"></i>Users</a>
+						<a [routerLink]="['home/users']"
+							><i nz-icon type="user"></i>Users</a
+						>
 					</li>
 					<li nz-menu-item>
-						<a [routerLink]="['home/users/add-user']"><i nz-icon type="user-add"></i>Add User</a>
+						<a [routerLink]="['home/users/add-user']"
+							><i nz-icon type="user-add"></i>Add User</a
+						>
 					</li>
 				</ul>
 			</li>
@@ -19,7 +28,9 @@
 		<span title><i nz-icon type="appstore"></i> Posts</span>
 		<ul>
 			<li nz-menu-item>
-				<a [routerLink]="['home/posts']"><i nz-icon type="interaction"></i>Latest Activities</a>
+				<a [routerLink]="['home/posts']"
+					><i nz-icon type="interaction"></i>Latest Activities</a
+				>
 			</li>
 		</ul>
 	</li>
@@ -30,5 +41,8 @@
 				<a [routerLink]="['home/login']"><i nz-icon type="login"></i>login</a>
 			</li>
 		</ul>
+	</li>
+	<li nz-menu-item>
+		<a [routerLink]="['home/playground']"><i nz-icon type="deployment-unit"></i>Playground</a>
 	</li>
 </ul>

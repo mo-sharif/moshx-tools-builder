@@ -31,6 +31,11 @@ const routes: Routes = [
 		loadChildren: "./containers/register/register.module#RegisterModule",
 		data: { breadcrumb: "Register" }
 	},
+	{
+		path: "home/playground",
+		loadChildren: "./containers/playground/playground.module#PlaygroundModule",
+		data: { breadcrumb: "Playground" }
+	},
 	{ path: "", redirectTo: "/home", pathMatch: "full" },
 	{
 		path: "**",
