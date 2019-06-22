@@ -14,11 +14,31 @@
 	</div>
 	<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
 		<div nz-col nzSpan="24">
-			<nz-carousel nzAutoPlay>
-				<div nz-carousel-content *ngFor="let index of array">
-					<h3>{{ index }}</h3>
+			<div nz-row [nzGutter]="12">
+				<div
+					nz-col
+					[nzSpan]="6"
+					class="card"
+					*ngFor="let container of containers$ | async | keyvalue"
+				>
+					<nz-card
+						(click)="navigateToProject(container.value.name)"
+						[nzBordered]="false"
+						[nzTitle]="container.value.name"
+						[nzExtra]="extraTemplate"
+					>
+						Continue building a {{ container.value.name }}
+					</nz-card>
+					<ng-template #extraTemplate>
+						<i
+							nz-icon
+							[nzType]="container.value.name | lowercase"
+							nzTheme="outline"
+						></i>
+					</ng-template>
 				</div>
-			</nz-carousel>
+				<div></div>
+			</div>
 		</div>
 	</div>
 </div>

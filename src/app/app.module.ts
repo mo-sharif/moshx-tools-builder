@@ -52,7 +52,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 		FooterComponent,
 		HomeComponent,
 		SideMenuComponent,
-		HeaderComponent,
+		HeaderComponent
 	],
 	imports: [
 		BrowserModule,

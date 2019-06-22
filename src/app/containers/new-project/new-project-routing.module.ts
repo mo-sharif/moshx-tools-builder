@@ -6,6 +6,11 @@ const routes: Routes = [
 	{
 		path: "",
 		component: NewProjectComponent
+	},
+	{
+		path: ":id",
+		loadChildren: '../edit-project/edit-project.module#EditProjectModule',
+		data: { breadcrumb: "Edit" }
 	}
 ];
 

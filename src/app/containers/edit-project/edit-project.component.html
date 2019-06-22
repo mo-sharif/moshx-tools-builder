@@ -1,0 +1,3 @@
+<div *ngIf="newProject$ | async as newProject">
+	<ng-container add-comp [comp]="components[newProject['type']]"></ng-container>
+</div>

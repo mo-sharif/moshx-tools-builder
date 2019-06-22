@@ -11,7 +11,7 @@
 	>
 		<div class="box" *ngFor="let component of components" cdkDrag>
 			{{ component.label }}
-			<ng-container add-comp [comp]="component.component"></ng-container>
+			<!-- <ng-container add-comp [comp]="component.component"></ng-container> -->
 			<div class="placeholder" *cdkDragPlaceholder></div>
 		</div>
 	</div>
@@ -30,7 +30,7 @@
 	>
 		<div class="box" *ngFor="let component of componentsRendered" cdkDrag>
 			{{ component.label }}
-			<ng-container add-comp [comp]="component.component"></ng-container>
+			<!-- <ng-container add-comp [comp]="component.component"></ng-container> -->
 			<div class="placeholder" *cdkDragPlaceholder></div>
 		</div>
 	</div>

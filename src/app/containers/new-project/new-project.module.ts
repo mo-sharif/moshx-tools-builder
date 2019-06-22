@@ -1,18 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { NewProjectRoutingModule } from './new-project-routing.module';
-import { NewProjectComponent } from './new-project.component';
-import { NzGridModule } from 'ng-zorro-antd';
-import { NzCarouselModule } from 'ng-zorro-antd';
+import { NewProjectRoutingModule } from "./new-project-routing.module";
+import { NewProjectComponent } from "./new-project.component";
+import { NzGridModule } from "ng-zorro-antd";
+import { NzCardModule } from 'ng-zorro-antd';
+import { NzIconModule } from 'ng-zorro-antd';
 
 @NgModule({
-  declarations: [NewProjectComponent],
-  imports: [
-    NzCarouselModule,
+	declarations: [ NewProjectComponent],
+	imports: [
     NzGridModule,
+    NzCardModule,
     CommonModule,
-    NewProjectRoutingModule
-  ]
+    NzIconModule,
+		NewProjectRoutingModule
+	]
 })
-export class NewProjectModule { }
+export class NewProjectModule {}

@@ -6,26 +6,29 @@ import { initialConfigState, IConfigState } from "./config.state";
 import { initialLoadingState, ILoadingState } from "./loading.state";
 import { initialAuthState, IAuthState } from "./auth.state";
 import { initialMessageState, IMessageState } from "./message.state";
+import { initialProjectState, IProjectState } from "./project.state";
 
 export interface IAppState {
-  router?: RouterReducerState;
-  users: IUserState;
-  posts: IPostState;
-  config: IConfigState;
-  loading: ILoadingState;
-  auth: IAuthState;
-  message: IMessageState;
+	router?: RouterReducerState;
+	users: IUserState;
+	posts: IPostState;
+	config: IConfigState;
+	loading: ILoadingState;
+	auth: IAuthState;
+	message: IMessageState;
+	projects: IProjectState;
 }
 
 export const initialAppState: IAppState = {
-  users: initialUserState,
-  config: initialConfigState,
-  posts: initialPostState,
-  loading: initialLoadingState,
-  auth: initialAuthState,
-  message: initialMessageState
+	users: initialUserState,
+	config: initialConfigState,
+	posts: initialPostState,
+	loading: initialLoadingState,
+	auth: initialAuthState,
+	message: initialMessageState,
+	projects: initialProjectState
 };
 
 export function getInitialState(): IAppState {
-  return initialAppState;
+	return initialAppState;
 }
