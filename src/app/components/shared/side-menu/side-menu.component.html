@@ -42,7 +42,19 @@
 			</li>
 		</ul>
 	</li>
-	<li nz-menu-item>
-		<a [routerLink]="['home/playground']"><i nz-icon type="deployment-unit"></i>Playground</a>
+	<li nz-submenu>
+		<span title><i nz-icon type="profile"></i> Project</span>
+		<ul>
+			<li nz-menu-item>
+				<a [routerLink]="['home/playground']"
+					><i nz-icon type="deployment-unit"></i>Playground</a
+				>
+			</li>
+			<li nz-menu-item>
+				<a [routerLink]="['home/playground/new-project']"
+					><i nz-icon type="build"></i>New Project</a
+				>
+			</li>
+		</ul>
 	</li>
 </ul>

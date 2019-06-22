@@ -1,0 +1,24 @@
+<div>
+	<div
+		nz-row
+		nzType="flex"
+		nzJustify="space-between"
+		nzAlign="middle"
+		[@slideInOut]="animationState"
+	>
+		<div nz-col nzSpan="24">
+			<h1 class="height-100">
+				What do you wanna build?
+			</h1>
+		</div>
+	</div>
+	<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
+		<div nz-col nzSpan="24">
+			<nz-carousel nzAutoPlay>
+				<div nz-carousel-content *ngFor="let index of array">
+					<h3>{{ index }}</h3>
+				</div>
+			</nz-carousel>
+		</div>
+	</div>
+</div>
