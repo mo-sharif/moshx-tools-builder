@@ -1,35 +1,37 @@
 <div class="example-container">
-	<h2>To do</h2>
+	<h2>Components</h2>
 
 	<div
 		cdkDropList
-		#todoList="cdkDropList"
-		[cdkDropListData]="todo"
-		[cdkDropListConnectedTo]="[doneList]"
-		class="example-list"
+		#componentsList="cdkDropList"
+		[cdkDropListData]="components"
+		[cdkDropListConnectedTo]="[componentsRenderedList]"
+		class="list"
 		(cdkDropListDropped)="drop($event)"
 	>
-		<div class="example-box" *ngFor="let item of todo" cdkDrag>
-			{{ item }}
-			<div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+		<div class="box" *ngFor="let component of components" cdkDrag>
+			{{ component.label }}
+			<ng-container add-comp [comp]="component.component"></ng-container>
+			<div class="placeholder" *cdkDragPlaceholder></div>
 		</div>
 	</div>
 </div>
 
 <div class="example-container">
-	<h2>Done</h2>
+	<h2>Rendered</h2>
 
 	<div
 		cdkDropList
-		#doneList="cdkDropList"
-		[cdkDropListData]="done"
-		[cdkDropListConnectedTo]="[todoList]"
+		#componentsRenderedList="cdkDropList"
+		[cdkDropListData]="componentsRendered"
+		[cdkDropListConnectedTo]="[componentsList]"
 		class="example-list"
 		(cdkDropListDropped)="drop($event)"
 	>
-		<div class="example-box" *ngFor="let item of done" cdkDrag>
-			{{ item }}
-			<div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+		<div class="box" *ngFor="let component of componentsRendered" cdkDrag>
+			{{ component.label }}
+			<ng-container add-comp [comp]="component.component"></ng-container>
+			<div class="placeholder" *cdkDragPlaceholder></div>
 		</div>
 	</div>
 </div>
