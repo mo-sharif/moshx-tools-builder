@@ -26,6 +26,7 @@ import { IUser } from "../../models/user.interface";
 import { selectUserList } from "../selectors/user.selector";
 
 import { SetSuccessMsg } from "../actions/message.actions";
+import { SetLoading } from "../actions/loading.actions";
 
 @Injectable()
 export class UserEffects {
@@ -60,7 +61,8 @@ export class UserEffects {
       return this._userService.getUserList().pipe(
         switchMap((users: IUser[]) => [
           new GetUsersSuccess(users),
-          new SetSuccessMsg("Users Loaded Successfully!")
+          new SetSuccessMsg("Users Loaded Successfully!"),
+          new SetLoading(false)
         ]),
         catchError(err => of(new GetUsersError({ error: err.message })))
       );

@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { UsersComponent } from "./users.component";
-import { UserComponent } from "../user/user.component";
+import { UserDetailsComponent } from "../../components/user-details/user-details.component";
 import { AuthGuard } from "../../services/guard/guard.service";
 
 const routes: Routes = [
@@ -16,9 +16,10 @@ const routes: Routes = [
 		canActivate: [AuthGuard]
 	},
 	{
-		path: "/users/user/:id",
-		component: UserComponent,
-		data: { breadcrumb: "User" }
+		path: ":id",
+		component: UserDetailsComponent,
+		data: { breadcrumb: "User" },
+		canActivate: [AuthGuard]
 	}
 ];
 

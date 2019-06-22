@@ -9,7 +9,7 @@ import { IUser } from '../../models/user.interface';
 })
 export class UserDetailsComponent implements OnInit {
   @Input()
-  user$: IUser;
+  user: IUser;
 
   constructor() {}
 

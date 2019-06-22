@@ -13,6 +13,10 @@ export class UsersComponent implements OnInit {
 
   @Input()
   users: IUser[];
+
+  @Input()
+  loading: boolean;
+
   @Output()
   userSelected: EventEmitter<number> = new EventEmitter();
 

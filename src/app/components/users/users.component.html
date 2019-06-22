@@ -9,7 +9,7 @@
 	</thead>
 	<tbody [@listStagger]="users.length">
 		<tr *ngFor="let user of basicTable.data"></tr>
-		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.id)">
+		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.name)">
 			<td>{{ user.name }}</td>
 			<td>{{ user.job }}</td>
 			<td>{{ user.city }}</td>
@@ -31,3 +31,10 @@
 		</tr>
 	</tbody>
 </nz-table>
+
+<nz-spin nzTip="Loading..." *ngIf="loading">
+	<nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+	<nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+	<nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+	<nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+</nz-spin>
