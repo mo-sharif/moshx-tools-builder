@@ -46,13 +46,14 @@ import { AuthEffects } from "./store/effects/auth.effects";
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
 		FooterComponent,
 		HomeComponent,
 		SideMenuComponent,
-		HeaderComponent
+		HeaderComponent,
 	],
 	imports: [
 		BrowserModule,

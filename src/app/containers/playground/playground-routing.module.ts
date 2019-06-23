@@ -9,8 +9,8 @@ const routes: Routes = [
 	},
 	{
 		path: "new-project",
-    loadChildren: "../new-project/new-project.module#NewProjectModule",
-    data: { breadcrumb: "New project" }
+		loadChildren: "../new-project/new-project.module#NewProjectModule",
+		data: { breadcrumb: "New project" }
 	}
 ];
 

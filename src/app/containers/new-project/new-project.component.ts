@@ -1,5 +1,5 @@
 import { Component, OnInit, Type } from "@angular/core";
-import { SlideInOutAnimation } from "../../animations/slide-in-out.animation";
+import { listStagger } from "../../animations/list-stagger.animation";
 
 import { NewProject } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 	selector: "app-new-project",
 	templateUrl: "./new-project.component.html",
 	styleUrls: ["./new-project.component.css"],
-	animations: [SlideInOutAnimation]
+	animations: [listStagger]
 })
 export class NewProjectComponent implements OnInit {
 	containers$ = this._store.pipe(select(selectContainers));

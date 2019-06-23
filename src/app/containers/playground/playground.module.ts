@@ -7,10 +7,12 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { FormsModule } from "@angular/forms";
 
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
+// import { AddComponentDirective } from "src/app/directives/addComponent.directive";
 
 @NgModule({
 	declarations: [
 		PlaygroundComponent,
+		// AddComponentDirective
 		// CheckboxComponent,
 		// CarouselComponent,
 		// UploadComponent,
@@ -28,6 +30,7 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 		// CarouselComponent,
 		// UploadComponent,
 		// ButtonComponent
-	]
+	],
+	// exports: [AddComponentDirective]
 })
 export class PlaygroundModule {}
