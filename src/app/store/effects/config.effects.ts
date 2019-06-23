@@ -1,28 +1,43 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap } from "rxjs/operators";
+import { switchMap, map, withLatestFrom } from "rxjs/operators";
 import { of } from "rxjs";
-
+import { Store, select } from "@ngrx/store";
 import { IConfig } from "../../models/config.interface";
+import { IAppState } from "../state/app.state";
+
 import {
 	EConfigActions,
 	GetConfig,
-	GetConfigSuccess
+	GetConfigSuccess,
+	OpenDrawer,
+	CloseDrawer,
+	DrawerStatus
 } from "../actions/config.actions";
 import { SetSuccessMsg } from "../actions/message.actions";
+import { selectConfig } from "../selectors/config.selector";
 
 @Injectable()
 export class ConfigEffects {
-/* 	@Effect()
-	getConfig$ = this._actions$.pipe(
-		ofType<GetConfig>(EConfigActions.GetConfig),
-    switchMap(() => this._configService.getConfig()),
-		switchMap((config: IConfig) => {
-			return of(new GetConfigSuccess(config));
+	@Effect()
+	openDrawer$ = this._actions$.pipe(
+		ofType<OpenDrawer>(EConfigActions.OpenDrawer),
+		withLatestFrom(this._store.pipe(select(selectConfig))),
+		switchMap(res => {
+			res[1].isCollapsed = true;
+			return of(new DrawerStatus(res[1]));
 		})
-	); */
+	);
 
-	constructor(
-		private _actions$: Actions
-	) {}
+	@Effect()
+	closeDrawer$ = this._actions$.pipe(
+		ofType<CloseDrawer>(EConfigActions.CloseDrawer),
+		withLatestFrom(this._store.pipe(select(selectConfig))),
+		switchMap(res => {
+			res[1].isCollapsed = false;
+			return of(new DrawerStatus(res[1]));
+		})
+	);
+
+	constructor(private _actions$: Actions, private _store: Store<IAppState>) {}
 }

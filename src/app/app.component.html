@@ -1,18 +1,19 @@
 <nz-layout class="inner-layout">
-	<app-header [configs$]="configs$" [loggedInUser$]="loggedInUser$"></app-header>
-	<nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'md'" [nzCollapsedWidth]="0"
-		[nzZeroTrigger]="zeroTrigger" [nzTrigger]="nonZeroTrigger" class="sidebar">
-		<app-side-menu></app-side-menu>
-	</nz-sider>
+	<app-header
+		[configs]="configs$ | async"
+		[loggedInUser]="loggedInUser$ | async"
+		(openDrawer)="openDrawer()"
+	></app-header>
+	<app-side-menu [configs]="configs$" (closeDrawer)="closeDrawer()"></app-side-menu>
 	<nz-content class="content">
 		<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
 		</nz-breadcrumb>
-		<div style="background:#fff; padding: 24px; min-height: 280px;" >
-			<div class="container app-container" >
+		<div style="background:#fff; padding: 24px; min-height: 280px;">
+			<div class="container app-container">
 				<router-outlet></router-outlet>
 			</div>
 		</div>
-		<app-footer [configs$]="configs$"></app-footer>
+		<app-footer [configs]="configs$ | async"></app-footer>
 	</nz-content>
 </nz-layout>
 

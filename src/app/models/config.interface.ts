@@ -3,5 +3,5 @@ export interface IConfig {
   permissions?: string[];
   siteName?: string;
   copyright?: string;
-  isCollapsed?: boolean;
+  isCollapsed?:boolean;
 }

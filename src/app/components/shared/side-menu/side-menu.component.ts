@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { IConfig } from "src/app/models/config.interface";
 
 @Component({
 	selector: "app-side-menu",
@@ -8,6 +9,18 @@ import { Component, OnInit } from "@angular/core";
 export class SideMenuComponent implements OnInit {
 	constructor() {}
 
+	visible = false;
+	placement = "left";
+
+	@Input()
+	configs: IConfig;
+
+	@Output()
+	closeDrawer: EventEmitter<any> = new EventEmitter();
+
 	ngOnInit() {}
-	isCollapsed = false;
+
+	closeSideDrawer = () => {
+		this.closeDrawer.emit();
+	};
 }

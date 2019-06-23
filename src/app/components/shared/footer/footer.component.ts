@@ -8,7 +8,7 @@ import { IConfig } from '../../../models/config.interface';
 })
 export class FooterComponent implements OnInit {
 	@Input()
-	configs$: IConfig;
+	configs: IConfig;
 
 	constructor() {}
 

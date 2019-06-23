@@ -1,52 +1,42 @@
 <nz-header class="header">
-	<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
-		<div
-			nz-col
-			nzSpan="5"
-			[nzXs]="{ span: 5, offset: 1 }"
-			[nzLg]="{ span: 4, offset: 0 }"
-		>
-			<a [routerLink]="['home']">
-				<div class="logo">
-					{{ (configs$ | async).siteName }}
-				</div>
-			</a>
+	<div
+		nz-row
+		nzType="flex"
+		nzJustify="end"
+		nzAlign="end"
+		class="toolbar"
+	>
+		<div nz-col nzSpan="8">
+			<p class="height-120">
+				<button nz-button [nzType]="link" (click)="openSideDrawer()" class="toggle-menu">
+					<i nz-icon nzType="menu" nzTheme="outline"></i>
+				</button>
+			</p>
 		</div>
-		<div
-			nz-col
-			nzSpan="4"
-			[nzXs]="{ span: 11, offset: 1 }"
-			[nzLg]="{ span: 8, offset: 1 }"
-		>
-			<nz-input-group [nzSuffix]="suffixIconSearch">
-				<input type="text" nz-input placeholder="input search text" />
-			</nz-input-group>
-			<ng-template #suffixIconSearch>
-				<i nz-icon type="search"></i>
-			</ng-template>
+		<div nz-col nzSpan="8">
+			<p class="height-100">
+				<a [routerLink]="['home']">
+					<div class="logo">
+						{{ configs.siteName }}
+					</div>
+				</a>
+			</p>
 		</div>
-		<div
-			nz-col
-			nzSpan="3"
-			[nzXs]="{ span: 5, offset: 0 }"
-			[nzLg]="{ span: 5, offset: 0 }"
-		>
-			<div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle">
-				<div nz-col nzSpan="2">
-					<button
-						nz-button
-						nzShape="circle"
-						[routerLink]="['home/login']"
-						routerLinkActive="active"
-						class="avatar-button"
-					>
-						<nz-avatar
-							[nzSrc]="(loggedInUser$ | async)?.photoURL"
-							[nzText]="(loggedInUser$ | async)?.displayName | slice: 0:1"
-						></nz-avatar>
-					</button>
-				</div>
-			</div>
+		<div nz-col nzSpan="8">
+			<p class="height-80">
+				<button
+					nz-button
+					nzShape="circle"
+					[routerLink]="['home/login']"
+					routerLinkActive="active"
+					class="avatar-button"
+				>
+					<nz-avatar
+						[nzSrc]="loggedInUser.photoURL"
+						[nzText]="loggedInUser.displayName | slice: 0:1"
+					></nz-avatar>
+				</button>
+			</p>
 		</div>
 	</div>
 </nz-header>

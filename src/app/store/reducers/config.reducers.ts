@@ -12,6 +12,22 @@ export function configReducers(
 				config: action.payload
 			};
 		}
+		case EConfigActions.OpenDrawer: {
+			return {
+				...state
+			};
+		}
+		case EConfigActions.CloseDrawer: {
+			return {
+				...state
+			};
+		}
+		case EConfigActions.DrawerStatus: {
+			return {
+				...state,
+				config: action.payload
+			};
+		}
 
 		default:
 			return state;

@@ -7,7 +7,6 @@
 
 .content {
 	padding: 0 50px;
-	margin-left: 200px;
 }
 .sidebar {
 	position: fixed;
@@ -20,7 +19,6 @@
 		display: none;
 	}
 	.content {
-		margin-left: 0px;
 		padding: 0px;
 	}
 	.sidebar {
