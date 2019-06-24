@@ -1,58 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>AngularX</title>
+		<base href="/" />
 
-<head>
-  <meta charset="utf-8">
-  <title>AngularX</title>
-  <base href="/">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+	</head>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
+	<body style="background-color: #f0f2f5;">
+		<app-root>
+			<style>
+				app-root {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					height: 100vh;
+					color: #1890ff;
+					font-size: 3.5em;
+					text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+				}
 
-<body>
-  <app-root>
-    <style>
-      app-root {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: #1890ff;
-        font-size: 3.5em;
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-      }
+				body {
+					margin: 0;
+					padding: 0;
+				}
 
-      body {
-        margin: 0;
-        padding: 0;
-      }
+				@keyframes dots {
+					50% {
+						transform: translateY(-0.4rem);
+					}
 
-      @keyframes dots {
-        50% {
-          transform: translateY(-.4rem);
-        }
+					100% {
+						transform: translateY(0);
+					}
+				}
 
-        100% {
-          transform: translateY(0);
-        }
-      }
+				.d {
+					animation: dots 1.5s ease-out infinite;
+				}
 
-      .d {
-        animation: dots 1.5s ease-out infinite;
-      }
+				.d-2 {
+					animation-delay: 0.5s;
+				}
 
-      .d-2 {
-        animation-delay: .5s;
-      }
+				.d-3 {
+					animation-delay: 1s;
+				}
+			</style>
 
-      .d-3 {
-        animation-delay: 1s;
-      }
-    </style>
-
-    <span class="d">.</span><span class="d d-2">.</span><span class="d d-3">.</span>
-  </app-root>
-</body>
-
+			<span class="d">.</span><span class="d d-2">.</span
+			><span class="d d-3">.</span>
+		</app-root>
+	</body>
 </html>

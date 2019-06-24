@@ -1,10 +1,5 @@
 <div>
-	<div
-		nz-row
-		nzType="flex"
-		nzJustify="space-between"
-		nzAlign="middle"
-	>
+	<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
 		<div nz-col nzSpan="24">
 			<h1 class="height-100">
 				What do you wanna build?
@@ -17,10 +12,10 @@
 				<div
 					nz-col
 					[nzSpan]="6"
-					class="card"
 					*ngFor="let container of containers$ | async | keyvalue"
 				>
 					<nz-card
+						class="card"
 						(click)="navigateToProject(container.value.name)"
 						[nzBordered]="false"
 						[nzTitle]="container.value.name"
@@ -29,11 +24,7 @@
 						Continue building a {{ container.value.name }}
 					</nz-card>
 					<ng-template #extraTemplate>
-						<i
-							nz-icon
-							[nzType]="container.value.name | lowercase"
-							nzTheme="outline"
-						></i>
+						<i nz-icon [nzType]="container.value.name | lowercase"></i>
 					</ng-template>
 				</div>
 				<div></div>
