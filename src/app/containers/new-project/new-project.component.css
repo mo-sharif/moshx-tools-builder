@@ -3,6 +3,12 @@
 }
 .card:hover {
 	box-shadow: 3px 4px 11px rgba(33, 33, 33, 0.2);
-    border-radius: 8px;
-    cursor: pointer;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.card:hover .project-name-input {
+    opacity: 1;
+}
+.project-name-input {
+	opacity: 0;
 }
