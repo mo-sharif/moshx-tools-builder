@@ -1,14 +1,8 @@
 <div class="example-container">
 	<h2>Components</h2>
 
-	<div
-		cdkDropList
-		#componentsList="cdkDropList"
-		[cdkDropListData]="components"
-		[cdkDropListConnectedTo]="[componentsRenderedList]"
-		class="list"
-		(cdkDropListDropped)="drop($event)"
-	>
+	<div cdkDropList #componentsList="cdkDropList" [cdkDropListData]="components"
+		[cdkDropListConnectedTo]="[componentsRenderedList]" class="list" (cdkDropListDropped)="drop($event)">
 		<div class="box" *ngFor="let component of components" cdkDrag>
 			{{ component.label }}
 			<!-- <ng-container add-comp [comp]="component.component"></ng-container> -->
@@ -20,14 +14,8 @@
 <div class="example-container">
 	<h2>Rendered</h2>
 
-	<div
-		cdkDropList
-		#componentsRenderedList="cdkDropList"
-		[cdkDropListData]="componentsRendered"
-		[cdkDropListConnectedTo]="[componentsList]"
-		class="example-list"
-		(cdkDropListDropped)="drop($event)"
-	>
+	<div cdkDropList #componentsRenderedList="cdkDropList" [cdkDropListData]="componentsRendered"
+		[cdkDropListConnectedTo]="[componentsList]" class="list" (cdkDropListDropped)="drop($event)">
 		<div class="box" *ngFor="let component of componentsRendered" cdkDrag>
 			{{ component.label }}
 			<!-- <ng-container add-comp [comp]="component.component"></ng-container> -->

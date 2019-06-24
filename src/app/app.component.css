@@ -24,7 +24,7 @@
 		display: none;
 	}
 	.content {
-		padding: 0px;
+		padding: 0 10px;
 	}
 	.sidebar {
 		position: relative;
