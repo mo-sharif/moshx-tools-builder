@@ -21,6 +21,7 @@ import { ConfigEffects } from "./store/effects/config.effects";
 import { UserEffects } from "./store/effects/user.effects";
 import { PostEffects } from "./store/effects/post.effects";
 import { MessageEffects } from "./store/effects/message.effects";
+import { routerEffects } from "./store/effects/router.effects";
 
 // Services
 import { UserService } from "./services/user/user.service";
@@ -46,7 +47,6 @@ import { AuthEffects } from "./store/effects/auth.effects";
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 
-
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -65,7 +65,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects, AuthEffects, MessageEffects]),
+		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects, AuthEffects, MessageEffects,routerEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,

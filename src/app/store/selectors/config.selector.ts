@@ -9,3 +9,8 @@ export const selectConfig = createSelector(
 	configState,
 	(state: IConfigState) => state.config
 );
+
+export const selectIsCollapsed = createSelector(
+	configState,
+	(state: IConfigState) => state.isCollapsed
+);

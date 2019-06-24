@@ -1,20 +1,16 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, map, withLatestFrom } from "rxjs/operators";
+import { switchMap, withLatestFrom } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
-import { IConfig } from "../../models/config.interface";
 import { IAppState } from "../state/app.state";
 
 import {
 	EConfigActions,
-	GetConfig,
-	GetConfigSuccess,
 	OpenDrawer,
 	CloseDrawer,
 	DrawerStatus
 } from "../actions/config.actions";
-import { SetSuccessMsg } from "../actions/message.actions";
 import { selectConfig } from "../selectors/config.selector";
 
 @Injectable()

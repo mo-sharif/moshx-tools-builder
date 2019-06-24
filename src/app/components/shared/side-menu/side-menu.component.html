@@ -5,10 +5,7 @@
 	nzTitle="Menu"
 	(nzOnClose)="closeSideDrawer()"
 >
-	<ul
-		nz-menu
-		class="side-menu"
-	>
+	<ul [routerLinkActive]="['active']" nz-menu class="side-menu">
 		<li nz-submenu [routerLinkActive]="['active']">
 			<span title><i nz-icon type="user"></i> Users</span>
 			<ul>
