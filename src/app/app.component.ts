@@ -14,7 +14,7 @@ import { selectLoggedInUser } from "./store/selectors/auth.selectors";
 import { selectMessage } from "./store/selectors/message.selectors";
 
 @Component({
-	selector: "root",
+	selector: "app-root",
 	templateUrl: "./app.component.html",
 	styleUrls: ["./app.component.css"]
 })

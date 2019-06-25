@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IConfig } from "src/app/models/config.interface";
 
 @Component({
-	selector: "side-menu",
+	selector: "app-side-menu",
 	templateUrl: "./side-menu.component.html",
 	styleUrls: ["./side-menu.component.css"]
 })

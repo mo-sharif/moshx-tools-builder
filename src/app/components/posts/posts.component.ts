@@ -3,7 +3,7 @@ import { listStagger } from "../../animations/list-stagger.animation";
 import { IPost } from '../../models/post.interface';
 
 @Component({
-  selector: 'posts',
+  selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
 	animations: [listStagger] // register the animation

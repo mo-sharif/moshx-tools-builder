@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-	selector: "login-form",
+	selector: "app-login-form",
 	templateUrl: "./login-form.component.html",
 	styleUrls: ["./login-form.component.css"]
 })
