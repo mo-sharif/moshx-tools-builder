@@ -6,7 +6,6 @@ import {
 	GoogleLogin,
 	Logout
 } from "./../../store/actions/auth.actions";
-import { IUser } from "../../models/user.interface";
 import { IAppState } from "../../store/state/app.state";
 import { listStagger } from "../../animations/list-stagger.animation";
 
