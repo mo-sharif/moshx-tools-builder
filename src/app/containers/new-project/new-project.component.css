@@ -1,15 +1,17 @@
 .card {
-	transition: box-shadow 0.3s;
-	border-radius: 8px;
-	box-shadow: 1px 3px 2px #e8e8e8;
+  border-radius: 8px;
+  box-shadow: 1px 3px 2px #e8e8e8;
+  transition: transform 0.1s ease-out, -webkit-transform 0.1s ease-out;
 }
 .card:hover {
-	box-shadow: 3px 4px 11px rgba(33, 33, 33, 0.2);
-	cursor: pointer;
+  cursor: pointer;
+  transform: scale(1.02);
+  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+  color: #1890ff;
 }
 .card:hover .project-name-input {
-	opacity: 1;
+  opacity: 1;
 }
 .project-name-input {
-	opacity: 0;
+  opacity: 0;
 }

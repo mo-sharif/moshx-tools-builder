@@ -1,21 +1,23 @@
 .logo {
-	margin-left: 28px;
+  margin-left: 28px;
 }
 .header {
-	background: #fff;
-	box-shadow: 1px 3px 2px #e8e8e8;
-
+  background: #fff;
+  box-shadow: 1px 3px 2px #e8e8e8;
 }
 .avatar-button {
-	width: 34px;
-	height: 34px;
+  width: 34px;
+  height: 34px;
 }
 .toggle-menu {
-	border: none;
+  border: none;
 }
 
 @media only screen and (max-width: 767px) {
-	.hide-small-screen {
-		display: none;
-	}
+  .hide-small-screen {
+    display: none;
+  }
+  .header {
+    padding: 0 10px;
+  }
 }
