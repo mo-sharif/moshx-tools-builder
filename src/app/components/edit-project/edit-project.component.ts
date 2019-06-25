@@ -10,7 +10,7 @@ import {
 import { Observable, Observer } from "rxjs";
 
 @Component({
-	selector: "app-edit-project",
+	selector: "edit-project",
 	templateUrl: "./edit-project.component.html",
 	styleUrls: ["./edit-project.component.css"]
 })

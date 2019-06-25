@@ -8,7 +8,7 @@ import { selectContainers } from "../../store/selectors/project.selector";
 import { Router } from "@angular/router";
 
 @Component({
-	selector: "app-new-project",
+	selector: "new-project",
 	templateUrl: "./new-project.component.html",
 	styleUrls: ["./new-project.component.css"],
 	animations: [listStagger]

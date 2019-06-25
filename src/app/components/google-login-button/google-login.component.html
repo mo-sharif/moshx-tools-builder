@@ -1,0 +1,9 @@
+<button
+	nz-button
+	nzType="primary"
+	(click)="googleLogin()"
+  [class.is-loading]="user.loading"
+  *ngIf="!user.uid"
+>
+	Sign In with Google
+</button>

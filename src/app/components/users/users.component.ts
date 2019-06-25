@@ -3,7 +3,7 @@ import { listStagger } from "../../animations/list-stagger.animation";
 import { IUser } from '../../models/user.interface';
 
 @Component({
-  selector: 'app-users',
+  selector: 'users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
   animations: [listStagger],

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { listStagger } from "../../animations/list-stagger.animation";
 
 @Component({
-  selector: "app-form",
+  selector: "form",
   templateUrl: "./form.component.html",
   styleUrls: ["./form.component.css"],
   animations: [listStagger] // register the animation

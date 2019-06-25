@@ -1,19 +1,19 @@
 <nz-layout class="inner-layout">
-	<app-header
+	<header
 		[configs]="configs$ | async"
 		[loggedInUser]="loggedInUser$ | async"
 		(openDrawer)="openDrawer()"
-	></app-header>
-	<app-side-menu [configs]="configs$" (closeDrawer)="closeDrawer()"></app-side-menu>
+	></header>
+	<side-menu [configs]="configs$" (closeDrawer)="closeDrawer()"></side-menu>
 	<nz-content class="content">
 		<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
 		</nz-breadcrumb>
 		<div class="content-inner">
-			<div class="container app-container">
+			<div class="container container">
 				<router-outlet></router-outlet>
 			</div>
 		</div>
-		<app-footer [configs]="configs$ | async"></app-footer>
+		<footer [configs]="configs$ | async"></footer>
 	</nz-content>
 </nz-layout>
 

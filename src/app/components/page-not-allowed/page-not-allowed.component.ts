@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-	selector: "app-page-not-allowed",
+	selector: "page-not-allowed",
 	templateUrl: "./page-not-allowed.component.html",
 	styleUrls: ["./page-not-allowed.component.css"],
 })

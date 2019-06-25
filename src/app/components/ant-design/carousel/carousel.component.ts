@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 
 @Component({
-	selector: "app-carousel",
+	selector: "carousel",
   templateUrl: "./carousel.component.html",
   encapsulation: ViewEncapsulation.None,
 	styleUrls: ["./carousel.component.css"]

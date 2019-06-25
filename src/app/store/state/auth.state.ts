@@ -15,5 +15,5 @@ export const initialAuthState: IAuthState = {
 
 export const defaultUser: IUser = {
 	uid: null,
-	displayName: "GUEST"
+	displayName: "Guest"
 };

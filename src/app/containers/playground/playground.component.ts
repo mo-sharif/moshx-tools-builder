@@ -16,7 +16,7 @@ export interface Comp {
 }
 
 @Component({
-	selector: "app-playground",
+	selector: "playground",
 	templateUrl: "./playground.component.html",
 	styleUrls: ["./playground.component.css"]
 })
