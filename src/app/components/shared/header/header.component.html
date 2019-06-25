@@ -2,12 +2,7 @@
 	<div nz-row nzType="flex" nzJustify="end" nzAlign="end">
 		<div nz-col nzSpan="8">
 			<p class="height-120">
-				<button
-					nz-button
-					[nzType]="link"
-					(click)="openSideDrawer()"
-					class="toggle-menu"
-				>
+				<button nz-button [nzType]="link" (click)="openSideDrawer()" class="toggle-menu">
 					<i nz-icon nzType="menu" nzTheme="outline"></i>
 				</button>
 			</p>
@@ -24,24 +19,16 @@
 		<div nz-col nzSpan="8" style="text-align: right">
 			<p class="height-80">
 				<ng-template #profileTemplate>
-					<div></div>
+					<button *ngIf="!loggedInUser.uid; else loggedOut" nz-button nzType="link" nzBlock [routerLink]="['home/login']" >Login</button>
+					<ng-template #loggedOut>
+						<button nz-button nzType="link" nzBlock [routerLink]="['home/login']">Logout</button>
+					</ng-template>
 				</ng-template>
-				<button
-					nz-button
-					nzShape="circle"
-					[routerLink]="['home/login']"
-					routerLinkActive="active"
-					class="avatar-button"
-					nz-popover
-					nzTitle="Profile"
-					[nzContent]="profileTemplate"
-					nzTrigger="hover"
-					nzPlacement="bottomRight"
-				>
-					<nz-avatar
-						[nzSrc]="loggedInUser.photoURL"
-						[nzText]="loggedInUser.displayName | slice: 0:1"
-					></nz-avatar>
+				<button nz-button nzShape="circle" [routerLink]="['home/login']" routerLinkActive="active"
+					class="avatar-button" nz-popover nzTitle="Profile" [nzContent]="profileTemplate" nzTrigger="hover"
+					nzPlacement="bottomRight">
+					<nz-avatar [nzSrc]="loggedInUser.photoURL" [nzText]="loggedInUser.displayName | slice: 0:1">
+					</nz-avatar>
 				</button>
 			</p>
 		</div>
