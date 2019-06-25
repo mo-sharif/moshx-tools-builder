@@ -1,7 +1,3 @@
-<!-- <login-form></login-form> -->
-
-<!-- *ngIf="!user.uid" -->
-
 <div *ngIf="user$ | async as user" [@listStagger]="user.length">
 	<h1>Welcome! {{ user.displayName }}</h1>
 	<google-login
