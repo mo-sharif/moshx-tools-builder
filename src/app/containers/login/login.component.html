@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div *ngIf="user$ | async as user" [@listStagger]="user.length">
 	<h1>Welcome! {{ user.displayName }}</h1>
 	<google-login
@@ -10,3 +11,8 @@
 		Logout
 	</button>
 </div>
+=======
+<app-login [user]="user$ | async" 
+(logoutEvent)="logout()" (googleLoginEvent)="googleLogin()"></app-login>
+<!-- <app-login-form></app-login-form> -->
+>>>>>>> parent of dd0c6d2... Refractor of all selectors

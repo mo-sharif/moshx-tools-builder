@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 // import 'rxjs/add/observable/throw';
 
 import {Component, Directive} from '@angular/core';
-import {GoogleLoginComponent} from './google-login.component';
+import {LoginComponent} from './login.component';
 
 describe('LoginComponent', () => {
   let fixture;
@@ -16,13 +16,13 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        GoogleLoginComponent
+        LoginComponent
       ],
       providers: [
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     }).compileComponents();
-    fixture = TestBed.createComponent(GoogleLoginComponent);
+    fixture = TestBed.createComponent(LoginComponent);
     component = fixture.debugElement.componentInstance;
   });
 

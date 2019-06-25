@@ -3,12 +3,12 @@ import { IUser } from '../../models/user.interface';
 import { listStagger } from '../../animations/list-stagger.animation';
 
 @Component({
-  selector: 'google-login',
-  templateUrl: './google-login.component.html',
-  styleUrls: ['./google-login.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
   animations: [listStagger]
 })
-export class GoogleLoginComponent implements OnInit {
+export class LoginComponent implements OnInit {
   @Input()
   user: IUser
 
