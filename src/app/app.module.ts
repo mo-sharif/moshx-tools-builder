@@ -36,11 +36,12 @@ import { FooterComponent } from "./components/shared/footer/footer.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
-import { SideMenuComponent } from "./components/shared/side-menu/side-menu.component";
-import { HeaderComponent } from "./components/shared/header/header.component";
+import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
+import { HeaderComponent } from './components/shared/header/header.component';
 
 // Ant Design
-import { NgZorroAntdModule } from "ng-zorro-antd";
+import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
+
 
 @NgModule({
 	declarations: [
@@ -48,7 +49,7 @@ import { NgZorroAntdModule } from "ng-zorro-antd";
 		FooterComponent,
 		HomeComponent,
 		SideMenuComponent,
-		HeaderComponent
+		HeaderComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -60,18 +61,13 @@ import { NgZorroAntdModule } from "ng-zorro-antd";
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([
-			ConfigEffects,
-			AuthEffects,
-			MessageEffects,
-			routerEffects
-		]),
+		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,
 		NgZorroAntdModule
 	],
-	providers: [AuthService, AuthGuard],
+	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

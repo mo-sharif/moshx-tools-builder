@@ -24,7 +24,7 @@ export const initialProjectState: IProjectState = {
 			type: TableComponent
 		},
 		{
-			name: "Calender",
+			name: "Calendar",
 			type: CalendarComponent
 		}
 	]

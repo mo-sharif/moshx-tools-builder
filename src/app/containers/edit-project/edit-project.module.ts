@@ -14,7 +14,7 @@ import { NzTabsModule } from "ng-zorro-antd";
 import { ProjectService } from "src/app/services/project/project.service";
 import { EffectsModule } from "@ngrx/effects";
 import { ProjectEffects } from "src/app/store/effects/project.effects";
-import { CalendarComponent } from "src/app/components/calendar/calendar.component";
+import { CalendarComponent } from "../../components/calendar/calendar.component";
 
 @NgModule({
   declarations: [

@@ -13,7 +13,7 @@ import { TableComponent } from "src/app/components/ant-design/table/table.compon
 import { IProjectComponent } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { ProjectService } from "../../services/project/project.service";
-import { CalendarComponent } from "src/app/components/calendar/calendar.component";
+import { CalendarComponent } from "../../components/calendar/calendar.component";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
