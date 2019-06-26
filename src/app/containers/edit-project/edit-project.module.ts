@@ -5,8 +5,6 @@ import { AddComponentDirective } from "../../directives/addComponent.directive";
 import { EditProjectRoutingModule } from "./edit-project-routing.module";
 import { EditProjectComponent as EditProjectContainer } from "./edit-project.component";
 
-import { CheckboxComponent } from "../../components/ant-design/checkbox/checkbox.component";
-import { CarouselComponent } from "../../components/ant-design/carousel/carousel.component";
 import { FormComponent } from "../../components/ant-design/form/form.component";
 import { TableComponent } from "../../components/ant-design/table/table.component";
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
@@ -16,16 +14,16 @@ import { NzTabsModule } from "ng-zorro-antd";
 import { ProjectService } from "src/app/services/project/project.service";
 import { EffectsModule } from "@ngrx/effects";
 import { ProjectEffects } from "src/app/store/effects/project.effects";
+import { CalendarComponent } from "src/app/components/calendar/calendar.component";
 
 @NgModule({
   declarations: [
     AddComponentDirective,
     EditProjectContainer,
     EditProjectComponent,
-    CheckboxComponent,
-    CarouselComponent,
     TableComponent,
-    FormComponent
+    FormComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,
@@ -37,10 +35,9 @@ import { ProjectEffects } from "src/app/store/effects/project.effects";
     EffectsModule.forFeature([ProjectEffects])
   ],
   entryComponents: [
-    CheckboxComponent,
-    CarouselComponent,
     TableComponent,
-    FormComponent
+    FormComponent,
+    CalendarComponent
   ],
   providers: [ProjectService]
 })
