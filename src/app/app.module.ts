@@ -36,22 +36,11 @@ import { FooterComponent } from "./components/shared/footer/footer.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
-import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
-import { HeaderComponent } from './components/shared/header/header.component';
+import { SideMenuComponent } from "./components/shared/side-menu/side-menu.component";
+import { HeaderComponent } from "./components/shared/header/header.component";
 
 // Ant Design
-import { NzBreadCrumbModule } from 'ng-zorro-antd';
-import { NzLayoutModule } from 'ng-zorro-antd';
-import { NzPageHeaderModule } from 'ng-zorro-antd';
-import { NzDrawerModule } from 'ng-zorro-antd';
-import { NzButtonModule } from 'ng-zorro-antd';
-import { NzPopoverModule } from 'ng-zorro-antd';
-import { NzAvatarModule } from 'ng-zorro-antd';
-import { NzMessageModule } from 'ng-zorro-antd';
-import { NzGridModule } from 'ng-zorro-antd';
-import { NzIconModule } from 'ng-zorro-antd';
-import { NzMenuModule } from 'ng-zorro-antd';
-
+import { NgZorroAntdModule } from "ng-zorro-antd";
 
 @NgModule({
 	declarations: [
@@ -59,7 +48,7 @@ import { NzMenuModule } from 'ng-zorro-antd';
 		FooterComponent,
 		HomeComponent,
 		SideMenuComponent,
-		HeaderComponent,
+		HeaderComponent
 	],
 	imports: [
 		BrowserModule,
@@ -71,21 +60,16 @@ import { NzMenuModule } from 'ng-zorro-antd';
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects]),
+		EffectsModule.forRoot([
+			ConfigEffects,
+			AuthEffects,
+			MessageEffects,
+			routerEffects
+		]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,
-		NzBreadCrumbModule,
-		NzLayoutModule,
-		NzPageHeaderModule,
-		NzDrawerModule,
-		NzButtonModule,
-		NzPopoverModule,
-		NzAvatarModule,
-		NzMessageModule,
-		NzGridModule,
-		NzIconModule,
-		NzMenuModule
+		NgZorroAntdModule
 	],
 	providers: [AuthService, AuthGuard],
 	bootstrap: [AppComponent]
