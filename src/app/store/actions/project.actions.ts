@@ -9,6 +9,8 @@ export enum EProjectActions {
 	GetProjectSuccess = "[Project] Get Project Success",
 	NewProject = "[Project] New Project",
 	EditProject = "[Project] Edit Project",
+	SaveProject = "[Project] Save Project",
+	SaveProjectSuccess = "[Project] Save Project Success",
 	GetContainers = "[Project] Get Containers"
 }
 
@@ -30,6 +32,14 @@ export class GetProjectSuccess implements Action {
 }
 export class NewProject implements Action {
 	public readonly type = EProjectActions.NewProject;
+	constructor(public payload: IProject) {}
+}
+export class SaveProject implements Action {
+	public readonly type = EProjectActions.SaveProject;
+	constructor(public payload: IProject) {}
+}
+export class SaveProjectSuccess implements Action {
+	public readonly type = EProjectActions.SaveProjectSuccess;
 	constructor(public payload: IProject) {}
 }
 export class GetContainers implements Action {

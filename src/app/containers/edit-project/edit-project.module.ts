@@ -13,30 +13,32 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EditProjectComponent } from "../../components/edit-project/edit-project.component";
 import { NzTabsModule } from "ng-zorro-antd";
+import { ProjectService } from "src/app/services/project/project.service";
 
 @NgModule({
-	declarations: [
-		AddComponentDirective,
-		EditProjectContainer,
-		EditProjectComponent,
-		CheckboxComponent,
-		CarouselComponent,
-		TableComponent,
-		FormComponent
-	],
-	imports: [
-		CommonModule,
-		EditProjectRoutingModule,
-		NgZorroAntdModule,
-		FormsModule,
-		NzTabsModule,
-		ReactiveFormsModule
-	],
-	entryComponents: [
-		CheckboxComponent,
-		CarouselComponent,
-		TableComponent,
-		FormComponent
-	]
+  declarations: [
+    AddComponentDirective,
+    EditProjectContainer,
+    EditProjectComponent,
+    CheckboxComponent,
+    CarouselComponent,
+    TableComponent,
+    FormComponent
+  ],
+  imports: [
+    CommonModule,
+    EditProjectRoutingModule,
+    NgZorroAntdModule,
+    FormsModule,
+    NzTabsModule,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    CheckboxComponent,
+    CarouselComponent,
+    TableComponent,
+    FormComponent
+  ],
+  providers: [ProjectService]
 })
 export class EditProjectModule {}

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Output, Input, EventEmitter } from "@angular/core";
 
 import {
 	FormBuilder,
@@ -16,6 +16,8 @@ import { Observable, Observer } from "rxjs";
 })
 export class EditProjectComponent {
 
+	@Output()
+	formData: EventEmitter<any> = new EventEmitter();
 
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: any) => {
@@ -24,24 +26,11 @@ export class EditProjectComponent {
 			this.validateForm.controls[key].markAsDirty();
 			this.validateForm.controls[key].updateValueAndValidity();
 		}
-		console.log(value);
+		this.emitFormData(value)
 	};
-
-	resetForm(e: MouseEvent): void {
-		e.preventDefault();
-		this.validateForm.reset();
-		for (const key in this.validateForm.controls) {
-			this.validateForm.controls[key].markAsPristine();
-			this.validateForm.controls[key].updateValueAndValidity();
-		}
-	}
-
-	validateConfirmPassword(): void {
-		setTimeout(() =>
-			this.validateForm.controls.confirm.updateValueAndValidity()
-		);
-	}
-
+	emitFormData = value => {
+		this.formData.emit(value)
+	} 
 	projectNameAsyncValidator = (control: FormControl) =>
 		new Observable((observer: Observer<ValidationErrors | null>) => {
 			setTimeout(() => {
@@ -66,10 +55,6 @@ export class EditProjectComponent {
 	constructor(private fb: FormBuilder) {
 		this.validateForm = this.fb.group({
 			projectName: ["", [Validators.required], [this.projectNameAsyncValidator]],
-			email: ["", [Validators.email, Validators.required]],
-			password: ["", [Validators.required]],
-			confirm: ["", [this.confirmValidator]],
-			comment: ["", [Validators.required]]
 		});
 	}
 }
