@@ -8,6 +8,7 @@ import {
 	Validators
 } from "@angular/forms";
 import { Observable, Observer } from "rxjs";
+import { IProject } from "src/app/models/project.interface";
 
 @Component({
 	selector: "app-edit-project",
@@ -20,7 +21,7 @@ export class EditProjectComponent {
 	formData: EventEmitter<any> = new EventEmitter();
 
 	validateForm: FormGroup;
-	submitForm = ($event: any, value: any) => {
+	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
 		for (const key in this.validateForm.controls) {
 			this.validateForm.controls[key].markAsDirty();
@@ -31,7 +32,7 @@ export class EditProjectComponent {
 	emitFormData = value => {
 		this.formData.emit(value)
 	} 
-	projectNameAsyncValidator = (control: FormControl) =>
+	titleAsyncValidator = (control: FormControl) =>
 		new Observable((observer: Observer<ValidationErrors | null>) => {
 			setTimeout(() => {
 				if (control.value === "New Project") {
@@ -54,7 +55,7 @@ export class EditProjectComponent {
 
 	constructor(private fb: FormBuilder) {
 		this.validateForm = this.fb.group({
-			projectName: ["", [Validators.required], [this.projectNameAsyncValidator]],
+			title: ["", [Validators.required], [this.titleAsyncValidator]],
 		});
 	}
 }

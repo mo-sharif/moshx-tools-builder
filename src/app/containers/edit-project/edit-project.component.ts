@@ -15,40 +15,40 @@ import { listStagger } from "../../animations/list-stagger.animation";
 import { ProjectService } from "../../services/project/project.service";
 
 @Component({
-  templateUrl: "./edit-project.component.html",
-  styleUrls: ["./edit-project.component.css"],
-  animations: [listStagger]
+	templateUrl: "./edit-project.component.html",
+	styleUrls: ["./edit-project.component.css"],
+	animations: [listStagger]
 })
 export class EditProjectComponent implements OnInit {
-  newProject$ = this._store.pipe(select(selectNewProject));
+	newProject$ = this._store.pipe(select(selectNewProject));
 
-  components: IProjectComponent = {
-    Checkbox: CheckboxComponent,
-    Form: FormComponent,
-    Table: TableComponent
-  };
+	components: IProjectComponent = {
+		Checkbox: CheckboxComponent,
+		Form: FormComponent,
+		Table: TableComponent
+	};
 
-  constructor(
-    private _store: Store<IAppState>,
-    private _router: ActivatedRoute,
-    private projectService: ProjectService
-  ) {}
+	constructor(
+		private _store: Store<IAppState>,
+		private _router: ActivatedRoute,
+		private projectService: ProjectService
+	) {}
 
-  ngOnInit() {
-    this._store.dispatch(
-      new NewProject({
-        title: "NEW PROJECT",
-        type: this._router.snapshot.params.id
-      })
-    );
-  }
+	ngOnInit() {
+		this._store.dispatch(
+			new NewProject({
+				title: "NEW PROJECT",
+				type: this._router.snapshot.params.id
+			})
+		);
+	}
 
-  submittedFormData = projectName => {
-    this._store.dispatch(
-      new SaveProject({
-        title: projectName,
-        type: this._router.snapshot.params.id
-      })
-    );
-  };
+	submittedFormData = formData => {
+		this._store.dispatch(
+			new SaveProject({
+				...formData,
+				type: this._router.snapshot.params.id
+			})
+		);
+	};
 }

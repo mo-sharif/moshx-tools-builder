@@ -53,4 +53,6 @@ export type ProjectActions =
 	| GetProjects
 	| GetProjectsSuccess
     | NewProject
-    | GetContainers;
+    | GetContainers
+    | SaveProject
+    | SaveProjectSuccess;

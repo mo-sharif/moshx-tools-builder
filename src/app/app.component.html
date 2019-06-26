@@ -3,6 +3,8 @@
 		[configs]="configs$ | async"
 		[loggedInUser]="loggedInUser$ | async"
 		(openDrawer)="openDrawer()"
+		(googleLogin)="googleLogin()"
+		(logout)="logout()"
 	></app-header>
 	<app-side-menu [configs]="configs$" (closeDrawer)="closeDrawer()"></app-side-menu>
 	<nz-content class="content">

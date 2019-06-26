@@ -40,7 +40,19 @@ export function projectReducers(
 				...state,
 				container: action.payload
 			};
-		}
+        }
+        case EProjectActions.SaveProject: {
+            return {
+                ...state,
+                newProject: action.payload
+            };
+        }
+        case EProjectActions.SaveProjectSuccess: {
+            return {
+                ...state,
+                newProject: action.payload
+            };
+        }
 		default:
 			return state;
 	}

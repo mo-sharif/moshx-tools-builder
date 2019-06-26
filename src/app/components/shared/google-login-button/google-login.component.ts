@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IUser } from '../../models/user.interface';
-import { listStagger } from '../../animations/list-stagger.animation';
+import { IUser } from '../../../models/user.interface';
+import { listStagger } from '../../../animations/list-stagger.animation';
 
 @Component({
   selector: 'google-login',

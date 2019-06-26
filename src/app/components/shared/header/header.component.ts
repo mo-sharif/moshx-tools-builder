@@ -10,13 +10,19 @@ import { IUser } from "src/app/models/user.interface";
 })
 export class HeaderComponent implements OnInit {
 	@Input()
-	configs: IConfig;
+  configs: IConfig;
 
 	@Input()
-	loggedInUser: IUser;
+  loggedInUser: IUser;
 
 	@Output()
-	openDrawer: EventEmitter<any> = new EventEmitter();
+  openDrawer: EventEmitter<any> = new EventEmitter();
+
+	@Output()
+  logout: EventEmitter<any> = new EventEmitter();
+
+	@Output()
+	googleLogin: EventEmitter<any> = new EventEmitter();
 
 	constructor() {}
 
@@ -24,5 +30,13 @@ export class HeaderComponent implements OnInit {
 
 	openSideDrawer = () => {
 		this.openDrawer.emit();
+	};
+
+	googleLoginClick = () => {
+		this.googleLogin.emit();
+  };
+  
+	logoutClick = () => {
+		this.logout.emit();
 	};
 }

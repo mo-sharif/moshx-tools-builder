@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EditProjectComponent } from "../../components/edit-project/edit-project.component";
 import { NzTabsModule } from "ng-zorro-antd";
 import { ProjectService } from "src/app/services/project/project.service";
+import { EffectsModule } from "@ngrx/effects";
+import { ProjectEffects } from "src/app/store/effects/project.effects";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { ProjectService } from "src/app/services/project/project.service";
     NgZorroAntdModule,
     FormsModule,
     NzTabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EffectsModule.forFeature([ProjectEffects])
   ],
   entryComponents: [
     CheckboxComponent,

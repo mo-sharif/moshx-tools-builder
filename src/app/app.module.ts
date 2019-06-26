@@ -18,19 +18,11 @@ import { appReducers } from "./store/reducers/app.reducers";
 
 // Effects
 import { ConfigEffects } from "./store/effects/config.effects";
-import { UserEffects } from "./store/effects/user.effects";
-import { PostEffects } from "./store/effects/post.effects";
 import { MessageEffects } from "./store/effects/message.effects";
 import { routerEffects } from "./store/effects/router.effects";
 
-// Services
-import { UserService } from "./services/user/user.service";
-import { PostService } from "./services/post/post.service";
 import { AuthService } from "./services/auth/auth.service";
 import { AuthGuard } from "./services/guard/guard.service";
-
-// Ant Design
-import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 
 // Firebase Imports
 import { AngularFireModule } from "@angular/fire";
@@ -46,6 +38,20 @@ import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+
+// Ant Design
+import { NzBreadCrumbModule } from 'ng-zorro-antd';
+import { NzLayoutModule } from 'ng-zorro-antd';
+import { NzPageHeaderModule } from 'ng-zorro-antd';
+import { NzDrawerModule } from 'ng-zorro-antd';
+import { NzButtonModule } from 'ng-zorro-antd';
+import { NzPopoverModule } from 'ng-zorro-antd';
+import { NzAvatarModule } from 'ng-zorro-antd';
+import { NzMessageModule } from 'ng-zorro-antd';
+import { NzGridModule } from 'ng-zorro-antd';
+import { NzIconModule } from 'ng-zorro-antd';
+import { NzMenuModule } from 'ng-zorro-antd';
+
 
 @NgModule({
 	declarations: [
@@ -65,14 +71,23 @@ import { HeaderComponent } from './components/shared/header/header.component';
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([UserEffects, ConfigEffects, PostEffects, AuthEffects, MessageEffects,routerEffects]),
+		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,
-		/** import ng-zorro-antd root module，you should import NgZorroAntdModule and avoid importing sub modules directly **/
-		NgZorroAntdModule
+		NzBreadCrumbModule,
+		NzLayoutModule,
+		NzPageHeaderModule,
+		NzDrawerModule,
+		NzButtonModule,
+		NzPopoverModule,
+		NzAvatarModule,
+		NzMessageModule,
+		NzGridModule,
+		NzIconModule,
+		NzMenuModule
 	],
-	providers: [{ provide: NZ_I18N, useValue: en_US }, UserService, PostService, AuthService, AuthGuard],
+	providers: [AuthService, AuthGuard],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

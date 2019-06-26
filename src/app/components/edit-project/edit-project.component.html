@@ -8,27 +8,27 @@
 		<nz-form-control [nzSpan]="12" nzHasFeedback>
 			<input
 				nz-input
-				formControlName="projectName"
+				formControlName="title"
 				placeholder="New Project"
 			/>
 			<nz-form-explain
 				*ngIf="
-					(validateForm.get('projectName')?.dirty &&
-						validateForm.get('projectName')?.errors) ||
-					validateForm.get('projectName')?.pending
+					(validateForm.get('title')?.dirty &&
+						validateForm.get('title')?.errors) ||
+					validateForm.get('title')?.pending
 				"
 			>
 				<ng-container
-					*ngIf="validateForm.get('projectName')?.hasError('required')"
+					*ngIf="validateForm.get('title')?.hasError('required')"
 				>
 					Please input your Project Name!
 				</ng-container>
 				<ng-container
-					*ngIf="validateForm.get('projectName')?.hasError('duplicated')"
+					*ngIf="validateForm.get('title')?.hasError('duplicated')"
 				>
 					The Project name is redundant!
 				</ng-container>
-				<ng-container *ngIf="validateForm.get('projectName')?.pending">
+				<ng-container *ngIf="validateForm.get('title')?.pending">
 					Validating...
 				</ng-container>
 			</nz-form-explain>

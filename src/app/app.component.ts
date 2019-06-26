@@ -7,7 +7,7 @@ import {
 	OpenDrawer,
 	CloseDrawer
 } from "./store/actions/config.actions";
-import { GetUserAuth } from "./store/actions/auth.actions";
+import { GetUserAuth, GoogleLogin, Logout } from "./store/actions/auth.actions";
 
 import { selectConfig } from "./store/selectors/config.selector";
 import { selectLoggedInUser } from "./store/selectors/auth.selectors";
@@ -38,4 +38,12 @@ export class AppComponent implements OnInit {
 	closeDrawer = () => {
 		this._store.dispatch(new CloseDrawer());
 	};
+
+	googleLogin() {
+		this._store.dispatch(new GoogleLogin());
+	}
+
+	logout() {
+		this._store.dispatch(new Logout());
+	}
 }

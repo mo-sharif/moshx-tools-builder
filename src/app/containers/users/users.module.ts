@@ -7,6 +7,9 @@ import { UsersComponent as UsersContainerComponent } from "../../containers/user
 import { UserComponent as UserContainerComponent } from "../../containers/user/user.component";
 import { UserDetailsComponent } from "../../components/user-details/user-details.component";
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
+import { EffectsModule } from "@ngrx/effects";
+import { UserEffects } from "src/app/store/effects/user.effects";
+import { UserService } from "src/app/services/user/user.service";
 
 @NgModule({
 	declarations: [
@@ -15,7 +18,12 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 		UserContainerComponent,
 		UserDetailsComponent
 	],
-	imports: [CommonModule, UsersRoutingModule, NgZorroAntdModule],
-	providers: [{ provide: NZ_I18N, useValue: en_US }]
+	imports: [
+		CommonModule,
+		UsersRoutingModule,
+		NgZorroAntdModule,
+		EffectsModule.forFeature([UserEffects])
+	],
+	providers: [UserService]
 })
 export class UsersModule {}
