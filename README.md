@@ -3,12 +3,15 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6825a5f1db8f4856aa48f38121f2f993)](https://app.codacy.com/app/Mosh-Media/AngularX?utm_source=github.com&utm_medium=referral&utm_content=Mosh-Media/AngularX&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/Mosh-Media/AngularX.svg?branch=master)](https://travis-ci.com/Mosh-Media/AngularX)
 
+
 ## Tools maker and components playground 
+
 Wouldn't it be nice to build web apps without any code knowledge? I am talking drag n drop beautiful components without any headaches.
 
 Imagine a collection of layouts such as tables, forms, charts, and calendars ready to be used for any purpose. These components are ready to handle and request API data to achieve any desirable results.
 
 The idea is to build a very robust and modular front end application, and give developers the ability to build amazing interfaces in just minutes. We can achieve that level of complexity by using ngrx as our state management solution and firebase as our serverless backend.
+
 
 ## Top Features
 
@@ -20,12 +23,18 @@ The idea is to build a very robust and modular front end application, and give d
 - Auth guards
 - Travis CI
 
+
 ## Features coming soon
 
 - Firebase cloud functions for notifications
 - PWA and offline support
 - SEO elements and assets
 - Playground components and tools maker
+
+
+## Contribute 💙
+
+Let's get this up and running! any help is highly appreciated
 
 ## Get Started
 
@@ -35,11 +44,13 @@ npm install
 ng serve -o
 ```
 
+
 ## Resources
 
 [Angular auth ngrx guide](https://angularfirebase.com/lessons/ngrx-with-firebase-auth-google-oauth-login/)
 
 [Ant Design Components](https://ng.ant.design/docs/introduce/en)
+
 
 ## Starting File Structure
 
