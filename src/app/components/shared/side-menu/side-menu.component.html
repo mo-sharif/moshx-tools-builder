@@ -58,7 +58,7 @@
 						><i nz-icon type="build"></i>New Project</a
 					>
 				</li>
-				<li nz-submenu *ngIf="userProjects">
+				<li nz-submenu *ngIf="userProjects.length">
 					<span title><i nz-icon type="profile"></i>Saved Project</span>
 					<ul>
 						<li nz-menu-item *ngFor="let userProject of userProjects">

@@ -34,7 +34,8 @@ const routes: Routes = [
 	{
 		path: "home/playground",
 		loadChildren: "./containers/playground/playground.module#PlaygroundModule",
-		data: { breadcrumb: "Playground" }
+		data: { breadcrumb: "Playground" },
+		canActivate: [AuthGuard],
 	},
 	{ path: "", redirectTo: "/home", pathMatch: "full" },
 	{

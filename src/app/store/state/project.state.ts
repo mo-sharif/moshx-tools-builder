@@ -11,7 +11,7 @@ export interface IProjectState {
 }
 
 export const initialProjectState: IProjectState = {
-	projects: null,
+	projects: [],
 	newProject: null,
 	selectedProject: null,
 	container: [
