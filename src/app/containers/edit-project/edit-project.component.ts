@@ -12,8 +12,8 @@ import { TableComponent } from "src/app/components/ant-design/table/table.compon
 
 import { IProjectComponent } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
-import { ProjectService } from "../../services/project/project.service";
 import { CalendarComponent } from "../../components/calendar/calendar.component";
+import { selectLoggedInUserUID } from "../../store/selectors/auth.selectors";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
@@ -21,26 +21,29 @@ import { CalendarComponent } from "../../components/calendar/calendar.component"
 	animations: [listStagger]
 })
 export class EditProjectComponent implements OnInit {
+	private currentUserUID;
 	newProject$ = this._store.pipe(select(selectNewProject));
+	currentUser$ = this._store.pipe(select(selectLoggedInUserUID));
 
 	components: IProjectComponent = {
 		Checkbox: CheckboxComponent,
 		Form: FormComponent,
-    Table: TableComponent,
-    Calendar: CalendarComponent
+		Table: TableComponent,
+		Calendar: CalendarComponent
 	};
 
 	constructor(
 		private _store: Store<IAppState>,
-		private _router: ActivatedRoute,
-		private projectService: ProjectService
+		private _router: ActivatedRoute
 	) {}
 
 	ngOnInit() {
+		this.currentUser$.subscribe(res => this.currentUserUID = res);
 		this._store.dispatch(
 			new NewProject({
 				title: "NEW PROJECT",
-				type: this._router.snapshot.params.id
+        type: this._router.snapshot.params.id,
+        user : "NOT YET ASSIGNED"
 			})
 		);
 	}
@@ -49,7 +52,8 @@ export class EditProjectComponent implements OnInit {
 		this._store.dispatch(
 			new SaveProject({
 				...formData,
-				type: this._router.snapshot.params.id
+				type: this._router.snapshot.params.id,
+				user: this.currentUserUID
 			})
 		);
 	};

@@ -9,3 +9,8 @@ export const selectLoggedInUser = createSelector(
     selectAuthState,
     (state: IAuthState) => state.currentUser
 );
+
+export const selectLoggedInUserUID = createSelector(
+    selectAuthState,
+    (state: IAuthState) => state.currentUser.uid
+);

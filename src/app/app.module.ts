@@ -41,6 +41,8 @@ import { HeaderComponent } from './components/shared/header/header.component';
 
 // Ant Design
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
+import { ProjectEffects } from "./store/effects/project.effects";
+import { ProjectService } from "./services/project/project.service";
 
 
 @NgModule({
@@ -61,13 +63,13 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects]),
+		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,
 		NgZorroAntdModule
 	],
-	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }],
+	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }, ProjectService ],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

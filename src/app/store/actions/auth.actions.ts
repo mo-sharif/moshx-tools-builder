@@ -20,7 +20,7 @@ export class GetUserAuth implements Action {
 
 export class Authenticated implements Action {
   public readonly type = EAuthActions.Authenticated;
-  constructor(public payload?: any) {}
+  constructor(public payload?: IUser) {}
 }
 
 export class NotAuthenticated implements Action {

@@ -17,6 +17,9 @@ export class ProjectService {
 	getProject(id): Observable<any> {
 		return this.firestore.collection(`/projects/${id}`).valueChanges();
 	}
+	getUserProjects(uid): Observable<any> {
+		return this.firestore.collection(`/projects/`, ref => ref.where('user', '==', uid)).valueChanges()
+	}
 	addProject(project: IProject) {
 		const id = this.firestore.createId();
 		return this.firestore.collection<IProject>("projects").doc(id).set(project);

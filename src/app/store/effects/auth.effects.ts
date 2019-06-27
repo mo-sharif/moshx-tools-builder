@@ -2,8 +2,8 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { of } from "rxjs";
-import { switchMap, map, catchError } from "rxjs/operators";
+import { of, } from "rxjs";
+import { switchMap, map, catchError, tap } from "rxjs/operators";
 import { IAppState } from "../state/app.state";
 import {
 	EAuthActions,
@@ -15,6 +15,7 @@ import {
 	AuthError
 } from "../actions/auth.actions";
 import { User } from "../../models/user.interface";
+import { GetUserProjects } from "../actions/project.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -33,9 +34,9 @@ export class AuthEffects {
 				authData.uid,
 				authData.displayName,
 				authData.photoURL
-			);
+      );
 			return of(new Authenticated(user));
-		}),
+    }),
 		catchError(err => {
 			return of(new AuthError({ error: err.message }));
 		})
@@ -49,7 +50,7 @@ export class AuthEffects {
 		}),
 		switchMap(() => this.authService.googleLogin()),
 		map(credential => {
-			// Successful login
+      // Successful login
 			return new GetUserAuth();
 		}),
 		catchError(err => of(new AuthError({ error: err.message })))

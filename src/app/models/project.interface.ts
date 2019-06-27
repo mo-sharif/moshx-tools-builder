@@ -3,6 +3,7 @@ import { Type } from "@angular/core";
 export interface IProject {
 	title: string;
 	type: string;
+	user:string;
 }
 
 export interface IProjectContainer {

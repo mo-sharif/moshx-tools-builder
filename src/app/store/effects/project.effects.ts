@@ -1,6 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, withLatestFrom, map, catchError } from "rxjs/operators";
+import {
+	switchMap,
+	withLatestFrom,
+	map,
+	catchError,
+	tap,
+  delay
+} from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -11,10 +18,13 @@ import {
 	SaveProject,
 	GetProject,
 	GetProjectSuccess,
+	GetUserProjects,
 	SaveProjectSuccess
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 import { IProject } from "src/app/models/project.interface";
+import { selectLoggedInUserUID } from "../selectors/auth.selectors";
+import { EAuthActions, Authenticated } from "../actions/auth.actions";
 
 @Injectable()
 export class ProjectEffects {
@@ -23,14 +33,28 @@ export class ProjectEffects {
 		ofType<SaveProject>(EProjectActions.SaveProject),
 		map(action => action.payload),
 		switchMap((project: IProject) => {
-			console.log(project);
 			this.projectService.addProject(project);
 			new SaveProjectSuccess(project);
 			return of(new SetSuccessMsg("Project Saved Successfully"));
 		}),
-		catchError(err => of(new SetErrorMsg("Error in saving project")))
+		catchError(err => of(new SetErrorMsg(err)))
 	);
 
+	@Effect()
+	getUserProject$ = this._actions$.pipe(
+    ofType<Authenticated>(EAuthActions.Authenticated),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(id => {
+			if (id[1]) {
+        return this.projectService.getUserProjects(id[1]).pipe(
+          switchMap((res) => [
+            new GetProjectSuccess(res), new SetSuccessMsg('Projects are loaded')
+          ])
+        )
+      }
+      return of( new SetErrorMsg('Projects failed to load'));
+		})
+	);
 	constructor(
 		private _actions$: Actions,
 		private _store: Store<IAppState>,

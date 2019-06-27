@@ -60,5 +60,14 @@
 				</li>
 			</ul>
 		</li>
+		<div style="margin-top:20px;margin-bottom:20px;">
+			<span title><i nz-icon type="save"></i> Saved Projects</span>
+
+			<li nz-menu-item *ngFor="let userProject of userProjects">
+				<a [routerLink]="['home/playground']"
+					><i nz-icon type="deployment-unit"></i>{{ userProject.title }}</a
+				>
+			</li>
+		</div>
 	</ul>
 </nz-drawer>

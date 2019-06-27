@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IConfig } from "src/app/models/config.interface";
+import { IProject } from "src/app/models/project.interface";
 
 @Component({
 	selector: "app-side-menu",
@@ -11,7 +12,8 @@ export class SideMenuComponent implements OnInit {
 
 	visible = false;
 	placement = "left";
-
+	@Input()
+	userProjects: IProject[]
 	@Input()
 	configs: IConfig;
 

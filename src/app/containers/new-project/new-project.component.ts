@@ -18,10 +18,10 @@ export class NewProjectComponent implements OnInit {
 	constructor(private _store: Store<IAppState>, private _router: Router) {}
 
 	ngOnInit() {
-		this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: "NOT YET ASSIGNED" }));
+		this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: "NOT YET ASSIGNED", user: "NOT YET ASSIGNED" }));
 	}
 	navigateToProject(id: string) {
-    this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: id}));
+    this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: id, user: "NOT YET ASSIGNED"}));
 		this._router.navigate(["home/playground/new-project", id]);
 	}
 }

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 	constructor(private _store: Store<IAppState>, private _route: Router) {}
 
 	ngOnInit() {
-		this._store.dispatch(new GetUserAuth());
+		// this._store.dispatch(new GetUserAuth());
 	}
 
 	googleLogin() {

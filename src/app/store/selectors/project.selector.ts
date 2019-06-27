@@ -5,11 +5,15 @@ import { IProjectState } from "../state/project.state";
 
 const selectProjects = (state: IAppState) => state.projects;
 
-export const selectProjectList = createSelector(
+export const userProjects = createSelector(
 	selectProjects,
 	(state: IProjectState) => state.projects
 );
 
+export const selectUserProjects = createSelector(
+	selectProjects,
+	(state:IProjectState) => state.newProject
+)
 export const selectSelectedProject = createSelector(
 	selectProjects,
 	(state: IProjectState) => state.selectedProject

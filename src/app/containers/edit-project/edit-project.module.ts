@@ -11,9 +11,9 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EditProjectComponent } from "../../components/edit-project/edit-project.component";
 import { NzTabsModule } from "ng-zorro-antd";
-import { ProjectService } from "src/app/services/project/project.service";
-import { EffectsModule } from "@ngrx/effects";
-import { ProjectEffects } from "src/app/store/effects/project.effects";
+// import { ProjectService } from "src/app/services/project/project.service";
+// import { EffectsModule } from "@ngrx/effects";
+// import { ProjectEffects } from "src/app/store/effects/project.effects";
 import { CalendarComponent } from "../../components/calendar/calendar.component";
 
 @NgModule({
@@ -32,13 +32,13 @@ import { CalendarComponent } from "../../components/calendar/calendar.component"
     FormsModule,
     NzTabsModule,
     ReactiveFormsModule,
-    EffectsModule.forFeature([ProjectEffects])
+    // EffectsModule.forFeature([ProjectEffects])
   ],
   entryComponents: [
     TableComponent,
     FormComponent,
     CalendarComponent
   ],
-  providers: [ProjectService]
+  // providers: [ProjectService]
 })
 export class EditProjectModule {}
