@@ -22,6 +22,6 @@ export class NewProjectComponent implements OnInit {
 	}
 	navigateToProject(id: string) {
     this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: id, user: "NOT YET ASSIGNED"}));
-		this._router.navigate(["home/playground/new-project", id]);
+		this._router.navigate(["home/new-project", id]);
 	}
 }

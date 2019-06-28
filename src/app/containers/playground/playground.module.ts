@@ -11,6 +11,7 @@ import { CarouselComponent } from "src/app/components/ant-design/carousel/carous
 import { CheckboxComponent } from "src/app/components/ant-design/checkbox/checkbox.component";
 import { UploadComponent } from "src/app/components/ant-design/upload/upload.component";
 import { ButtonComponent } from "src/app/components/ant-design/button/button.component";
+import { addComponentModule } from "src/app/directives/addComponent.module";
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { ButtonComponent } from "src/app/components/ant-design/button/button.com
 		ButtonComponent
 	],
 	imports: [
+		addComponentModule,
 		FormsModule,
 		NgZorroAntdModule,
 		DragDropModule,

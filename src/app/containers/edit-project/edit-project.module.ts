@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { AddComponentDirective } from "../../directives/addComponent.directive";
+// import { AddComponentDirective } from "../../directives/addComponent.directive";
 
 import { EditProjectRoutingModule } from "./edit-project-routing.module";
 import { EditProjectComponent as EditProjectContainer } from "./edit-project.component";
@@ -15,10 +15,11 @@ import { NzTabsModule } from "ng-zorro-antd";
 // import { EffectsModule } from "@ngrx/effects";
 // import { ProjectEffects } from "src/app/store/effects/project.effects";
 import { CalendarComponent } from "../../components/calendar/calendar.component";
+import { addComponentModule } from "src/app/directives/addComponent.module";
 
 @NgModule({
   declarations: [
-    AddComponentDirective,
+    // AddComponentDirective,
     EditProjectContainer,
     EditProjectComponent,
     TableComponent,
@@ -26,6 +27,7 @@ import { CalendarComponent } from "../../components/calendar/calendar.component"
     CalendarComponent
   ],
   imports: [
+    addComponentModule,
     CommonModule,
     EditProjectRoutingModule,
     NgZorroAntdModule,

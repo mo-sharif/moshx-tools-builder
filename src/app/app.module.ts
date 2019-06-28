@@ -43,6 +43,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { ProjectEffects } from "./store/effects/project.effects";
 import { ProjectService } from "./services/project/project.service";
+import { addComponentModule } from "./directives/addComponent.module";
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ProjectService } from "./services/project/project.service";
 		HeaderComponent,
 	],
 	imports: [
+		addComponentModule,
 		BrowserModule,
 		BrowserAnimationsModule,
 		AngularFireModule.initializeApp(environment.firebase),

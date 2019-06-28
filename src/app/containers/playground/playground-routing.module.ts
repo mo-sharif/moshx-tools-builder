@@ -6,11 +6,6 @@ const routes: Routes = [
 	{
 		path: "",
 		component: PlaygroundComponent
-	},
-	{
-		path: "new-project",
-		loadChildren: "../new-project/new-project.module#NewProjectModule",
-		data: { breadcrumb: "New project" }
 	}
 ];
 

@@ -7,14 +7,15 @@ const routes: Routes = [
 	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
 	{
 		path: "home/not-allowed",
-		loadChildren: "./containers/page-not-allowed/page-not-allowed.module#PageNotAllowedModule",
+		loadChildren:
+			"./containers/page-not-allowed/page-not-allowed.module#PageNotAllowedModule",
 		data: { breadcrumb: "No Access!" }
 	},
 	{
 		path: "home/users",
 		loadChildren: "./containers/users/users.module#UsersModule",
 		data: { breadcrumb: "Users" },
-		canActivate: [AuthGuard],
+		canActivate: [AuthGuard]
 	},
 	{
 		path: "home/posts",
@@ -35,12 +36,19 @@ const routes: Routes = [
 		path: "home/playground",
 		loadChildren: "./containers/playground/playground.module#PlaygroundModule",
 		data: { breadcrumb: "Playground" },
-		canActivate: [AuthGuard],
+		canActivate: [AuthGuard]
+	},
+	{
+		path: "home/new-project",
+		loadChildren: "./containers/new-project/new-project.module#NewProjectModule",
+		data: { breadcrumb: "New Project" },
+		canActivate: [AuthGuard]
 	},
 	{ path: "", redirectTo: "/home", pathMatch: "full" },
 	{
 		path: "**",
-		loadChildren:"./containers/page-not-found/page-not-found.module#PageNotFoundModule" ,
+		loadChildren:
+			"./containers/page-not-found/page-not-found.module#PageNotFoundModule",
 		data: { breadcrumb: "Oops!" }
 	}
 ];
