@@ -8,7 +8,6 @@ import { IProject } from "../../models/project.interface";
 
 @Injectable()
 export class ProjectService {
-
 	constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 
 	getProjectList(): Observable<any> {
@@ -18,10 +17,17 @@ export class ProjectService {
 		return this.firestore.collection(`/projects/${id}`).valueChanges();
 	}
 	getUserProjects(uid): Observable<any> {
-		return this.firestore.collection(`/projects/`, ref => ref.where('user', '==', uid)).valueChanges()
+		return this.firestore
+			.collection(`/projects/`, ref => ref.where("user", "==", uid))
+			.valueChanges();
 	}
 	addProject(project: IProject) {
 		const id = this.firestore.createId();
-		return this.firestore.collection<IProject>("projects").doc(id).set(project);
+		return this.firestore
+			.collection<IProject>("projects")
+			.doc(project.profile)
+			.collection(project.title)
+			.doc(id)
+			.set(project);
 	}
 }

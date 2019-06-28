@@ -1,9 +1,11 @@
 import { Type } from "@angular/core";
 
 export interface IProject {
+	id?: string
 	title: string;
 	type: string;
 	user:string;
+	profile?: string;
 }
 
 export interface IProjectContainer {

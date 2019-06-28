@@ -16,7 +16,6 @@ import { IProject } from "src/app/models/project.interface";
 	styleUrls: ["./edit-project.component.css"]
 })
 export class EditProjectComponent {
-
 	@Output()
 	formData: EventEmitter<any> = new EventEmitter();
 
@@ -27,11 +26,11 @@ export class EditProjectComponent {
 			this.validateForm.controls[key].markAsDirty();
 			this.validateForm.controls[key].updateValueAndValidity();
 		}
-		this.emitFormData(value)
+		this.emitFormData(value);
 	};
 	emitFormData = value => {
-		this.formData.emit(value)
-	} 
+		this.formData.emit(value);
+	};
 	titleAsyncValidator = (control: FormControl) =>
 		new Observable((observer: Observer<ValidationErrors | null>) => {
 			setTimeout(() => {
@@ -55,7 +54,8 @@ export class EditProjectComponent {
 
 	constructor(private fb: FormBuilder) {
 		this.validateForm = this.fb.group({
-			title: ["", [Validators.required], [this.titleAsyncValidator]],
+			title: ["", [Validators.required]],
+			profile: ["", [Validators.required], [this.titleAsyncValidator]]
 		});
 	}
 }

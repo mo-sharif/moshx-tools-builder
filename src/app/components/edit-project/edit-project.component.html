@@ -4,33 +4,43 @@
 	(ngSubmit)="submitForm($event, validateForm.value)"
 >
 	<nz-form-item>
-		<nz-form-label [nzSpan]="7" nzRequired>Project Name</nz-form-label>
+		<nz-form-label [nzSpan]="7" nzRequired>Profile Name</nz-form-label>
+		<nz-form-control [nzSpan]="12" nzHasFeedback>
+			<input nz-input formControlName="profile" placeholder="Awesome Profile" />
+			<nz-form-explain
+				*ngIf="
+					(validateForm.get('profile')?.dirty &&
+						validateForm.get('profile')?.errors) ||
+					validateForm.get('profile')?.pending
+				"
+			>
+				<ng-container *ngIf="validateForm.get('profile')?.hasError('required')">
+					Please input your Profile Name!
+				</ng-container>
+				<ng-container *ngIf="validateForm.get('profile')?.hasError('duplicated')">
+					The Project name is redundant!
+				</ng-container>
+				<ng-container *ngIf="validateForm.get('profile')?.pending">
+					Validating...
+				</ng-container>
+			</nz-form-explain>
+		</nz-form-control>
+	</nz-form-item>
+	<nz-form-item>
+		<nz-form-label [nzSpan]="7" nzRequired nzFor="title"
+			>Project name</nz-form-label
+		>
 		<nz-form-control [nzSpan]="12" nzHasFeedback>
 			<input
 				nz-input
+				name="title"
+				type="title"
+				id="title"
 				formControlName="title"
-				placeholder="New Project"
+				placeholder="Awesome title"
 			/>
-			<nz-form-explain
-				*ngIf="
-					(validateForm.get('title')?.dirty &&
-						validateForm.get('title')?.errors) ||
-					validateForm.get('title')?.pending
-				"
-			>
-				<ng-container
-					*ngIf="validateForm.get('title')?.hasError('required')"
-				>
-					Please input your Project Name!
-				</ng-container>
-				<ng-container
-					*ngIf="validateForm.get('title')?.hasError('duplicated')"
-				>
-					The Project name is redundant!
-				</ng-container>
-				<ng-container *ngIf="validateForm.get('title')?.pending">
-					Validating...
-				</ng-container>
+			<nz-form-explain *ngIf="validateForm.get('title')?.dirty && validateForm.get('title')?.error">
+				Please input your Project Name!
 			</nz-form-explain>
 		</nz-form-control>
 	</nz-form-item>
