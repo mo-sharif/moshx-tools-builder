@@ -19,7 +19,9 @@ import {
   GetUsers,
   GetUsersError,
   AddUser,
-  AddUserSuccess
+  AddUserSuccess,
+  UpdateUserProfile,
+  UpdateUserProfileSuccess
 } from "../actions/user.actions";
 import { UserService } from "../../services/user/user.service";
 import { IUser } from "../../models/user.interface";
@@ -27,6 +29,8 @@ import { selectUserList } from "../selectors/user.selector";
 
 import { SetSuccessMsg } from "../actions/message.actions";
 import { SetLoading } from "../actions/loading.actions";
+import { selectLoggedInUser } from "../selectors/auth.selectors";
+import { EProjectActions, SaveProjectSuccess } from "../actions/project.actions";
 
 @Injectable()
 export class UserEffects {
@@ -68,7 +72,18 @@ export class UserEffects {
       );
     })
   );
-
+ // FINISH ME
+	@Effect()
+	updateUserProfile$ = this._actions$.pipe(
+    ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
+    map(action => action.payload),
+    tap((project) => {
+      console.log(project) 
+      // this._userService.updateUser(project);
+      // return of(new UpdateUserProfileSuccess(user[1]))
+    })
+    )
+  
   constructor(
     private _userService: UserService,
     private _actions$: Actions,

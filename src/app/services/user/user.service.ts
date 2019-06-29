@@ -22,4 +22,7 @@ export class UserService {
 		const id = this.firestore.createId();
 		return this.firestore.collection<IUser>("users").doc(id).set(user);
 	}
+	updateUser(profile) {
+		// return this.firestore.collection<IUser>(`/users/`).doc(id).set({"profile":profile})
+	}
 }

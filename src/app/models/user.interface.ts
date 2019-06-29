@@ -9,6 +9,7 @@ export interface IUser {
 	photoURL?: string;
 	city?: string;
 	job?: string;
+	profile?: string;
 }
 
 export class User implements IUser {
