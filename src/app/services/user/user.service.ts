@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { IUser, User } from "../../models/user.interface";
+import { IProject } from "src/app/models/project.interface";
 
 @Injectable()
 export class UserService {
@@ -18,11 +19,16 @@ export class UserService {
 	getUser(id): Observable<any> {
 		return this.firestore.collection(`/users/${id}`).valueChanges();
 	}
-	addUser(user: IUser) {
-		const id = this.firestore.createId();
-		return this.firestore.collection<IUser>("users").doc(id).set(user);
+	addUser(user: any) {
+		return this.firestore
+			.collection<IUser>(`/users/`)
+			.doc(user.uid)
+			.update({ ...user });
 	}
-	updateUser(profile) {
-		// return this.firestore.collection<IUser>(`/users/`).doc(id).set({"profile":profile})
+	updateUser(project: IProject) {
+		return this.firestore
+			.collection<IUser>(`/users/`)
+			.doc(project.user)
+			.set({ profile: project.profile });
 	}
 }

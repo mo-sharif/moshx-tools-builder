@@ -9,8 +9,8 @@ export interface IConfigState {
 export const initialConfigState: IConfigState = {
 	config: {
 		siteName: Configs.SITE_NAME,
-    copyright: Configs.COPYRIGHT,
-    isCollapsed: Configs.IS_COLLAPSED
+		copyright: Configs.COPYRIGHT,
+		isCollapsed: Configs.IS_COLLAPSED
 	},
 	isCollapsed: Configs.IS_COLLAPSED
 };

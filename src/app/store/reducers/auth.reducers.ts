@@ -46,6 +46,12 @@ export function authReducers(
 				loading: true
 			};
 		}
+		case EAuthActions.UpdateUser: {
+			return {
+				...state,
+				currentUser: action.payload
+			};
+		}
 		default:
 			return state;
 	}

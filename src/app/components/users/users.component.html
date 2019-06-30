@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>Field</th>
+			<th>Profile</th>
 			<th>City</th>
 			<th>Action</th>
 		</tr>
@@ -10,8 +10,8 @@
 	<tbody [@listStagger]="users.length">
 		<tr *ngFor="let user of basicTable.data"></tr>
 		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.name)">
-			<td>{{ user.name }}</td>
-			<td>{{ user.job }}</td>
+			<td>{{ user.displayName }}</td>
+			<td>{{ user.profile }}</td>
 			<td>{{ user.city }}</td>
 			<td>
 				<i

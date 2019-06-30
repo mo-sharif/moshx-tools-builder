@@ -8,7 +8,8 @@ export enum EAuthActions {
 
   GoogleLogin = "[Auth] Google login attempt",
   Logout = "[Auth] Logout",
-  AuthError = "[Auth] Login error"
+  AuthError = "[Auth] Login error",
+  UpdateUser = "[Auth] Update User Profile"
 }
 
 // Get user state auth
@@ -43,10 +44,16 @@ export class AuthError implements Action {
   constructor(public payload?: any) {}
 }
 
+export class UpdateUser implements Action {
+  public readonly type = EAuthActions.UpdateUser;
+  constructor(public payload: IUser) {}
+}
+
 export type AuthActions =
   | GetUserAuth
   | Authenticated
   | NotAuthenticated
   | GoogleLogin
   | Logout
-  | AuthError;
+  | AuthError
+  | UpdateUser;

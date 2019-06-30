@@ -1,9 +1,15 @@
 import { AuthService } from "../../services/auth/auth.service";
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { Store } from "@ngrx/store";
-import { of, } from "rxjs";
-import { switchMap, map, catchError, tap } from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
+import { of } from "rxjs";
+import {
+	switchMap,
+	map,
+	catchError,
+	tap,
+	withLatestFrom
+} from "rxjs/operators";
 import { IAppState } from "../state/app.state";
 import {
 	EAuthActions,
@@ -12,10 +18,12 @@ import {
 	NotAuthenticated,
 	GoogleLogin,
 	Logout,
-	AuthError
+	AuthError,
+	UpdateUser
 } from "../actions/auth.actions";
-import { User } from "../../models/user.interface";
-import { GetUserProjects } from "../actions/project.actions";
+import { User, IUser } from "../../models/user.interface";
+import { UserService } from "src/app/services/user/user.service";
+import { AddUser, AddUserSuccess } from "../actions/user.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -34,9 +42,9 @@ export class AuthEffects {
 				authData.uid,
 				authData.displayName,
 				authData.photoURL
-      );
+			);
 			return of(new Authenticated(user));
-    }),
+		}),
 		catchError(err => {
 			return of(new AuthError({ error: err.message }));
 		})
@@ -50,7 +58,7 @@ export class AuthEffects {
 		}),
 		switchMap(() => this.authService.googleLogin()),
 		map(credential => {
-      // Successful login
+			// Successful login
 			return new GetUserAuth();
 		}),
 		catchError(err => of(new AuthError({ error: err.message })))
@@ -62,14 +70,28 @@ export class AuthEffects {
 		map(action => {
 			action.payload;
 		}),
-		switchMap(payload => {
+		switchMap(() => {
 			return of(this.authService.logout());
 		}),
-		map(authData => {
+		map(() => {
 			return new NotAuthenticated();
 		}),
 		catchError(err => of(new AuthError({ error: err.message })))
 	);
 
-	constructor(private authService: AuthService, private _actions$: Actions) {}
+	@Effect()
+	afterAuth$ = this._actions$.pipe(
+		ofType<Authenticated>(EAuthActions.Authenticated),
+		map((action) => action.payload),
+		switchMap((user: any) => {
+			this._userService.addUser(user);
+			return of(new AddUserSuccess(user));
+		})
+	);
+	constructor(
+		private authService: AuthService,
+		private _actions$: Actions,
+		private _store: Store<IAppState>,
+		private _userService: UserService
+	) {}
 }

@@ -44,6 +44,7 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { ProjectEffects } from "./store/effects/project.effects";
 import { ProjectService } from "./services/project/project.service";
 import { addComponentModule } from "./directives/addComponent.module";
+import { UserService } from "./services/user/user.service";
 
 
 @NgModule({
@@ -71,7 +72,7 @@ import { addComponentModule } from "./directives/addComponent.module";
 		AppRoutingModule,
 		NgZorroAntdModule
 	],
-	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }, ProjectService ],
+	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }, ProjectService, UserService ],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

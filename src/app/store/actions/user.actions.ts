@@ -55,7 +55,7 @@ export class UpdateUserProfile implements Action {
 
 export class UpdateUserProfileSuccess implements Action {
   public readonly type = EUserActions.UpdateUserProfileSuccess;
-  constructor(public payload: IUser) {}
+  constructor(public payload: any) {}
 }
 
 export type UserActions =
