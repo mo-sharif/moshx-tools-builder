@@ -7,7 +7,8 @@ export enum EConfigActions {
 	GetConfigSuccess = "[Config] Get Config Success",
 	OpenDrawer = "[Drawer] Open Drawer",
 	CloseDrawer = "[Drawer] Close Drawer",
-	DrawerStatus = "[Drawer] Drawer Collapsed Status"
+	DrawerStatus = "[Drawer] Drawer Collapsed Status",
+	NavigateToRoute = "[Route] Navigate To Route"
 }
 
 export class GetConfig implements Action {
@@ -30,9 +31,15 @@ export class DrawerStatus implements Action {
 	public readonly type = EConfigActions.DrawerStatus;
 	constructor(public payload?: IConfig) {}
 }
+
+export class NavigateToRoute implements Action {
+	public readonly type = EConfigActions.NavigateToRoute;
+	constructor(public payload: string) {}
+}
 export type ConfigActions =
 	| GetConfig
 	| GetConfigSuccess
 	| OpenDrawer
 	| CloseDrawer
-	| DrawerStatus;
+	| DrawerStatus
+	| NavigateToRoute;

@@ -19,12 +19,23 @@ import {
 	GetProjectSuccess,
 	SaveProjectSuccess
 } from "../actions/project.actions";
-import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
+import {
+	SetSuccessMsg,
+	SetErrorMsg,
+	SetInfoMsg
+} from "../actions/message.actions";
+
 import { IProject } from "src/app/models/project.interface";
 import { selectLoggedInUserUID } from "../selectors/auth.selectors";
 import { EAuthActions, Authenticated } from "../actions/auth.actions";
+
+import { LoadProfile, EProfileActions, LoadProfileSuccess } from "../actions/profile.actions";
 import { UpdateUserProfileSuccess } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
+import { Router } from "@angular/router";
+import { NavigateToRoute } from "../actions/config.actions";
+import { ProfileService } from "src/app/services/profile/profile.service";
+import { IProfile } from "src/app/models/profile.interface";
 
 @Injectable()
 export class ProjectEffects {
@@ -40,6 +51,31 @@ export class ProjectEffects {
 			];
 		}),
 		catchError(err => of(new SetErrorMsg(err)))
+	);
+
+	@Effect()
+	navigateToProfile$ = this._actions$.pipe(
+		ofType<SaveProject>(EProjectActions.SaveProject),
+		map(action => action.payload),
+		switchMap((project: IProject) => {
+			let profileSlug = project.profile.replace(/ /g, ".");
+			return of(new NavigateToRoute(profileSlug));
+		})
+	);
+
+	@Effect()
+	loadProfile$ = this._actions$.pipe(
+		ofType<LoadProfile>(EProfileActions.LoadProfile),
+		map(action => action.payload),
+		switchMap(route => {
+			let profileName = route.replace('.', ' ')
+			return this._profileService.loadProfile(profileName).pipe(
+				switchMap((profile: IProfile) => [
+					console.log(profile),
+					new LoadProfileSuccess(profile)
+				])
+			);
+		})
 	);
 
 	@Effect()
@@ -59,7 +95,6 @@ export class ProjectEffects {
 			);
 		})
 	); */
-
 	@Effect()
 	updateUserProfile$ = this._actions$.pipe(
 		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
@@ -74,6 +109,8 @@ export class ProjectEffects {
 		private _actions$: Actions,
 		private _store: Store<IAppState>,
 		private _projectService: ProjectService,
-		private _userService: UserService
+		private _userService: UserService,
+		private _router: Router,
+		private _profileService: ProfileService
 	) {}
 }

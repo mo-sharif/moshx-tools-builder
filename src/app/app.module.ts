@@ -45,6 +45,7 @@ import { ProjectEffects } from "./store/effects/project.effects";
 import { ProjectService } from "./services/project/project.service";
 import { addComponentModule } from "./directives/addComponent.module";
 import { UserService } from "./services/user/user.service";
+import { ProfileService } from "./services/profile/profile.service";
 
 
 @NgModule({
@@ -72,7 +73,7 @@ import { UserService } from "./services/user/user.service";
 		AppRoutingModule,
 		NgZorroAntdModule
 	],
-	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }, ProjectService, UserService ],
+	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }, ProjectService, UserService, ProfileService ],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

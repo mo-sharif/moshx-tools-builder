@@ -4,6 +4,7 @@ import { Configs } from "../../constants/configs";
 export interface IConfigState {
 	config: IConfig;
 	isCollapsed: boolean;
+	route: string;
 }
 
 export const initialConfigState: IConfigState = {
@@ -12,5 +13,6 @@ export const initialConfigState: IConfigState = {
 		copyright: Configs.COPYRIGHT,
 		isCollapsed: Configs.IS_COLLAPSED
 	},
-	isCollapsed: Configs.IS_COLLAPSED
+	isCollapsed: Configs.IS_COLLAPSED,
+	route: null
 };

@@ -30,4 +30,11 @@ export class ProjectService {
 			.doc(id)
 			.set(project);
 	}
+/* 	addProject(project: IProject) {
+		const id = this.firestore.createId();
+		return this.firestore
+			.collection<IProject>("projects")
+			.doc(id)
+			.set(project);
+	} */
 }

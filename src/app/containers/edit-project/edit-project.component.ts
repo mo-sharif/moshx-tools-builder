@@ -38,17 +38,17 @@ export class EditProjectComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.currentUser$.subscribe(res => this.currentUserUID = res);
+		this.currentUser$.subscribe(res => (this.currentUserUID = res));
 		this._store.dispatch(
 			new NewProject({
 				title: "NEW PROJECT",
-        type: this._router.snapshot.params.id,
-        user : "NOT YET ASSIGNED"
+				type: this._router.snapshot.params.id,
+				user: "NOT YET ASSIGNED"
 			})
 		);
 	}
 
-	submittedFormData = formData => {
+	saveFormData = formData => {
 		this._store.dispatch(
 			new SaveProject({
 				...formData,

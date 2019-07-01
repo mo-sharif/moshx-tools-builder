@@ -12,6 +12,12 @@ const routes: Routes = [
 		data: { breadcrumb: "No Access!" }
 	},
 	{
+		path: ":id",
+		loadChildren:
+			"./containers/project/project.module#ProjectModule",
+		data: { breadcrumb: "Project" }
+	},
+	{
 		path: "home/users",
 		loadChildren: "./containers/users/users.module#UsersModule",
 		data: { breadcrumb: "Users" },

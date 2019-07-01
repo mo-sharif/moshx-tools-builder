@@ -28,6 +28,12 @@ export function configReducers(
 				config: action.payload
 			};
 		}
+		case EConfigActions.NavigateToRoute: {
+			return {
+				...state,
+				route: action.payload
+			}
+		}
 
 		default:
 			return state;
