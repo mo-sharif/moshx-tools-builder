@@ -70,8 +70,7 @@ export class ProjectEffects {
 		switchMap(route => {
 			let profileName = route.replace('.', ' ')
 			return this._profileService.loadProfile(profileName).pipe(
-				switchMap((profile: IProfile) => [
-					console.log(profile),
+				switchMap((profile: any) => [
 					new LoadProfileSuccess(profile)
 				])
 			);

@@ -14,8 +14,7 @@ export class ProfileService {
 		console.log(profileName);
 		return this.firestore
 			.collection("projects")
-			.doc(profileName)
-			.valueChanges();
+			.doc(profileName).snapshotChanges();
 		// return this.firestore.collection(`/projects/`, ref => ref.where("profile", "==", profileName)).get()
 	}
 	constructor(private _http: HttpClient, private firestore: AngularFirestore) {}

@@ -27,8 +27,7 @@ export class ProjectService {
 			.collection<IProject>("projects")
 			.doc(project.profile)
 			.collection(project.title)
-			.doc(id)
-			.set(project);
+			.add(project);
 	}
 /* 	addProject(project: IProject) {
 		const id = this.firestore.createId();
