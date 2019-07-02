@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 import { environment } from "../../../environments/environment";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { IProfile } from "../../models/profile.interface";
+import { IProfile } from "../../models/project.interface";
 import { map } from "rxjs/operators";
 
 @Injectable()

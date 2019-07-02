@@ -8,6 +8,12 @@ export interface IProject {
 	profile?: string;
 }
 
+export interface IProfile {
+	name: string;
+	user: string;
+	projects: IProject[];
+}
+
 export interface IProjectContainer {
 	name: string;
 	type: Type<any>;

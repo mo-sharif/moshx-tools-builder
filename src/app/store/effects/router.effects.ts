@@ -13,7 +13,7 @@ import {
 import { ROUTER_NAVIGATION, RouterNavigationAction } from "@ngrx/router-store";
 import { selectIsCollapsed } from "../selectors/config.selector";
 import { Router } from "@angular/router";
-import { LoadProfile } from "../actions/profile.actions";
+import { LoadProfile } from "../actions/project.actions";
 
 @Injectable()
 export class routerEffects {

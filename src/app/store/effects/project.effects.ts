@@ -17,7 +17,9 @@ import {
 	EProjectActions,
 	SaveProject,
 	GetProjectSuccess,
-	SaveProjectSuccess
+	SaveProjectSuccess,
+	LoadProfileSuccess,
+	LoadProfile
 } from "../actions/project.actions";
 import {
 	SetSuccessMsg,
@@ -28,14 +30,12 @@ import {
 import { IProject } from "src/app/models/project.interface";
 import { selectLoggedInUserUID } from "../selectors/auth.selectors";
 import { EAuthActions, Authenticated } from "../actions/auth.actions";
-
-import { LoadProfile, EProfileActions, LoadProfileSuccess } from "../actions/profile.actions";
 import { UpdateUserProfileSuccess } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
 import { Router } from "@angular/router";
 import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
-import { IProfile } from "src/app/models/profile.interface";
+import { IProfile } from "src/app/models/project.interface";
 
 @Injectable()
 export class ProjectEffects {
@@ -65,7 +65,7 @@ export class ProjectEffects {
 
 	@Effect()
 	loadProfile$ = this._actions$.pipe(
-		ofType<LoadProfile>(EProfileActions.LoadProfile),
+		ofType<LoadProfile>(EProjectActions.LoadProfile),
 		map(action => action.payload),
 		switchMap(route => {
 			let profileName = route.replace('.', ' ')

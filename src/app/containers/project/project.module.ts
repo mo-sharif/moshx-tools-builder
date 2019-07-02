@@ -6,13 +6,22 @@ import { ProjectComponent as ProjectContainer } from "./project.component";
 import { ProjectComponent } from "../../components/project/project.component";
 import { ProfileService } from "../../services/profile/profile.service";
 
+import { NzGridModule } from "ng-zorro-antd";
+import { NzCardModule } from "ng-zorro-antd";
+import { NzIconModule } from "ng-zorro-antd";
+import { NzInputModule } from "ng-zorro-antd";
+
 @NgModule({
 	declarations: [ProjectComponent, ProjectContainer],
 	imports: [
+    CommonModule,
+		ProjectRoutingModule,
+		NzGridModule,
+		NzCardModule,
 		CommonModule,
-		ProjectRoutingModule
+		NzIconModule,
+		NzInputModule
 	],
-  providers: [ProfileService]
-  
+	providers: [ProfileService]
 })
 export class ProjectModule {}

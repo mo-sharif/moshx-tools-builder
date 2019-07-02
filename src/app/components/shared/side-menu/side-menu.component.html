@@ -58,17 +58,6 @@
 						><i nz-icon type="build"></i>New Project</a
 					>
 				</li>
-				<li nz-submenu *ngIf="userProjects.length">
-					<span title><i nz-icon type="profile"></i>Saved Project</span>
-					<ul>
-						<li nz-menu-item *ngFor="let userProject of userProjects">
-							<a [routerLink]="['home/playground']"
-								><i nz-icon type="deployment-unit"></i
-								>{{ userProject.title }}</a
-							>
-						</li>
-					</ul>
-				</li>
 			</ul>
 		</li>
 	</ul>

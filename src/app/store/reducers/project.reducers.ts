@@ -56,14 +56,13 @@ export function projectReducers(
 
 		case EProjectActions.LoadProfile: {
 			return {
-				...state,
-				profile: action.payload
+				...state
 			};
 		}
 		case EProjectActions.LoadProfileSuccess: {
 			return {
 				...state,
-				profile: action.payload
+				projects: action.payload
 			};
 		}
 
