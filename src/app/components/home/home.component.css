@@ -1,35 +1,60 @@
 nz-page-header {
-  border: 1px solid rgb(235, 237, 240);
+	border: 1px solid rgb(235, 237, 240);
 }
 
 .wrap {
-  display: flex;
+	display: flex;
 }
 
 .content {
-  flex: 1;
+	flex: 1;
 }
 
 .content p {
-  margin-bottom: 8px;
+	margin-bottom: 8px;
 }
 
 .content-link {
-  padding-top: 16px;
+	padding-top: 16px;
 }
 
 .content-link a {
-  display: inline-block;
-  vertical-align: text-top;
-  margin-right: 32px;
+	display: inline-block;
+	vertical-align: text-top;
+	margin-right: 32px;
+}
+
+.content-link {
+	text-align: center;
 }
 
 .content-link a img {
-  margin-right: 8px;
-  height: 50px;
+	width: 120px;
 }
 
 .extra-content {
-  min-width: 240px;
-  text-align: right;
+	min-width: 240px;
+	text-align: right;
+}
+
+.custom-font {
+	font-family: "Montserrat", sans-serif;
+}
+
+.big-text {
+	color: #0056ed;
+	font-size: 3em;
+}
+
+.center {
+	text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+	.big-text {
+		font-size: 2em;
+	}
+	.content-link a img {
+		width: 60px;
+	}
 }
