@@ -11,10 +11,8 @@ import { map } from "rxjs/operators";
 export class ProfileService {
 	loadProfile(profileName: string): Observable<any> {
 		// return this.firestore.collection(`/projects/${profileName}`).doc().valueChanges()
-		console.log(profileName);
 		return this.firestore
-			.collection("projects")
-			.doc(profileName).snapshotChanges();
+		.collection(`/projects/`, ref => ref.where("profile", "==", profileName)).valueChanges();
 		// return this.firestore.collection(`/projects/`, ref => ref.where("profile", "==", profileName)).get()
 	}
 	constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
