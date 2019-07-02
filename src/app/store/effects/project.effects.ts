@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import {
-	switchMap,
-	withLatestFrom,
-	map,
-	catchError,
-	tap,
-	delay
+  switchMap,
+  withLatestFrom,
+  map,
+  catchError,
+  tap,
+  delay
 } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
@@ -14,17 +14,17 @@ import { IAppState } from "../state/app.state";
 import { ProjectService } from "../../services/project/project.service";
 
 import {
-	EProjectActions,
-	SaveProject,
-	GetProjectSuccess,
-	SaveProjectSuccess,
-	LoadProfileSuccess,
-	LoadProfile
+  EProjectActions,
+  SaveProject,
+  GetProjectSuccess,
+  SaveProjectSuccess,
+  LoadProfileSuccess,
+  LoadProfile
 } from "../actions/project.actions";
 import {
-	SetSuccessMsg,
-	SetErrorMsg,
-	SetInfoMsg
+  SetSuccessMsg,
+  SetErrorMsg,
+  SetInfoMsg
 } from "../actions/message.actions";
 
 import { IProject } from "src/app/models/project.interface";
@@ -39,47 +39,45 @@ import { IProfile } from "src/app/models/project.interface";
 
 @Injectable()
 export class ProjectEffects {
-	@Effect()
-	saveProject$ = this._actions$.pipe(
-		ofType<SaveProject>(EProjectActions.SaveProject),
-		map(action => action.payload),
-		switchMap((project: IProject) => {
-			this._projectService.addProject(project);
-			return [
-				new SetSuccessMsg("Project Saved Successfully"),
-				new SaveProjectSuccess(project)
-			];
-		}),
-		catchError(err => of(new SetErrorMsg(err)))
-	);
+  @Effect()
+  saveProject$ = this._actions$.pipe(
+    ofType<SaveProject>(EProjectActions.SaveProject),
+    map(action => action.payload),
+    switchMap((project: IProject) => {
+      this._projectService.addProject(project);
+      return [
+        new SetSuccessMsg("Project Saved Successfully"),
+        new SaveProjectSuccess(project)
+      ];
+    }),
+    catchError(err => of(new SetErrorMsg(err)))
+  );
 
-	@Effect()
-	navigateToProfile$ = this._actions$.pipe(
-		ofType<SaveProject>(EProjectActions.SaveProject),
-		map(action => action.payload),
-		switchMap((project: IProject) => {
-			let profileSlug = project.profile.replace(/ /g, ".");
-			return of(new NavigateToRoute(profileSlug));
-		})
-	);
+  @Effect()
+  navigateToProfile$ = this._actions$.pipe(
+    ofType<SaveProject>(EProjectActions.SaveProject),
+    map(action => action.payload),
+    switchMap((project: IProject) => {
+      let profileSlug = project.profile.replace(/ /g, ".");
+      return of(new NavigateToRoute(profileSlug));
+    })
+  );
 
-	@Effect()
-	loadProfile$ = this._actions$.pipe(
-		ofType<LoadProfile>(EProjectActions.LoadProfile),
-		map(action => action.payload),
-		switchMap(route => {
-			let profileName = route.replace('.', ' ')
-			return this._profileService.loadProfile(profileName).pipe(
-				switchMap((profile: any) => [
-					new LoadProfileSuccess(profile)
-				])
-			);
-		})
-	);
+  @Effect()
+  loadProfile$ = this._actions$.pipe(
+    ofType<LoadProfile>(EProjectActions.LoadProfile),
+    map(action => action.payload),
+    switchMap(route => {
+      let profileName = route.replace(".", " ");
+      return this._profileService
+        .loadProfile(profileName)
+        .pipe(switchMap((profile: any) => [new LoadProfileSuccess(profile)]));
+    })
+  );
 
-	@Effect()
-	// BROKEN!
-	/* getUserProjects$ = this._actions$.pipe(
+  @Effect()
+  // BROKEN!
+  /* getUserProjects$ = this._actions$.pipe(
 		ofType<Authenticated>(EAuthActions.Authenticated),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
 		switchMap(id => {
@@ -94,22 +92,26 @@ export class ProjectEffects {
 			);
 		})
 	); */
-	@Effect()
-	updateUserProfile$ = this._actions$.pipe(
-		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
-		map(action => action.payload),
-		switchMap((project: IProject) => {
-			this._userService.updateUser(project);
-			return of(new UpdateUserProfileSuccess(project.user));
-		})
-	);
+  @Effect()
+  updateUserProfile$ = this._actions$.pipe(
+    ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
+    map(action => action.payload),
+    switchMap((project: IProject) => {
+      this._userService.updateUser(project);
+      let profileRoute = project.profile.replace(" ", ".");
+      return [
+        new UpdateUserProfileSuccess(project.user),
+        new NavigateToRoute(profileRoute)
+      ];
+    })
+  );
 
-	constructor(
-		private _actions$: Actions,
-		private _store: Store<IAppState>,
-		private _projectService: ProjectService,
-		private _userService: UserService,
-		private _router: Router,
-		private _profileService: ProfileService
-	) {}
+  constructor(
+    private _actions$: Actions,
+    private _store: Store<IAppState>,
+    private _projectService: ProjectService,
+    private _userService: UserService,
+    private _router: Router,
+    private _profileService: ProfileService
+  ) {}
 }

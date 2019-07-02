@@ -24,16 +24,14 @@ export class routerEffects {
 		switchMap(() => of(new CloseDrawer()))
 	);
 
-	/* @Effect()
+	@Effect()
 	navigateToRoute$ = this._actions$.pipe(
 		ofType<NavigateToRoute>(EConfigActions.NavigateToRoute),
 		map(action => action.payload),
 		switchMap((route: string) => {
-			this._router.navigate([route]);
-			let profileName = route.replace(".", " ");
-			return of(new LoadProfile());
+			return this._router.navigate([route]);
 		})
-	); */
+	);
 
 	constructor(
 		private _actions$: Actions,

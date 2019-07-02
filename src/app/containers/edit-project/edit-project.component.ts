@@ -4,7 +4,7 @@ import { NewProject, SaveProject } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 import { ActivatedRoute } from "@angular/router";
-import { selectNewProject } from "../../store/selectors/project.selector";
+import { selectNewProject, userProjects } from "../../store/selectors/project.selector";
 
 import { CheckboxComponent } from "../../components/ant-design/checkbox/checkbox.component";
 import { FormComponent } from "src/app/components/ant-design/form/form.component";
@@ -24,6 +24,7 @@ export class EditProjectComponent implements OnInit {
 	private currentUserUID;
 	newProject$ = this._store.pipe(select(selectNewProject));
 	currentUser$ = this._store.pipe(select(selectLoggedInUserUID));
+	userProjects$ = this._store.pipe(select(userProjects));
 
 	components: IProjectComponent = {
 		Checkbox: CheckboxComponent,

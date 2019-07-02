@@ -9,7 +9,7 @@
 	</nz-tab>
 		<nz-tab nzTitle="Edit Project">
 			<ng-template nz-tab>
-        <app-edit-project (formData)="saveFormData($event)" ></app-edit-project>
+        <app-edit-project (formData)="saveFormData($event)" [userProjects]="userProjects$ | async"></app-edit-project>
 			</ng-template>
 		</nz-tab>
 </nz-tabset>

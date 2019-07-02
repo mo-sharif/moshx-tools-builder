@@ -19,6 +19,8 @@ export class EditProjectComponent {
 	@Output()
 	formData: EventEmitter<any> = new EventEmitter();
 
+	@Input()
+	userProjects: IProject[]
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
