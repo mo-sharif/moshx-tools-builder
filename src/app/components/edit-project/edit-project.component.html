@@ -6,8 +6,7 @@
 	<nz-form-item>
 		<nz-form-label [nzSpan]="7" nzRequired>Profile Name</nz-form-label>
 		<nz-form-control [nzSpan]="12" nzHasFeedback>
-			{{userProjects | json}}
-			<input nz-input formControlName="profile" placeholder="Awesome Profile" [value]="userProjects.profile"/>
+			<input nz-input formControlName="profile" placeholder="Awesome Profile"/>
 			<nz-form-explain
 				*ngIf="
 					(validateForm.get('profile')?.dirty &&
