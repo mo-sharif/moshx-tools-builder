@@ -24,17 +24,10 @@ export class ProjectService {
 	addProject(project: IProject) {
 		const id = this.firestore.createId();
 		return this.firestore
-			.collection<IProject>("projects")
+			.collection("profiles")
 			.doc(project.profile)
-			.collection("projects")
+			.collection<IProject>("projects")
 			.doc(id)
 			.set(project);
 	}
-	/* 	addProject(project: IProject) {
-		const id = this.firestore.createId();
-		return this.firestore
-			.collection<IProject>("projects")
-			.doc(id)
-			.set(project);	
-	} */
 }
