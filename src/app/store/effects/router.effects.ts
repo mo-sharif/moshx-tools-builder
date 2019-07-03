@@ -8,7 +8,8 @@ import { IAppState } from "../state/app.state";
 import {
 	CloseDrawer,
 	NavigateToRoute,
-	EConfigActions
+	EConfigActions,
+	NavigateSuccess
 } from "../actions/config.actions";
 import { ROUTER_NAVIGATION, RouterNavigationAction } from "@ngrx/router-store";
 import { selectIsCollapsed } from "../selectors/config.selector";
@@ -24,13 +25,16 @@ export class routerEffects {
 		switchMap(() => of(new CloseDrawer()))
 	);
 
-	@Effect()
+	@Effect({ dispatch: false })
 	navigateToRoute$ = this._actions$.pipe(
 		ofType<NavigateToRoute>(EConfigActions.NavigateToRoute),
 		map(action => action.payload),
-		switchMap((route: string) => {
-			return this._router.navigate([route]);
+		tap((route: string) => {
+			this._router.navigate([route]);
 		})
+		/* 		tap(() => {
+			of(new NavigateSuccess("Navigate to route success"));
+		}) */
 	);
 
 	constructor(

@@ -25,14 +25,16 @@ export class ProjectService {
 		const id = this.firestore.createId();
 		return this.firestore
 			.collection<IProject>("projects")
-			.doc(project.user)
+			.doc(project.profile)
+			.collection("projects")
+			.doc(id)
 			.set(project);
 	}
-/* 	addProject(project: IProject) {
+	/* 	addProject(project: IProject) {
 		const id = this.firestore.createId();
 		return this.firestore
 			.collection<IProject>("projects")
 			.doc(id)
-			.set(project);
+			.set(project);	
 	} */
 }
