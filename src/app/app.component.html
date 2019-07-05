@@ -6,8 +6,8 @@
 		(googleLogin)="googleLogin()"
 		(logout)="logout()"
 	></app-header>
-	<app-side-menu [configs]="configs$" [userProjects]="userProjects$ | async" (closeDrawer)="closeDrawer()"></app-side-menu>
-	<nz-content class="content">
+	<app-side-menu [configs]="configs$" (closeDrawer)="closeDrawer()"></app-side-menu>
+	<nz-content class="content" >
 		<nz-breadcrumb nzAutoGenerate="true" style="margin:16px 0;">
 		</nz-breadcrumb>
 		<div class="content-inner">

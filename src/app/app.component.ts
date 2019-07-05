@@ -23,15 +23,16 @@ export class AppComponent implements OnInit, AfterViewInit {
 	configs$ = this._store.pipe(select(selectConfig));
 	loggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	message$ = this._store.pipe(select(selectMessage));
-  userProjects$ = this._store.pipe(select(userProjects));
+	userProjects$ = this._store.pipe(select(userProjects));
 	isCollapsed = true;
+	
 	constructor(private _store: Store<IAppState>) {}
 
 	ngOnInit() {
 		this._store.dispatch(new GetUserAuth());
 	}
 	ngAfterViewInit() {
-    this._store.dispatch(new GetConfig());
+		this._store.dispatch(new GetConfig());
 	}
 	openDrawer = () => {
 		this._store.dispatch(new OpenDrawer());

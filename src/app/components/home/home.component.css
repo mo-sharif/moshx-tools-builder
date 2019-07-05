@@ -50,6 +50,25 @@ nz-page-header {
 	text-align: center;
 }
 
+.card {
+	border-radius: 8px;
+	transition: transform 0.1s ease-out, -webkit-transform 0.1s ease-out;
+	background: white;
+}
+.card:hover {
+	cursor: pointer;
+	transform: scale(1.02);
+	box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+	color: #1890ff;
+}
+.card:hover .project-name-input {
+	opacity: 1;
+}
+.project-name-input {
+	opacity: 0;
+}
+
+
 @media only screen and (max-width: 767px) {
 	.big-text {
 		font-size: 2em;

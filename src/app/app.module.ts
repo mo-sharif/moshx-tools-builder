@@ -46,6 +46,7 @@ import { ProjectService } from "./services/project/project.service";
 import { addComponentModule } from "./directives/addComponent.module";
 import { UserService } from "./services/user/user.service";
 import { ProfileService } from "./services/profile/profile.service";
+import { listStagger } from "./animations/list-stagger.animation";
 
 
 @NgModule({
