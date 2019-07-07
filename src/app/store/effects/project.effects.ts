@@ -85,9 +85,9 @@ export class ProjectEffects {
 		switchMap(([action, userId]) => {
 			return this._profileService.getUserProfile(userId).pipe(
 				switchMap((user: IUser) => {
-					return of(new GetUserProfileSuccess(user))
+					return of(new GetUserProfileSuccess(user));
 				})
-			)
+			);
 		})
 	);
 	// BROKEN!

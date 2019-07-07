@@ -6,6 +6,7 @@ import { environment } from "../../../environments/environment";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { IProfile } from "../../models/project.interface";
 import { map } from "rxjs/operators";
+import { IUser } from "src/app/models/user.interface";
 
 @Injectable()
 export class ProfileService {
@@ -15,7 +16,7 @@ export class ProfileService {
 			.doc(profileName)
 			.collection(`/projects/`, ref => ref.where("profile", "==", profileName))
 			.valueChanges();
-	}
+  }
 	getUserProfile(userId: any): Observable<any> {
 		return this.firestore
 			.collection(`/users/`)

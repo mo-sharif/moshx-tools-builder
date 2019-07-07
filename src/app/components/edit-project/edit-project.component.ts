@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter } from "@angular/core";
+import { Component, Output, Input, EventEmitter, OnInit } from "@angular/core";
 
 import {
 	FormBuilder,
@@ -15,15 +15,15 @@ import { IProject } from "src/app/models/project.interface";
 	templateUrl: "./edit-project.component.html",
 	styleUrls: ["./edit-project.component.css"]
 })
-export class EditProjectComponent {
+export class EditProjectComponent implements OnInit {
 	@Output()
 	formData: EventEmitter<any> = new EventEmitter();
 
 	@Input()
-	selectProfile: any
-	
+	selectProfile: any;
+
 	@Input()
-	userProjects: IProject[]
+	userProjects: IProject[];
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
@@ -57,10 +57,19 @@ export class EditProjectComponent {
 		return {};
 	};
 
-	constructor(private fb: FormBuilder) {
+	constructor(private fb: FormBuilder) {}
+
+	ngOnInit() {
 		this.validateForm = this.fb.group({
 			title: ["", [Validators.required]],
-			profile: ["", [Validators.required], [this.titleAsyncValidator]]
+			profile: [
+				this.selectProfile.profile,
+				[Validators.required],
+				[this.titleAsyncValidator]
+			]
 		});
+		this.selectProfile.profile
+			? this.validateForm.controls.profile.disable()
+			: this.validateForm.controls.profile.enable();
 	}
 }
