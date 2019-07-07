@@ -1,10 +1,5 @@
-.logo {
-  margin-left: 28px;
-  font-family: "Montserrat", sans-serif;
-}
 .header {
-  background: #fff;
-  box-shadow: 1px 3px 2px #e8e8e8;
+  background: none;
 }
 .avatar-button {
   width: 34px;

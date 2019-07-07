@@ -49,16 +49,20 @@ nz-page-header {
 .center {
 	text-align: center;
 }
-
 .card {
 	border-radius: 8px;
-	transition: transform 0.1s ease-out, -webkit-transform 0.1s ease-out;
 	background: white;
+	box-shadow: 0px 0px 51px 0px rgba(0, 0, 0, 0.08),
+		0px 6px 18px 0px rgba(0, 0, 0, 0.05);
+	transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+		box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+	transform: translateY(0px);
 }
 .card:hover {
 	cursor: pointer;
-	transform: scale(1.02);
-	box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 0px 114px 0px rgba(0, 0, 0, 0.08),
+		0px 30px 25px 0px rgba(0, 0, 0, 0.05);
+	transform: translateY(-5px);
 	color: #1890ff;
 }
 .card:hover .project-name-input {
@@ -67,7 +71,6 @@ nz-page-header {
 .project-name-input {
 	opacity: 0;
 }
-
 
 @media only screen and (max-width: 767px) {
 	.big-text {
