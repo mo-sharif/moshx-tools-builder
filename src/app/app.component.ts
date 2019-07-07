@@ -17,7 +17,7 @@ import { userProjects } from "./store/selectors/project.selector";
 @Component({
 	selector: "app-root",
 	templateUrl: "./app.component.html",
-	styleUrls: ["./app.component.css"]
+	styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	configs$ = this._store.pipe(select(selectConfig));

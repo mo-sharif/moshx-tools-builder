@@ -1,14 +1,29 @@
-<div class="wrap">
-	<div class="content">
-		<div nz-row nzType="flex" nzJustify="center" nzAlign="middle">
+<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
+	<div nz-col nzSpan="24">
+		<h1 class="h1-header">
+			Welcome to AngularX
+		</h1>
+	</div>
+</div>
+<div
+	nz-row
+	nzType="flex"
+	nzGutter="12"
+	nzJustify="space-around"
+	nzAlign="middle"
+>
+	<div nz-col nzSpan="24">
+		<div nz-row nzGutter="12" [@listStagger]>
 			<div
+				style="margin-bottom: 10px"
 				nz-col
-				[nzXs]="{ span: 24, offset: 0 }"
-				[nzLg]="{ span: 6, offset: 0 }"
+				[nzSpan]="6"
+				[nzMd]="6"
+				[nzSm]="24"
+				[nzXs]="24"
 			>
 				<a [routerLink]="['new-project']">
 					<nz-card
-						[@listStagger]
 						[nzCover]="newProjectTemplate"
 						nzBordered="false"
 						class="card center"
@@ -24,11 +39,7 @@
 								<span>No Coding Required</span>
 							</ng-template>
 							<ng-template #footerTpl>
-								<button
-									nz-button
-									nzType="primary"
-									[nzLoading]="isLoadingTwo"
-								>
+								<button nz-button nzType="primary" [nzLoading]="isLoadingTwo">
 									<i nz-icon nzType="play-circle"></i>New Project
 								</button>
 							</ng-template>
@@ -37,53 +48,5 @@
 				</a>
 			</div>
 		</div>
-		<!-- <div nz-row nzType="flex" nzJustify="center" nzAlign="middle">
-			<div
-				nz-col
-				[nzXs]="{ span: 24, offset: 0 }"
-				[nzLg]="{ span: 12, offset: 0 }"
-			>
-				<h1 class="custom-font center big-text">
-					AngularX is on the way!
-				</h1>
-				<h2 class="custom-font center">
-					Supercharge your Angular web app game, and without any coding
-				</h2>
-			</div>
-		</div>
-		<div nz-row nzType="flex" nzJustify="center" nzAlign="middle">
-			<div
-				class="content-link"
-				nz-col
-				[nzXs]="{ span: 24, offset: 0 }"
-				[nzLg]="{ span: 12, offset: 0 }"
-			>
-				<a href="https://ng.ant.design/docs/introduce/en">
-					<img
-						src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-						alt="Ant Design"
-					/>
-				</a>
-				<a href="https://firebase.google.com/">
-					<img
-						src="https://seeklogo.com/images/F/firebase-logo-402F407EE0-seeklogo.com.png"
-						alt="Firebase"
-					/>
-				</a>
-				<a href="https://github.com/ngrx/platform">
-					<img
-						src="https://avatars0.githubusercontent.com/u/16272733?s=200&v=4"
-						alt="Ngrx"
-					/>
-				</a>
-			</div>
-		</div> -->
-		<!-- 		<div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle">
-			<div nz-col nzSpan="24">
-				<a href="https://www.freepik.com/free-photos-vectors/business"
-					>Art by macrovector</a
-				>
-			</div>
-		</div> -->
 	</div>
 </div>
