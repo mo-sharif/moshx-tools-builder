@@ -3,13 +3,14 @@ import { TableComponent } from "src/app/components/ant-design/table/table.compon
 import { FormComponent } from "src/app/components/ant-design/form/form.component";
 import { CalendarComponent } from "../../components/calendar/calendar.component";
 import { IProfile } from "src/app/models/project.interface";
+import { IUser } from "src/app/models/user.interface";
 
 export interface IProjectState {
 	projects: any;
 	newProject: IProject;
 	selectedProject: IProject;
 	container: IProjectContainer[];
-	profile: IProfile
+	profile: IUser
 }
 
 export const initialProjectState: IProjectState = {

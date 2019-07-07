@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
 
 import { IProject, IProjectContainer, IProfile } from "../../models/project.interface";
+import { IUser } from "src/app/models/user.interface";
 
 export enum EProjectActions {
 	GetProjects = "[Project] Get Projects",
@@ -14,7 +15,9 @@ export enum EProjectActions {
     GetContainers = "[Project] Get Containers",
 	GetUserProjects = "[Project] Get User Projects",
 	LoadProfile = "[Profile] Load User Profile",
-	LoadProfileSuccess = "[Profile] Load User Profile Success"
+	LoadProfileSuccess = "[Profile] Load User Profile Success",
+	GetUserProfile = "[Profile] Get User Profile",
+	GetUserProfileSuccess = "[Profile] Get User Profile Success"
 }
 
 export class GetProjects implements Action {
@@ -62,6 +65,14 @@ export class LoadProfileSuccess implements Action {
 	public readonly type = EProjectActions.LoadProfileSuccess;
 	constructor(public payload: any) {}
 }
+
+export class GetUserProfile implements Action {
+	public readonly type = EProjectActions.GetUserProfile;
+}
+export class GetUserProfileSuccess implements Action {
+	public readonly type = EProjectActions.GetUserProfileSuccess;
+	constructor(public payload: IUser) {}
+}
 export type ProjectActions =
 	| GetProject
 	| GetProjectSuccess
@@ -73,4 +84,6 @@ export type ProjectActions =
     | SaveProjectSuccess
 	| GetUserProjects
 	| LoadProfile
-	| LoadProfileSuccess;
+	| LoadProfileSuccess
+	| GetUserProfile
+	| GetUserProfileSuccess;

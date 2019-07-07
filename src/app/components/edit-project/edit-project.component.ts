@@ -20,6 +20,9 @@ export class EditProjectComponent {
 	formData: EventEmitter<any> = new EventEmitter();
 
 	@Input()
+	selectProfile: any
+	
+	@Input()
 	userProjects: IProject[]
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: IProject) => {

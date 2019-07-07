@@ -9,12 +9,18 @@ import { map } from "rxjs/operators";
 
 @Injectable()
 export class ProfileService {
-  loadProfile(profileName: string): Observable<any> {
-    return this.firestore
-      .collection(`/profiles/`)
-      .doc(profileName)
-      .collection(`/projects/`, ref => ref.where("profile", "==", profileName))
-      .valueChanges();
-  }
-  constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
+	loadProfile(profileName: string): Observable<any> {
+		return this.firestore
+			.collection(`/profiles/`)
+			.doc(profileName)
+			.collection(`/projects/`, ref => ref.where("profile", "==", profileName))
+			.valueChanges();
+	}
+	getUserProfile(userId: any): Observable<any> {
+		return this.firestore
+			.collection(`/users/`)
+			.doc(userId)
+			.valueChanges();
+	}
+	constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 }

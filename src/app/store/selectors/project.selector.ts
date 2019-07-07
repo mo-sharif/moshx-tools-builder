@@ -28,3 +28,8 @@ export const selectNewProject = createSelector(
 	selectProjects,
 	(state: IProjectState) => state.newProject
 );
+
+export const selectProfile = createSelector(
+	selectProjects,
+	(state: IProjectState) => state.profile
+)

@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 
-import { NewProject, SaveProject } from "../../store/actions/project.actions";
+import { NewProject, SaveProject, GetUserProfile } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 import { ActivatedRoute } from "@angular/router";
-import { selectNewProject, userProjects } from "../../store/selectors/project.selector";
+import { selectNewProject, userProjects, selectProfile } from "../../store/selectors/project.selector";
 
 import { CheckboxComponent } from "../../components/ant-design/checkbox/checkbox.component";
 import { FormComponent } from "src/app/components/ant-design/form/form.component";
@@ -25,7 +25,8 @@ export class EditProjectComponent implements OnInit {
 	newProject$ = this._store.pipe(select(selectNewProject));
 	currentUser$ = this._store.pipe(select(selectLoggedInUserUID));
 	userProjects$ = this._store.pipe(select(userProjects));
-
+	selectProfile$ = this._store.pipe(select(selectProfile));
+	
 	components: IProjectComponent = {
 		Checkbox: CheckboxComponent,
 		Form: FormComponent,
@@ -47,6 +48,9 @@ export class EditProjectComponent implements OnInit {
 				user: "NOT YET ASSIGNED"
 			})
 		);
+		this._store.dispatch(
+			new GetUserProfile()
+		)
 	}
 
 	saveFormData = formData => {
