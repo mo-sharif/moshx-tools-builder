@@ -13,7 +13,7 @@ import { TableComponent } from "src/app/components/ant-design/table/table.compon
 import { IProjectComponent } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { CalendarComponent } from "../../components/calendar/calendar.component";
-import { selectLoggedInUserUID } from "../../store/selectors/auth.selectors";
+import { selectLoggedInUserUID, selectLoggedInUser } from "../../store/selectors/auth.selectors";
 import { GetUserProfile } from "src/app/store/actions/auth.actions";
 
 @Component({
@@ -27,6 +27,7 @@ export class EditProjectComponent implements OnInit {
 	currentUser$ = this._store.pipe(select(selectLoggedInUserUID));
 	userProjects$ = this._store.pipe(select(userProjects));
 	selectProfile$ = this._store.pipe(select(selectProfile));
+	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	
 	components: IProjectComponent = {
 		Checkbox: CheckboxComponent,

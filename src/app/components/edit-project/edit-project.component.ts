@@ -9,6 +9,7 @@ import {
 } from "@angular/forms";
 import { Observable, Observer } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
+import { IUser } from "src/app/models/user.interface";
 
 @Component({
 	selector: "app-edit-project",
@@ -20,7 +21,7 @@ export class EditProjectComponent implements OnInit {
 	formData: EventEmitter<any> = new EventEmitter();
 
 	@Input()
-	selectProfile: any;
+	selectProfile: IUser;
 
 	@Input()
 	userProjects: IProject[];
