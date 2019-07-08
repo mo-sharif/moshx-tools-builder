@@ -19,7 +19,7 @@ export class UserService {
 	getUser(id): Observable<any> {
 		return this.firestore.collection(`/users/${id}`).valueChanges();
 	}
-	addUser(user: any) {
+	addUser(user: IUser) {
 		return this.firestore
 			.collection<IUser>(`/users/`)
 			.doc(user.uid)

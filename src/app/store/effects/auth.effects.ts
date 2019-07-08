@@ -26,6 +26,7 @@ import { User, IUser } from "../../models/user.interface";
 import { UserService } from "src/app/services/user/user.service";
 import { AddUser, AddUserSuccess } from "../actions/user.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
+import { GetUserProfile } from "../actions/auth.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -46,7 +47,7 @@ export class AuthEffects {
 				authData.photoURL
 			);
 			
-			 return of(new Authenticated(user), new SaveUserProfile(user))
+			 return of(new Authenticated(user), new GetUserProfile())
 		}),
 		catchError(err => {
 			return [new AuthError({ error: err.message })];

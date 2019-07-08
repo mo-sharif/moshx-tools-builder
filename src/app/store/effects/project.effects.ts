@@ -20,8 +20,6 @@ import {
 	SaveProjectSuccess,
 	GetProfileFromRouteSuccess,
 	GetProfileFromRoute,
-	GetUserProfile,
-	GetUserProfileSuccess,
 } from "../actions/project.actions";
 import {
 	SetSuccessMsg,
@@ -38,6 +36,7 @@ import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { IProfile } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
+import { EAuthActions, GetUserProfileSuccess, GetUserProfile } from "../actions/auth.actions";
 
 @Injectable()
 export class ProjectEffects {
@@ -79,12 +78,13 @@ export class ProjectEffects {
 
 	@Effect()
 	getUserProfile$ = this._actions$.pipe(
-		ofType<GetUserProfile>(EProjectActions.GetUserProfile),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-		switchMap((res) => {
-			console.log(res)
-			return this._profileService.getUserProfile(res).pipe(
+		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([action, userId]) => {
+			return this._profileService.getUserProfile(userId).pipe(
 				switchMap((user: IUser) => {
+					user.profileSlug = user.profile.replace(/ /g, '.');
+					this._userService.addUser(user);
 					return of(new GetUserProfileSuccess(user));
 				})
 			);

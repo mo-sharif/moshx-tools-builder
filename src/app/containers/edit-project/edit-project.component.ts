@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { NewProject, SaveProject, GetUserProfile } from "../../store/actions/project.actions";
+import { NewProject, SaveProject } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 import { ActivatedRoute } from "@angular/router";
@@ -14,6 +14,7 @@ import { IProjectComponent } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { CalendarComponent } from "../../components/calendar/calendar.component";
 import { selectLoggedInUserUID } from "../../store/selectors/auth.selectors";
+import { GetUserProfile } from "src/app/store/actions/auth.actions";
 
 @Component({
 	templateUrl: "./edit-project.component.html",

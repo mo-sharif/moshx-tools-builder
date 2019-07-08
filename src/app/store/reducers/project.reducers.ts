@@ -65,12 +65,6 @@ export function projectReducers(
 				projects: action.payload
 			};
 		}
-		case EProjectActions.GetUserProfileSuccess: {
-			return {
-				...state,
-				profile: action.payload
-			}
-		}
 
 		default:
 			return state;

@@ -10,7 +10,9 @@ export enum EAuthActions {
   Logout = "[Auth] Logout",
   AuthError = "[Auth] Login error",
   UpdateUser = "[Auth] Update User Profile",
-  SaveUserProfile = "[Auth] Save User Profile"
+  SaveUserProfile = "[Auth] Save User Profile",
+	GetUserProfile = "[Profile] Get User Profile",
+	GetUserProfileSuccess = "[Profile] Get User Profile Success"
 }
 
 // Get user state auth
@@ -55,6 +57,14 @@ export class SaveUserProfile implements Action {
   constructor(public payload: IUser) {}
 }
 
+export class GetUserProfile implements Action {
+	public readonly type = EAuthActions.GetUserProfile;
+}
+
+export class GetUserProfileSuccess implements Action {
+	public readonly type = EAuthActions.GetUserProfileSuccess;
+	constructor(public payload: IUser) {}
+}
 export type AuthActions =
   | GetUserAuth
   | Authenticated
@@ -63,4 +73,6 @@ export type AuthActions =
   | Logout
   | AuthError
   | UpdateUser
-  | SaveUserProfile;
+  | SaveUserProfile
+	| GetUserProfile
+	| GetUserProfileSuccess;

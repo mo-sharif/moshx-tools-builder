@@ -3,8 +3,6 @@ import { listStagger } from "src/app/animations/list-stagger.animation";
 import { IAppState } from "src/app/store/state/app.state";
 import { Store, select } from "@ngrx/store";
 import { selectLoggedInUser } from "src/app/store/selectors/auth.selectors";
-import { SaveUserProfile } from "src/app/store/actions/auth.actions";
-import { GetUserProfile } from "src/app/store/actions/project.actions";
 
 @Component({
   selector: "app-home",
