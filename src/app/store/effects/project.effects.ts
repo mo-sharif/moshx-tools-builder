@@ -18,10 +18,10 @@ import {
 	SaveProject,
 	GetProjectSuccess,
 	SaveProjectSuccess,
-	LoadProfileSuccess,
-	LoadProfile,
+	GetProfileFromRouteSuccess,
+	GetProfileFromRoute,
 	GetUserProfile,
-	GetUserProfileSuccess
+	GetUserProfileSuccess,
 } from "../actions/project.actions";
 import {
 	SetSuccessMsg,
@@ -66,23 +66,24 @@ export class ProjectEffects {
 	);
 
 	@Effect()
-	loadProfile$ = this._actions$.pipe(
-		ofType<LoadProfile>(EProjectActions.LoadProfile),
+	loadProfileFromRoute$ = this._actions$.pipe(
+		ofType<GetProfileFromRoute>(EProjectActions.GetProfileFromRoute),
 		map(action => action.payload),
 		switchMap(route => {
 			let profileName = route.replace(".", " ");
 			return this._profileService
 				.loadProfile(profileName)
-				.pipe(switchMap((profile: any) => [new LoadProfileSuccess(profile)]));
+				.pipe(switchMap((profile: any) => [new GetProfileFromRouteSuccess(profile)]));
 		})
 	);
 
 	@Effect()
 	getUserProfile$ = this._actions$.pipe(
 		ofType<GetUserProfile>(EProjectActions.GetUserProfile),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		switchMap(([action, userId]) => {
-			return this._profileService.getUserProfile(userId).pipe(
+		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+		switchMap((res) => {
+			console.log(res)
+			return this._profileService.getUserProfile(res).pipe(
 				switchMap((user: IUser) => {
 					return of(new GetUserProfileSuccess(user));
 				})

@@ -46,7 +46,7 @@ export class AuthEffects {
 				authData.photoURL
 			);
 			
-			 return of(new SaveUserProfile(user), new Authenticated(user))
+			 return of(new Authenticated(user), new SaveUserProfile(user))
 		}),
 		catchError(err => {
 			return [new AuthError({ error: err.message })];
@@ -84,14 +84,14 @@ export class AuthEffects {
 
 	@Effect()
 	saveUserProfile$ = this._actions$.pipe(
-		ofType<Authenticated>(EAuthActions.Authenticated),
+		ofType<SaveUserProfile>(EAuthActions.SaveUserProfile),
 		map((action) => action.payload),
 		switchMap((user: IUser) => {
 			return this._profileService.getUserProfile(user.uid).pipe(
-				switchMap((user: IUser) => {
+				map((user: IUser) => {
 					user.profileSlug = user.profile.replace(/ /g, '.');
 					this._userService.addUser(user);
-					return of(new UpdateUser(user))
+					return new UpdateUser(user)
 				})
 			)
 		})

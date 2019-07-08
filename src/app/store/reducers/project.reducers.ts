@@ -54,12 +54,12 @@ export function projectReducers(
 			};
 		}
 
-		case EProjectActions.LoadProfile: {
+		case EProjectActions.GetProfileFromRoute: {
 			return {
 				...state
 			};
 		}
-		case EProjectActions.LoadProfileSuccess: {
+		case EProjectActions.GetProfileFromRouteSuccess: {
 			return {
 				...state,
 				projects: action.payload

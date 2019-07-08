@@ -13,6 +13,7 @@ import { selectConfig } from "./store/selectors/config.selector";
 import { selectLoggedInUser } from "./store/selectors/auth.selectors";
 import { selectMessage } from "./store/selectors/message.selectors";
 import { userProjects } from "./store/selectors/project.selector";
+import { GetUserProfile } from "./store/actions/project.actions";
 
 @Component({
 	selector: "app-root",
