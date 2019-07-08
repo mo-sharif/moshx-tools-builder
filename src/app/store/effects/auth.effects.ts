@@ -24,6 +24,7 @@ import {
 import { User, IUser } from "../../models/user.interface";
 import { UserService } from "src/app/services/user/user.service";
 import { AddUser, AddUserSuccess } from "../actions/user.actions";
+import { ProfileService } from "src/app/services/profile/profile.service";
 
 @Injectable()
 export class AuthEffects {
@@ -83,15 +84,21 @@ export class AuthEffects {
 	afterAuth$ = this._actions$.pipe(
 		ofType<Authenticated>(EAuthActions.Authenticated),
 		map((action) => action.payload),
-		switchMap((user: any) => {
-			this._userService.addUser(user);
-			return of(new AddUserSuccess(user));
+		switchMap((user: IUser) => {
+			return this._profileService.getUserProfile(user.uid).pipe(
+				switchMap((user: IUser) => {
+					user.profileSlug = user.profile.replace(/ /g, '.');
+					this._userService.addUser(user);
+					return of(new UpdateUser(user))
+				})
+			)
 		})
 	);
 	constructor(
 		private authService: AuthService,
 		private _actions$: Actions,
 		private _store: Store<IAppState>,
-		private _userService: UserService
+		private _userService: UserService,
+		private _profileService: ProfileService
 	) {}
 }

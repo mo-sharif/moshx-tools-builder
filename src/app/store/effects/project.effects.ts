@@ -30,7 +30,7 @@ import {
 } from "../actions/message.actions";
 
 import { IProject } from "src/app/models/project.interface";
-import { selectLoggedInUserUID } from "../selectors/auth.selectors";
+import { selectLoggedInUserUID, selectLoggedInUser } from "../selectors/auth.selectors";
 import { EAuthActions, Authenticated } from "../actions/auth.actions";
 import { UpdateUserProfileSuccess } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
@@ -90,12 +90,12 @@ export class ProjectEffects {
 			);
 		})
 	);
-	// BROKEN!
-	/* getUserProjects$ = this._actions$.pipe(
+	@Effect()
+/* 	getUserProjects$ = this._actions$.pipe(
 		ofType<Authenticated>(EAuthActions.Authenticated),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		switchMap(id => {
-			return this._projectService.getUserProjects(id[1]).pipe(
+		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+		switchMap(([action, user]) => {
+			return this._projectService.getUserProjects(user).pipe(
 				switchMap(res => [
 					new GetProjectSuccess(res),
 					new SetSuccessMsg("Projects are loaded")

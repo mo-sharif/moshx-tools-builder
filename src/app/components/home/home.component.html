@@ -47,6 +47,60 @@
 					</nz-card>
 				</a>
 			</div>
+			<div
+				style="margin-bottom: 10px"
+				nz-col
+				[nzSpan]="6"
+				[nzMd]="6"
+				[nzSm]="24"
+				[nzXs]="24"
+				*ngIf="(selectLoggedInUser$ | async) as currentUser"
+			>
+				<a [routerLink]="['/', currentUser.profileSlug]" *ngIf="currentUser.profileSlug; else noProfile">
+					<nz-card
+						[nzCover]="newProjectTemplate"
+						nzBordered="false"
+						class="card center"
+					>
+						<nz-empty
+							[nzNotFoundImage]="
+								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_2.png?alt=media&token=e896ba8c-ef16-4f09-ac64-6b783bc8dd54'
+							"
+							[nzNotFoundContent]="contentTpl"
+							[nzNotFoundFooter]="footerTpl"
+						>
+							<ng-template #contentTpl>
+								<span>{{ currentUser.profile }}</span>
+							</ng-template>
+							<ng-template #footerTpl>
+								<button nz-button nzType="primary" [nzLoading]="!currentUser">
+									<i nz-icon nzType="profile"></i>View Profile
+								</button>
+							</ng-template>
+						</nz-empty>
+					</nz-card>
+				</a>
+				<ng-template #noProfile>
+					<nz-card
+						nzBordered="false"
+						class="card center"
+					>
+						<nz-empty
+							[nzNotFoundContent]="contentTpl"
+							[nzNotFoundFooter]="footerTpl"
+						>
+							<ng-template #contentTpl>
+								<span>No Profile</span>
+							</ng-template>
+							<ng-template #footerTpl>
+								<button nz-button nzType="primary" [disabled]="true">
+									<i nz-icon nzType="profile"></i>View Profile
+								</button>
+							</ng-template>
+						</nz-empty>
+					</nz-card>
+				</ng-template>
+			</div>
 		</div>
 	</div>
 </div>
