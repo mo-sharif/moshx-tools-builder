@@ -9,7 +9,8 @@ export enum EAuthActions {
   GoogleLogin = "[Auth] Google login attempt",
   Logout = "[Auth] Logout",
   AuthError = "[Auth] Login error",
-  UpdateUser = "[Auth] Update User Profile"
+  UpdateUser = "[Auth] Update User Profile",
+  SaveUserProfile = "[Auth] Save User Profile"
 }
 
 // Get user state auth
@@ -49,6 +50,11 @@ export class UpdateUser implements Action {
   constructor(public payload: IUser) {}
 }
 
+export class SaveUserProfile implements Action {
+  public readonly type = EAuthActions.SaveUserProfile;
+  constructor(public payload: IUser) {}
+}
+
 export type AuthActions =
   | GetUserAuth
   | Authenticated
@@ -56,4 +62,5 @@ export type AuthActions =
   | GoogleLogin
   | Logout
   | AuthError
-  | UpdateUser;
+  | UpdateUser
+  | SaveUserProfile;

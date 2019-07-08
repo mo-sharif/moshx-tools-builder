@@ -31,7 +31,6 @@ import {
 
 import { IProject } from "src/app/models/project.interface";
 import { selectLoggedInUserUID, selectLoggedInUser } from "../selectors/auth.selectors";
-import { EAuthActions, Authenticated } from "../actions/auth.actions";
 import { UpdateUserProfileSuccess } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
 import { Router } from "@angular/router";

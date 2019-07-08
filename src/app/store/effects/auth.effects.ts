@@ -19,7 +19,8 @@ import {
 	GoogleLogin,
 	Logout,
 	AuthError,
-	UpdateUser
+	UpdateUser,
+	SaveUserProfile
 } from "../actions/auth.actions";
 import { User, IUser } from "../../models/user.interface";
 import { UserService } from "src/app/services/user/user.service";
@@ -37,17 +38,18 @@ export class AuthEffects {
 		switchMap(() => this.authService.currentUserObservable),
 		switchMap(authData => {
 			if (authData == null) {
-				return of(new NotAuthenticated());
+				return of(new NotAuthenticated())
 			}
-			const user = new User(
+			let user = new User(
 				authData.uid,
 				authData.displayName,
 				authData.photoURL
 			);
-			return of(new Authenticated(user));
+			
+			 return of(new SaveUserProfile(user), new Authenticated(user))
 		}),
 		catchError(err => {
-			return of(new AuthError({ error: err.message }));
+			return [new AuthError({ error: err.message })];
 		})
 	);
 
@@ -81,7 +83,7 @@ export class AuthEffects {
 	);
 
 	@Effect()
-	afterAuth$ = this._actions$.pipe(
+	saveUserProfile$ = this._actions$.pipe(
 		ofType<Authenticated>(EAuthActions.Authenticated),
 		map((action) => action.payload),
 		switchMap((user: IUser) => {

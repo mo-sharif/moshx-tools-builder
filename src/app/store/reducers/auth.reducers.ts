@@ -52,6 +52,12 @@ export function authReducers(
 				currentUser: action.payload
 			};
 		}
+		case EAuthActions.SaveUserProfile: {
+			return {
+				...state,
+				currentUser: action.payload
+			};
+		}
 		default:
 			return state;
 	}
