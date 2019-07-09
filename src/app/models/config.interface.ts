@@ -4,4 +4,9 @@ export interface IConfig {
   siteName?: string;
   copyright?: string;
   isCollapsed?:boolean;
+  settings?: ISettings
+}
+
+export interface ISettings {
+  containers: {}
 }

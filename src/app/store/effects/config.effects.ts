@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, withLatestFrom } from "rxjs/operators";
+import { switchMap, withLatestFrom, map } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -9,9 +9,13 @@ import {
 	EConfigActions,
 	OpenDrawer,
 	CloseDrawer,
-	DrawerStatus
+	DrawerStatus,
+	GetSettings,
+	GetSettingsSuccess
 } from "../actions/config.actions";
 import { selectConfig } from "../selectors/config.selector";
+import { ConfigService } from "src/app/services/config/config.service";
+import { IConfig } from "src/app/models/config.interface";
 
 @Injectable()
 export class ConfigEffects {
@@ -35,5 +39,26 @@ export class ConfigEffects {
 		})
 	);
 
-	constructor(private _actions$: Actions, private _store: Store<IAppState>) {}
+	@Effect()
+	getSettings$ = this._actions$.pipe(
+		ofType<GetSettings>(EConfigActions.GetSettings),
+		switchMap(() => {
+			return this._configService.getSettings();
+		}),
+		map(([payload, action]) => {
+			let components = payload.containers.map(component => {
+				return { name: `${component}`, type: `${component}Component` };
+			});
+			return components;
+		}),
+		switchMap(res => {
+			return of(new GetSettingsSuccess(res));
+		})
+	);
+
+	constructor(
+		private _actions$: Actions,
+		private _store: Store<IAppState>,
+		private _configService: ConfigService
+	) {}
 }

@@ -16,7 +16,7 @@ export interface IProfile {
 
 export interface IProjectContainer {
 	name: string;
-	type: Type<any>;
+	type: string;
 }
 
 export interface IProjectComponent {

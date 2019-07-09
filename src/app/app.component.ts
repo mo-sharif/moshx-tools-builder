@@ -5,7 +5,8 @@ import { IAppState } from "./store/state/app.state";
 import {
 	GetConfig,
 	OpenDrawer,
-	CloseDrawer
+	CloseDrawer,
+	GetSettings
 } from "./store/actions/config.actions";
 import { GetUserAuth, GoogleLogin, Logout } from "./store/actions/auth.actions";
 
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	constructor(private _store: Store<IAppState>) {}
 
 	ngOnInit() {
+		this._store.dispatch(new GetSettings());
 		this._store.dispatch(new GetUserAuth());
 	}
 	ngAfterViewInit() {

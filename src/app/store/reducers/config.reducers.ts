@@ -34,6 +34,17 @@ export function configReducers(
 				route: action.payload
 			}
 		}
+		case EConfigActions.GetSettings: {
+			return  {
+				...state
+			}
+		}
+		case EConfigActions.GetSettingsSuccess: {
+			return {
+				...state,
+				containers: action.payload 
+			}
+		}
 
 		default:
 			return state;
