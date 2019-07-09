@@ -5,10 +5,10 @@ import {
 	transferArrayItem
 } from "@angular/cdk/drag-drop";
 
-import { CheckboxComponent } from "../../components/ant-design/checkbox/checkbox.component";
-import { CarouselComponent } from "src/app/components/ant-design/carousel/carousel.component";
-import { UploadComponent } from "src/app/components/ant-design/upload/upload.component";
-import { ButtonComponent } from "src/app/components/ant-design/button/button.component";
+import { CheckboxComponent } from "../../custom/ant-design/checkbox/checkbox.component";
+import { CarouselComponent } from "src/app/custom/ant-design/carousel/carousel.component";
+import { UploadComponent } from "src/app/custom/ant-design/upload/upload.component";
+import { ButtonComponent } from "src/app/custom/ant-design/button/button.component";
 
 export interface Comp {
 	label: string;

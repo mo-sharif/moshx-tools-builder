@@ -5,8 +5,8 @@ import { CommonModule } from "@angular/common";
 import { EditProjectRoutingModule } from "./edit-project-routing.module";
 import { EditProjectComponent as EditProjectContainer } from "./edit-project.component";
 
-import { FormComponent } from "../../components/ant-design/form/form.component";
-import { TableComponent } from "../../components/ant-design/table/table.component";
+import { FormComponent } from "../../custom/ant-design/form/form.component";
+import { TableComponent } from "../../custom/ant-design/table/table.component";
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EditProjectComponent } from "../../components/edit-project/edit-project.component";
@@ -14,7 +14,7 @@ import { NzTabsModule } from "ng-zorro-antd";
 // import { ProjectService } from "src/app/services/project/project.service";
 // import { EffectsModule } from "@ngrx/effects";
 // import { ProjectEffects } from "src/app/store/effects/project.effects";
-import { CalendarComponent } from "../../components/calendar/calendar.component";
+import { CalendarComponent } from "../../custom/ant-design/calendar/calendar.component";
 import { addComponentModule } from "src/app/directives/addComponent.module";
 
 @NgModule({

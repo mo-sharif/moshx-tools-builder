@@ -7,10 +7,10 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { FormsModule } from "@angular/forms";
 
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
-import { CarouselComponent } from "src/app/components/ant-design/carousel/carousel.component";
-import { CheckboxComponent } from "src/app/components/ant-design/checkbox/checkbox.component";
-import { UploadComponent } from "src/app/components/ant-design/upload/upload.component";
-import { ButtonComponent } from "src/app/components/ant-design/button/button.component";
+import { CarouselComponent } from "src/app/custom/ant-design/carousel/carousel.component";
+import { CheckboxComponent } from "src/app/custom/ant-design/checkbox/checkbox.component";
+import { UploadComponent } from "src/app/custom/ant-design/upload/upload.component";
+import { ButtonComponent } from "src/app/custom/ant-design/button/button.component";
 import { addComponentModule } from "src/app/directives/addComponent.module";
 
 @NgModule({
