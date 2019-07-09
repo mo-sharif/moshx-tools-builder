@@ -9,7 +9,7 @@ const routes: Routes = [
 	},
 	{
 		path: ":id",
-		loadChildren: '../edit-project/edit-project.module#EditProjectModule',
+		loadChildren: "../edit-project/edit-project.module#EditProjectModule",
 		data: { breadcrumb: "Edit" }
 	}
 ];

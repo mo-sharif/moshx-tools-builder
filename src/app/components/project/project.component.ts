@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IProject } from 'src/app/models/project.interface';
 import { listStagger } from '../../animations/list-stagger.animation';
 
@@ -13,13 +13,16 @@ export class ProjectComponent implements OnInit {
   @Input()
   userProjects: IProject[]
 
+  @Output()
+  navigateToProject: EventEmitter<string> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  navigateToProject() {
-    return
+  navigateToProjectEmit(project) {
+    this.navigateToProject.emit(project)
   }
 
 }

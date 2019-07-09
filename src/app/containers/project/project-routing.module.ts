@@ -7,7 +7,13 @@ const routes: Routes = [
 	{
 		path: "",
 		component: ProjectContainer,
-		canActivate: [AuthGuard]
+		canActivate: [AuthGuard],
+		data: { breadcrumb: "Projects" }
+	},
+	{
+		path: "projects/:id",
+		loadChildren: '../edit-project/edit-project.module#EditProjectModule',
+		data: { breadcrumb: "Edit" }
 	}
 ];
 

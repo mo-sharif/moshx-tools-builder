@@ -15,7 +15,7 @@ const routes: Routes = [
 		path: ":id",
 		loadChildren:
 			"./containers/project/project.module#ProjectModule",
-		data: { breadcrumb: "Project" }
+		data: { breadcrumb: "Projects" }
 	},
 	{
 		path: "home/users",

@@ -1,1 +1,2 @@
-<app-project [userProjects]="userProjects$"></app-project>
+<nz-spin nzSimple *ngIf="!userProjects$"></nz-spin>
+<app-project [userProjects]="userProjects$" (navigateToProject)="navigateToProject($event)"></app-project>

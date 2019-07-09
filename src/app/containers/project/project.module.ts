@@ -10,6 +10,7 @@ import { NzGridModule } from "ng-zorro-antd";
 import { NzCardModule } from "ng-zorro-antd";
 import { NzIconModule } from "ng-zorro-antd";
 import { NzInputModule } from "ng-zorro-antd";
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
 	declarations: [ProjectComponent, ProjectContainer],
@@ -20,7 +21,8 @@ import { NzInputModule } from "ng-zorro-antd";
 		NzCardModule,
 		CommonModule,
 		NzIconModule,
-		NzInputModule
+		NzInputModule,
+		NzSpinModule
 	],
 	providers: [ProfileService]
 })
