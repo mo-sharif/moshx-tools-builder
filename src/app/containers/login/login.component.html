@@ -1,16 +1,14 @@
 <div *ngIf="user$ | async as user" [@listStagger]="user.length">
 	<h1>Welcome! {{ user.displayName }}</h1>
-	<google-login
-		[user]="user"
-		(logoutEvent)="logout()"
-		(googleLoginEvent)="googleLogin()"
-	></google-login>
-	
-	<github-login
-		[user]="user"
-		(logoutEvent)="logout()"
-		(githubLoginEvent)="githubLogin()"
-	></github-login>
+	<ul>
+		<li>
+			<google-login [user]="user" (logoutEvent)="logout()" (googleLoginEvent)="googleLogin()"></google-login>
+		</li>
+		<li>
+			<github-login [user]="user" (logoutEvent)="logout()" (githubLoginEvent)="githubLogin()"></github-login>
+		</li>
+	</ul>
+
 
 	<button nz-button nzType="primary" *ngIf="user.uid" (click)="logout()">
 		Logout

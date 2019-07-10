@@ -9,6 +9,9 @@
   border: none;
 }
 
+.loginButtons {
+  margin: 5px
+}
 @media only screen and (max-width: 767px) {
   .hide-small-screen {
     display: none;
