@@ -22,6 +22,8 @@ import { GetUserProfile } from "src/app/store/actions/auth.actions";
 	animations: [listStagger]
 })
 export class EditProjectComponent implements OnInit {
+	isVisible = false;
+	isOkLoading = false;
 	private currentUserUID;
 	newProject$ = this._store.pipe(select(selectNewProject));
 	currentUser$ = this._store.pipe(select(selectLoggedInUserUID));
@@ -64,4 +66,19 @@ export class EditProjectComponent implements OnInit {
 			})
 		);
 	};
+	showModal(): void {
+		this.isVisible = true;
+	  }
+	
+	  handleOk(): void {
+		this.isOkLoading = true;
+		setTimeout(() => {
+		  this.isVisible = false;
+		  this.isOkLoading = false;
+		}, 3000);
+	  }
+	
+	  handleCancel(): void {
+		this.isVisible = false;
+	  }
 }

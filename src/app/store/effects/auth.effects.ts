@@ -20,13 +20,15 @@ import {
 	Logout,
 	AuthError,
 	UpdateUser,
-	SaveUserProfile
+	SaveUserProfile,
+	GithubLogin
 } from "../actions/auth.actions";
 import { User, IUser } from "../../models/user.interface";
 import { UserService } from "src/app/services/user/user.service";
 import { AddUser, AddUserSuccess } from "../actions/user.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { GetUserProfile } from "../actions/auth.actions";
+import { GetSettings } from "../actions/config.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -39,15 +41,19 @@ export class AuthEffects {
 		switchMap(() => this.authService.currentUserObservable),
 		switchMap(authData => {
 			if (authData == null) {
-				return of(new NotAuthenticated())
+				return of(new NotAuthenticated());
 			}
 			let user = new User(
 				authData.uid,
 				authData.displayName,
 				authData.photoURL
 			);
-			
-			 return of(new Authenticated(user), new GetUserProfile())
+
+			return of(
+				new Authenticated(user),
+				new GetUserProfile(),
+				new GetSettings()
+			);
 		}),
 		catchError(err => {
 			return [new AuthError({ error: err.message })];
@@ -57,10 +63,18 @@ export class AuthEffects {
 	@Effect()
 	googleLogin$ = this._actions$.pipe(
 		ofType<GoogleLogin>(EAuthActions.GoogleLogin),
-		map(action => {
-			action.payload;
-		}),
 		switchMap(() => this.authService.googleLogin()),
+		map(credential => {
+			// Successful login
+			return new GetUserAuth();
+		}),
+		catchError(err => of(new AuthError({ error: err.message })))
+	);
+
+	@Effect()
+	githubLogin$ = this._actions$.pipe(
+		ofType<GithubLogin>(EAuthActions.GithubLogin),
+		switchMap(() => this.authService.githubLogin()),
 		map(credential => {
 			// Successful login
 			return new GetUserAuth();
@@ -86,15 +100,15 @@ export class AuthEffects {
 	@Effect()
 	saveUserProfile$ = this._actions$.pipe(
 		ofType<SaveUserProfile>(EAuthActions.SaveUserProfile),
-		map((action) => action.payload),
+		map(action => action.payload),
 		switchMap((user: IUser) => {
 			return this._profileService.getUserProfile(user.uid).pipe(
 				map((user: IUser) => {
-					user.profileSlug = user.profile.replace(/ /g, '.');
+					user.profileSlug = user.profile.replace(/ /g, ".");
 					this._userService.addUser(user);
-					return new UpdateUser(user)
+					return new UpdateUser(user);
 				})
-			)
+			);
 		})
 	);
 	constructor(

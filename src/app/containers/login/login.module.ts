@@ -9,9 +9,10 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NzFormModule } from 'ng-zorro-antd';
 import { NzInputModule } from 'ng-zorro-antd';
+import { GithubLoginComponent } from "src/app/components/shared/github-login/github-login.component";
 
 @NgModule({
-	declarations: [GoogleLoginComponent, LoginContainer, LoginFormComponent],
+	declarations: [GoogleLoginComponent,GithubLoginComponent, LoginContainer, LoginFormComponent],
 	imports: [
     NzFormModule,
     NzInputModule,

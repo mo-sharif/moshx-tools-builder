@@ -1,33 +1,29 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IUser } from '../../../models/user.interface';
-import { listStagger } from '../../../animations/list-stagger.animation';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { IUser } from "../../../models/user.interface";
 
 @Component({
-  selector: 'google-login',
-  templateUrl: './google-login.component.html',
-  animations: [listStagger]
+	selector: "google-login",
+	templateUrl: "./google-login.component.html"
 })
 export class GoogleLoginComponent implements OnInit {
-  @Input()
-  user: IUser
+	@Input()
+	user: IUser;
 
-  @Output()
-  googleLoginEvent: EventEmitter<any> = new EventEmitter();
+	@Output()
+	googleLoginEvent: EventEmitter<any> = new EventEmitter();
 
-  @Output()
-  logoutEvent: EventEmitter<any> = new EventEmitter();
-  
-  constructor() { }
+	@Output()
+	logoutEvent: EventEmitter<any> = new EventEmitter();
 
-  ngOnInit() {
-  }
+	constructor() {}
 
-  googleLogin() { 
-    this.googleLoginEvent.emit()
-  }
+	ngOnInit() {}
 
-  logout() { 
-    this.logoutEvent.emit()
-  }
+	googleLogin() {
+		this.googleLoginEvent.emit();
+	}
 
+	logout() {
+		this.logoutEvent.emit();
+	}
 }

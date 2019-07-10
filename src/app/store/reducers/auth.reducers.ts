@@ -40,6 +40,12 @@ export function authReducers(
 				loading: true
 			};
 		}
+		case EAuthActions.GithubLogin: {
+			return {
+				...state,
+				loading: true
+			};
+		}
 		case EAuthActions.Logout: {
 			return {
 				...state,

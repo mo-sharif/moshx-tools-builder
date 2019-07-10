@@ -19,7 +19,7 @@ import {
 	GetProjectSuccess,
 	SaveProjectSuccess,
 	GetProfileFromRouteSuccess,
-	GetProfileFromRoute,
+	GetProfileFromRoute
 } from "../actions/project.actions";
 import {
 	SetSuccessMsg,
@@ -28,7 +28,10 @@ import {
 } from "../actions/message.actions";
 
 import { IProject } from "src/app/models/project.interface";
-import { selectLoggedInUserUID, selectLoggedInUser } from "../selectors/auth.selectors";
+import {
+	selectLoggedInUserUID,
+	selectLoggedInUser
+} from "../selectors/auth.selectors";
 import { UpdateUserProfileSuccess } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
 import { Router } from "@angular/router";
@@ -36,7 +39,11 @@ import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { IProfile } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
-import { EAuthActions, GetUserProfileSuccess, GetUserProfile } from "../actions/auth.actions";
+import {
+	EAuthActions,
+	GetUserProfileSuccess,
+	GetUserProfile
+} from "../actions/auth.actions";
 
 @Injectable()
 export class ProjectEffects {
@@ -72,7 +79,9 @@ export class ProjectEffects {
 			let profileName = route.replace(".", " ");
 			return this._profileService
 				.loadProfile(profileName)
-				.pipe(switchMap((profile: any) => [new GetProfileFromRouteSuccess(profile)]));
+				.pipe(
+					switchMap((profile: any) => [new GetProfileFromRouteSuccess(profile)])
+				);
 		})
 	);
 
@@ -83,15 +92,19 @@ export class ProjectEffects {
 		switchMap(([action, userId]) => {
 			return this._profileService.getUserProfile(userId).pipe(
 				switchMap((user: IUser) => {
-					user.profileSlug = user.profile.replace(/ /g, '.');
-					this._userService.addUser(user);
-					return of(new GetUserProfileSuccess(user));
+					if (user && user.profile) {
+						user.profileSlug = user.profile.replace(/ /g, ".");
+						this._userService.addUser(user);
+						return of(new GetUserProfileSuccess(user));
+					} else {
+						return of()
+					}
 				})
 			);
 		})
 	);
 	@Effect()
-/* 	getUserProjects$ = this._actions$.pipe(
+	/* 	getUserProjects$ = this._actions$.pipe(
 		ofType<Authenticated>(EAuthActions.Authenticated),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 		switchMap(([action, user]) => {

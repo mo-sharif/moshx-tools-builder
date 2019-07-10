@@ -24,6 +24,9 @@ export class HeaderComponent implements OnInit {
 	@Output()
 	googleLogin: EventEmitter<any> = new EventEmitter();
 
+	@Output()
+	githubLogin: EventEmitter<any> = new EventEmitter();
+
 	constructor() {}
 
 	ngOnInit() {}
@@ -34,6 +37,9 @@ export class HeaderComponent implements OnInit {
 
 	googleLoginClick = () => {
 		this.googleLogin.emit();
+  };
+	githubLoginClick = () => {
+		this.githubLogin.emit();
   };
   
 	logoutClick = () => {

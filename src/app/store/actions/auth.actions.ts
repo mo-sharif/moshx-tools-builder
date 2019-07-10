@@ -7,6 +7,7 @@ export enum EAuthActions {
   NotAuthenticated = "[Auth] Not Authenticated",
 
   GoogleLogin = "[Auth] Google login attempt",
+  GithubLogin = "[Auth] Github login attempt",
   Logout = "[Auth] Logout",
   AuthError = "[Auth] Login error",
   UpdateUser = "[Auth] Update User Profile",
@@ -34,7 +35,9 @@ export class NotAuthenticated implements Action {
 
 export class GoogleLogin implements Action {
   public readonly type = EAuthActions.GoogleLogin;
-  constructor(public payload?: any) {}
+}
+export class GithubLogin implements Action {
+  public readonly type = EAuthActions.GithubLogin;
 }
 
 export class Logout implements Action {
@@ -70,6 +73,7 @@ export type AuthActions =
   | Authenticated
   | NotAuthenticated
   | GoogleLogin
+  | GithubLogin
   | Logout
   | AuthError
   | UpdateUser

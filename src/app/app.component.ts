@@ -8,7 +8,7 @@ import {
 	CloseDrawer,
 	GetSettings
 } from "./store/actions/config.actions";
-import { GetUserAuth, GoogleLogin, Logout } from "./store/actions/auth.actions";
+import { GetUserAuth, GoogleLogin, Logout, GithubLogin } from "./store/actions/auth.actions";
 
 import { selectConfig } from "./store/selectors/config.selector";
 import { selectLoggedInUser } from "./store/selectors/auth.selectors";
@@ -30,7 +30,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 	constructor(private _store: Store<IAppState>) {}
 
 	ngOnInit() {
-		this._store.dispatch(new GetSettings());
 		this._store.dispatch(new GetUserAuth());
 	}
 	ngAfterViewInit() {
@@ -46,6 +45,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	googleLogin() {
 		this._store.dispatch(new GoogleLogin());
+	}
+
+	githubLogin() {
+		this._store.dispatch(new GithubLogin());
 	}
 
 	logout() {

@@ -4,7 +4,8 @@ import { Store, select } from "@ngrx/store";
 import {
 	GetUserAuth,
 	GoogleLogin,
-	Logout
+	Logout,
+	GithubLogin
 } from "./../../store/actions/auth.actions";
 import { IAppState } from "../../store/state/app.state";
 import { listStagger } from "../../animations/list-stagger.animation";
@@ -23,11 +24,15 @@ export class LoginComponent implements OnInit {
 	constructor(private _store: Store<IAppState>, private _route: Router) {}
 
 	ngOnInit() {
-		// this._store.dispatch(new GetUserAuth());
 	}
 
 	googleLogin() {
 		this._store.dispatch(new GoogleLogin());
+	}
+
+	githubLogin() {
+		console.log('hello')
+		this._store.dispatch(new GithubLogin());
 	}
 
 	logout() {

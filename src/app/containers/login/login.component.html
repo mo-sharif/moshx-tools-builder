@@ -5,6 +5,12 @@
 		(logoutEvent)="logout()"
 		(googleLoginEvent)="googleLogin()"
 	></google-login>
+	
+	<github-login
+		[user]="user"
+		(logoutEvent)="logout()"
+		(githubLoginEvent)="githubLogin()"
+	></github-login>
 
 	<button nz-button nzType="primary" *ngIf="user.uid" (click)="logout()">
 		Logout
