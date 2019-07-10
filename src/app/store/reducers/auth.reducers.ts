@@ -52,6 +52,12 @@ export function authReducers(
 				loading: true
 			};
 		}
+		case EAuthActions.LogoutSuccess: {
+			return {
+				...state,
+				loading: false
+			};
+		}
 		case EAuthActions.UpdateUser: {
 			return {
 				...state,

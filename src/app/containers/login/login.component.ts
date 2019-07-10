@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 
 import {
-	GetUserAuth,
 	GoogleLogin,
 	Logout,
 	GithubLogin

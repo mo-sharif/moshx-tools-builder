@@ -21,7 +21,8 @@ import {
   AuthError,
   UpdateUser,
   SaveUserProfile,
-  GithubLogin
+  GithubLogin,
+  LogoutSuccess
 } from "../actions/auth.actions";
 import { User, IUser } from "../../models/user.interface";
 import { UserService } from "src/app/services/user/user.service";
@@ -35,9 +36,6 @@ export class AuthEffects {
   @Effect()
   getUserAuth$ = this._actions$.pipe(
     ofType<GetUserAuth>(EAuthActions.GetUserAuth),
-    map(action => {
-      action.payload;
-    }),
     switchMap(() => this.authService.currentUserObservable),
     switchMap(authData => {
       if (authData == null) {
@@ -91,8 +89,8 @@ export class AuthEffects {
     switchMap(() => {
       return of(this.authService.logout());
     }),
-    map(() => {
-      return new NotAuthenticated();
+    switchMap(() => {
+      return of(new LogoutSuccess());
     }),
     catchError(err => of(new AuthError({ error: err.message })))
   );

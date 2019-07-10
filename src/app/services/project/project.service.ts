@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 
 import { environment } from "../../../environments/environment";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -15,9 +15,15 @@ export class ProjectService {
 		return this.firestore.collection("/projects").valueChanges();
 	}
 	getProject(id): Observable<any> {
+		if (!id) {
+			return of()
+		}
 		return this.firestore.collection(`/projects/${id}`).valueChanges();
 	}
 	getUserProjects(user: IUser): Observable<any> {
+		if (!user) {
+			return of()
+		}
 		return this.firestore
 			.collection(`/profiles/`)
 			.doc(user.profile)
@@ -25,6 +31,9 @@ export class ProjectService {
 			.valueChanges();
 	}
 	addProject(project: IProject) {
+		if (!project) {
+			return
+		}
 		const id = this.firestore.createId();
 		return this.firestore
 			.collection("profiles")

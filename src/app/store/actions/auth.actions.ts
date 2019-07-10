@@ -9,6 +9,7 @@ export enum EAuthActions {
   GoogleLogin = "[Auth] Google login attempt",
   GithubLogin = "[Auth] Github login attempt",
   Logout = "[Auth] Logout",
+  LogoutSuccess = "[Auth] Logout Success",
   AuthError = "[Auth] Login error",
   UpdateUser = "[Auth] Update User Profile",
   SaveUserProfile = "[Auth] Save User Profile",
@@ -20,7 +21,6 @@ export enum EAuthActions {
 
 export class GetUserAuth implements Action {
   public readonly type = EAuthActions.GetUserAuth;
-  constructor(public payload?: IUser) {}
 }
 
 export class Authenticated implements Action {
@@ -42,6 +42,11 @@ export class GithubLogin implements Action {
 
 export class Logout implements Action {
   public readonly type = EAuthActions.Logout;
+  constructor(public payload?: any) {}
+}
+
+export class LogoutSuccess implements Action {
+  public readonly type = EAuthActions.LogoutSuccess;
   constructor(public payload?: any) {}
 }
 
@@ -79,4 +84,5 @@ export type AuthActions =
   | UpdateUser
   | SaveUserProfile
 	| GetUserProfile
-	| GetUserProfileSuccess;
+  | GetUserProfileSuccess
+  | LogoutSuccess;

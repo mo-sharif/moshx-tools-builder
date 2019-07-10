@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 
 import { environment } from "../../../environments/environment";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -11,6 +11,9 @@ import { IUser } from "src/app/models/user.interface";
 @Injectable()
 export class ProfileService {
 	loadProfile(profileName: string): Observable<any> {
+		if (!profileName) {
+			return of()
+		}
 		return this.firestore
 			.collection(`/profiles/`)
 			.doc(profileName)
@@ -18,6 +21,9 @@ export class ProfileService {
 			.valueChanges();
   }
 	getUserProfile(userId: any): Observable<any> {
+		if (!userId) {
+			return of()
+		}
 		return this.firestore
 			.collection(`/users/`)
 			.doc(userId)
