@@ -14,5 +14,5 @@ export interface IUser {
 }
 
 export class User implements IUser {
-	constructor(public uid: string, public displayName: string, public photoURL?: string, public profile?: string, public profileSlug?: string) {}
+	constructor(public uid: string, public displayName: string, public photoURL?: string) {}
 }

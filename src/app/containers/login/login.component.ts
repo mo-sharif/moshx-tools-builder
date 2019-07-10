@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 	}
 
 	githubLogin() {
-		console.log('hello')
 		this._store.dispatch(new GithubLogin());
 	}
 
