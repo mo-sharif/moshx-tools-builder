@@ -16,6 +16,7 @@ import { NzTabsModule } from "ng-zorro-antd";
 // import { ProjectEffects } from "src/app/store/effects/project.effects";
 import { CalendarComponent } from "../../custom/ant-design/calendar/calendar.component";
 import { addComponentModule } from "src/app/directives/addComponent.module";
+import { PostsComponent } from "../../custom/posts/posts.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { addComponentModule } from "src/app/directives/addComponent.module";
     EditProjectComponent,
     TableComponent,
     FormComponent,
-    CalendarComponent
+    CalendarComponent,
+    PostsComponent
   ],
   imports: [
     addComponentModule,
