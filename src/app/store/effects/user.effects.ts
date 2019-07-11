@@ -56,8 +56,7 @@ export class UserEffects {
 		map(action => action.payload),
 		switchMap((user: IUser) => {
 			this._userService.addUser(user);
-			new AddUserSuccess(user);
-			return of(new SetSuccessMsg("User Added Successfully"));
+			return of(new AddUserSuccess(user));
 		}),
 		catchError(err => of(new GetUsersError({ error: err.message })))
   );

@@ -69,8 +69,5 @@ export class EditProjectComponent implements OnInit {
 				[this.titleAsyncValidator]
 			]
 		});
-		this.selectLoggedInUser.profile
-			? this.validateForm.controls.profile.disable()
-			: this.validateForm.controls.profile.enable();
 	}
 }

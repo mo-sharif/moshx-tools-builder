@@ -31,9 +31,6 @@ export class routerEffects {
 		tap((route: string) => {
 			this._router.navigate([route]);
 		})
-		/* 		tap(() => {
-			of(new NavigateSuccess("Navigate to route success"));
-		}) */
 	);
 
 	constructor(

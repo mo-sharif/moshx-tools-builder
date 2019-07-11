@@ -58,6 +58,7 @@ export class EditProjectComponent implements OnInit {
 	}
 
 	saveFormData = formData => {
+		console.log(formData)
 		this._store.dispatch(
 			new SaveProject({
 				...formData,

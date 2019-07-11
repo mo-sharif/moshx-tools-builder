@@ -1,45 +1,24 @@
 <div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
 	<div nz-col nzSpan="24">
 		<h1 class="h1-header">
-			Welcome to AngularX 
+			Welcome to AngularX
 		</h1>
 	</div>
 </div>
-<div
-	nz-row
-	nzType="flex"
-	nzGutter="12"
-	nzJustify="space-around"
-	nzAlign="middle"
->
+<div nz-row nzType="flex" nzGutter="12" nzJustify="space-around" nzAlign="middle">
 	<div nz-col nzSpan="24">
 		<div nz-row nzGutter="12" [@listStagger]>
-			<div
-				style="margin-bottom: 10px"
-				nz-col
-				[nzSpan]="6"
-				[nzMd]="6"
-				[nzSm]="24"
-				[nzXs]="24"
-			>
+			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
 				<a [routerLink]="['new-project']">
-					<nz-card
-						[nzCover]="newProjectTemplate"
-						nzBordered="false"
-						class="card center"
-					>
-						<nz-empty
-							[nzNotFoundImage]="
+					<nz-card [nzCover]="newProjectTemplate" nzBordered="false" class="card center">
+						<nz-empty [nzNotFoundImage]="
 								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_1.png?alt=media&token=71c84225-232d-4ca2-b391-f60632506adc'
-							"
-							[nzNotFoundContent]="contentTpl"
-							[nzNotFoundFooter]="footerTpl"
-						>
+							" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
 							<ng-template #contentTpl>
 								<span>No Coding Required</span>
 							</ng-template>
 							<ng-template #footerTpl>
-								<button nz-button nzType="primary" [nzLoading]="isLoadingTwo">
+								<button nz-button nzType="primary" [nzLoading]="">
 									<i nz-icon nzType="play-circle"></i>New Project
 								</button>
 							</ng-template>
@@ -47,28 +26,13 @@
 					</nz-card>
 				</a>
 			</div>
-			<div
-				style="margin-bottom: 10px"
-				nz-col
-				[nzSpan]="6"
-				[nzMd]="6"
-				[nzSm]="24"
-				[nzXs]="24"
-				*ngIf="(selectLoggedInUser$ | async) as currentUser"
-			>
+			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24"
+				*ngIf="(selectLoggedInUser$ | async) as currentUser">
 				<a [routerLink]="['/', currentUser.profileSlug]" *ngIf="currentUser.profileSlug; else noProfile">
-					<nz-card
-						[nzCover]="newProjectTemplate"
-						nzBordered="false"
-						class="card center"
-					>
-						<nz-empty
-							[nzNotFoundImage]="
+					<nz-card [nzCover]="newProjectTemplate" nzBordered="false" class="card center">
+						<nz-empty [nzNotFoundImage]="
 								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_2.png?alt=media&token=e896ba8c-ef16-4f09-ac64-6b783bc8dd54'
-							"
-							[nzNotFoundContent]="contentTpl"
-							[nzNotFoundFooter]="footerTpl"
-						>
+							" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
 							<ng-template #contentTpl>
 								<span>{{ currentUser.profile }}</span>
 							</ng-template>
@@ -81,18 +45,12 @@
 					</nz-card>
 				</a>
 				<ng-template #noProfile>
-					<nz-card
-						nzBordered="false"
-						class="card center"
-					>
-						<nz-empty
-							[nzNotFoundContent]="contentTpl"
-							[nzNotFoundFooter]="footerTpl"
-						>
-							<ng-template #contentTpl>
+					<nz-card nzBordered="false" class="card center">
+						<nz-empty [nzNotFoundContent]="noProfileTpl" [nzNotFoundFooter]="noProfileFooterTpl">
+							<ng-template #noProfileTpl>
 								<span>No Profile</span>
 							</ng-template>
-							<ng-template #footerTpl>
+							<ng-template #noProfileFooterTpl>
 								<button nz-button nzType="primary" [disabled]="true">
 									<i nz-icon nzType="profile"></i>View Profile
 								</button>
@@ -100,6 +58,24 @@
 						</nz-empty>
 					</nz-card>
 				</ng-template>
+			</div>
+			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
+				<a [routerLink]="['users']">
+					<nz-card [nzCover]="newProjectTemplate" nzBordered="false" class="card center">
+						<nz-empty [nzNotFoundImage]="
+							'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_3.png?alt=media&token=5426000f-2adb-4167-84dc-9b127caa5c58'
+						" [nzNotFoundContent]="userTpl" [nzNotFoundFooter]="userFooterTpl">
+							<ng-template #userTpl>
+								<span>Folks On Here</span>
+							</ng-template>
+							<ng-template #userFooterTpl>
+								<button nz-button nzType="primary" [nzLoading]="">
+									<i nz-icon nzType="user"></i>Users
+								</button>
+							</ng-template>
+						</nz-empty>
+					</nz-card>
+				</a>
 			</div>
 		</div>
 	</div>

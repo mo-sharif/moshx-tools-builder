@@ -65,7 +65,8 @@ export class ProjectEffects {
   navigateToProfile$ = this._actions$.pipe(
     ofType<SaveProject>(EProjectActions.SaveProject),
     map(action => action.payload),
-    switchMap((project: IProject) => {
+	  switchMap((project: IProject) => {
+		console.log(project)
       let profileSlug = project.profile.replace(/ /g, ".");
       return of(new NavigateToRoute(profileSlug));
     })
