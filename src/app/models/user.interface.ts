@@ -2,10 +2,10 @@
 export interface IUser {
 	uid: string;
 	displayName: string;
+	email: string;
 	error?: string;
 	id?: number;
 	name?: string;
-	email?: string;
 	photoURL?: string;
 	city?: string;
 	job?: string;
@@ -14,5 +14,5 @@ export interface IUser {
 }
 
 export class User implements IUser {
-	constructor(public uid: string, public displayName: string, public photoURL?: string) {}
+	constructor(public uid: string, public displayName: string, public email: string, public photoURL?: string) {}
 }
