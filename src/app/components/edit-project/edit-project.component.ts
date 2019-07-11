@@ -21,7 +21,7 @@ export class EditProjectComponent implements OnInit {
 	formData: EventEmitter<any> = new EventEmitter();
 
 	@Input()
-	selectProfile: IUser;
+	selectLoggedInUser: IUser;
 
 	@Input()
 	userProjects: IProject[];
@@ -64,12 +64,12 @@ export class EditProjectComponent implements OnInit {
 		this.validateForm = this.fb.group({
 			title: ["", [Validators.required]],
 			profile: [
-				this.selectProfile.profile,
+				this.selectLoggedInUser.profile,
 				[Validators.required],
 				[this.titleAsyncValidator]
 			]
 		});
-		this.selectProfile.profile
+		this.selectLoggedInUser.profile
 			? this.validateForm.controls.profile.disable()
 			: this.validateForm.controls.profile.enable();
 	}

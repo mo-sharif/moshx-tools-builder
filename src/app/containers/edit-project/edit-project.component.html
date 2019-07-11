@@ -17,7 +17,7 @@
 			<app-edit-project
 				(formData)="saveFormData($event)"
 				[userProjects]="userProjects$ | async"
-				[selectProfile]="selectLoggedInUser$ | async"
+				[selectLoggedInUser]="selectLoggedInUser$ | async"
 			>
 			</app-edit-project>
 		</ng-template>

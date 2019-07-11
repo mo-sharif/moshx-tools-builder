@@ -55,7 +55,7 @@ export class AuthEffects {
 	  );
 	}),
 	catchError(err => {
-	  return [new AuthError({ error: err.message })];
+	  return of(new AuthError({ error: err.message }));
 	})
   );
 

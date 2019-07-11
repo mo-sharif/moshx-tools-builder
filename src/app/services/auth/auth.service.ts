@@ -32,7 +32,7 @@ export class AuthService {
 	 */
 	logout(): void {
 		this.afAuth.auth.signOut().then(() => {
-			this.router.navigate(["home/login"]);
+			this.router.navigate(["home"]);
 		});
 	}
 	// Returns true if user is logged in
@@ -168,7 +168,7 @@ export class AuthService {
 
 	signOut(): void {
 		this.afAuth.auth.signOut();
-		this.router.navigate(["/"]);
+		this.router.navigate(["/home"]);
 	}
 
 	//// Helpers ////
