@@ -6,8 +6,13 @@ export enum EAuthActions {
   Authenticated = "[Auth] Authenticated",
   NotAuthenticated = "[Auth] Not Authenticated",
 
-  GoogleLogin = "[Auth] Google login attempt",
-  GithubLogin = "[Auth] Github login attempt",
+  EmailLogin = "[Auth] Email Login Attempt",
+  GoogleLogin = "[Auth] Google Login Attempt",
+  GithubLogin = "[Auth] Github Login Attempt",
+  FacebookLogin = "[Auth] Facebook Login Attempt",
+  TwitterLogin = "[Auth] Twitter Login Attempt",
+  AnonymousLogin = "[Auth] Anonymous Login Attempt",
+
   Logout = "[Auth] Logout",
   LogoutSuccess = "[Auth] Logout Success",
   AuthError = "[Auth] Login error",
@@ -38,6 +43,18 @@ export class GoogleLogin implements Action {
 }
 export class GithubLogin implements Action {
   public readonly type = EAuthActions.GithubLogin;
+}
+export class FacebookLogin implements Action {
+  public readonly type = EAuthActions.FacebookLogin
+}
+export class TwitterLogin implements Action { 
+  public readonly type = EAuthActions.TwitterLogin
+}
+export class AnonymousLogin implements Action { 
+  public readonly type = EAuthActions.AnonymousLogin
+}
+export class EmailLogin implements Action { 
+  public readonly type = EAuthActions.EmailLogin
 }
 
 export class Logout implements Action {
@@ -79,6 +96,10 @@ export type AuthActions =
   | NotAuthenticated
   | GoogleLogin
   | GithubLogin
+  | FacebookLogin
+  | TwitterLogin
+  | AnonymousLogin
+  | EmailLogin
   | Logout
   | AuthError
   | UpdateUser

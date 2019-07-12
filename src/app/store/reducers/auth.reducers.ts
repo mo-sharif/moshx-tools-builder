@@ -46,6 +46,30 @@ export function authReducers(
 				loading: true
 			};
 		}
+		case EAuthActions.FacebookLogin: { 
+			return {
+				...state,
+				loading: true
+			}
+		}
+		case EAuthActions.TwitterLogin: { 
+			return {
+				...state,
+				loading: true
+			}
+		}
+		case EAuthActions.AnonymousLogin: { 
+			return {
+				...state,
+				loading: true
+			}
+		}
+		case EAuthActions.EmailLogin: { 
+			return { 
+				...state,
+				loading: true
+			}
+		}
 		case EAuthActions.Logout: {
 			return {
 				...state,
