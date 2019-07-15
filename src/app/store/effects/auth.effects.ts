@@ -107,7 +107,7 @@ export class AuthEffects {
   EmailLogin$ = this._actions$.pipe(
     ofType<EmailLogin>(EAuthActions.EmailLogin),
     switchMap(() => this.authService.emailLogin("EMAIL", "PASSWORD")),
-    map(crediential => of(new GetUserAuth())),
+    map(credential => of(new GetUserAuth())),
     catchError(err => of(new AuthError({ error: err.message })))
   );
   @Effect()

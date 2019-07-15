@@ -15,7 +15,7 @@ export class AuthService {
 	constructor(
 		private afAuth: AngularFireAuth,
 		private db: AngularFireDatabase,
-		private store: AngularFirestore,
+		private firestore: AngularFirestore,
 		public userStorageService: UserStorageService,
 		private router: Router
 	) {
@@ -99,7 +99,7 @@ export class AuthService {
 
 	facebookLogin() {
 		const provider = new firebase.auth.FacebookAuthProvider();
-		return this.socialSignIn(provider);
+		return this.facebookSignIn(provider);
 	}
 
 	twitterLogin() {
@@ -115,6 +115,18 @@ export class AuthService {
 			.then(credential => {
 				this.authState = credential.user;
 				this.updateUserData();
+				return this.authState;
+			})
+			.catch(error => console.log(error));
+	}
+	private facebookSignIn(provider) {
+		provider.addScope("email");
+		return this.afAuth.auth
+			.signInWithPopup(provider)
+			.then(credential => {
+				console.log(credential)
+				this.authState = credential.user;
+				this.updateFacebookUserData();
 				return this.authState;
 			})
 			.catch(error => console.log(error));
@@ -179,6 +191,22 @@ export class AuthService {
 		let path = `users/${this.currentUserId}`; // Endpoint on firebase
 		let data = {
 			email: this.authState.email,
+			name: this.authState.displayName
+		};
+
+		this.db
+			.object(path)
+			.update(data)
+			.catch(error => console.log(error));
+	}
+	private updateFacebookUserData(): void {
+		const generateEmail = `${this.firestore.createId()}mosh-media.web.app`
+		const userEmail = this.authState.email ? this.authState.email : generateEmail
+		// Writes user name and email to realtime db
+		// useful if your app displays information about users or for admin features
+		let path = `users/${this.currentUserId}`; // Endpoint on firebase
+		let data = {
+			email: userEmail,
 			name: this.authState.displayName
 		};
 

@@ -19,7 +19,8 @@ import {
   GetProjectSuccess,
   SaveProjectSuccess,
   GetProfileFromRouteSuccess,
-  GetProfileFromRoute
+  GetProfileFromRoute,
+  GetUserProjects
 } from "../actions/project.actions";
 import {
   SetSuccessMsg,
@@ -44,6 +45,7 @@ import {
   GetUserProfileSuccess,
   GetUserProfile
 } from "../actions/auth.actions";
+import { selectUserProjects } from "../selectors/project.selector";
 
 @Injectable()
 export class ProjectEffects {
@@ -103,8 +105,8 @@ export class ProjectEffects {
     })
   );
   @Effect()
-  /* 	getUserProjects$ = this._actions$.pipe(
-		ofType<Authenticated>(EAuthActions.Authenticated),
+  	getUserProjects$ = this._actions$.pipe(
+		ofType<GetUserProjects>(EAuthActions.Authenticated),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 		switchMap(([action, user]) => {
 			return this._projectService.getUserProjects(user).pipe(
@@ -117,7 +119,8 @@ export class ProjectEffects {
 				})
 			);
 		})
-	); */
+	);
+
   @Effect()
   updateUserProfile$ = this._actions$.pipe(
     ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),

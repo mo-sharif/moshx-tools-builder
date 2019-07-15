@@ -44,4 +44,4 @@ import { addComponentModule } from "src/app/directives/addComponent.module";
   ],
   // providers: [ProjectService]
 })
-export class EditProjectModule {}
+export class EditProjectModule { }

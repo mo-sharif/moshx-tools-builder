@@ -4,45 +4,51 @@ import { IConfig } from "../../../models/config.interface";
 import { IUser } from "src/app/models/user.interface";
 
 @Component({
-	selector: "app-header",
-	templateUrl: "./header.component.html",
-	styleUrls: ["./header.component.css"]
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
-	@Input()
+  @Input()
   configs: IConfig;
 
-	@Input()
+  @Input()
   loggedInUser: IUser;
 
-	@Output()
+  @Output()
   openDrawer: EventEmitter<any> = new EventEmitter();
 
-	@Output()
+  @Output()
   logout: EventEmitter<any> = new EventEmitter();
 
-	@Output()
-	googleLogin: EventEmitter<any> = new EventEmitter();
+  @Output()
+  googleLogin: EventEmitter<any> = new EventEmitter();
 
-	@Output()
-	githubLogin: EventEmitter<any> = new EventEmitter();
+  @Output()
+  githubLogin: EventEmitter<any> = new EventEmitter();
 
-	constructor() {}
+  @Output()
+  facebookLogin: EventEmitter<any> = new EventEmitter();
 
-	ngOnInit() {}
+  constructor() {}
 
-	openSideDrawer = () => {
-		this.openDrawer.emit();
-	};
+  ngOnInit() {}
 
-	googleLoginClick = () => {
-		this.googleLogin.emit();
+  openSideDrawer = () => {
+    this.openDrawer.emit();
   };
-	githubLoginClick = () => {
-		this.githubLogin.emit();
+
+  googleLoginClick = () => {
+    this.googleLogin.emit();
   };
-  
-	logoutClick = () => {
-		this.logout.emit();
-	};
+  githubLoginClick = () => {
+    this.githubLogin.emit();
+  };
+
+  facebookLoginClick = () => {
+    this.facebookLogin.emit();
+  };
+  logoutClick = () => {
+    this.logout.emit();
+  };
 }

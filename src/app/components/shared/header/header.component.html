@@ -22,13 +22,16 @@
 		</div>
 		<div nz-col nzSpan="8" style="text-align: right">
 			<p class="height-80">
-				<ng-template #profileTemplate>
+				<ng-template #accountTemplate>
 					<ng-container *ngIf="!loggedInUser.uid; else loggedOut">
 						<button  class="loginButtons" nz-button nzShape="circle" (click)="googleLoginClick()">
 							<i nz-icon nzType="google" nzTheme="outline"></i>
 						</button>
 						<button  class="loginButtons" nz-button nzShape="circle" (click)="githubLoginClick()">
 							<i nz-icon nzType="github" nzTheme="outline"></i>
+						</button>
+						<button  class="loginButtons" nz-button nzShape="circle" (click)="facebookLoginClick()">
+							<i nz-icon nzType="facebook" nzTheme="outline"></i>
 						</button>
 					</ng-container>
 					<ng-template #loggedOut>
@@ -44,8 +47,8 @@
 					routerLinkActive="active"
 					class="avatar-button"
 					nz-popover
-					nzTitle="Profile"
-					[nzContent]="profileTemplate"
+					nzTitle="Account"
+					[nzContent]="accountTemplate"
 					nzTrigger="hover"
 					nzPlacement="bottomRight"
 				>
