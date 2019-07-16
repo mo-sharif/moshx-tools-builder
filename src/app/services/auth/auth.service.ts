@@ -124,7 +124,6 @@ export class AuthService {
 		return this.afAuth.auth
 			.signInWithPopup(provider)
 			.then(credential => {
-				console.log(credential)
 				this.authState = credential.user;
 				this.updateFacebookUserData();
 				return this.authState;
@@ -200,7 +199,7 @@ export class AuthService {
 			.catch(error => console.log(error));
 	}
 	private updateFacebookUserData(): void {
-		const generateEmail = `${this.firestore.createId()}mosh-media.web.app`
+		const generateEmail = `${this.firestore.createId()}@mosh-media.web.app`
 		const userEmail = this.authState.email ? this.authState.email : generateEmail
 		// Writes user name and email to realtime db
 		// useful if your app displays information about users or for admin features
