@@ -6,7 +6,7 @@ import { UserStorageService } from "../user/user-storage.service";
 import * as firebase from "firebase/app";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 
 @Injectable()
 export class AuthService {
@@ -61,7 +61,7 @@ export class AuthService {
 
 	// Returns
 	get currentUserObservable(): Observable<User> {
-		return this.afAuth.authState;
+		return this.authenticated ? this.afAuth.authState : of(null);
 	}
 
 	// Returns current user UID
@@ -179,7 +179,6 @@ export class AuthService {
 
 	signOut(): void {
 		this.afAuth.auth.signOut();
-		this.router.navigate(["/home"]);
 	}
 
 	//// Helpers ////
