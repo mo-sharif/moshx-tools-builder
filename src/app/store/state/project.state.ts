@@ -25,6 +25,10 @@ export const initialProjectState: IProjectState = {
 		{
 			name: "Calendar",
 			type: "CalendarComponent"
+		},
+		{
+			name: "Posts",
+			type: "PostsComponent"
 		}
 	],
 	profile: null

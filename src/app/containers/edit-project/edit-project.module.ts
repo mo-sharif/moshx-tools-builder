@@ -16,7 +16,9 @@ import { NzTabsModule } from "ng-zorro-antd";
 // import { ProjectEffects } from "src/app/store/effects/project.effects";
 import { CalendarComponent } from "../../custom/ant-design/calendar/calendar.component";
 import { addComponentModule } from "src/app/directives/addComponent.module";
+import { PostsComponent } from "src/app/custom/posts/posts.component";
 // import { PostsComponent } from "../../custom/posts/posts.component";
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { addComponentModule } from "src/app/directives/addComponent.module";
     TableComponent,
     FormComponent,
     CalendarComponent,
+    PostsComponent
   ],
   imports: [
     addComponentModule,
@@ -35,12 +38,14 @@ import { addComponentModule } from "src/app/directives/addComponent.module";
     FormsModule,
     NzTabsModule,
     ReactiveFormsModule,
+    ScrollDispatchModule
     // EffectsModule.forFeature([ProjectEffects])
   ],
   entryComponents: [
     TableComponent,
     FormComponent,
-    CalendarComponent
+    CalendarComponent,
+    PostsComponent
   ],
   // providers: [ProjectService]
 })

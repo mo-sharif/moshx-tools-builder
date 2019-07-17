@@ -40,7 +40,7 @@ export class AuthEffects {
   @Effect()
   getUserAuth$ = this._actions$.pipe(
     ofType<GetUserAuth>(EAuthActions.GetUserAuth),
-    switchMap(() => this.authService.currentUserObservable),
+	switchMap(() => this.authService.currentUserObservable),
     switchMap(authData => {
       if (authData == null) {
         return of(new NotAuthenticated());

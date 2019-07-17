@@ -61,7 +61,7 @@ export class AuthService {
 
 	// Returns
 	get currentUserObservable(): Observable<User> {
-		return this.authenticated ? this.afAuth.authState : of(null);
+		return this.afAuth.authState;
 	}
 
 	// Returns current user UID

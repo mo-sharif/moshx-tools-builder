@@ -15,6 +15,7 @@ import { listStagger } from "../../animations/list-stagger.animation";
 import { CalendarComponent } from "../../custom/ant-design/calendar/calendar.component";
 import { selectLoggedInUserUID, selectLoggedInUser } from "../../store/selectors/auth.selectors";
 import { GetUserProfile } from "src/app/store/actions/auth.actions";
+import { PostsComponent } from "../../custom/posts/posts.component";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
@@ -35,7 +36,8 @@ export class EditProjectComponent implements OnInit {
 		Checkbox: CheckboxComponent,
 		Form: FormComponent,
 		Table: TableComponent,
-		Calendar: CalendarComponent
+		Calendar: CalendarComponent,
+		Posts: PostsComponent
 	};
 
 	constructor(
