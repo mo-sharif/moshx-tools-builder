@@ -104,7 +104,7 @@ export class ProjectEffects {
       );
     })
   );
-  @Effect()
+/*   @Effect()
   	getUserProjects$ = this._actions$.pipe(
 		ofType<GetUserProjects>(EAuthActions.Authenticated),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
@@ -119,7 +119,7 @@ export class ProjectEffects {
 				})
 			);
 		})
-	);
+	); */
 
   @Effect()
   updateUserProfile$ = this._actions$.pipe(
