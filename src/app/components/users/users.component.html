@@ -1,6 +1,7 @@
 <nz-table #basicTable *ngIf="users" [nzData]="users">
 	<thead>
 		<tr>
+			<th></th>
 			<th>Name</th>
 			<th>Profile</th>
 			<th>City</th>
@@ -9,7 +10,11 @@
 	</thead>
 	<tbody [@listStagger]="users.length">
 		<tr *ngFor="let user of basicTable.data"></tr>
-		<tr *ngFor="let user of basicTable.data" (click)="navigateToUser(user.name)">
+		<tr
+			*ngFor="let user of basicTable.data"
+			(click)="navigateToUser(user.name)"
+		>
+			<td><nz-avatar nzIcon="user" nzSrc="{{ user.photoURL }}"></nz-avatar></td>
 			<td>{{ user.displayName }}</td>
 			<td>{{ user.profile }}</td>
 			<td>{{ user.city }}</td>

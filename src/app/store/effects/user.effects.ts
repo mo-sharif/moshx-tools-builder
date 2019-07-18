@@ -7,7 +7,9 @@ import {
 	map,
 	withLatestFrom,
 	tap,
-	catchError
+	catchError,
+	take,
+	distinctUntilChanged
 } from "rxjs/operators";
 
 import { IAppState } from "../state/app.state";
@@ -60,7 +62,7 @@ export class UserEffects {
 		}),
 		catchError(err => of(new GetUsersError({ error: err.message })))
   );
-  
+
 	@Effect()
 	getUsers$ = this._actions$.pipe(
 		ofType<GetUsers>(EUserActions.GetUsers),
@@ -68,7 +70,6 @@ export class UserEffects {
 			return this._userService.getUserList().pipe(
 				switchMap((users: IUser[]) => [
 					new GetUsersSuccess(users),
-					new SetSuccessMsg("Users Loaded Successfully!"),
 					new SetLoading(false)
 				]),
 				catchError(err => of(new GetUsersError({ error: err.message })))

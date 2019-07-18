@@ -18,7 +18,7 @@
 								<span>No Coding Required</span>
 							</ng-template>
 							<ng-template #footerTpl>
-								<button nz-button nzType="primary" [nzLoading]="">
+								<button nz-button nzType="primary" [nzLoading]="currentUser">
 									<i nz-icon nzType="play-circle"></i>New Project
 								</button>
 							</ng-template>
@@ -69,7 +69,7 @@
 								<span>Folks On Here</span>
 							</ng-template>
 							<ng-template #userFooterTpl>
-								<button nz-button nzType="primary" [nzLoading]="">
+								<button nz-button nzType="primary" [nzLoading]="currentUser">
 									<i nz-icon nzType="user"></i>Users
 								</button>
 							</ng-template>
