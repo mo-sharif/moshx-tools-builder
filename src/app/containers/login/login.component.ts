@@ -5,7 +5,8 @@ import {
   GoogleLogin,
   Logout,
   GithubLogin,
-  FacebookLogin
+  FacebookLogin,
+  EmailLogin
 } from "./../../store/actions/auth.actions";
 import { IAppState } from "../../store/state/app.state";
 import { listStagger } from "../../animations/list-stagger.animation";
@@ -35,6 +36,11 @@ export class LoginComponent implements OnInit {
 
   facebookLogin() {
     this._store.dispatch(new FacebookLogin());
+  }
+
+  emailLogin(formData){
+    console.log(formData)
+    this._store.dispatch(new EmailLogin(''));
   }
   logout() {
     this._store.dispatch(new Logout());

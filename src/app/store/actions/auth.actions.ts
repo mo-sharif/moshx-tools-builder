@@ -55,6 +55,7 @@ export class AnonymousLogin implements Action {
 }
 export class EmailLogin implements Action { 
   public readonly type = EAuthActions.EmailLogin
+  constructor(public payload: any){}
 }
 
 export class Logout implements Action {

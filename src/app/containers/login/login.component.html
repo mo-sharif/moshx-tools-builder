@@ -9,7 +9,7 @@
 	<div nz-row>
 		<div nz-col nzXs="12" nzSm="12" nzMd="10" nzLg="12" nzXl="12">
 			<h1>Login In</h1>
-			<login-form></login-form>
+			<login-form (formData)="emailLogin($event)"></login-form>
 		</div>
 		<div nz-col nzXs="12" nzSm="12" nzMd="10" nzLg="12" nzXl="12">
 			<h1>Social Login In</h1>
