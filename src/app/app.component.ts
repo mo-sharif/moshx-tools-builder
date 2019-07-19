@@ -14,6 +14,7 @@ import { selectConfig } from "./store/selectors/config.selector";
 import { selectLoggedInUser } from "./store/selectors/auth.selectors";
 import { selectMessage } from "./store/selectors/message.selectors";
 import { userProjects } from "./store/selectors/project.selector";
+import { SetLoading } from "./store/actions/loading.actions";
 
 @Component({
 	selector: "app-root",

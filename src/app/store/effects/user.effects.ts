@@ -9,7 +9,9 @@ import {
 	tap,
 	catchError,
 	take,
-	distinctUntilChanged
+	distinctUntilChanged,
+	publishReplay,
+	refCount
 } from "rxjs/operators";
 
 import { IAppState } from "../state/app.state";
@@ -68,6 +70,8 @@ export class UserEffects {
 		ofType<GetUsers>(EUserActions.GetUsers),
 		switchMap(() => {
 			return this._userService.getUserList().pipe(
+				publishReplay(1),
+				refCount(),
 				switchMap((users: IUser[]) => [
 					new GetUsersSuccess(users),
 					new SetLoading(false)

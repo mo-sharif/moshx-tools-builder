@@ -1,4 +1,4 @@
-<nz-table #basicTable *ngIf="users" [nzData]="users">
+<nz-table #basicTable *ngIf="users" [nzData]="users" [@listStagger] >
 	<thead>
 		<tr>
 			<th></th>
@@ -8,29 +8,28 @@
 			<th>Action</th>
 		</tr>
 	</thead>
-	<tbody [@listStagger]="users.length">
-		<tr *ngFor="let user of basicTable.data"></tr>
+	<tbody >
+		<tr  *ngFor="let user of basicTable.data"></tr>
 		<tr
-			*ngFor="let user of basicTable.data"
-			(click)="navigateToUser(user.name)"
+			*ngFor="let user of basicTable.data" 
 		>
 			<td><nz-avatar nzIcon="user" nzSrc="{{ user.photoURL }}"></nz-avatar></td>
 			<td>{{ user.displayName }}</td>
-			<td>{{ user.profile }}</td>
+			<td><a routerLink="/{{user.profileSlug}}">{{ user.profile }}</a></td>
 			<td>{{ user.city }}</td>
 			<td>
-				<i
-					nz-icon
-					nzType="edit"
-					nzTheme="outline"
-					(click)="navigateToUser(user.id)"
-				></i>
+				<a (click)="navigateToUser(user.uid)">
+					<i
+						nz-icon
+						nzType="edit"
+						nzTheme="outline"
+					></i>
+				</a>
 				<nz-divider nzType="vertical"></nz-divider>
 				<i
 					nz-icon
 					nzType="more"
 					nzTheme="outline"
-					(click)="navigateToUser(user.id)"
 				></i>
 			</td>
 		</tr>

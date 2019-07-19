@@ -45,18 +45,20 @@
 					</nz-card>
 				</a>
 				<ng-template #noProfile>
-					<nz-card nzBordered="false" class="card center">
-						<nz-empty [nzNotFoundContent]="noProfileTpl" [nzNotFoundFooter]="noProfileFooterTpl">
-							<ng-template #noProfileTpl>
-								<span>No Profile</span>
-							</ng-template>
-							<ng-template #noProfileFooterTpl>
-								<button nz-button nzType="primary" [disabled]="true">
-									<i nz-icon nzType="profile"></i>View Profile
-								</button>
-							</ng-template>
-						</nz-empty>
-					</nz-card>
+					<a [routerLink]="['login']">
+						<nz-card nzBordered="false" class="card center">
+							<nz-empty [nzNotFoundContent]="noProfileTpl" [nzNotFoundFooter]="noProfileFooterTpl">
+								<ng-template #noProfileTpl>
+									<span>Get started</span>
+								</ng-template>
+								<ng-template #noProfileFooterTpl>
+									<button nz-button nzType="primary">
+										<i nz-icon nzType="login"></i>Login In
+									</button>
+								</ng-template>
+							</nz-empty>
+						</nz-card>
+					</a>
 				</ng-template>
 			</div>
 			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
