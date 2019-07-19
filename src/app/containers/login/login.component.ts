@@ -13,6 +13,7 @@ import { listStagger } from "../../animations/list-stagger.animation";
 
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
 import { Router } from "@angular/router";
+import { ILoginData } from "src/app/models/user.interface";
 
 @Component({
   templateUrl: "./login.component.html",
@@ -38,9 +39,9 @@ export class LoginComponent implements OnInit {
     this._store.dispatch(new FacebookLogin());
   }
 
-  emailLogin(formData){
+  emailLogin = (formData: ILoginData) => {
     console.log(formData)
-    this._store.dispatch(new EmailLogin(''));
+    this._store.dispatch(new EmailLogin(formData));
   }
   logout() {
     this._store.dispatch(new Logout());

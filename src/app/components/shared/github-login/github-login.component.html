@@ -1,9 +1,3 @@
-<button
-	nz-button
-	nzType="primary"
-	(click)="githubLogin()"
-  [class.is-loading]="user.loading"
-  *ngIf="!user.uid"
->
-<i nz-icon nzType="github"></i> Sign In with GitHub
+<button nz-button nzType="primary" (click)="githubLogin()">
+	<i nz-icon nzType="github"></i> Sign In with GitHub
 </button>

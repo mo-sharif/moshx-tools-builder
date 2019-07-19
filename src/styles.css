@@ -1,9 +1,30 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
 .side-menu .ant-menu-submenu-title {
   padding: 0px !important;
 }
 .h1-header {
   margin-bottom: 20px;
 }
-* {
-  font-family: "Montserrat", sans-serif;
+
+.card {
+	border-radius: 8px !important;
+	background: white;
+	box-shadow: 0px 0px 51px 0px rgba(0, 0, 0, 0.08),
+		0px 6px 18px 0px rgba(0, 0, 0, 0.05);
+	transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+		box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+	transform: translateY(0px);
+}
+.card:hover {
+	cursor: pointer;
+	box-shadow: 0px 0px 114px 0px rgba(0, 0, 0, 0.08),
+		0px 30px 25px 0px rgba(0, 0, 0, 0.05);
+	transform: translateY(-5px);
+	color: #1890ff;
+}
+.card:hover .project-name-input {
+	opacity: 1;
 }

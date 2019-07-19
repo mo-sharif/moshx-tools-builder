@@ -2,24 +2,24 @@
 	nz-form
 	[formGroup]="validateForm"
 	class="login-form"
-	(ngSubmit)="submitForm()"
+	(ngSubmit)="submitForm($event, validateForm.value)"
 >
 	<nz-form-item>
 		<nz-form-control>
 			<nz-input-group [nzPrefix]="prefixUser">
 				<input
-					type="text"
+					type="email"
 					nz-input
-					formControlName="userName"
-					placeholder="Username"
+					formControlName="email"
+					placeholder="Email"
 				/>
 			</nz-input-group>
 			<nz-form-explain
 				*ngIf="
-					validateForm.get('userName')?.dirty &&
-					validateForm.get('userName')?.errors
+					validateForm.get('email')?.dirty &&
+					validateForm.get('email')?.errors
 				"
-				>Please input your username!</nz-form-explain
+				>Please input your email!</nz-form-explain
 			>
 		</nz-form-control>
 	</nz-form-item>

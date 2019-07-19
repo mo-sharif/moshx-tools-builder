@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
-import { User, IUser } from "../../models/user.interface";
+import { User, IUser, ILoginData } from "../../models/user.interface";
 import { UserStorageService } from "../user/user-storage.service";
 import * as firebase from "firebase/app";
 import { AngularFireDatabase } from "@angular/fire/database";
@@ -155,7 +155,8 @@ export class AuthService {
 			.catch(error => console.log(error));
 	}
 
-	emailLogin(email: string, password: string) {
+	emailLogin(loginData: ILoginData) {
+		let { email, password } = loginData;
 		return this.afAuth.auth
 			.signInWithEmailAndPassword(email, password)
 			.then(user => {

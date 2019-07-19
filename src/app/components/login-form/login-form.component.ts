@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ILoginData } from "../../models/user.interface";
 
 @Component({
 	selector: "login-form",
@@ -13,22 +14,24 @@ export class LoginFormComponent implements OnInit {
 
 	validateForm: FormGroup;
 
-	submitForm(): void {
+	submitForm = ($event: any, value: ILoginData) => {
+		$event.preventDefault();
 		for (const i in this.validateForm.controls) {
 			this.validateForm.controls[i].markAsDirty();
 			this.validateForm.controls[i].updateValueAndValidity();
 		}
+		this.emitFormData(value);
 	}
 
 	constructor(private fb: FormBuilder) {}
 
-	emitFOrmData = value => {
+	emitFormData = value => {
 		this.formData.emit(value);
 	}
 	
 	ngOnInit(): void {
 		this.validateForm = this.fb.group({
-			userName: [null, [Validators.required]],
+			email: [null, [Validators.email, Validators.required]],
 			password: [null, [Validators.required]],
 			remember: [true]
 		});

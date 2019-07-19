@@ -12,6 +12,7 @@ import { NzInputModule } from 'ng-zorro-antd';
 import { GithubLoginComponent } from "src/app/components/shared/github-login/github-login.component";
 import { FacebookLoginComponent } from "src/app/components/shared/facebook-login/facebook-login.component";
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
 	declarations: [GoogleLoginComponent, GithubLoginComponent, LoginContainer, LoginFormComponent, FacebookLoginComponent],
@@ -23,6 +24,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 		NzButtonModule,
 		NzGridModule,
 		FormsModule,
+		NzCardModule,
 		ReactiveFormsModule
 	]
 })

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { IUser } from "../../models/user.interface";
+import { IUser, ILoginData } from "../../models/user.interface";
 
 export enum EAuthActions {
   GetUserAuth = "[Auth] Get User Auth State",
@@ -55,7 +55,7 @@ export class AnonymousLogin implements Action {
 }
 export class EmailLogin implements Action { 
   public readonly type = EAuthActions.EmailLogin
-  constructor(public payload: any){}
+  constructor(public payload: ILoginData){}
 }
 
 export class Logout implements Action {

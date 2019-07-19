@@ -28,7 +28,7 @@ import {
   AnonymousLogin,
   EmailLogin
 } from "../actions/auth.actions";
-import { User, IUser } from "../../models/user.interface";
+import { User, IUser, ILoginData } from "../../models/user.interface";
 import { UserService } from "src/app/services/user/user.service";
 import { AddUser, AddUserSuccess } from "../actions/user.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
@@ -106,7 +106,8 @@ export class AuthEffects {
   @Effect()
   EmailLogin$ = this._actions$.pipe(
     ofType<EmailLogin>(EAuthActions.EmailLogin),
-    switchMap(() => this.authService.emailLogin("EMAIL", "PASSWORD")),
+    map(action => action.payload),
+    switchMap((loginData: ILoginData) => this.authService.emailLogin(loginData)),
     map(credential => of(new GetUserAuth())),
     catchError(err => of(new AuthError({ error: err.message })))
   );

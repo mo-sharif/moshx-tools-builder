@@ -1,41 +1,43 @@
-<div *ngIf="user$ | async as user" [@listStagger]="user.length">
-	<div nz-row>
+<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle" [nzGutter]="12">
+	<div nz-col nzSpan="24">
+		<h1 class="h1-header">
+			Welcome to AngularX
+		</h1>
+	</div>
+</div>
+<div *ngIf="user$ | async; let user;" [@listStagger]>
+	<div nz-row [nzGutter]="12">
 		<div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
 			<button nz-button nzType="primary" *ngIf="user.uid" (click)="logout()">
 				Logout
 			</button>
 		</div>
 	</div>
-	<div nz-row>
-		<div nz-col nzXs="12" nzSm="12" nzMd="10" nzLg="12" nzXl="12">
-			<h1>Login In</h1>
-			<login-form (formData)="emailLogin($event)"></login-form>
+</div>
+<div *ngIf="!(user$ | async).uid">
+	<div nz-row [nzGutter]="12">
+		<div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+			<nz-card class="card" [nzBordered]="false" [nzTitle]="'Login'">
+				<login-form (formData)="emailLogin($event)"></login-form>
+			</nz-card>
 		</div>
-		<div nz-col nzXs="12" nzSm="12" nzMd="10" nzLg="12" nzXl="12">
-			<h1>Social Login In</h1>
-			<ul>
-				<li>
-					<google-login
-						[user]="user"
-						(logoutEvent)="logout()"
-						(googleLoginEvent)="googleLogin()"
-					></google-login>
-				</li>
-				<li>
-					<github-login
-						[user]="user"
-						(logoutEvent)="logout()"
-						(githubLoginEvent)="githubLogin()"
-					></github-login>
-				</li>
-				<li>
-					<facebook-login
-						[user]="user"
-						(logoutEvent)="logout()"
-						(facebookLoginEvent)="facebookLogin()"
-					></facebook-login>
-				</li>
-			</ul>
+		<div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+			<nz-card class="card" [nzBordered]="false" [nzTitle]="'Social Login In'">
+				<ul>
+					<li>
+						<google-login (logoutEvent)="logout()" (googleLoginEvent)="googleLogin()">
+						</google-login>
+					</li>
+					<li>
+						<github-login (logoutEvent)="logout()" (githubLoginEvent)="githubLogin()">
+						</github-login>
+					</li>
+					<li>
+						<facebook-login (logoutEvent)="logout()" (facebookLoginEvent)="facebookLogin()">
+						</facebook-login>
+					</li>
+				</ul>
+			</nz-card>
 		</div>
 	</div>
 </div>
