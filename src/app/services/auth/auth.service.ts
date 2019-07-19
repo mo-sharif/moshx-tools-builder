@@ -27,14 +27,7 @@ export class AuthService {
 	getAuthState(): Observable<User> {
 		return this.afAuth.authState;
 	}
-	/*
-	 * logout
-	 */
-	logout(): void {
-		this.afAuth.auth.signOut().then(() => {
-			this.router.navigate(["home"]);
-		});
-	}
+
 	// Returns true if user is logged in
 	get userFromStorage(): User {
 		return this.userStorageService.getUserLoggedIn();
@@ -156,14 +149,14 @@ export class AuthService {
 	}
 
 	emailLogin(loginData: ILoginData) {
-		let { email, password } = loginData;
+		const { email, password } = loginData;
 		return this.afAuth.auth
 			.signInWithEmailAndPassword(email, password)
 			.then(user => {
 				this.authState = user;
 				this.updateUserData();
 			})
-			.catch(error => console.log(error));
+			.catch(error => {return error});
 	}
 
 	// Sends email allowing user to reset password
@@ -178,8 +171,10 @@ export class AuthService {
 
 	//// Sign Out ////
 
-	signOut(): void {
-		this.afAuth.auth.signOut();
+	logout(): void {
+		this.afAuth.auth.signOut().then(() => {
+			this.router.navigate(["home"]);
+		}).catch(error => console.log(error));
 	}
 
 	//// Helpers ////

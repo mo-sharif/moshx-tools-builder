@@ -29,9 +29,9 @@ const routes: Routes = [
 		data: { breadcrumb: "Posts" }
 	},
 	{
-		path: "home/login",
-		loadChildren: "./containers/login/login.module#LoginModule",
-		data: { breadcrumb: "Login" }
+		path: "home/account",
+		loadChildren: "./containers/account/account.module#AccountModule",
+		data: { breadcrumb: "Account" }
 	},
 	{
 		path: "register",

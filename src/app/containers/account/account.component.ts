@@ -7,7 +7,7 @@ import {
   GithubLogin,
   FacebookLogin,
   EmailLogin
-} from "./../../store/actions/auth.actions";
+} from "../../store/actions/auth.actions";
 import { IAppState } from "../../store/state/app.state";
 import { listStagger } from "../../animations/list-stagger.animation";
 
@@ -16,11 +16,11 @@ import { Router } from "@angular/router";
 import { ILoginData } from "src/app/models/user.interface";
 
 @Component({
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+  templateUrl: "./account.component.html",
+  styleUrls: ["./account.component.css"],
   animations: [listStagger]
 })
-export class LoginComponent implements OnInit {
+export class AccountComponent implements OnInit {
   user$ = this._store.pipe(select(selectLoggedInUser));
 
   constructor(private _store: Store<IAppState>, private _route: Router) {}
@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
   }
 
   emailLogin = (formData: ILoginData) => {
-    console.log(formData)
     this._store.dispatch(new EmailLogin(formData));
   }
   logout() {

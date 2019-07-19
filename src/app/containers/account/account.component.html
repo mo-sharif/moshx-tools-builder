@@ -17,8 +17,15 @@
 <div *ngIf="!(user$ | async).uid">
 	<div nz-row [nzGutter]="12">
 		<div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
-			<nz-card class="card" [nzBordered]="false" [nzTitle]="'Login'">
-				<login-form (formData)="emailLogin($event)"></login-form>
+			<nz-card class="card" [nzBordered]="false">
+				<nz-tabset>
+					<nz-tab nzTitle="Login">
+						<login-form (formData)="emailLogin($event)"></login-form>
+					</nz-tab>
+					<nz-tab nzTitle="Register">
+						<app-register></app-register>
+					</nz-tab>
+				</nz-tabset>
 			</nz-card>
 		</div>
 		<div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
