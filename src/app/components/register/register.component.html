@@ -39,35 +39,6 @@
         </nz-form-explain>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="displayName" nzRequired>
-        <span>
-          Full Name
-          <i
-            nz-icon
-            nz-tooltip
-            nzTitle="What do you want other to call you"
-            type="question-circle"
-            theme="outline"
-          ></i>
-        </span>
-      </nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input nz-input id="displayName" formControlName="displayName" />
-        <nz-form-explain *ngIf="validateForm.get('displayName')?.dirty && validateForm.get('displayName')?.errors"
-          >Please input your name!</nz-form-explain
-        >
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="profile" nzRequired>Profile Name</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24">
-        <input nz-input id="profile" formControlName="profile" placeholder="My Awesomeness" />
-        <nz-form-explain *ngIf="validateForm.get('profile')?.dirty && validateForm.get('profile')?.errors"
-          >Please input your profile name!</nz-form-explain
-        >
-      </nz-form-control>
-    </nz-form-item>
     <nz-form-item nz-row style="margin-bottom:8px;">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
         <button nz-button nzType="primary">Register</button>

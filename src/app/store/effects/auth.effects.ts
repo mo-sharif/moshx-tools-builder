@@ -2,7 +2,7 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Store, select } from "@ngrx/store";
-import { of } from "rxjs";
+import { of, from } from "rxjs";
 import {
   switchMap,
   map,
@@ -26,9 +26,16 @@ import {
   FacebookLogin,
   TwitterLogin,
   AnonymousLogin,
-  EmailLogin
+  EmailLogin,
+  EmailSignUp,
+  EmailSignUpSuccess
 } from "../actions/auth.actions";
-import { User, IUser, ILoginData } from "../../models/user.interface";
+import {
+  User,
+  IUser,
+  ILoginData,
+  IEmailSignUpData
+} from "../../models/user.interface";
 import { UserService } from "src/app/services/user/user.service";
 import { AddUser, AddUserSuccess } from "../actions/user.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
@@ -40,7 +47,7 @@ export class AuthEffects {
   @Effect()
   getUserAuth$ = this._actions$.pipe(
     ofType<GetUserAuth>(EAuthActions.GetUserAuth),
-	switchMap(() => this.authService.currentUserObservable),
+    switchMap(() => this.authService.currentUserObservable),
     switchMap(authData => {
       if (authData == null) {
         return of(new NotAuthenticated());
@@ -104,13 +111,28 @@ export class AuthEffects {
   );
 
   @Effect()
-  EmailLogin$ = this._actions$.pipe(
+  emailLogin$ = this._actions$.pipe(
     ofType<EmailLogin>(EAuthActions.EmailLogin),
     map(action => action.payload),
-    switchMap((loginData: ILoginData) => this.authService.emailLogin(loginData)),
+    switchMap((loginData: ILoginData) =>
+      this.authService.emailLogin(loginData)
+    ),
     map(credential => of(new GetUserAuth())),
     catchError(err => of(new AuthError({ error: err.message })))
   );
+
+  @Effect()
+  emailSignUp$ = this._actions$.pipe(
+    ofType<EmailSignUp>(EAuthActions.EmailSignUp),
+    map(action => action.payload),
+    map((emailSignUpData: IEmailSignUpData) => {
+      from(this.authService.emailSignUp(emailSignUpData)).pipe(
+        switchMap((credential: IUser) => of(new EmailSignUpSuccess(credential)))
+      );
+    }),
+    switchMap(credential => of(new GetUserAuth()))
+  );
+
   @Effect()
   logout$ = this._actions$.pipe(
     ofType<Logout>(EAuthActions.Logout),

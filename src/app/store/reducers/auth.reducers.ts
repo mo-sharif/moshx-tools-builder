@@ -64,6 +64,18 @@ export function authReducers(
 				loading: true
 			}
 		}
+		case EAuthActions.EmailSignUp: { 
+			return {
+				...state,
+				loading: true
+			}
+		}
+		case EAuthActions.EmailSignUpSuccess: { 
+			return {
+				...state,
+				loading: false
+			}
+		}
 		case EAuthActions.EmailLogin: { 
 			return { 
 				...state,

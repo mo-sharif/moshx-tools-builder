@@ -23,7 +23,7 @@
 						<login-form (formData)="emailLogin($event)"></login-form>
 					</nz-tab>
 					<nz-tab nzTitle="Register">
-						<app-register></app-register>
+						<app-register (formData)="register($event)"></app-register>
 					</nz-tab>
 				</nz-tabset>
 			</nz-card>

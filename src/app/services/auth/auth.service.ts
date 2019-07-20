@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
-import { User, IUser, ILoginData } from "../../models/user.interface";
+import { User, IUser, ILoginData, IEmailSignUpData } from "../../models/user.interface";
 import { UserStorageService } from "../user/user-storage.service";
 import * as firebase from "firebase/app";
 import { AngularFireDatabase } from "@angular/fire/database";
@@ -10,7 +10,7 @@ import { Observable, of } from "rxjs";
 
 @Injectable()
 export class AuthService {
-	authState: User | any = null;
+	authState: User = null;
 	user: User;
 	constructor(
 		private afAuth: AngularFireAuth,
@@ -130,7 +130,7 @@ export class AuthService {
 		return this.afAuth.auth
 			.signInAnonymously()
 			.then(user => {
-				this.authState = user;
+				// this.authState = user;
 				this.updateUserData();
 			})
 			.catch(error => console.log(error));
@@ -138,12 +138,14 @@ export class AuthService {
 
 	//// Email/Password Auth ////
 
-	emailSignUp(email: string, password: string) {
+	emailSignUp(emailSignUpData: IEmailSignUpData) {
+		const { email, password } = emailSignUpData
 		return this.afAuth.auth
 			.createUserWithEmailAndPassword(email, password)
-			.then(user => {
-				this.authState = user;
+			.then(credential => {
+				this.authState = credential.user;
 				this.updateUserData();
+				return this.authState;
 			})
 			.catch(error => console.log(error));
 	}
@@ -152,8 +154,8 @@ export class AuthService {
 		const { email, password } = loginData;
 		return this.afAuth.auth
 			.signInWithEmailAndPassword(email, password)
-			.then(user => {
-				this.authState = user;
+			.then(credential => {
+				this.authState = credential.user;
 				this.updateUserData();
 			})
 			.catch(error => {return error});

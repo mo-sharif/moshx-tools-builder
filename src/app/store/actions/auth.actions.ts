@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { IUser, ILoginData } from "../../models/user.interface";
+import { IUser, ILoginData, IEmailSignUpData } from "../../models/user.interface";
 
 export enum EAuthActions {
   GetUserAuth = "[Auth] Get User Auth State",
@@ -12,6 +12,9 @@ export enum EAuthActions {
   FacebookLogin = "[Auth] Facebook Login Attempt",
   TwitterLogin = "[Auth] Twitter Login Attempt",
   AnonymousLogin = "[Auth] Anonymous Login Attempt",
+
+  EmailSignUp = "[Auth] New User Registrations",
+  EmailSignUpSuccess = "[Auth] New User Registrations Success",
 
   Logout = "[Auth] Logout",
   LogoutSuccess = "[Auth] Logout Success",
@@ -56,6 +59,15 @@ export class AnonymousLogin implements Action {
 export class EmailLogin implements Action { 
   public readonly type = EAuthActions.EmailLogin
   constructor(public payload: ILoginData){}
+}
+export class EmailSignUp implements Action { 
+  public readonly type = EAuthActions.EmailSignUp
+  constructor(public payload: IEmailSignUpData){}
+}
+
+export class EmailSignUpSuccess implements Action { 
+  public readonly type = EAuthActions.EmailSignUpSuccess
+  constructor(public payload: IUser){}
 }
 
 export class Logout implements Action {
@@ -107,4 +119,6 @@ export type AuthActions =
   | SaveUserProfile
 	| GetUserProfile
   | GetUserProfileSuccess
-  | LogoutSuccess;
+  | LogoutSuccess
+  | EmailSignUp
+  | EmailSignUpSuccess;
