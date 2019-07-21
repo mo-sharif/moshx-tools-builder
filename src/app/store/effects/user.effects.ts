@@ -24,8 +24,8 @@ import {
 	GetUsersError,
 	AddUser,
 	AddUserSuccess,
-	UpdateUserProfile,
-	UpdateUserProfileSuccess
+	UpdateUser,
+	UpdateUserSuccess
 } from "../actions/user.actions";
 import { UserService } from "../../services/user/user.service";
 import { IUser } from "../../models/user.interface";
@@ -61,6 +61,17 @@ export class UserEffects {
 		switchMap((user: IUser) => {
 			this._userService.addUser(user);
 			return of(new AddUserSuccess(user));
+		}),
+		catchError(err => of(new GetUsersError({ error: err.message })))
+  );
+	
+  @Effect()
+	updateUser$ = this._actions$.pipe(
+		ofType<UpdateUser>(EUserActions.UpdateUser),
+		map(action => action.payload),
+		switchMap((user: IUser) => {
+			this._userService.addUser(user);
+			return of(new UpdateUserSuccess(user));
 		}),
 		catchError(err => of(new GetUsersError({ error: err.message })))
   );

@@ -23,12 +23,18 @@ export class UserService {
 		return this.firestore
 			.collection<IUser>(`/users/`)
 			.doc(user.uid)
+			.set({ ...user });
+	}
+	updateUser(user: IUser) {
+		return this.firestore
+			.collection<IUser>(`/users/`)
+			.doc(user.uid)
 			.update({ ...user });
 	}
-	updateUser(project: IProject) {
+	updateProjectName(project: IProject) {
 		return this.firestore
 			.collection<IUser>(`/users/`)
 			.doc(project.user)
-			.set({ profile: project.profile });
+			.update({ profile: project.profile });
 	}
 }

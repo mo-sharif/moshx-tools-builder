@@ -25,5 +25,5 @@ export interface IEmailSignUpData {
 	profile: string,
 }
 export class User implements IUser {
-	constructor(public uid: string, public displayName: string, public email: string, public photoURL?: string, public isAnonymous?: boolean, public profile?: string) {}
+	constructor(public uid: string, public displayName: string, public email: string, public photoURL?: string, public isAnonymous?: boolean) {}
 }

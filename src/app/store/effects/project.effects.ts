@@ -126,7 +126,7 @@ export class ProjectEffects {
     ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
     map(action => action.payload),
     switchMap((project: IProject) => {
-      this._userService.updateUser(project);
+      this._userService.updateProjectName(project);
       let profileRoute = project.profile.replace(" ", ".");
       return [
         new UpdateUserProfileSuccess(project.user),

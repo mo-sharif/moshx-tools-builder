@@ -157,6 +157,7 @@ export class AuthService {
 			.then(credential => {
 				this.authState = credential.user;
 				this.updateUserData();
+				return this.authState;
 			})
 			.catch(error => {return error});
 	}

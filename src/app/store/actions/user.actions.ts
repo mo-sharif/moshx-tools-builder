@@ -10,6 +10,8 @@ export enum EUserActions {
   GetUsersError = "[User] Get Users Error",
   AddUser = "[User] Add User",
   AddUserSuccess = "[User] Add User Success",
+  UpdateUser = "[User] Update User",
+  UpdateUserSuccess = "[User] Update User Success",
   UpdateUserProfile = "[User] Update User Profile Name",
   UpdateUserProfileSuccess = "[User] Update Profile Name Success"
 }
@@ -48,6 +50,15 @@ export class AddUserSuccess implements Action {
   constructor(public payload: IUser) {}
 }
 
+export class UpdateUser implements Action {
+  public readonly type = EUserActions.UpdateUser;
+  constructor(public payload: IUser) {}
+}
+export class UpdateUserSuccess implements Action {
+  public readonly type = EUserActions.UpdateUserSuccess;
+  constructor(public payload: IUser) {}
+}
+
 export class UpdateUserProfile implements Action {
   public readonly type = EUserActions.UpdateUserProfile;
   constructor(public payload?: IUser['profile']) {}
@@ -66,5 +77,7 @@ export type UserActions =
   | GetUsersError
   | AddUser
   | AddUserSuccess
+  | UpdateUser
+  | UpdateUserSuccess
   | UpdateUserProfile
   | UpdateUserProfileSuccess;

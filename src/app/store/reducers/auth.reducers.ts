@@ -94,12 +94,6 @@ export function authReducers(
 				loading: false
 			};
 		}
-		case EAuthActions.UpdateUser: {
-			return {
-				...state,
-				currentUser: action.payload
-			};
-		}
 		case EAuthActions.SaveUserProfile: {
 			return {
 				...state,

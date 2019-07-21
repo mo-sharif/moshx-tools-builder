@@ -14,7 +14,7 @@
 		</div>
 	</div>
 </div>
-<div *ngIf="!(user$ | async).uid">
+<div *ngIf="!(user$ | async)?.uid">
 	<div nz-row [nzGutter]="12">
 		<div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
 			<nz-card class="card" [nzBordered]="false">
