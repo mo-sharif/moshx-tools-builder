@@ -152,14 +152,14 @@ export class AuthService {
 
 	emailLogin(loginData: ILoginData) {
 		const { email, password } = loginData;
-		return this.afAuth.auth
+		 return this.afAuth.auth
 			.signInWithEmailAndPassword(email, password)
 			.then(credential => {
 				this.authState = credential.user;
 				this.updateUserData();
-				return this.authState;
+				// return this.authState
 			})
-			.catch(error => {return error});
+			.catch(error => { return error});
 	}
 
 	// Sends email allowing user to reset password

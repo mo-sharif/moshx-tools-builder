@@ -115,8 +115,18 @@ export class AuthEffects {
 		ofType<EmailLogin>(EAuthActions.EmailLogin),
 		map(action => action.payload),
 		switchMap((loginData: ILoginData) =>
+			/*  this.authService.emailLogin(loginData).then(
+      (credential: IUser) => of(new GetUserAuth())
+    ).catch(
+      (err) => of(new AuthError({ error: err.message }))
+    )) */
 			from(this.authService.emailLogin(loginData)).pipe(
-				switchMap((credential: IUser) => of(new GetUserAuth())),
+				map((credential: any) => {
+          console.log(credential.message)
+					credential.message
+						? new AuthError({ error: credential.message })
+						: new GetUserAuth();
+				}),
 				catchError(err => of(new AuthError({ error: err.message })))
 			)
 		)
