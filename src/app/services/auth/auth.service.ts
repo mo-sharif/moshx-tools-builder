@@ -176,7 +176,7 @@ export class AuthService {
 
 	logout(): void {
 		this.afAuth.auth.signOut().then(() => {
-			this.router.navigate(["home"]);
+			this.navigateToPath("home")
 		}).catch(error => console.log(error));
 	}
 
@@ -213,6 +213,9 @@ export class AuthService {
 			.catch(error => console.log(error));
 	}
 
+	navigateToPath(path) {
+		this.router.navigate([path]);
+	}
 	/*   public getItemsList(): Observable<any> {
 	 return this.store.collection('/users').snapshotChanges()
 		return new Promise<any>((resolve, reject) => {
