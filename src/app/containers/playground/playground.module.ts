@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { PlaygroundRoutingModule } from "./playground-routing.module";
 import { PlaygroundComponent } from "./playground.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
 import { CarouselComponent } from "src/app/custom/ant-design/carousel/carousel.component";
@@ -27,6 +27,7 @@ import { addComponentModule } from "src/app/directives/addComponent.module";
 		NgZorroAntdModule,
 		DragDropModule,
 		CommonModule,
+		ReactiveFormsModule,
 		PlaygroundRoutingModule
 	],
 	entryComponents: [
