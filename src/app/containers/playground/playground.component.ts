@@ -1,5 +1,17 @@
-import { AfterContentInit, Component, Input, Type, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+	AfterContentInit,
+	Component,
+	Input,
+	Type,
+	OnInit
+} from "@angular/core";
+import {
+	AbstractControl,
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators
+} from "@angular/forms";
 
 import {
 	CdkDragDrop,
@@ -16,7 +28,12 @@ export interface Comp {
 	label: string;
 	component: Type<any>;
 }
-
+export interface Item {
+	id: number;
+	controlInstance: string;
+	label: string;
+	component: Type<any>;
+}
 @Component({
 	selector: "app-playground",
 	templateUrl: "./playground.component.html",
@@ -26,52 +43,57 @@ export class PlaygroundComponent implements AfterContentInit, OnInit {
 	@Input() data: any;
 
 	validateForm: FormGroup;
-  	listOfControl: Array<{ id: number; controlInstance: string }> = [];
+	// controls: Array<{ id: number; controlInstance: string }> = [];
 
 	ngOnInit(): void {
-	this.validateForm = this.fb.group({});
-	this.addField();
+		this.validateForm = this.fb.group({});
+		this.addField();
 	}
 
 	addField(e?: MouseEvent): void {
 		if (e) {
-		  e.preventDefault();
+			e.preventDefault();
 		}
-		const id = this.listOfControl.length > 0 ? this.listOfControl[this.listOfControl.length - 1].id + 1 : 0;
-	
+		const id =
+			this.controls.length > 0
+				? this.controls[this.controls.length - 1].id + 1
+				: 0;
+
 		const control = {
-		  id,
-		  controlInstance: `passenger${id}`
+			id,
+			controlInstance: `test${id}`,
+			label: `checkbox${id}`,
+			component: CheckboxComponent
 		};
-		const index = this.listOfControl.push(control);
-		console.log(this.listOfControl[this.listOfControl.length - 1]);
+		const index = this.controls.push(control);
+		console.log(this.controls[this.controls.length - 1]);
 		this.validateForm.addControl(
-		  this.listOfControl[index - 1].controlInstance,
-		  new FormControl(null, Validators.required)
+			this.controls[index - 1].controlInstance,
+			new FormControl(null, Validators.required)
 		);
-	  }
-	
-	  removeField(i: { id: number; controlInstance: string }, e: MouseEvent): void {
+	}
+
+	removeField(i: Item, e: MouseEvent): void {
 		e.preventDefault();
-		if (this.listOfControl.length > 1) {
-		  const index = this.listOfControl.indexOf(i);
-		  this.listOfControl.splice(index, 1);
-		  console.log(this.listOfControl);
-		  this.validateForm.removeControl(i.controlInstance);
+		if (this.controls.length > 1) {
+			const index = this.controls.indexOf(i);
+			this.controls.splice(index, 1);
+			console.log(this.controls);
+			this.validateForm.removeControl(i.controlInstance);
 		}
-	  }
-	
-	  getFormControl(name: string): AbstractControl {
+	}
+
+	getFormControl(name: string): AbstractControl {
 		return this.validateForm.controls[name];
-	  }
-	
-	  submitForm(): void {
+	}
+
+	submitForm(): void {
 		for (const i in this.validateForm.controls) {
-		  this.validateForm.controls[i].markAsDirty();
-		  this.validateForm.controls[i].updateValueAndValidity();
+			this.validateForm.controls[i].markAsDirty();
+			this.validateForm.controls[i].updateValueAndValidity();
 		}
 		console.log(this.validateForm.value);
-	  }
+	}
 
 	components: Comp[] = [
 		{
@@ -94,8 +116,8 @@ export class PlaygroundComponent implements AfterContentInit, OnInit {
 			label: "Button",
 			component: ButtonComponent
 		}
-  ];
-  
+	];
+
 	componentsRendered: Comp[] = [
 		{
 			label: "Checkbox",
@@ -118,6 +140,7 @@ export class PlaygroundComponent implements AfterContentInit, OnInit {
 			component: ButtonComponent
 		}
 	];
+	controls: Array<Item> = [];
 
 	constructor(private fb: FormBuilder) {}
 

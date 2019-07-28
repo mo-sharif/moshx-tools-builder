@@ -53,7 +53,7 @@
 .placeholder {
   border-radius: 4px;
   background: rgb(238, 238, 238);
-  height: 63px;
+  height: 74px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 

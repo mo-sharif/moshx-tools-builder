@@ -1,8 +1,14 @@
 <div class="example-container">
-	<h2>Components</h2>
+	<h2>Move me <i nz-icon nzType="drag" nzTheme="outline"></i></h2>
 
-	<div cdkDropList #componentsList="cdkDropList" [cdkDropListData]="components"
-		[cdkDropListConnectedTo]="[componentsRenderedList]" class="list" (cdkDropListDropped)="drop($event)">
+	<div
+		cdkDropList
+		#componentsList="cdkDropList"
+		[cdkDropListData]="components"
+		[cdkDropListConnectedTo]="[componentsRenderedList]"
+		class="list"
+		(cdkDropListDropped)="drop($event)"
+	>
 		<div class="box" *ngFor="let component of components" cdkDrag>
 			{{ component.label }}
 			<ng-container add-comp [comp]="component.component"></ng-container>
@@ -12,10 +18,16 @@
 </div>
 
 <div class="example-container">
-	<h2>Rendered</h2>
+	<h2>My List <i nz-icon nzType="code" nzTheme="outline"></i></h2>
 
-	<div cdkDropList #componentsRenderedList="cdkDropList" [cdkDropListData]="componentsRendered"
-		[cdkDropListConnectedTo]="[componentsList]" class="list" (cdkDropListDropped)="drop($event)">
+	<div
+		cdkDropList
+		#componentsRenderedList="cdkDropList"
+		[cdkDropListData]="componentsRendered"
+		[cdkDropListConnectedTo]="[componentsList]"
+		class="list"
+		(cdkDropListDropped)="drop($event)"
+	>
 		<div class="box" *ngFor="let component of componentsRendered" cdkDrag>
 			{{ component.label }}
 			<ng-container add-comp [comp]="component.component"></ng-container>
@@ -23,38 +35,76 @@
 		</div>
 	</div>
 </div>
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-	<nz-form-item *ngFor="let control of listOfControl; let i = index">
-	  <nz-form-label [nzXs]="24" [nzSm]="4" *ngIf="i == 0" [nzFor]="control.controlInstance"
-		>Passengers
-	  </nz-form-label>
-	  <nz-form-control
-		[nzXs]="24"
-		[nzSm]="20"
-		[nzOffset]="i == 0 ? 0 : 4"
-		nzErrorTip="Please input passenger's name or delete this field."
-	  >
-		<input
-		  class="passenger-input"
-		  nz-input
-		  placeholder="placeholder"
-		  [attr.id]="control.id"
-		  [formControlName]="control.controlInstance"
-		/>
-		<i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
-	  </nz-form-control>
-	</nz-form-item>
-	<nz-form-item>
-	  <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
-		<button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
-		  <i nz-icon nzType="plus"></i>
-		  Add field
-		</button>
-	  </nz-form-control>
-	</nz-form-item>
-	<nz-form-item>
-	  <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
-		<button nz-button nzType="primary">Submit</button>
-	  </nz-form-control>
-	</nz-form-item>
-  </form>
+<div class="example-container">
+	<h2>Dynamic List <i nz-icon nzType="experiment" nzTheme="outline"></i></h2>
+	<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+		<div
+			cdkDropList
+			#controlsList="cdkDropList"
+			[cdkDropListData]="controls"
+			[cdkDropListConnectedTo]="[controlsList]"
+			class="list"
+			(cdkDropListDropped)="drop($event)"
+		>
+			<nz-form-item
+				class="box"
+				*ngFor="let control of controls; let i = index"
+				cdkDrag
+			>
+				<ng-container add-comp [comp]="control.component"></ng-container>
+				<div class="placeholder" *cdkDragPlaceholder></div>
+				<nz-form-label
+					[nzXs]="24"
+					[nzSm]="4"
+					*ngIf="i == 0"
+					[nzFor]="control.controlInstance"
+					>{{ control.label }}
+				</nz-form-label>
+				<nz-form-control
+					[nzXs]="24"
+					[nzSm]="20"
+					[nzOffset]="i == 0 ? 0 : 4"
+					nzErrorTip="Please input passenger's name or delete this field."
+				>
+					<input
+						class="passenger-input"
+						nz-input
+						placeholder="placeholder"
+						[attr.id]="control.id"
+						[formControlName]="control.controlInstance"
+					/>
+					<i
+						nz-icon
+						nzType="minus-circle-o"
+						class="dynamic-delete-button"
+						(click)="removeField(control, $event)"
+					></i>
+				</nz-form-control>
+			</nz-form-item>
+			<nz-form-item>
+				<nz-form-control
+					[nzXs]="{ span: 24, offset: 0 }"
+					[nzSm]="{ span: 20, offset: 4 }"
+				>
+					<button
+						nz-button
+						nzType="dashed"
+						class="add-button"
+						(click)="addField($event)"
+					>
+						<i nz-icon nzType="plus"></i>
+						Add field
+					</button>
+				</nz-form-control>
+			</nz-form-item>
+			<nz-form-item>
+				<nz-form-control
+					[nzXs]="{ span: 24, offset: 0 }"
+					[nzSm]="{ span: 20, offset: 4 }"
+				>
+					<button nz-button nzType="primary">Submit</button>
+				</nz-form-control>
+			</nz-form-item>
+		</div>
+	</form>
+</div>
