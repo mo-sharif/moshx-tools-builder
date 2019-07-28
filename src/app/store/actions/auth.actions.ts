@@ -13,8 +13,8 @@ export enum EAuthActions {
   TwitterLogin = "[Auth] Twitter Login Attempt",
   AnonymousLogin = "[Auth] Anonymous Login Attempt",
 
-  EmailSignUp = "[Auth] New User Registrations",
-  EmailSignUpSuccess = "[Auth] New User Registrations Success",
+  EmailSignUp = "[Auth] New Email Sign up",
+  EmailSignUpSuccess = "[Auth] New User Email Sign up Success",
 
   Logout = "[Auth] Logout",
   LogoutSuccess = "[Auth] Logout Success",

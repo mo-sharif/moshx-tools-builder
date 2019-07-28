@@ -12,6 +12,6 @@ export class MessageService {
   };
 
   setErrorMsg = message => {
-    this.NzMessageService.error(message, { nzDuration: 2500 }).onClose!;
+    return this.NzMessageService.error(message, { nzDuration: 2500 }).onClose!;
   };
 }

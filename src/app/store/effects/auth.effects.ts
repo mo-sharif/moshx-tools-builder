@@ -116,8 +116,7 @@ export class AuthEffects {
 		map(action => action.payload),
 		switchMap((loginData: ILoginData) =>
 			from(this.authService.emailLogin(loginData)).pipe(
-				switchMap((credential: any) => {
-					console.log(credential.message);
+				switchMap((credential: IUser | any) => {
 					return credential.message
 						? of(new AuthError({ error: credential.message }), new SetErrorMsg(credential.message))
 						: of(new GetUserAuth());
@@ -131,14 +130,16 @@ export class AuthEffects {
 	emailSignUp$ = this._actions$.pipe(
 		ofType<EmailSignUp>(EAuthActions.EmailSignUp),
 		map(action => action.payload),
-		map((emailSignUpData: IEmailSignUpData) => {
+		switchMap((emailSignUpData: IEmailSignUpData) => 
 			from(this.authService.emailSignUp(emailSignUpData)).pipe(
-				switchMap((credential: IUser) => of(new EmailSignUpSuccess(credential)))
-			);
-		}),
-		switchMap(credential => {
-			return of(new GetUserAuth());
-		})
+				switchMap((credential: any) => {
+					return credential.message
+					? of(new AuthError({ error: credential.message }), new SetErrorMsg(credential.message))
+					: of(new EmailSignUpSuccess(credential), new GetUserAuth());
+				}),
+				catchError(err => of(new AuthError({ error: err.message })))
+			)
+		)
 	);
 
 	@Effect()

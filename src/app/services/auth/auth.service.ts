@@ -110,7 +110,7 @@ export class AuthService {
 				this.updateUserData();
 				return this.authState;
 			})
-			.catch(error => console.log(error));
+			.catch(error => error);
 	}
 	private facebookSignIn(provider) {
 		provider.addScope("email");
@@ -121,7 +121,7 @@ export class AuthService {
 				this.updateFacebookUserData();
 				return this.authState;
 			})
-			.catch(error => console.log(error));
+			.catch(error => error);
 	}
 
 	//// Anonymous Auth ////
@@ -133,7 +133,7 @@ export class AuthService {
 				// this.authState = user;
 				this.updateUserData();
 			})
-			.catch(error => console.log(error));
+			.catch(error => error);
 	}
 
 	//// Email/Password Auth ////
@@ -147,7 +147,7 @@ export class AuthService {
 				this.updateUserData();
 				return this.authState;
 			})
-			.catch(error => console.log(error));
+			.catch(error => error);
 	}
 
 	emailLogin(loginData: ILoginData) {
@@ -169,7 +169,7 @@ export class AuthService {
 		return auth
 			.sendPasswordResetEmail(email)
 			.then(() => console.log("email sent"))
-			.catch(error => console.log(error));
+			.catch(error => error);
 	}
 
 	//// Sign Out ////
@@ -177,7 +177,7 @@ export class AuthService {
 	logout(): void {
 		this.afAuth.auth.signOut().then(() => {
 			this.navigateToPath("home")
-		}).catch(error => console.log(error));
+		}).catch(error => error);
 	}
 
 	//// Helpers ////
@@ -194,7 +194,7 @@ export class AuthService {
 		this.db
 			.object(path)
 			.update(data)
-			.catch(error => console.log(error));
+			.catch(error => error);
 	}
 	private updateFacebookUserData(): void {
 		const generateEmail = `${this.firestore.createId()}@mosh-media.web.app`
@@ -210,7 +210,7 @@ export class AuthService {
 		this.db
 			.object(path)
 			.update(data)
-			.catch(error => console.log(error));
+			.catch(error => error);
 	}
 
 	navigateToPath(path) {
