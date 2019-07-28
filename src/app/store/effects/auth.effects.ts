@@ -39,7 +39,7 @@ import { AddUser, AddUserSuccess } from "../actions/user.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { GetUserProfile } from "../actions/auth.actions";
 import { GetSettings } from "../actions/config.actions";
-import { SetSuccessMsg } from "../actions/message.actions";
+import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -115,17 +115,12 @@ export class AuthEffects {
 		ofType<EmailLogin>(EAuthActions.EmailLogin),
 		map(action => action.payload),
 		switchMap((loginData: ILoginData) =>
-			/*  this.authService.emailLogin(loginData).then(
-      (credential: IUser) => of(new GetUserAuth())
-    ).catch(
-      (err) => of(new AuthError({ error: err.message }))
-    )) */
 			from(this.authService.emailLogin(loginData)).pipe(
-				map((credential: any) => {
-          console.log(credential.message)
-					credential.message
-						? new AuthError({ error: credential.message })
-						: new GetUserAuth();
+				switchMap((credential: any) => {
+					console.log(credential.message);
+					return credential.message
+						? of(new AuthError({ error: credential.message }), new SetErrorMsg(credential.message))
+						: of(new GetUserAuth());
 				}),
 				catchError(err => of(new AuthError({ error: err.message })))
 			)
