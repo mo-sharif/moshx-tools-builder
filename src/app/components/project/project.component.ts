@@ -19,7 +19,6 @@ export class ProjectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.userProjects)
   }
 
   navigateToProjectEmit(project) {

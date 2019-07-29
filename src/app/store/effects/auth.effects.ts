@@ -29,6 +29,7 @@ import {
 	EmailSignUpSuccess
 } from "../actions/auth.actions";
 import {
+	User,
 	IUser,
 	ILoginData,
 	IEmailSignUpData
@@ -46,20 +47,20 @@ export class AuthEffects {
 	getUserAuth$ = this._actions$.pipe(
 		ofType<GetUserAuth>(EAuthActions.GetUserAuth),
 		switchMap(() => this.authService.currentUserObservable),
-		switchMap((authData: IUser) => {
+		switchMap(authData => {
 			if (authData == null) {
 				return of(new NotAuthenticated());
 			}
-		/* 	let user = new User(
+			let user = new User(
 				authData.uid,
 				authData.displayName,
 				authData.email,
 				authData.photoURL,
 				authData.isAnonymous
-			); */
-			
+			);
+
 			return of(
-				new Authenticated(authData),
+				new Authenticated(user),
 				new GetUserProfile(),
 				new GetSettings()
 			);

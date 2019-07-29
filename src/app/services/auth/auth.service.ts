@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from "@angular/router";
-import {  IUser, ILoginData, IEmailSignUpData } from "../../models/user.interface";
+import { User, IUser, ILoginData, IEmailSignUpData } from "../../models/user.interface";
 import { UserStorageService } from "../user/user-storage.service";
 import * as firebase from "firebase/app";
 import { AngularFireDatabase } from "@angular/fire/database";
@@ -10,8 +10,8 @@ import { Observable, of } from "rxjs";
 
 @Injectable()
 export class AuthService {
-	authState: IUser = null;
-	user: IUser;
+	authState: User = null;
+	user: User;
 	constructor(
 		private afAuth: AngularFireAuth,
 		private db: AngularFireDatabase,
@@ -24,16 +24,16 @@ export class AuthService {
 		});
 	}
 
-	getAuthState(): Observable<IUser> {
+	getAuthState(): Observable<User> {
 		return this.afAuth.authState;
 	}
 
 	// Returns true if user is logged in
-	get userFromStorage(): IUser {
+	get userFromStorage(): User {
 		return this.userStorageService.getUserLoggedIn();
 	}
 
-	get AuthStateFirebase(): IUser {
+	get AuthStateFirebase(): User {
 		this.afAuth.authState.subscribe(auth => {
 			if (auth) {
 				this.authState = auth;
@@ -53,7 +53,7 @@ export class AuthService {
 	}
 
 	// Returns
-	get currentUserObservable(): Observable<IUser> {
+	get currentUserObservable(): Observable<User> {
 		return this.afAuth.authState;
 	}
 
