@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { User } from "../../models/user.interface";
+import { IUser } from "../../models/user.interface";
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -8,12 +8,12 @@ import { Router } from "@angular/router";
 export class UserStorageService {
   constructor() {}
   // Set data on localStorage
-  setUserLoggedIn(user: User) {
+  setUserLoggedIn(user: IUser) {
     localStorage.setItem("user", JSON.stringify(user));
     console.log("saved on localStorage");
   }
   // get data on localStorage
-  getUserLoggedIn(): User {
+  getUserLoggedIn(): IUser {
     if (localStorage.getItem("user")) {
 			return JSON.parse(localStorage.getItem("user"));
     }
