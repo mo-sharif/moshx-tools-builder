@@ -51,12 +51,17 @@ export class AuthEffects {
 			if (authData == null) {
 				return of(new NotAuthenticated());
 			}
+			
+			if (authData && authData.email && !authData.displayName) {
+				authData.displayName = authData.email.split("@")[0];
+			}
+
 			let user = new User(
 				authData.uid,
 				authData.displayName,
 				authData.email,
 				authData.photoURL,
-				authData.isAnonymous
+				authData.isAnonymous,
 			);
 
 			return of(
@@ -157,7 +162,7 @@ export class AuthEffects {
 		catchError(err => of(new AuthError({ error: err.message })))
 	);
 
-	@Effect()
+/* 	@Effect()
 	saveUserProfile$ = this._actions$.pipe(
 		ofType<Authenticated>(EAuthActions.Authenticated),
 		map(action => action.payload),
@@ -168,11 +173,11 @@ export class AuthEffects {
 			if (user && user.email && !user.displayName) {
 				user.displayName = user.email.split("@")[0];
 			}
-			this._userService.addUser(user);
+			// this._userService.addUser(user);
 
 			return of(new AddUserSuccess(user));
 		})
-	);
+	); */
 	constructor(
 		private authService: AuthService,
 		private _actions$: Actions,
