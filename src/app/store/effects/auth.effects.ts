@@ -52,13 +52,14 @@ export class AuthEffects {
 				return of(new NotAuthenticated());
 			}
 			
-			if (authData && authData.email && !authData.displayName) {
-				authData.displayName = authData.email.split("@")[0];
+			let displayName: string = null;
+			if (!authData.displayName && authData.email) {
+				displayName = authData.email.split("@")[0];
 			}
 
 			let user = new User(
 				authData.uid,
-				authData.displayName,
+				displayName,
 				authData.email,
 				authData.photoURL,
 				authData.isAnonymous,

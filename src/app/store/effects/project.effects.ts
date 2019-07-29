@@ -33,7 +33,7 @@ import {
   selectLoggedInUserUID,
   selectLoggedInUser
 } from "../selectors/auth.selectors";
-import { UpdateUserProfileSuccess } from "../actions/user.actions";
+import { UpdateUserProfileSuccess, AddUser } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
 import { Router } from "@angular/router";
 import { NavigateToRoute } from "../actions/config.actions";
@@ -97,9 +97,9 @@ export class ProjectEffects {
         switchMap((user: IUser) => {
           if (user && user.profile && !user.profileSlug) {
             user.profileSlug = user.profile.replace(/ /g, ".");
-            this._userService.addUser(user);
           }
-          return of(new GetUserProfileSuccess(user));
+          // this._userService.addUser(user);
+          return of(new GetUserProfileSuccess(user), new AddUser(user));
         })
       );
     })
