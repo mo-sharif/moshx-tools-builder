@@ -108,6 +108,7 @@ export class AuthService {
 			.then(credential => {
 				this.authState = credential.user;
 				this.updateUserData();
+				this.navigateToPath("home");
 				return this.authState;
 			})
 			.catch(error => error);
@@ -119,6 +120,7 @@ export class AuthService {
 			.then(credential => {
 				this.authState = credential.user;
 				this.updateFacebookUserData();
+				this.navigateToPath("home")
 				return this.authState;
 			})
 			.catch(error => error);
@@ -145,6 +147,7 @@ export class AuthService {
 			.then(credential => {
 				this.authState = credential.user;
 				this.updateUserData();
+				this.navigateToPath("home")
 				return this.authState;
 			})
 			.catch(error => error);
@@ -157,7 +160,8 @@ export class AuthService {
 			.then(credential => {
 				this.authState = credential.user;
 				this.updateUserData();
-				// return this.authState
+				this.navigateToPath("home")
+				return this.authState
 			})
 			.catch(error => { return error});
 	}
