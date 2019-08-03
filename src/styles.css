@@ -23,7 +23,6 @@
 	box-shadow: 0px 0px 114px 0px rgba(0, 0, 0, 0.08),
 		0px 30px 25px 0px rgba(0, 0, 0, 0.05);
 	transform: translateY(-5px);
-	color: #1890ff;
 }
 .card:hover .project-name-input {
 	opacity: 1;
