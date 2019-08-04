@@ -6,7 +6,8 @@ import {
 	map,
 	catchError,
 	tap,
-	delay
+	delay,
+	takeWhile
 } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
@@ -22,7 +23,8 @@ import {
 	GetProfileFromRoute,
 	GetUserProjects,
 	GetSelectedProjectFromRoute,
-  GetSelectedProjectFromRouteSuccess
+	GetSelectedProjectFromRouteSuccess,
+	NewProject
 } from "../actions/project.actions";
 import {
 	SetSuccessMsg,
@@ -57,7 +59,7 @@ export class ProjectEffects {
 		ofType<SaveProject>(EProjectActions.SaveProject),
 		map(action => action.payload),
 		switchMap((project: IProject) => {
-      project.slug = project.title.replace(/ /g , ".")
+			project.slug = project.title.replace(/ /g, ".");
 			this._projectService.addProject(project);
 			return [
 				new SetSuccessMsg("Project Saved Successfully"),
@@ -105,8 +107,8 @@ export class ProjectEffects {
 				})
 			);
 		})
-  );
-  
+	);
+
 	@Effect()
 	getUserProjects$ = this._actions$.pipe(
 		ofType<GetUserProfileSuccess>(EAuthActions.GetUserProfileSuccess),
@@ -123,19 +125,32 @@ export class ProjectEffects {
 
 	@Effect()
 	GetSelectedProjectFromRoute$ = this._actions$.pipe(
-		ofType<GetSelectedProjectFromRoute>(EProjectActions.GetSelectedProjectFromRoute),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+		ofType<GetSelectedProjectFromRoute>(
+			EProjectActions.GetSelectedProjectFromRoute
+		),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 		switchMap(([action, user]) => {
-      let route = action.payload
+			let route = action.payload;
 			return this._projectService.GetSelectedProjectFromRoute(user, route).pipe(
-				switchMap(res => [new GetSelectedProjectFromRouteSuccess(res)]),
+				switchMap(([project]) => {
+          console.log(project)
+					if (project) {
+						return of(new GetSelectedProjectFromRouteSuccess(project));
+					} else {
+						return of(new NewProject({
+              title: "NEW PROJECT",
+              type: action.payload,
+              user: "NOT YET ASSIGNED"
+            }));
+					}
+				}),
 				catchError(err => {
 					return of(new SetErrorMsg(err));
 				})
 			);
 		})
-  );
-  
+	);
+
 	@Effect()
 	updateUserProfile$ = this._actions$.pipe(
 		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),

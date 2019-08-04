@@ -39,6 +39,7 @@ export function projectReducers(
 		case EProjectActions.NewProject: {
 			return {
 				...state,
+				selectedProject: null,
 				newProject: action.payload
 			};
 		}

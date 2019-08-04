@@ -1,21 +1,20 @@
 <nz-tabset [nzType]="line" [@listStagger]="" class="card">
 	<!-- Selected Project -->
-	<div *ngFor="let selectedProject of selectedProject$ | async">
+	<div *ngIf="selectedProject$ | async as selectedProject">
 		<nz-tab [nzTitle]="selectedProject.title">
 			<ng-template nz-tab style="padding: 24px;">
 				<ng-container
 					add-comp
 					[comp]="components[selectedProject['type']]"
 					[projects]="userProjects$"
-				></ng-container>
+				>{{selectedProject | json}}</ng-container>
 			</ng-template>
 		</nz-tab>
 	</div>
 	<!-- New Project -->
-	<div>
+	<div *ngIf="newProject$ | async as newProject">
 		<nz-tab
 			[nzTitle]="newProject['type']"
-			*ngIf="newProject$ | async as newProject"
 		>
 			<ng-template nz-tab style="padding: 24px;">
 				<ng-container
