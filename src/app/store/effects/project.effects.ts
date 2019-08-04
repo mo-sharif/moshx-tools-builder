@@ -42,7 +42,6 @@ import { UserService } from "src/app/services/user/user.service";
 import { Router } from "@angular/router";
 import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
-import { IProfile } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
 import {
 	EAuthActions,
