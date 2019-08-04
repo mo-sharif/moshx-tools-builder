@@ -1,21 +1,30 @@
 <nz-tabset [nzType]="line" [@listStagger]="" class="card">
 	<!-- Selected Project -->
-	<div *ngIf="selectedProject$ | async as selectedProject">
+	<div *ngIf="selectedProject$ | async as selectedProject; else saveProject">
 		<nz-tab [nzTitle]="selectedProject.title">
 			<ng-template nz-tab style="padding: 24px;">
 				<ng-container
 					add-comp
 					[comp]="components[selectedProject['type']]"
 					[projects]="userProjects$"
-				>{{selectedProject | json}}</ng-container>
+				></ng-container>
+			</ng-template>
+		</nz-tab>
+		<!-- Save Project -->
+		<nz-tab nzTitle="Save Project">
+			<ng-template nz-tab>
+				<app-edit-project
+					(formData)="saveFormData($event)"
+					[userProjects]="userProjects$ | async"
+					[selectLoggedInUser]="selectLoggedInUser$ | async"
+				>
+				</app-edit-project>
 			</ng-template>
 		</nz-tab>
 	</div>
 	<!-- New Project -->
-	<div *ngIf="newProject$ | async as newProject">
-		<nz-tab
-			[nzTitle]="newProject['type']"
-		>
+	<div *ngIf="newProject$ | async as newProject; else saveProject">
+		<nz-tab [nzTitle]="newProject['type']">
 			<ng-template nz-tab style="padding: 24px;">
 				<ng-container
 					add-comp
@@ -24,9 +33,7 @@
 				></ng-container>
 			</ng-template>
 		</nz-tab>
-	</div>
-	<!-- Save Project -->
-	<div *ngIf="selectedProject$ || newProject$">
+		<!-- Save Project -->
 		<nz-tab nzTitle="Save Project">
 			<ng-template nz-tab>
 				<app-edit-project

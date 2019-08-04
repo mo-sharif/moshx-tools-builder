@@ -109,13 +109,12 @@ export class ProjectEffects {
 		})
 	);
 
-	@Effect()
+	@Effect({dispatch: false})
 	getUserProjects$ = this._actions$.pipe(
 		ofType<GetUserProfileSuccess>(EAuthActions.GetUserProfileSuccess),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 		switchMap(([action, user]) => {
 			return this._projectService.getUserProjects(user).pipe(
-				switchMap(res => [new GetProjectSuccess(res)]),
 				catchError(err => {
 					return of(new SetErrorMsg(err));
 				})
@@ -123,6 +122,10 @@ export class ProjectEffects {
 		})
 	);
 
+  /* 
+  This effect handles logic between creating a new project 
+  or editing an viewing and editing an existing project 
+  */
 	@Effect()
 	GetSelectedProjectFromRoute$ = this._actions$.pipe(
 		ofType<GetSelectedProjectFromRoute>(
@@ -133,7 +136,6 @@ export class ProjectEffects {
 			let route = action.payload;
 			return this._projectService.GetSelectedProjectFromRoute(user, route).pipe(
 				switchMap(([project]) => {
-          console.log(project)
 					if (project) {
 						return of(new GetSelectedProjectFromRouteSuccess(project));
 					} else {
@@ -151,6 +153,10 @@ export class ProjectEffects {
 		})
 	);
 
+  /* 
+  On saving a new project
+  Update project name
+  */
 	@Effect()
 	updateUserProfile$ = this._actions$.pipe(
 		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
