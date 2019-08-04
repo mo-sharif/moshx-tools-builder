@@ -50,7 +50,6 @@ import {
 	GetUserProfile,
 	Authenticated
 } from "../actions/auth.actions";
-import { selectUserProjects } from "../selectors/project.selector";
 
 @Injectable()
 export class ProjectEffects {
