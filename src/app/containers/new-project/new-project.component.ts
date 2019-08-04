@@ -1,4 +1,4 @@
-import { Component, OnInit, Type } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { listStagger } from "../../animations/list-stagger.animation";
 
 import { NewProject } from "../../store/actions/project.actions";
@@ -14,15 +14,21 @@ import { Router } from "@angular/router";
 	animations: [listStagger]
 })
 export class NewProjectComponent implements OnInit {
-	containers$ = this._store.pipe(select(selectContainers))
-	
+	containers$ = this._store.pipe(select(selectContainers));
+
 	constructor(private _store: Store<IAppState>, private _router: Router) {}
 
 	ngOnInit() {
-		this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: "NOT YET ASSIGNED", user: "NOT YET ASSIGNED" }));
+		// this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: "NOT YET ASSIGNED", user: "NOT YET ASSIGNED" }));
 	}
 	navigateToProject(id: string) {
-    this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: id, user: "NOT YET ASSIGNED"}));
+		this._store.dispatch(
+			new NewProject({
+				title: "NEW PROJECT",
+				type: id,
+				user: "NOT YET ASSIGNED"
+			})
+		);
 		this._router.navigate(["home/new-project", id]);
 	}
 }

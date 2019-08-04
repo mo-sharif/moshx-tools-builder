@@ -22,13 +22,24 @@ export class ProjectService {
   }
   getUserProjects(user: IUser): Observable<any> {
     if (!user) {
-      return of();
+      return of('No User Was Projvided');
     }
     return this.firestore
       .collection(`/profiles/`)
       .doc(user.profile)
       .collection(`/projects/`, ref => ref.where("user", "==", user.uid))
       .valueChanges();
+  }
+
+  GetSelectedProjectFromRoute(user: IUser, route: string): Observable<any> {
+    if (!user) {
+      return of('No User Was provided');
+    }
+    return this.firestore
+    .collection( `/profiles/`)
+    .doc(user.profile)
+    .collection(`/projects/`, ref => ref.where("slug", "==", route))
+    .valueChanges();
   }
   addProject(project: IProject) {
     const id = project.id ? project.id : this.firestore.createId();

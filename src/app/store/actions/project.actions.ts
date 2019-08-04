@@ -7,6 +7,8 @@ export enum EProjectActions {
 	GetProjects = "[Project] Get Projects",
 	GetProjectsSuccess = "[Project] Get Projects Success",
 	GetProject = "[Project] Get Project",
+	GetSelectedProjectFromRoute = "[Project] Get Selected Project From Route",
+	GetSelectedProjectFromRouteSuccess = "[Project] Get Selected Project From Route Success",
 	GetProjectSuccess = "[Project] Get Project Success",
 	NewProject = "[Project] New Project",
 	EditProject = "[Project] Edit Project",
@@ -15,7 +17,7 @@ export enum EProjectActions {
     GetContainers = "[Project] Get Containers",
 	GetUserProjects = "[Project] Get User Projects",
 	GetProfileFromRoute = "[Profile] Get User Profile From Route",
-	GetProfileFromRouteSuccess = "[Profile] Get User Profile Success From Route",
+	GetProfileFromRouteSuccess = "[Profile] Get User Profile From Route Success",
 }
 
 export class GetProjects implements Action {
@@ -24,6 +26,14 @@ export class GetProjects implements Action {
 
 export class GetProject implements Action {
 	public readonly type = EProjectActions.GetProject;
+}
+export class GetSelectedProjectFromRoute implements Action {
+	public readonly type = EProjectActions.GetSelectedProjectFromRoute;
+	constructor(public payload: string) {}
+}
+export class GetSelectedProjectFromRouteSuccess implements Action {
+	public readonly type = EProjectActions.GetSelectedProjectFromRouteSuccess;
+	constructor(public payload: IProject) {}
 }
 export class GetUserProjects implements Action {
     public readonly type = EProjectActions.GetUserProjects;
@@ -35,7 +45,7 @@ export class GetProjectsSuccess implements Action {
 
 export class GetProjectSuccess implements Action {
 	public readonly type = EProjectActions.GetProjectSuccess;
-	constructor(public payload?: IProject[]) {}
+	constructor(public payload: IProject) {}
 }
 export class NewProject implements Action {
 	public readonly type = EProjectActions.NewProject;
@@ -69,6 +79,8 @@ export type ProjectActions =
 	| GetProject
 	| GetProjectSuccess
 	| GetProjects
+	| GetSelectedProjectFromRoute
+	| GetSelectedProjectFromRouteSuccess
 	| GetProjectsSuccess
 	| NewProject
 	| GetContainers

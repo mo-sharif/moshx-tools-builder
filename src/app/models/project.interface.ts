@@ -6,6 +6,7 @@ export interface IProject {
 	type: string;
 	user:string;
 	profile?: string;
+	slug?: string;
 }
 
 export interface IProfile {

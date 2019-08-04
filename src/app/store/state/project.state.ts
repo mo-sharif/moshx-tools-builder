@@ -6,7 +6,7 @@ export interface IProjectState {
 	newProject: IProject;
 	selectedProject: IProject;
 	container: IProjectContainer[];
-	profile: IUser
+	profile: IUser;
 }
 
 export const initialProjectState: IProjectState = {
@@ -31,5 +31,5 @@ export const initialProjectState: IProjectState = {
 			type: "PostsComponent"
 		}
 	],
-	profile: null
+	profile: null,
 };

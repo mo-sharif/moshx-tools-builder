@@ -32,4 +32,9 @@ export const selectNewProject = createSelector(
 export const selectProfile = createSelector(
 	selectProjects,
 	(state: IProjectState) => state.profile
-)
+);
+
+export const selectedProject = createSelector(
+	selectProjects,
+	(state: IProjectState) => state.selectedProject
+);

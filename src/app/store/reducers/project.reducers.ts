@@ -26,7 +26,14 @@ export function projectReducers(
 		case EProjectActions.GetProjectSuccess: {
 			return {
 				...state,
-				projects: action.payload
+				selectedProject: action.payload,
+			};
+		}
+		case EProjectActions.GetSelectedProjectFromRouteSuccess: {
+			return {
+				...state,
+				selectedProject: action.payload,
+				newProject: null
 			};
 		}
 		case EProjectActions.NewProject: {
