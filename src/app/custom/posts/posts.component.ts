@@ -1,7 +1,8 @@
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { HttpClient } from "@angular/common/http";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { IProject } from "src/app/models/project.interface";
 
 @Component({
 	selector: "app-posts",
@@ -16,6 +17,10 @@ export class PostsComponent {
 }
 
 class MyDataSource extends DataSource<string | undefined> {
+
+	@Input()
+	projects: IProject[];
+
 	private length = 100000;
 	private pageSize = 10;
 	private cachedData = Array.from<any>({ length: this.length });

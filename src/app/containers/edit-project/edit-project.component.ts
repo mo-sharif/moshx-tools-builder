@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { NewProject, SaveProject } from "../../store/actions/project.actions";
+import { NewProject, SaveProject, GetUserProjects } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 import { ActivatedRoute } from "@angular/router";
@@ -54,9 +54,6 @@ export class EditProjectComponent implements OnInit {
 				user: "NOT YET ASSIGNED"
 			})
 		);
-		this._store.dispatch(
-			new GetUserProfile()
-		)
 	}
 
 	saveFormData = formData => {

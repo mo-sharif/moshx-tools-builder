@@ -43,7 +43,8 @@ import { IUser } from "src/app/models/user.interface";
 import {
   EAuthActions,
   GetUserProfileSuccess,
-  GetUserProfile
+  GetUserProfile,
+  Authenticated
 } from "../actions/auth.actions";
 import { selectUserProjects } from "../selectors/project.selector";
 
@@ -104,11 +105,12 @@ export class ProjectEffects {
       );
     })
   );
-/*   @Effect()
+  @Effect()
   	getUserProjects$ = this._actions$.pipe(
-		ofType<GetUserProjects>(EAuthActions.Authenticated),
+    ofType<GetUserProfileSuccess>(EAuthActions.GetUserProfileSuccess),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 		switchMap(([action, user]) => {
+      console.log(user)
 			return this._projectService.getUserProjects(user).pipe(
 				switchMap(res => [
 					new GetProjectSuccess(res),
@@ -119,7 +121,7 @@ export class ProjectEffects {
 				})
 			);
 		})
-	); */
+	);
 
   @Effect()
   updateUserProfile$ = this._actions$.pipe(

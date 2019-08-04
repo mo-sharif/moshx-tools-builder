@@ -1,4 +1,7 @@
 <div>
+  <li *ngFor="let project of projects | async">
+     {{ project | json}}
+  </li>
     <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
       <nz-list>
         <nz-list-item *cdkVirtualFor="let item of ds">

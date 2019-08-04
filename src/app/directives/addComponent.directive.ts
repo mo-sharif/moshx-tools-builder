@@ -6,6 +6,7 @@ import { Directive, Type, ViewContainerRef, Input, ComponentFactoryResolver } fr
 export class AddComponentDirective {
 
   @Input('comp') comp : Type<any>
+  @Input('projects') projects : Type<any>
   constructor(public viewContainerRef: ViewContainerRef,
   public componentFactoryResolver:ComponentFactoryResolver) {
     
@@ -15,7 +16,8 @@ export class AddComponentDirective {
      Promise.resolve().then(()=>{
      let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.comp);
      this.viewContainerRef.clear();
-     this.viewContainerRef.createComponent(componentFactory);
+     let cmpRef = this.viewContainerRef.createComponent(componentFactory);
+     cmpRef.instance.projects = this.projects
      })
    }
 }
