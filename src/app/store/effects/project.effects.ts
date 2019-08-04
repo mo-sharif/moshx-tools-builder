@@ -69,9 +69,7 @@ export class ProjectEffects {
     ofType<SaveProject>(EProjectActions.SaveProject),
     map(action => action.payload),
 	  switchMap((project: IProject) => {
-		console.log(project)
-      let profileSlug = project.profile.replace(/ /g, ".");
-      return of(new NavigateToRoute(profileSlug));
+      return of(new NavigateToRoute([project.profile]));
     })
   );
 
@@ -129,10 +127,9 @@ export class ProjectEffects {
     map(action => action.payload),
     switchMap((project: IProject) => {
       this._userService.updateProjectName(project);
-      let profileRoute = project.profile.replace(" ", ".");
       return [
         new UpdateUserProfileSuccess(project.user),
-        new NavigateToRoute(profileRoute)
+        new NavigateToRoute([project.profile])
       ];
     })
   );

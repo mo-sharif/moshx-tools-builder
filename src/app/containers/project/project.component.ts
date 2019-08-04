@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { userProjects } from "../../store/selectors/project.selector";
 import { GetProfileFromRoute } from "../../store/actions/project.actions";
 import { IProject } from "src/app/models/project.interface";
+import { NavigateToRoute } from "src/app/store/actions/config.actions";
 
 @Component({
 	templateUrl: "./project.component.html",
@@ -26,7 +27,6 @@ export class ProjectComponent implements OnInit {
 	}
 
 	navigateToProject(project: IProject) {
-		let profileSlug = project.profile.replace(/ /g, '.')
-		this._router.navigate([profileSlug, 'projects', project.type])
+		this._store.dispatch(new NavigateToRoute([project.profile, 'projects', project.title]))
 	}
 }

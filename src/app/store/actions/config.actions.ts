@@ -37,12 +37,11 @@ export class DrawerStatus implements Action {
 
 export class NavigateToRoute implements Action {
 	public readonly type = EConfigActions.NavigateToRoute;
-	constructor(public payload: string) {}
+	constructor(public payload: Array<string>) {}
 }
 
 export class NavigateSuccess implements Action {
 	public readonly type = EConfigActions.NavigateSuccess;
-	constructor(public payload: string) {}
 }
 export class GetSettings implements Action {
 	public readonly type = EConfigActions.GetSettings;

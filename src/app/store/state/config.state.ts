@@ -4,7 +4,7 @@ import { Configs } from "../../constants/configs";
 export interface IConfigState {
 	config: IConfig;
 	isCollapsed: boolean;
-	route: string;
+	route: Array<string>;
 	containers: {}
 }
 

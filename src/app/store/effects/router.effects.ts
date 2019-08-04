@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, tap, withLatestFrom, map } from "rxjs/operators";
+import { switchMap, tap, withLatestFrom, map, filter } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -24,13 +24,17 @@ export class routerEffects {
 		switchMap(() => of(new CloseDrawer()))
 	);
 
-	@Effect({ dispatch: false })
+	@Effect()
 	navigateToRoute$ = this._actions$.pipe(
 		ofType<NavigateToRoute>(EConfigActions.NavigateToRoute),
 		map(action => action.payload),
-		tap((route: string) => {
-			this._router.navigate([route]);
-		})
+		map((routes) => {
+			return routes.map((route) => route.replace(/ /g, "."))
+		}),
+		map((routes: Array<string>) => {
+			this._router.navigate(routes);
+		}),
+		switchMap(() => of(new NavigateSuccess()))
 	);
 
 	constructor(
