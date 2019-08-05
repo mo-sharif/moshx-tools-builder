@@ -14,3 +14,11 @@
 .setting-container {
 	position:fixed;right:100px;bottom:100px;
 }
+
+.loading-template {
+	text-align: center;
+	border-radius: 4px;
+	margin-bottom: 20px;
+	padding: 30px 50px;
+	margin: 20px 0;
+}

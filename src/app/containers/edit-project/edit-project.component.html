@@ -22,6 +22,16 @@
 			</ng-template>
 		</nz-tab>
 	</div>
+	<!-- Loading Tab -->
+	<div *ngIf="!(selectedProject$ | async)">
+		<nz-tab>
+			<ng-template nz-tab>
+				<div  class="loading-template">
+					<nz-spin nzSimple nzTip="Loading..."></nz-spin>
+				</div>
+			</ng-template>
+		</nz-tab>
+	</div>
 	<!-- New Project -->
 	<div *ngIf="newProject$ | async as newProject">
 		<nz-tab [nzTitle]="newProject['type']">
