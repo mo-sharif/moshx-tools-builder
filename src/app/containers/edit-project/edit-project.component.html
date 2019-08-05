@@ -15,7 +15,7 @@
 			<ng-template nz-tab>
 				<app-edit-project
 					(formData)="saveFormData($event)"
-					[userProjects]="userProjects$ | async"
+					[selectedProject]="selectedProject"
 					[selectLoggedInUser]="selectLoggedInUser$ | async"
 				>
 				</app-edit-project>
@@ -38,7 +38,7 @@
 			<ng-template nz-tab>
 				<app-edit-project
 					(formData)="saveFormData($event)"
-					[userProjects]="userProjects$ | async"
+					[selectedProject]="selectedProject$"
 					[selectLoggedInUser]="selectLoggedInUser$ | async"
 				>
 				</app-edit-project>
