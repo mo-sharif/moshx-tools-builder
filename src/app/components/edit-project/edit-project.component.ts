@@ -68,6 +68,7 @@ export class EditProjectComponent implements OnInit {
 				[this.titleAsyncValidator]
 			],
 			title: [this.selectedProject.title, [Validators.required]],
+			type: [this.selectedProject.type]
 		});
 	}
 }

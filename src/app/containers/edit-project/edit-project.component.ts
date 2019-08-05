@@ -20,7 +20,7 @@ import { CheckboxComponent } from "../../custom/ant-design/checkbox/checkbox.com
 import { FormComponent } from "src/app/custom/ant-design/form/form.component";
 import { TableComponent } from "src/app/custom/ant-design/table/table.component";
 
-import { IProjectComponent } from "../../models/project.interface";
+import { IProjectComponent, IProject } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { CalendarComponent } from "../../custom/ant-design/calendar/calendar.component";
 import {
@@ -78,11 +78,11 @@ export class EditProjectComponent implements OnInit {
 			.subscribe();
 	}
 
-	saveFormData = formData => {
+	saveFormData = (formData: IProject) => {
+		formData.type ? '' : formData.type = this._router.snapshot.params.id
 		this._store.dispatch(
 			new SaveProject({
 				...formData,
-				type: this._router.snapshot.params.id,
 				user: this.userUid
 			})
 		);
