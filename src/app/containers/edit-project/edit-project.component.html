@@ -1,6 +1,6 @@
 <nz-tabset [nzType]="line" [@listStagger]="" class="card">
 	<!-- Selected Project -->
-	<div *ngIf="selectedProject$ | async as selectedProject; else saveProject">
+	<div *ngIf="selectedProject$ | async as selectedProject">
 		<nz-tab [nzTitle]="selectedProject.title">
 			<ng-template nz-tab style="padding: 24px;">
 				<ng-container
@@ -23,7 +23,7 @@
 		</nz-tab>
 	</div>
 	<!-- New Project -->
-	<div *ngIf="newProject$ | async as newProject; else saveProject">
+	<div *ngIf="newProject$ | async as newProject">
 		<nz-tab [nzTitle]="newProject['type']">
 			<ng-template nz-tab style="padding: 24px;">
 				<ng-container
