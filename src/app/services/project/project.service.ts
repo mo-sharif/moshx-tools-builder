@@ -48,6 +48,6 @@ export class ProjectService {
       .doc(project.profile)
       .collection<IProject>("projects")
       .doc(id)
-      .set(project);
+      .update(project);
   }
 }

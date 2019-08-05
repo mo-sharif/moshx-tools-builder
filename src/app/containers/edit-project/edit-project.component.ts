@@ -79,6 +79,7 @@ export class EditProjectComponent implements OnInit {
 	}
 
 	saveFormData = (formData: IProject) => {
+		// Add component type to formData from route id
 		formData.type ? '' : formData.type = this._router.snapshot.params.id
 		this._store.dispatch(
 			new SaveProject({
