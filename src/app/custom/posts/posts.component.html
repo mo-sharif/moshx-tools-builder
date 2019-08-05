@@ -1,5 +1,5 @@
 <div>
-  <li *ngFor="let project of projects | async">
+  <li *ngIf="selectedProject | async as project">
      {{ project | json}}
   </li>
     <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">

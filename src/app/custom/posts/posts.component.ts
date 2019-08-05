@@ -19,7 +19,7 @@ export class PostsComponent {
 class MyDataSource extends DataSource<string | undefined> {
 
 	@Input()
-	projects: IProject[];
+	selectedProject: IProject[];
 
 	private length = 100000;
 	private pageSize = 10;

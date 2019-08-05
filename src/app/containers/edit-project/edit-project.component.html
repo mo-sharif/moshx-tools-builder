@@ -6,7 +6,7 @@
 				<ng-container
 					add-comp
 					[comp]="components[selectedProject['type']]"
-					[projects]="userProjects$"
+					[selectedProject]="selectedProject$"
 				></ng-container>
 			</ng-template>
 		</nz-tab>
@@ -29,7 +29,7 @@
 				<ng-container
 					add-comp
 					[comp]="components[newProject['type']]"
-					[projects]="userProjects$"
+					[selectedProject]="selectedProject$"
 				></ng-container>
 			</ng-template>
 		</nz-tab>
