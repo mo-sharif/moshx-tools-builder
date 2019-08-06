@@ -61,6 +61,7 @@ export class ProjectEffects {
 		switchMap(([project, selectedProject]) => {
 			project.slug = project.title.replace(/ /g, ".");
 			if (selectedProject) {
+				project.id = selectedProject.id
 				this._projectService.updateProject(project);
 			} else {
 				this._projectService.addProject(project);
