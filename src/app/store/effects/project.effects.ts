@@ -49,6 +49,7 @@ import {
 	GetUserProfile,
 	Authenticated
 } from "../actions/auth.actions";
+import { selectedProject } from "../selectors/project.selector";
 
 @Injectable()
 export class ProjectEffects {
@@ -56,9 +57,14 @@ export class ProjectEffects {
 	saveProject$ = this._actions$.pipe(
 		ofType<SaveProject>(EProjectActions.SaveProject),
 		map(action => action.payload),
-		switchMap((project: IProject) => {
+		withLatestFrom(this._store.pipe(select(selectedProject))),
+		switchMap(([project, selectedProject]) => {
 			project.slug = project.title.replace(/ /g, ".");
-			this._projectService.addProject(project);
+			if (selectedProject) {
+				this._projectService.updateProject(project);
+			} else {
+				this._projectService.addProject(project);
+			}
 			return [
 				new SetSuccessMsg("Project Saved Successfully"),
 				new SaveProjectSuccess(project)

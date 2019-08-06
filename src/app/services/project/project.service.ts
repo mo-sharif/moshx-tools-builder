@@ -41,17 +41,25 @@ export class ProjectService {
     .collection(`/projects/`, ref => ref.where("slug", "==", route))
     .valueChanges();
   }
-  addProject(project: IProject) {
-    console.log(project)
-    project.id = project.id ? project.id : this.firestore.createId();
-    console.log(project.id)
 
-    // FINISH ME
+  addProject = (project: IProject) => {
+    project.id = project.id ? project.id : this.firestore.createId();
+
     return this.firestore
       .collection("profiles")
       .doc(project.profile)
       .collection<IProject>("projects")
       .doc(project.id)
       .set(project);
+  }
+
+  updateProject = (project: IProject) => {
+    
+    return this.firestore
+      .collection("profiles")
+      .doc(project.profile)
+      .collection<IProject>("projects")
+      .doc(project.id)
+      .update(project);
   }
 }
