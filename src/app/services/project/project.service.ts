@@ -22,7 +22,7 @@ export class ProjectService {
   }
   getUserProjects(user: IUser): Observable<any> {
     if (!user) {
-      return of('No User Was Projvided');
+      return of('No User Was provided');
     }
     return this.firestore
       .collection(`/profiles/`)
@@ -42,12 +42,16 @@ export class ProjectService {
     .valueChanges();
   }
   addProject(project: IProject) {
-    const id = project.id ? project.id : this.firestore.createId();
+    console.log(project)
+    project.id = project.id ? project.id : this.firestore.createId();
+    console.log(project.id)
+
+    // FINISH ME
     return this.firestore
       .collection("profiles")
       .doc(project.profile)
       .collection<IProject>("projects")
-      .doc(id)
-      .update(project);
+      .doc(project.id)
+      .set(project);
   }
 }
