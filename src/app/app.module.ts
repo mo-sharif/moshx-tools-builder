@@ -47,6 +47,7 @@ import { addComponentModule } from "./directives/addComponent.module";
 import { UserService } from "./services/user/user.service";
 import { ProfileService } from "./services/profile/profile.service";
 import { listStagger } from "./animations/list-stagger.animation";
+import { UserEffects } from "./store/effects/user.effects";
 
 
 @NgModule({
@@ -68,7 +69,7 @@ import { listStagger } from "./animations/list-stagger.animation";
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects]),
+		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects, UserEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,

@@ -46,8 +46,7 @@ import { IUser } from "src/app/models/user.interface";
 import {
 	EAuthActions,
 	GetUserProfileSuccess,
-	GetUserProfile,
-	Authenticated
+	GetUserProfile
 } from "../actions/auth.actions";
 import { selectedProject } from "../selectors/project.selector";
 
@@ -107,8 +106,7 @@ export class ProjectEffects {
 					if (user && user.profile && !user.profileSlug) {
 						user.profileSlug = user.profile.replace(/ /g, ".");
 					}
-					// this._userService.addUser(user);
-					return of(new GetUserProfileSuccess(user), new AddUser(user));
+					return of(new GetUserProfileSuccess(user));
 				})
 			);
 		})

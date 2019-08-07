@@ -42,7 +42,7 @@ export class ConfigEffects {
   );
 
   @Effect()
-  getSettings$ = this._actions$.pipe(
+  getSetting$ = this._actions$.pipe(
     ofType<GetSettings>(EConfigActions.GetSettings),
     switchMap(user => {
       return this._configService.getSettings();

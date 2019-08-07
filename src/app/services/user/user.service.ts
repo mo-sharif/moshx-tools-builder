@@ -20,6 +20,7 @@ export class UserService {
 		return this.firestore.collection(`/users/${id}`).valueChanges();
 	}
 	addUser(user: IUser) {
+		console.log(user)
 		return this.firestore
 			.collection<IUser>(`/users/`)
 			.doc(user.uid)
