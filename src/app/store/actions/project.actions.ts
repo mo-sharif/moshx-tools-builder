@@ -14,6 +14,8 @@ export enum EProjectActions {
 	EditProject = "[Project] Edit Project",
 	SaveProject = "[Project] Save Project",
 	SaveProjectSuccess = "[Project] Save Project Success",
+	DeleteProject = "[Project] Delete Project",
+	DeleteProjectSuccess = "[Project] Delete Project Success",
     GetContainers = "[Project] Get Containers",
 	GetUserProjects = "[Project] Get User Projects",
 	GetProfileFromRoute = "[Profile] Get User Profile From Route",
@@ -59,6 +61,13 @@ export class SaveProjectSuccess implements Action {
 	public readonly type = EProjectActions.SaveProjectSuccess;
 	constructor(public payload: IProject) {}
 }
+export class DeleteProject implements Action {
+	public readonly type = EProjectActions.DeleteProject;
+	constructor(public payload: IProject) {}
+}
+export class DeleteProjectSuccess implements Action {
+	public readonly type = EProjectActions.DeleteProjectSuccess;
+}
 export class GetContainers implements Action {
 	public readonly type = EProjectActions.GetContainers;
 	constructor(public payload: IProjectContainer[]) {}
@@ -86,6 +95,8 @@ export type ProjectActions =
 	| GetContainers
 	| SaveProject
 	| SaveProjectSuccess
+	| DeleteProject
+	| DeleteProjectSuccess
 	| GetUserProjects
 	| GetProfileFromRoute
 	| GetProfileFromRouteSuccess;

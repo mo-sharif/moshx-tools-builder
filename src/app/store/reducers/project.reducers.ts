@@ -61,6 +61,17 @@ export function projectReducers(
 				newProject: action.payload
 			};
 		}
+		case EProjectActions.DeleteProject: {
+			return {
+				...state,
+				selectedProject: null
+			};
+		}
+		case EProjectActions.DeleteProjectSuccess: {
+			return {
+				...state
+			};
+		}
 
 		case EProjectActions.GetProfileFromRoute: {
 			return {
