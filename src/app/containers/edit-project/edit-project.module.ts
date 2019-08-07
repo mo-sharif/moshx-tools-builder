@@ -1,51 +1,23 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-// import { AddComponentDirective } from "../../directives/addComponent.directive";
 
 import { EditProjectRoutingModule } from "./edit-project-routing.module";
 import { EditProjectComponent as EditProjectContainer } from "./edit-project.component";
-
-import { FormComponent } from "../../custom/ant-design/form/form.component";
-import { TableComponent } from "../../custom/ant-design/table/table.component";
-import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EditProjectComponent } from "../../components/edit-project/edit-project.component";
-import { NzTabsModule } from "ng-zorro-antd";
-// import { ProjectService } from "src/app/services/project/project.service";
-// import { EffectsModule } from "@ngrx/effects";
-// import { ProjectEffects } from "src/app/store/effects/project.effects";
-import { CalendarComponent } from "../../custom/ant-design/calendar/calendar.component";
+
 import { addComponentModule } from "src/app/directives/addComponent.module";
-import { PostsComponent } from "src/app/custom/posts/posts.component";
-// import { PostsComponent } from "../../custom/posts/posts.component";
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import { ComponentsModule } from "src/app/custom/components-module";
 
 @NgModule({
   declarations: [
     // AddComponentDirective,
     EditProjectContainer,
     EditProjectComponent,
-    TableComponent,
-    FormComponent,
-    CalendarComponent,
-    PostsComponent
   ],
   imports: [
+    ComponentsModule,
     addComponentModule,
-    CommonModule,
     EditProjectRoutingModule,
-    NgZorroAntdModule,
-    FormsModule,
-    NzTabsModule,
-    ReactiveFormsModule,
-    ScrollDispatchModule
     // EffectsModule.forFeature([ProjectEffects])
-  ],
-  entryComponents: [
-    TableComponent,
-    FormComponent,
-    CalendarComponent,
-    PostsComponent
   ],
   // providers: [ProjectService]
 })

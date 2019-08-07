@@ -18,7 +18,7 @@ import { IProject } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
 import { map } from "rxjs/operators";
-import { Components } from "../../custom/index";
+import { Components } from "../../custom/components-module";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
@@ -26,10 +26,10 @@ import { Components } from "../../custom/index";
 	animations: [listStagger]
 })
 export class EditProjectComponent implements OnInit {
+	public components = Components;
 	isVisible = false;
 	isOkLoading = false;
 	private userUid: string;
-	public components = Components;
 	newProject$ = this._store.pipe(select(selectNewProject));
 	currentUser$ = this._store.pipe(select(selectLoggedInUser));
 	userProjects$ = this._store.pipe(select(userProjects));
