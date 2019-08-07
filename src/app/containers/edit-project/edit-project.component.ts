@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 
 import {
 	SaveProject,
-	GetSelectedProjectFromRoute
+	GetSelectedProjectFromRoute,
+	DeleteProject
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -85,4 +86,8 @@ export class EditProjectComponent implements OnInit {
 	handleCancel(): void {
 		this.isVisible = false;
 	}
+
+	deleteProject = userProject => {
+		this._store.dispatch(new DeleteProject(userProject));
+	};
 }

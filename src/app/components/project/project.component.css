@@ -12,9 +12,12 @@
 	color: #1890ff;
 }
 
-.card:hover .project-name-input {
+.card:hover .hidden {
 	opacity: 1;
 }
-.project-name-input {
+.hidden {
 	opacity: 0;
+}
+.delete-button {
+	border: none;
 }

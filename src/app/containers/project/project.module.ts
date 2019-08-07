@@ -11,6 +11,7 @@ import { NzCardModule } from "ng-zorro-antd";
 import { NzIconModule } from "ng-zorro-antd";
 import { NzInputModule } from "ng-zorro-antd";
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
 	declarations: [ProjectComponent, ProjectContainer],
@@ -22,7 +23,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 		CommonModule,
 		NzIconModule,
 		NzInputModule,
-		NzSpinModule
+		NzSpinModule,
+		NzButtonModule
 	],
 	providers: [ProfileService]
 })

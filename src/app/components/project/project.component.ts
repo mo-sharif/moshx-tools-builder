@@ -16,13 +16,16 @@ export class ProjectComponent implements OnInit {
   @Output()
   navigateToProject: EventEmitter<string> = new EventEmitter();
 
+  @Output()
+  deleteProject: EventEmitter<string> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  navigateToProjectEmit(project) {
-    this.navigateToProject.emit(project)
+  navigateToProjectEmit = (project) => {
+    return this.navigateToProject.emit(project)
   }
 
 }

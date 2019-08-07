@@ -24,7 +24,9 @@ import {
 	GetUserProjects,
 	GetSelectedProjectFromRoute,
 	GetSelectedProjectFromRouteSuccess,
-	NewProject
+	NewProject,
+	DeleteProject,
+	DeleteProjectSuccess
 } from "../actions/project.actions";
 import {
 	SetSuccessMsg,
@@ -68,6 +70,24 @@ export class ProjectEffects {
 			return [
 				new SetSuccessMsg("Project Saved Successfully"),
 				new SaveProjectSuccess(project)
+			];
+		}),
+		catchError(err => of(new SetErrorMsg(err)))
+	);
+	@Effect()
+	deleteProject$ = this._actions$.pipe(
+		ofType<DeleteProject>(EProjectActions.DeleteProject),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectedProject))),
+		switchMap(([project, selectedProject]) => {
+			project.slug = project.title.replace(/ /g, ".");
+			if (selectedProject) {
+				project.id = selectedProject.id
+			}
+			this._projectService.deleteProject(project);
+			return [
+				new SetSuccessMsg("Project Deleted Successfully!"),
+				new DeleteProjectSuccess()
 			];
 		}),
 		catchError(err => of(new SetErrorMsg(err)))

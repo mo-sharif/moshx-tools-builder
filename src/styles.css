@@ -24,6 +24,3 @@
 		0px 30px 25px 0px rgba(0, 0, 0, 0.05);
 	transform: translateY(-5px);
 }
-.card:hover .project-name-input {
-	opacity: 1;
-}

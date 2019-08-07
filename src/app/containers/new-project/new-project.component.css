@@ -11,10 +11,3 @@
     transform: translateY(-5px);
 	color: #1890ff;
 }
-
-.card:hover .project-name-input {
-	opacity: 1;
-}
-.project-name-input {
-	opacity: 0;
-}

@@ -3,7 +3,9 @@ import { IAppState } from "src/app/store/state/app.state";
 import { Store, select } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
 import { userProjects } from "../../store/selectors/project.selector";
-import { GetProfileFromRoute } from "../../store/actions/project.actions";
+import {
+	GetProfileFromRoute,
+} from "../../store/actions/project.actions";
 import { IProject } from "src/app/models/project.interface";
 import { NavigateToRoute } from "src/app/store/actions/config.actions";
 
@@ -26,7 +28,9 @@ export class ProjectComponent implements OnInit {
 		);
 	}
 
-	navigateToProject(project: IProject) {
-		this._store.dispatch(new NavigateToRoute([project.profile, 'projects', project.title]))
-	}
+	navigateToProject = (project: IProject) => {
+		this._store.dispatch(
+			new NavigateToRoute([project.profile, "projects", project.title])
+		);
+	};
 }

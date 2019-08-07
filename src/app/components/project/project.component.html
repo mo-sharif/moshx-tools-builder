@@ -15,8 +15,8 @@
 					[nzMd]="6"
 					[nzSm]="12"
 					[nzXs]="12"
-          *ngFor="let userProject of userProjects"
-          style="margin-bottom: 10px;"
+					*ngFor="let userProject of userProjects"
+					style="margin-bottom: 10px;"
 				>
 					<nz-card
 						class="card"
@@ -25,11 +25,9 @@
 						[nzTitle]="userProject.title"
 						[nzExtra]="extraTemplate"
 					>
-						{{ userProject.profile }}
+						{{ userProject.type }}
 					</nz-card>
 					<ng-template #extraTemplate>
-						<!--               <i nz-icon [nzType]="userProject.type | lowercase" nzTheme="outline"></i>
- -->
 					</ng-template>
 				</div>
 				<div nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="12" [nzXs]="12">
