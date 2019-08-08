@@ -9,12 +9,14 @@ import { PostsComponent } from "./posts/posts.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgZorroAntdModule } from "ng-zorro-antd";
 import { ScrollDispatchModule } from "@angular/cdk/scrolling";
+import { UndefinedComponent } from "./undefined/undefined.component"
 
 export const Components: IProjectComponent = {
 	Form: FormComponent,
 	Table: TableComponent,
 	Calendar: CalendarComponent,
-	Posts: PostsComponent
+	Posts: PostsComponent,
+	undefined: UndefinedComponent
 };
 
 @NgModule({
@@ -30,13 +32,15 @@ export const Components: IProjectComponent = {
 		FormComponent,
 		TableComponent,
 		CalendarComponent,
-		PostsComponent
+		PostsComponent,
+		UndefinedComponent
 	],
 	exports: [
 		FormComponent,
 		TableComponent,
 		CalendarComponent,
 		PostsComponent,
+		UndefinedComponent,
 		NgZorroAntdModule,
 		FormsModule,
 		CommonModule,
@@ -46,7 +50,8 @@ export const Components: IProjectComponent = {
 		FormComponent,
 		TableComponent,
 		CalendarComponent,
-		PostsComponent
+		PostsComponent,
+		UndefinedComponent
 	]
 })
 export class ComponentsModule {}

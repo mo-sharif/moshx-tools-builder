@@ -35,7 +35,7 @@ export class UserService {
 	updateProjectName(project: IProject) {
 		return this.firestore
 			.collection<IUser>(`/users/`)
-			.doc(project.user)
+			.doc(project.userID)
 			.update({ profile: project.profile });
 	}
 }

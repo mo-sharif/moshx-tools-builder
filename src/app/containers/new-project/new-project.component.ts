@@ -26,7 +26,7 @@ export class NewProjectComponent implements OnInit {
 			new NewProject({
 				title: "NEW PROJECT",
 				type: id,
-				user: "NOT YET ASSIGNED"
+				userID: "NOT YET ASSIGNED"
 			})
 		);
 		this._router.navigate(["home/new-project", id]);

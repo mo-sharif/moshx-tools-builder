@@ -4,7 +4,7 @@ export interface IProject {
 	id?: string
 	title: string;
 	type: string;
-	user:string;
+	userID:string;
 	profile?: string;
 	slug?: string;
 }

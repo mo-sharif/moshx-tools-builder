@@ -67,7 +67,7 @@ export class EditProjectComponent implements OnInit {
 		this._store.dispatch(
 			new SaveProject({
 				...formData,
-				user: this.userUid
+				userID: this.userUid
 			})
 		);
 	};
