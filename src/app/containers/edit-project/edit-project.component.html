@@ -3,21 +3,38 @@
 	<div *ngIf="selectedProject$ | async as selectedProject">
 		<nz-tab [nzTitle]="selectedProject.title">
 			<ng-template nz-tab style="padding: 24px;">
-				<ng-container add-comp [comp]="components[selectedProject['type']]"
-					[selectedProject]="selectedProject$"></ng-container>
+				<ng-container
+					add-comp
+					[comp]="components[selectedProject['type']]"
+					[selectedProject]="selectedProject$"
+				></ng-container>
+				<nz-collapse nzAccordion nzBordered="false">
+					<nz-collapse-panel
+					nzHeader="Library"
+					nzActive="false"
+					>
+						<p>{{ selectedProject | json}}</p>
+					</nz-collapse-panel>
+				</nz-collapse>
 			</ng-template>
 		</nz-tab>
 		<!-- Save Selected Project -->
 		<nz-tab nzTitle="Save Project">
 			<ng-template nz-tab>
-				<app-edit-project (formData)="saveFormData($event)" [selectedProject]="selectedProject"
-					[selectLoggedInUser]="selectLoggedInUser$ | async">
+				<app-edit-project
+					(formData)="saveFormData($event)"
+					[selectedProject]="selectedProject"
+					[selectLoggedInUser]="selectLoggedInUser$ | async"
+				>
 				</app-edit-project>
 			</ng-template>
 		</nz-tab>
 		<nz-tab nzTitle="Delete Project">
 			<ng-template nz-tab>
-				<app-delete-project (deleteProject)="deleteProject($event)" [selectedProject]="selectedProject">
+				<app-delete-project
+					(deleteProject)="deleteProject($event)"
+					[selectedProject]="selectedProject"
+				>
 				</app-delete-project>
 			</ng-template>
 		</nz-tab>
@@ -26,14 +43,21 @@
 	<div *ngIf="newProject$ | async as newProject">
 		<nz-tab [nzTitle]="newProject['type']">
 			<ng-template nz-tab style="padding: 24px;">
-				<ng-container add-comp [comp]="components[newProject['type']]" [selectedProject]="selectedProject$">
+				<ng-container
+					add-comp
+					[comp]="components[newProject['type']]"
+					[selectedProject]="selectedProject$"
+				>
 				</ng-container>
 			</ng-template>
 		</nz-tab>
 		<!-- Save New Project -->
 		<nz-tab nzTitle="Save Project">
 			<ng-template nz-tab>
-				<app-edit-project (formData)="saveFormData($event)" [selectedProject]="selectLoggedInUser$ | async">
+				<app-edit-project
+					(formData)="saveFormData($event)"
+					[selectedProject]="selectLoggedInUser$ | async"
+				>
 				</app-edit-project>
 			</ng-template>
 		</nz-tab>
