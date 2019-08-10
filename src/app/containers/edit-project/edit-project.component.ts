@@ -38,6 +38,11 @@ export class EditProjectComponent implements OnInit {
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	selectedProject$ = this._store.pipe(select(selectedProject));
 
+	settings = [
+		{ placeholder: "Http Request", type: "Data in", example: "https://mosh-media.com" },
+		{ placeholder: "Firebase Collection", type: "storage", example: "/user/profile"}
+	]
+
 	constructor(
 		private _store: Store<IAppState>,
 		private _router: ActivatedRoute

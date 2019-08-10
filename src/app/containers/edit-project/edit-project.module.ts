@@ -6,12 +6,14 @@ import { EditProjectComponent } from "../../components/edit-project/edit-project
 import { DeleteProjectComponent } from "../../components/delete-project/delete-project.component"; 
 import { addComponentModule } from "src/app/directives/addComponent.module";
 import { ComponentsModule } from "src/app/custom/components-module";
+import { ShortFormComponent } from "../../components/forms/short-form/short-form.component";
 
 @NgModule({
   declarations: [
     DeleteProjectComponent,
     EditProjectContainer,
     EditProjectComponent,
+    ShortFormComponent,
   ],
   imports: [
     ComponentsModule,
