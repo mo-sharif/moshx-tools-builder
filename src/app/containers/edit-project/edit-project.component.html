@@ -3,9 +3,12 @@
 	<nz-page-header nzBackIcon (nzBack)="goBack()">
 		<nz-page-header-title
 			>{{ (selectedProject$ | async)?.title }}
-			{{ (newProject$ | async)?.type }}</nz-page-header-title
+			{{ (newProject$ | async)?.title }}</nz-page-header-title
 		>
-		<nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle>
+		<nz-page-header-subtitle
+			>{{ (selectedProject$ | async)?.type }}
+			{{ (newProject$ | async)?.type }}</nz-page-header-subtitle
+		>
 		<nz-page-header-tags>
 			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
