@@ -4,8 +4,8 @@
 	(ngSubmit)="submitForm($event, validateForm.value)"
 >
 	<nz-form-item>
-		<nz-form-label [nzSpan]="7" nzRequired>Profile Name</nz-form-label>
-		<nz-form-control [nzSpan]="12" nzHasFeedback>
+		<nz-form-label [nzSpan]="10" nzRequired>Profile Name</nz-form-label>
+		<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
 			<input nz-input formControlName="profile" placeholder="Awesome Profile"/>
 			<nz-form-explain
 				*ngIf="
@@ -27,10 +27,10 @@
 		</nz-form-control>
 	</nz-form-item>
 	<nz-form-item>
-		<nz-form-label [nzSpan]="7" nzRequired nzFor="title"
+		<nz-form-label [nzSpan]="10" nzRequired nzFor="title"
 			>Project name</nz-form-label
 		>
-		<nz-form-control [nzSpan]="12" nzHasFeedback>
+		<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
 			<input
 				nz-input
 				name="title"
@@ -45,7 +45,7 @@
 		</nz-form-control>
 	</nz-form-item>
 	<nz-form-item>
-		<nz-form-control [nzOffset]="7" [nzSpan]="12">
+		<nz-form-control [nzOffset]="0" [nzSpan]="12">
 			<button nz-button nzType="primary" [disabled]="!validateForm.valid">
 				Save Project
 			</button>

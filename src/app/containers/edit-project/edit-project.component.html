@@ -69,6 +69,7 @@
 					[nzSm]="24"
 					[nzXs]="24"
 					style="margin-bottom: 10px;"
+					*ngIf="selectedProject$ | async; else newProjectSaveTemplate"
 				>
 					<nz-card
 						class="card"
@@ -79,12 +80,38 @@
 						<!-- Save New Project -->
 						<app-edit-project
 							(formData)="saveFormData($event)"
-							[selectedProject]="selectLoggedInUser$ | async"
+							[selectedProject]="selectedProject$ | async"
+							[selectLoggedInUser]="selectLoggedInUser$ | async"
 						>
 						</app-edit-project>
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
 				</div>
+				<ng-template #newProjectSaveTemplate>
+					<div
+						nz-col
+						[nzSpan]="24"
+						[nzMd]="24"
+						[nzSm]="24"
+						[nzXs]="24"
+						style="margin-bottom: 10px;"
+					>
+						<nz-card
+							class="card"
+							[nzBordered]="false"
+							nzTitle="Save Project"
+							[nzExtra]="extraTemplate"
+						>
+							<!-- Save New Project -->
+							<app-edit-project
+								(formData)="saveFormData($event)"
+								[selectedProject]="selectLoggedInUser$ | async"
+							>
+							</app-edit-project>
+						</nz-card>
+						<ng-template #extraTemplate> </ng-template>
+					</div>
+				</ng-template>
 			</div>
 			<div nz-row nzGutter="12" [@listStagger]>
 				<div

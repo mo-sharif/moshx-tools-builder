@@ -25,6 +25,7 @@ export class EditProjectComponent implements OnInit {
 
 	@Input()
 	selectedProject: IProject;
+	
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
