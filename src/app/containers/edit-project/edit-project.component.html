@@ -1,14 +1,28 @@
 <div [@listStagger]="" class="card" style="padding: 24px;">
 	<!-- Header -->
-	<nz-page-header nzBackIcon>
-		<nz-page-header-title>{{ (selectedProject$ | async)?.title }} {{ (newProject$ | async)?.type }}</nz-page-header-title>
+	<nz-page-header nzBackIcon (nzBack)="goBack()">
+		<nz-page-header-title
+			>{{ (selectedProject$ | async)?.title }}
+			{{ (newProject$ | async)?.type }}</nz-page-header-title
+		>
 		<nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle>
 		<nz-page-header-tags>
-			<nz-tag [nzColor]="'red'">Warning</nz-tag>
+			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
 		<nz-page-header-extra>
 			<div *ngIf="selectedProject$ | async as selectedProject">
-				<button nz-button nzType="danger" (click)="deleteProject(selectedProject)">Delete</button>
+				<button
+					nzShape="circle"
+					nz-button
+					nzType="danger"
+					(click)="deleteProject(selectedProject)"
+					style="margin-right: 12px;"
+				>
+					<i nz-icon nzType="delete"></i>
+				</button>
+				<button nzShape="circle" nz-button nzType="default" (click)="open()">
+					<i nz-icon nzType="setting"></i>
+				</button>
 			</div>
 		</nz-page-header-extra>
 		<nz-page-header-content>
@@ -55,71 +69,42 @@
 	</div>
 </div>
 
-<!-- <div class="switch-container">
-	<nz-switch [(ngModel)]="switchValue"></nz-switch>
-</div> -->
-
-<!-- <nz-page-header nzBackIcon>
-		<nz-page-header-title>Title</nz-page-header-title>
-		<nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle>
-		<nz-page-header-tags>
-			<nz-tag [nzColor]="'red'">Warning</nz-tag>
-		</nz-page-header-tags>
-		<nz-page-header-extra>
-			<button nz-button>Operation</button>
-			<button nz-button>Operation</button>
-			<button nz-button nzType="primary">Primary</button>
-		</nz-page-header-extra>
-		<nz-page-header-content>
-			<div class="wrap">
-				<div nz-row class="content padding">
+<nz-drawer
+	[nzVisible]="visible"
+	[nzWidth]="640"
+	nzPlacement="bottom"
+	[nzClosable]="false"
+	(nzOnClose)="close()"
+>
+	<p class="title" style=" margin-bottom: 24px;">Settings</p>
+	<div
+		nz-row
+		nzType="flex"
+		nzJustify="space-around"
+		nzAlign="middle"
+		class="collapse-content"
+	>
+		<div nz-col nzSpan="24">
+			<div nz-row nzGutter="12" [@listStagger]>
+				<div
+					nz-col
+					[nzSpan]="6"
+					[nzMd]="6"
+					[nzSm]="12"
+					[nzXs]="12"
+					*ngFor="let setting of settings"
+					style="margin-bottom: 10px;"
+				>
+					<nz-card
+						class="card"
+						[nzBordered]="false"
+						[nzTitle]="setting.placeholder"
+						[nzExtra]="extraTemplate"
+						><app-short-form [dataInput]="setting"></app-short-form>
+					</nz-card>
+					<ng-template #extraTemplate> </ng-template>
 				</div>
 			</div>
-		</nz-page-header-content>
-	</nz-page-header> -->
-
-<!-- <nz-tab nzTitle="Settings">
-			<ng-template nz-tab>
-				<nz-switch [(ngModel)]="switchValue"></nz-switch>
-				<a (click)="open()">Settings</a>
-			</ng-template>
-		</nz-tab>
-		<nz-drawer
-			[nzVisible]="visible"
-			[nzWidth]="640"
-			nzPlacement="bottom"
-			[nzClosable]="false"
-			(nzOnClose)="close()"
-		>
-			<p class="title" style=" margin-bottom: 24px;">Settings</p>
-			<div
-				nz-row
-				nzType="flex"
-				nzJustify="space-around"
-				nzAlign="middle"
-				class="collapse-content"
-			>
-				<div nz-col nzSpan="24">
-					<div nz-row nzGutter="12" [@listStagger]>
-						<div
-							nz-col
-							[nzSpan]="6"
-							[nzMd]="6"
-							[nzSm]="12"
-							[nzXs]="12"
-							*ngFor="let setting of settings"
-							style="margin-bottom: 10px;"
-						>
-							<nz-card
-								class="card"
-								[nzBordered]="false"
-								[nzTitle]="setting.placeholder"
-								[nzExtra]="extraTemplate"
-								><app-short-form [dataInput]="setting"></app-short-form>
-							</nz-card>
-							<ng-template #extraTemplate> </ng-template>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nz-drawer> -->
+		</div>
+	</div>
+</nz-drawer>

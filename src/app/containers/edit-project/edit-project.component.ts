@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from '@angular/common';
 
 import {
 	SaveProject,
@@ -46,7 +47,8 @@ export class EditProjectComponent implements OnInit {
 
 	constructor(
 		private _store: Store<IAppState>,
-		private _router: ActivatedRoute
+		private _router: ActivatedRoute,
+		private _location: Location
 	) {}
 
 	ngOnInit() {
@@ -104,4 +106,8 @@ export class EditProjectComponent implements OnInit {
 	close(): void {
 	  this.visible = false;
 	}
+
+	goBack() {
+		this._location.back();
+	  }
 }
