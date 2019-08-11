@@ -13,11 +13,9 @@
 			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
 		<nz-page-header-extra>
-			<div *ngIf="selectedProject$ | async as selectedProject">
-				<button nzShape="circle" nz-button nzType="default" (click)="open()">
-					<i nz-icon nzType="setting"></i>
-				</button>
-			</div>
+			<button nzShape="circle" nz-button nzType="default" (click)="open()">
+				<i nz-icon nzType="setting"></i>
+			</button>
 		</nz-page-header-extra>
 	</nz-page-header>
 	<!-- Selected Project -->
@@ -27,13 +25,6 @@
 			[comp]="components[selectedProject['type']]"
 			[selectedProject]="selectedProject$"
 		></ng-container>
-		<!-- Save Selected Project -->
-		<app-edit-project
-			(formData)="saveFormData($event)"
-			[selectedProject]="selectedProject"
-			[selectLoggedInUser]="selectLoggedInUser$ | async"
-		>
-		</app-edit-project>
 	</div>
 	<!-- New Project -->
 	<div *ngIf="newProject$ | async as newProject">
@@ -43,12 +34,6 @@
 			[selectedProject]="selectedProject$"
 		>
 		</ng-container>
-		<!-- Save New Project -->
-		<app-edit-project
-			(formData)="saveFormData($event)"
-			[selectedProject]="selectLoggedInUser$ | async"
-		>
-		</app-edit-project>
 	</div>
 	<!-- Loading Tab -->
 	<div *ngIf="!(selectedProject$ | async) && !(newProject$ | async)">
@@ -57,10 +42,11 @@
 		</div>
 	</div>
 </div>
-
+<!-- Setting Drawer -->
+<!-- TODO: Move me to a component and import me in here-->
 <nz-drawer
 	[nzVisible]="visible"
-	[nzWidth]="420"
+	[nzWidth]="380"
 	nzPlacement="right"
 	(nzOnClose)="close()"
 	[nzMaskClosable]="true"
@@ -81,7 +67,32 @@
 					[nzSpan]="24"
 					[nzMd]="24"
 					[nzSm]="24"
-					[nzXs]="24"	
+					[nzXs]="24"
+					style="margin-bottom: 10px;"
+				>
+					<nz-card
+						class="card"
+						[nzBordered]="false"
+						nzTitle="Save Project"
+						[nzExtra]="extraTemplate"
+					>
+						<!-- Save New Project -->
+						<app-edit-project
+							(formData)="saveFormData($event)"
+							[selectedProject]="selectLoggedInUser$ | async"
+						>
+						</app-edit-project>
+					</nz-card>
+					<ng-template #extraTemplate> </ng-template>
+				</div>
+			</div>
+			<div nz-row nzGutter="12" [@listStagger]>
+				<div
+					nz-col
+					[nzSpan]="24"
+					[nzMd]="24"
+					[nzSm]="24"
+					[nzXs]="24"
 					*ngFor="let setting of settings"
 					style="margin-bottom: 10px;"
 				>
