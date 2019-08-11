@@ -14,15 +14,6 @@
 		</nz-page-header-tags>
 		<nz-page-header-extra>
 			<div *ngIf="selectedProject$ | async as selectedProject">
-				<button
-					nzShape="circle"
-					nz-button
-					nzType="danger"
-					(click)="deleteProject(selectedProject)"
-					style="margin-right: 12px;"
-				>
-					<i nz-icon nzType="delete"></i>
-				</button>
 				<button nzShape="circle" nz-button nzType="default" (click)="open()">
 					<i nz-icon nzType="setting"></i>
 				</button>
@@ -74,10 +65,12 @@
 
 <nz-drawer
 	[nzVisible]="visible"
-	[nzWidth]="640"
-	nzPlacement="bottom"
+	[nzWidth]="420"
+	nzPlacement="right"
 	[nzClosable]="false"
 	(nzOnClose)="close()"
+	[nzMaskClosable]="true"
+	[nzClosable]="true"
 >
 	<p class="title" style=" margin-bottom: 24px;">Settings</p>
 	<div
@@ -91,10 +84,10 @@
 			<div nz-row nzGutter="12" [@listStagger]>
 				<div
 					nz-col
-					[nzSpan]="6"
-					[nzMd]="6"
-					[nzSm]="12"
-					[nzXs]="12"
+					[nzSpan]="24"
+					[nzMd]="24"
+					[nzSm]="24"
+					[nzXs]="24"
 					*ngFor="let setting of settings"
 					style="margin-bottom: 10px;"
 				>
@@ -106,6 +99,25 @@
 						><app-short-form [dataInput]="setting"></app-short-form>
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
+				</div>
+				<div
+					nz-col
+					[nzSpan]="24"
+					[nzMd]="24"
+					[nzSm]="24"
+					[nzXs]="24"
+					style="margin-bottom: 10px;"
+				>
+					<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
+						<button
+							nz-button
+							nzType="danger"
+							(click)="deleteProject(selectedProject)"
+							style="margin-right: 12px;"
+						>
+							<i nz-icon nzType="delete"> Delete</i>
+						</button>
+					</nz-card>
 				</div>
 			</div>
 		</div>
