@@ -1,13 +1,12 @@
 <form nz-form>
 	<nz-form-item>
-		<nz-form-control [nzSpan]="7" [nzOffset]="0" >
-			<nz-form-label [nzSpan]="12">Delete this project </nz-form-label>
+		<nz-form-control [nzSpan]="7" [nzOffset]="0">
 			<button
 				nz-button
 				nzType="danger"
 				(click)="deleteProjectEmit(selectedProject)"
 			>
-             {{selectedProject.title}}
+				Delete
 			</button>
 		</nz-form-control>
 	</nz-form-item>

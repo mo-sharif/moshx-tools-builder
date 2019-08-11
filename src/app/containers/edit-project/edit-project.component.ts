@@ -29,6 +29,7 @@ import { Components } from "../../custom/components-module";
 export class EditProjectComponent implements OnInit {
 	public components = Components;
 	isVisible = false;
+	visible = false;
 	isOkLoading = false;
 	private userUid: string;
 	newProject$ = this._store.pipe(select(selectNewProject));
@@ -95,4 +96,12 @@ export class EditProjectComponent implements OnInit {
 	deleteProject = userProject => {
 		this._store.dispatch(new DeleteProject(userProject));
 	};
+
+	open(): void {
+	  this.visible = true;
+	}
+  
+	close(): void {
+	  this.visible = false;
+	}
 }

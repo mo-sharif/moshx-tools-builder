@@ -28,11 +28,6 @@
     padding-top: 20px;
 }
 
-.collapse-container {
-	margin-bottom: 16px;
-	border: none;
-}
-
-.collapse-content{
-	padding: 20px 0;
+.switch-container{
+	position: absolute;
 }
