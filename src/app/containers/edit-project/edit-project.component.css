@@ -11,9 +11,13 @@
 .ant-tabs {
 	padding: 24px;
 }
-
+.card-padding {
+	padding: 24px;
+}
 .setting-container {
-	position:fixed;right:100px;bottom:100px;
+	position: fixed;
+	right: 100px;
+	bottom: 100px;
 }
 
 .loading-template {
@@ -25,9 +29,18 @@
 }
 
 .ant-collapse-content {
-    padding-top: 20px;
+	padding-top: 20px;
 }
 
-.switch-container{
+.switch-container {
 	position: absolute;
+}
+.ant-page-header {
+	padding-bottom: 26px;
+}
+
+@media only screen and (max-width: 767px) {
+	.card-padding {
+		padding: 10px;
+	}
 }

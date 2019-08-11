@@ -1,4 +1,4 @@
-<div [@listStagger]="" class="card" style="padding: 24px;">
+<div [@listStagger]="" class="card card-padding">
 	<!-- Header -->
 	<nz-page-header nzBackIcon (nzBack)="goBack()">
 		<nz-page-header-title
@@ -19,11 +19,6 @@
 				</button>
 			</div>
 		</nz-page-header-extra>
-		<nz-page-header-content>
-			<div class="wrap">
-				<div nz-row class="content padding"></div>
-			</div>
-		</nz-page-header-content>
 	</nz-page-header>
 	<!-- Selected Project -->
 	<div *ngIf="selectedProject$ | async as selectedProject">
@@ -67,7 +62,6 @@
 	[nzVisible]="visible"
 	[nzWidth]="420"
 	nzPlacement="right"
-	[nzClosable]="false"
 	(nzOnClose)="close()"
 	[nzMaskClosable]="true"
 	[nzClosable]="true"
@@ -87,7 +81,7 @@
 					[nzSpan]="24"
 					[nzMd]="24"
 					[nzSm]="24"
-					[nzXs]="24"
+					[nzXs]="24"	
 					*ngFor="let setting of settings"
 					style="margin-bottom: 10px;"
 				>
@@ -107,15 +101,15 @@
 					[nzSm]="24"
 					[nzXs]="24"
 					style="margin-bottom: 10px;"
+					*ngIf="selectedProject$ | async as selectedProject"
 				>
 					<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
 						<button
 							nz-button
 							nzType="danger"
 							(click)="deleteProject(selectedProject)"
-							style="margin-right: 12px;"
 						>
-							<i nz-icon nzType="delete"> Delete</i>
+							<i nz-icon nzType="delete"></i>Delete
 						</button>
 					</nz-card>
 				</div>
