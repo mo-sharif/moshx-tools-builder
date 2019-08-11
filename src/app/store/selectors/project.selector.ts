@@ -14,10 +14,6 @@ export const selectUserProjects = createSelector(
 	selectProjects,
 	(state:IProjectState) => state.newProject
 )
-export const selectSelectedProject = createSelector(
-	selectProjects,
-	(state: IProjectState) => state.selectedProject
-);
 
 export const selectContainers = createSelector(
 	selectProjects,
