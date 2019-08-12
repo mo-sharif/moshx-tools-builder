@@ -10,7 +10,7 @@
 		<div nz-row nzGutter="12" [@listStagger]>
 			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
 				<a [routerLink]="['new-project']">
-					<nz-card [nzCover]="newProjectTemplate" nzBordered="false" class="card center">
+					<nz-card nzBordered="false" class="card center">
 						<nz-empty [nzNotFoundImage]="
 								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_1.png?alt=media&token=71c84225-232d-4ca2-b391-f60632506adc'
 							" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
@@ -30,7 +30,7 @@
 				<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24"
 					*ngIf="currentUser.profileSlug">
 					<a [routerLink]="['/', currentUser.profileSlug]">
-						<nz-card [nzCover]="newProjectTemplate" nzBordered="false" class="card center">
+						<nz-card nzBordered="false" class="card center">
 							<nz-empty [nzNotFoundImage]="
 									'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_2.png?alt=media&token=e896ba8c-ef16-4f09-ac64-6b783bc8dd54'
 								" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
@@ -66,16 +66,34 @@
 			</ng-container>
 			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
 				<a [routerLink]="['users']">
-					<nz-card [nzCover]="newProjectTemplate" nzBordered="false" class="card center">
+					<nz-card nzBordered="false" class="card center">
 						<nz-empty [nzNotFoundImage]="
 								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_3.png?alt=media&token=5426000f-2adb-4167-84dc-9b127caa5c58'
 							" [nzNotFoundContent]="userTpl" [nzNotFoundFooter]="userFooterTpl">
 							<ng-template #userTpl>
-								<span>Folks On Here</span>
+								<span>Signed up folks</span>
 							</ng-template>
 							<ng-template #userFooterTpl>
 								<button nz-button nzType="primary" [nzLoading]="currentUser">
 									<i nz-icon nzType="user"></i>Users
+								</button>
+							</ng-template>
+						</nz-empty>
+					</nz-card>
+				</a>
+			</div>
+			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
+				<a [routerLink]="['/']">
+					<nz-card nzBordered="false" class="card center">
+						<nz-empty [nzNotFoundImage]="
+								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/google_firebase-2-512.png?alt=media&token=7925785b-3067-4f00-8977-a4d32775aa83'
+							" [nzNotFoundContent]="firebaseTpl" [nzNotFoundFooter]="firebaseFooterTpl">
+							<ng-template #firebaseTpl>
+								<span>Configure your Firebase</span>
+							</ng-template>
+							<ng-template #firebaseFooterTpl>
+								<button nz-button nzType="primary" [nzLoading]="currentUser" disabled>
+									<i nz-icon nzType="fire"></i>Make it yours
 								</button>
 							</ng-template>
 						</nz-empty>
