@@ -12,7 +12,7 @@
 	padding: 24px;
 }
 .card-padding {
-	padding: 24px;
+	padding: 13px 24px;
 }
 .setting-container {
 	position: fixed;
@@ -36,7 +36,8 @@
 	position: absolute;
 }
 .ant-page-header {
-	padding-bottom: 26px;
+	padding: 19px;
+	margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 767px) {
