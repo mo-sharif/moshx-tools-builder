@@ -53,8 +53,8 @@
 					nzPlacement="bottomRight"
 				>
 					<nz-avatar
-						[nzSrc]="loggedInUser.photoURL"
-						[nzText]="loggedInUser.displayName | slice: 0:1"
+						[nzSrc]="loggedInUser?.photoURL"
+						[nzText]="loggedInUser?.displayName | slice: 0:1"
 					>
 					</nz-avatar>
 				</button>

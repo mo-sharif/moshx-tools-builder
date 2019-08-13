@@ -16,11 +16,10 @@ export class UserService {
 	getUserList(): Observable<any> {
 		return this.firestore.collection("/users").valueChanges();
 	}
-	getUser(id): Observable<any> {
-		return this.firestore.collection(`/users/${id}`).valueChanges();
+	getUser(uid): Observable<any> {
+		return this.firestore.collection("/users", ref => ref.where("uid", "==", uid)).valueChanges();
 	}
 	addUser(user: IUser) {
-		console.log(user)
 		return this.firestore
 			.collection<IUser>(`/users/`)
 			.doc(user.uid)
