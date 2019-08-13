@@ -70,7 +70,7 @@ export class UserEffects {
 		ofType<UpdateUser>(EUserActions.UpdateUser),
 		map(action => action.payload),
 		switchMap((user: IUser) => {
-			this._userService.addUser(user);
+			this._userService.updateUser(user);
 			return of(new UpdateUserSuccess(user));
 		}),
 		catchError(err => of(new GetUsersError({ error: err.message })))
@@ -91,16 +91,6 @@ export class UserEffects {
 			);
 		})
 	);
-	// FINISH ME
-/* 	@Effect()
-	updateUserProfile$ = this._actions$.pipe(
-		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
-		switchMap(project => {
-			console.log(project);
-			// this._userService.updateUser(project);
-			return of(new UpdateUserProfileSuccess(project));
-		})
-	); */
 
 	constructor(
 		private _userService: UserService,

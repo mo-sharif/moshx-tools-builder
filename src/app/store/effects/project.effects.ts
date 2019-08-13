@@ -39,7 +39,7 @@ import {
 	selectLoggedInUserUID,
 	selectLoggedInUser
 } from "../selectors/auth.selectors";
-import { UpdateUserProfileSuccess, AddUser } from "../actions/user.actions";
+import { UpdateUserProfileSuccess, AddUser, UpdateUser } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
 import { Router } from "@angular/router";
 import { NavigateToRoute } from "../actions/config.actions";
@@ -120,14 +120,18 @@ export class ProjectEffects {
 	@Effect()
 	getUserProfile$ = this._actions$.pipe(
 		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		switchMap(([action, userId]) => {
-			return this._profileService.getUserProfile(userId).pipe(
-				switchMap((user: IUser) => {
-					if (user && user.profile && !user.profileSlug) {
-						user.profileSlug = user.profile.replace(/ /g, ".");
+		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+		switchMap(([action, user]) => {
+			return this._profileService.getUserProfile(user.uid).pipe(
+				switchMap((userProfile: IUser) => {
+
+					if (!userProfile) {
+						return of(new AddUser(user));
 					}
-					return of(new GetUserProfileSuccess(user));
+					if (userProfile && userProfile.profile && !userProfile.profileSlug) {
+						userProfile.profileSlug = userProfile.profile.replace(/ /g, ".");
+					}
+					return of(new GetUserProfileSuccess(userProfile), new UpdateUser(userProfile));
 				})
 			);
 		})
@@ -188,7 +192,7 @@ export class ProjectEffects {
 		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
 		map(action => action.payload),
 		switchMap((project: IProject) => {
-			this._userService.updateProjectName(project);
+			this._userService.updateUserFromProjectName(project);
 			return [
 				new UpdateUserProfileSuccess(project.userID),
 				new NavigateToRoute([project.profile])

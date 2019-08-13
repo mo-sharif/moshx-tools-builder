@@ -80,7 +80,7 @@
 						<!-- Save New Project -->
 						<app-edit-project
 							(formData)="saveFormData($event)"
-							[selectedProject]="selectedProject$ | async"
+							[selectedProject]="selectedProject$"
 							[selectLoggedInUser]="selectLoggedInUser$ | async"
 						>
 						</app-edit-project>
@@ -105,7 +105,7 @@
 							<!-- Save New Project -->
 							<app-edit-project
 								(formData)="saveFormData($event)"
-								[selectedProject]="selectLoggedInUser$ | async"
+								[selectedProject]="selectLoggedInUser$"
 							>
 							</app-edit-project>
 						</nz-card>

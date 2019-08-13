@@ -30,7 +30,7 @@ export function authReducers(
 		case EAuthActions.AuthError: {
 			return {
 				...state,
-				currentUser: action.payload,
+				currentUser: defaultUser,
 				loading: false
 			};
 		}
