@@ -1,11 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import {
-	switchMap,
-	withLatestFrom,
-	map,
-	catchError
-} from "rxjs/operators";
+import { switchMap, withLatestFrom, map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -23,17 +18,18 @@ import {
 	DeleteProject,
 	DeleteProjectSuccess
 } from "../actions/project.actions";
-import {
-	SetSuccessMsg,
-	SetErrorMsg
-} from "../actions/message.actions";
+import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
 import { IProject } from "src/app/models/project.interface";
 import {
 	selectLoggedInUserUID,
 	selectLoggedInUser
 } from "../selectors/auth.selectors";
-import { UpdateUserProfileSuccess, AddUser, UpdateUser } from "../actions/user.actions";
+import {
+	UpdateProfileSuccess,
+	AddUser,
+	UpdateUser
+} from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
 import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
@@ -81,7 +77,7 @@ export class ProjectEffects {
 					new NavigateToRoute(["home"])
 				];
 			} else {
-				 new SetErrorMsg("You don't have permission to delete this project")
+				new SetErrorMsg("You don't have permission to delete this project");
 			}
 		}),
 		catchError(err => of(new SetErrorMsg(err)))
@@ -114,17 +110,20 @@ export class ProjectEffects {
 	getUserProfile$ = this._actions$.pipe(
 		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-		switchMap(([action, user]) => {
-			return this._profileService.getUserProfile(user.uid).pipe(
-				switchMap((userProfile: IUser) => {
-
-					if (!userProfile) {
-						return of(new AddUser(user));
+		switchMap(([action, userProfile]) => {
+			return this._profileService.getUserProfile(userProfile.uid).pipe(
+				switchMap((user) => {
+					if (typeof user === 'undefined') {
+						return of(new AddUser(userProfile));
+					} else {
+						if (user.profile && !user.profileSlug) {
+							user.profileSlug = user.profile.replace(/ /g, ".");
+						}
+						return of(new GetUserProfileSuccess(user), new UpdateUser(user));
 					}
-					if (userProfile && userProfile.profile && !userProfile.profileSlug) {
-						userProfile.profileSlug = userProfile.profile.replace(/ /g, ".");
-					}
-					return of(new GetUserProfileSuccess(userProfile), new UpdateUser(userProfile));
+				}),
+				catchError(err => {	
+					return of(new SetErrorMsg(err));
 				})
 			);
 		})
@@ -187,7 +186,7 @@ export class ProjectEffects {
 		switchMap((project: IProject) => {
 			this._userService.updateUserFromProjectName(project);
 			return [
-				new UpdateUserProfileSuccess(project.userID),
+				new UpdateProfileSuccess(project.userID),
 				new NavigateToRoute([project.profile])
 			];
 		})

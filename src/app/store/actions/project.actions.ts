@@ -1,7 +1,6 @@
 import { Action } from "@ngrx/store";
 
-import { IProject, IProjectContainer, IProfile } from "../../models/project.interface";
-import { IUser } from "src/app/models/user.interface";
+import { IProject, IProjectContainer } from "../../models/project.interface";
 
 export enum EProjectActions {
 	GetProjects = "[Project] Get Projects",
@@ -18,8 +17,8 @@ export enum EProjectActions {
 	DeleteProjectSuccess = "[Project] Delete Project Success",
     GetContainers = "[Project] Get Containers",
 	GetUserProjects = "[Project] Get User Projects",
-	GetProfileFromRoute = "[Profile] Get User Profile From Route",
-	GetProfileFromRouteSuccess = "[Profile] Get User Profile From Route Success",
+	GetProfileFromRoute = "[Profile] Get Profile From Route",
+	GetProfileFromRouteSuccess = "[Profile] Get Profile From Route Success",
 }
 
 export class GetProjects implements Action {
