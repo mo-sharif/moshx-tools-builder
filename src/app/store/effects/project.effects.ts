@@ -4,10 +4,7 @@ import {
 	switchMap,
 	withLatestFrom,
 	map,
-	catchError,
-	tap,
-	delay,
-	takeWhile
+	catchError
 } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
@@ -17,11 +14,9 @@ import { ProjectService } from "../../services/project/project.service";
 import {
 	EProjectActions,
 	SaveProject,
-	GetProjectSuccess,
 	SaveProjectSuccess,
 	GetProfileFromRouteSuccess,
 	GetProfileFromRoute,
-	GetUserProjects,
 	GetSelectedProjectFromRoute,
 	GetSelectedProjectFromRouteSuccess,
 	NewProject,
@@ -30,8 +25,7 @@ import {
 } from "../actions/project.actions";
 import {
 	SetSuccessMsg,
-	SetErrorMsg,
-	SetInfoMsg
+	SetErrorMsg
 } from "../actions/message.actions";
 
 import { IProject } from "src/app/models/project.interface";
@@ -41,7 +35,6 @@ import {
 } from "../selectors/auth.selectors";
 import { UpdateUserProfileSuccess, AddUser, UpdateUser } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
-import { Router } from "@angular/router";
 import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { IUser } from "src/app/models/user.interface";
@@ -205,7 +198,6 @@ export class ProjectEffects {
 		private _store: Store<IAppState>,
 		private _projectService: ProjectService,
 		private _userService: UserService,
-		private _router: Router,
 		private _profileService: ProfileService
 	) {}
 }

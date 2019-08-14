@@ -1,15 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Store, select } from "@ngrx/store";
-import { of, from } from "rxjs";
+import { of } from "rxjs";
 import {
 	switchMap,
 	map,
 	withLatestFrom,
-	tap,
 	catchError,
-	take,
-	distinctUntilChanged,
 	publishReplay,
 	refCount
 } from "rxjs/operators";
@@ -31,13 +28,8 @@ import { UserService } from "../../services/user/user.service";
 import { IUser } from "../../models/user.interface";
 import { selectUserList } from "../selectors/user.selector";
 
-import { SetSuccessMsg } from "../actions/message.actions";
 import { SetLoading } from "../actions/loading.actions";
-import { selectLoggedInUser } from "../selectors/auth.selectors";
-import {
-	EProjectActions,
-	SaveProjectSuccess
-} from "../actions/project.actions";
+
 
 @Injectable()
 export class UserEffects {

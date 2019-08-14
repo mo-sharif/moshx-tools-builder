@@ -1,16 +1,12 @@
 import { AuthService } from "../../services/auth/auth.service";
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { Store, select } from "@ngrx/store";
 import { of, from } from "rxjs";
 import {
   switchMap,
   map,
-  catchError,
-  tap,
-  withLatestFrom
+  catchError
 } from "rxjs/operators";
-import { IAppState } from "../state/app.state";
 import {
   EAuthActions,
   GetUserAuth,
@@ -34,12 +30,10 @@ import {
   ILoginData,
   IEmailSignUpData
 } from "../../models/user.interface";
-import { UserService } from "src/app/services/user/user.service";
-import { AddUser, AddUserSuccess } from "../actions/user.actions";
-import { ProfileService } from "src/app/services/profile/profile.service";
+
 import { GetUserProfile } from "../actions/auth.actions";
 import { GetSettings } from "../actions/config.actions";
-import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
+import { SetErrorMsg } from "../actions/message.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -180,8 +174,5 @@ export class AuthEffects {
   constructor(
     private authService: AuthService,
     private _actions$: Actions,
-    private _store: Store<IAppState>,
-    private _userService: UserService,
-    private _profileService: ProfileService
   ) {}
 }

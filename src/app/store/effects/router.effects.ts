@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, tap, withLatestFrom, map, filter } from "rxjs/operators";
+import { switchMap, withLatestFrom, map } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";

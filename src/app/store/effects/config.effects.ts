@@ -15,9 +15,6 @@ import {
 } from "../actions/config.actions";
 import { selectConfig } from "../selectors/config.selector";
 import { ConfigService } from "src/app/services/config/config.service";
-import { IConfig } from "src/app/models/config.interface";
-import { selectLoggedInUser } from "../selectors/auth.selectors";
-import { IUser } from "src/app/models/user.interface";
 
 @Injectable()
 export class ConfigEffects {
