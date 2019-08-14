@@ -13,23 +13,6 @@ export const initialProjectState: IProjectState = {
 	projects: [],
 	newProject: null,
 	selectedProject: null,
-	container: [
-		{
-			name: "Form",
-			type: "FormComponent"
-		},
-		{
-			name: "Table",
-			type: "TableComponent"
-		},
-		{
-			name: "Calendar",
-			type: "CalendarComponent"
-		},
-		{
-			name: "Posts",
-			type: "PostsComponent"
-		}
-	],
+	container: [],
 	profile: null,
 };

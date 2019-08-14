@@ -1,7 +1,7 @@
 <div>
-  <li *ngIf="selectedProject | async as project">
+<!--   <li *ngIf="selectedProject | async as project">
      {{ project | json}}
-  </li>
+  </li> -->
     <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
       <nz-list>
         <nz-list-item *cdkVirtualFor="let item of ds">

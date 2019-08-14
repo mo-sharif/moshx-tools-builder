@@ -16,11 +16,10 @@ export class UserService {
 	getUserList(): Observable<any> {
 		return this.firestore.collection("/users").valueChanges();
 	}
-	getUser(id): Observable<any> {
-		return this.firestore.collection(`/users/${id}`).valueChanges();
+	getUser(uid): Observable<any> {
+		return this.firestore.collection("/users", ref => ref.where("uid", "==", uid)).valueChanges();
 	}
 	addUser(user: IUser) {
-		console.log(user)
 		return this.firestore
 			.collection<IUser>(`/users/`)
 			.doc(user.uid)
@@ -32,10 +31,10 @@ export class UserService {
 			.doc(user.uid)
 			.update({ ...user });
 	}
-	updateProjectName(project: IProject) {
+	updateUserFromProjectName(project: IProject) {
 		return this.firestore
 			.collection<IUser>(`/users/`)
-			.doc(project.user)
+			.doc(project.userID)
 			.update({ profile: project.profile });
 	}
 }

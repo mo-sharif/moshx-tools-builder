@@ -1,14 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import {
-	switchMap,
-	withLatestFrom,
-	map,
-	catchError,
-	tap,
-	delay,
-	takeWhile
-} from "rxjs/operators";
+import { switchMap, withLatestFrom, map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -17,31 +9,28 @@ import { ProjectService } from "../../services/project/project.service";
 import {
 	EProjectActions,
 	SaveProject,
-	GetProjectSuccess,
 	SaveProjectSuccess,
 	GetProfileFromRouteSuccess,
 	GetProfileFromRoute,
-	GetUserProjects,
 	GetSelectedProjectFromRoute,
 	GetSelectedProjectFromRouteSuccess,
 	NewProject,
 	DeleteProject,
 	DeleteProjectSuccess
 } from "../actions/project.actions";
-import {
-	SetSuccessMsg,
-	SetErrorMsg,
-	SetInfoMsg
-} from "../actions/message.actions";
+import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
 import { IProject } from "src/app/models/project.interface";
 import {
 	selectLoggedInUserUID,
 	selectLoggedInUser
 } from "../selectors/auth.selectors";
-import { UpdateUserProfileSuccess, AddUser } from "../actions/user.actions";
+import {
+	UpdateProfileSuccess,
+	AddUser,
+	UpdateUser
+} from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
-import { Router } from "@angular/router";
 import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { IUser } from "src/app/models/user.interface";
@@ -62,7 +51,7 @@ export class ProjectEffects {
 		switchMap(([project, selectedProject]) => {
 			project.slug = project.title.replace(/ /g, ".");
 			if (selectedProject) {
-				project.id = selectedProject.id
+				project.id = selectedProject.id;
 				this._projectService.updateProject(project);
 			} else {
 				this._projectService.addProject(project);
@@ -78,17 +67,18 @@ export class ProjectEffects {
 	deleteProject$ = this._actions$.pipe(
 		ofType<DeleteProject>(EProjectActions.DeleteProject),
 		map(action => action.payload),
-		withLatestFrom(this._store.pipe(select(selectedProject))),
-		switchMap(([project, selectedProject]) => {
-			project.slug = project.title.replace(/ /g, ".");
-			if (selectedProject) {
-				project.id = selectedProject.id
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([project, selectLoggedInUserUID]) => {
+			if (selectLoggedInUserUID == project.userID) {
+				this._projectService.deleteProject(project);
+				return [
+					new SetSuccessMsg("Project Deleted Successfully!"),
+					new DeleteProjectSuccess(),
+					new NavigateToRoute(["home"])
+				];
+			} else {
+				new SetErrorMsg("You don't have permission to delete this project");
 			}
-			this._projectService.deleteProject(project);
-			return [
-				new SetSuccessMsg("Project Deleted Successfully!"),
-				new DeleteProjectSuccess()
-			];
 		}),
 		catchError(err => of(new SetErrorMsg(err)))
 	);
@@ -119,20 +109,27 @@ export class ProjectEffects {
 	@Effect()
 	getUserProfile$ = this._actions$.pipe(
 		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		switchMap(([action, userId]) => {
-			return this._profileService.getUserProfile(userId).pipe(
-				switchMap((user: IUser) => {
-					if (user && user.profile && !user.profileSlug) {
-						user.profileSlug = user.profile.replace(/ /g, ".");
+		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+		switchMap(([action, userProfile]) => {
+			return this._profileService.getUserProfile(userProfile.uid).pipe(
+				switchMap((user) => {
+					if (typeof user === 'undefined') {
+						return of(new AddUser(userProfile));
+					} else {
+						if (user.profile && !user.profileSlug) {
+							user.profileSlug = user.profile.replace(/ /g, ".");
+						}
+						return of(new GetUserProfileSuccess(user), new UpdateUser(user));
 					}
-					return of(new GetUserProfileSuccess(user));
+				}),
+				catchError(err => {	
+					return of(new SetErrorMsg(err));
 				})
 			);
 		})
 	);
 
-	@Effect({dispatch: false})
+	@Effect({ dispatch: false })
 	getUserProjects$ = this._actions$.pipe(
 		ofType<GetUserProfileSuccess>(EAuthActions.GetUserProfileSuccess),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
@@ -145,7 +142,7 @@ export class ProjectEffects {
 		})
 	);
 
-  /* 
+	/* 
   This effect handles logic between creating a new project 
   or editing an viewing and editing an existing project 
   */
@@ -162,11 +159,13 @@ export class ProjectEffects {
 					if (project) {
 						return of(new GetSelectedProjectFromRouteSuccess(project));
 					} else {
-						return of(new NewProject({
-              title: "NEW PROJECT",
-              type: action.payload,
-              user: "NOT YET ASSIGNED"
-            }));
+						return of(
+							new NewProject({
+								title: "NEW PROJECT",
+								type: action.payload,
+								userID: "NOT YET ASSIGNED"
+							})
+						);
 					}
 				}),
 				catchError(err => {
@@ -176,7 +175,7 @@ export class ProjectEffects {
 		})
 	);
 
-  /* 
+	/* 
   On saving a new project
   Update project name
   */
@@ -185,9 +184,9 @@ export class ProjectEffects {
 		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
 		map(action => action.payload),
 		switchMap((project: IProject) => {
-			this._userService.updateProjectName(project);
+			this._userService.updateUserFromProjectName(project);
 			return [
-				new UpdateUserProfileSuccess(project.user),
+				new UpdateProfileSuccess(project.userID),
 				new NavigateToRoute([project.profile])
 			];
 		})
@@ -198,7 +197,6 @@ export class ProjectEffects {
 		private _store: Store<IAppState>,
 		private _projectService: ProjectService,
 		private _userService: UserService,
-		private _router: Router,
 		private _profileService: ProfileService
 	) {}
 }

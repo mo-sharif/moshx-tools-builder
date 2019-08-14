@@ -24,7 +24,8 @@ export class EditProjectComponent implements OnInit {
 	selectLoggedInUser: IUser;
 
 	@Input()
-	selectedProject: IProject;
+	selectedProject: Observable<IProject>;
+	
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
@@ -61,14 +62,16 @@ export class EditProjectComponent implements OnInit {
 	constructor(private fb: FormBuilder) {}
 
 	ngOnInit() {
-		this.validateForm = this.fb.group({
-			profile: [
-				this.selectedProject.profile,
-				[Validators.required],
-				[this.titleAsyncValidator]
-			],
-			title: [this.selectedProject.title, [Validators.required]],
-			type: [this.selectedProject.type]
-		});
+		this.selectedProject.subscribe((selectedProject) => { 
+			this.validateForm = this.fb.group({
+				profile: [
+					selectedProject.profile,
+					[Validators.required],
+					[this.titleAsyncValidator]
+				],
+				title: [selectedProject.title, [Validators.required]],
+				type: [selectedProject.type]
+			});
+		})
 	}
 }

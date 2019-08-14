@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteProjectComponent } from './delete-project.component';
+import { ShortFormComponent } from './short-form.component';
 
-describe('DeleteProjectComponent', () => {
-  let component: DeleteProjectComponent;
-  let fixture: ComponentFixture<DeleteProjectComponent>;
+describe('ShortFormComponent', () => {
+  let component: ShortFormComponent;
+  let fixture: ComponentFixture<ShortFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteProjectComponent ]
+      declarations: [ ShortFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteProjectComponent);
+    fixture = TestBed.createComponent(ShortFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

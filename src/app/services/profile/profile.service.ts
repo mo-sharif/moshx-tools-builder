@@ -20,7 +20,7 @@ export class ProfileService {
 			.collection(`/projects/`, ref => ref.where("profile", "==", profileName))
 			.valueChanges();
   }
-	getUserProfile(userId: any): Observable<any> {
+	getUserProfile(userId: string): Observable<any> {
 		if (!userId) {
 			return of()
 		}

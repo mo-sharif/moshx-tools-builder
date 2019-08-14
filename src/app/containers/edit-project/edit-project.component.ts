@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from '@angular/common';
 
 import {
 	SaveProject,
@@ -29,6 +30,7 @@ import { Components } from "../../custom/components-module";
 export class EditProjectComponent implements OnInit {
 	public components = Components;
 	isVisible = false;
+	visible = false;
 	isOkLoading = false;
 	private userUid: string;
 	newProject$ = this._store.pipe(select(selectNewProject));
@@ -38,9 +40,15 @@ export class EditProjectComponent implements OnInit {
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	selectedProject$ = this._store.pipe(select(selectedProject));
 
+	settings = [
+		{ placeholder: "Http Request", type: "Data in", example: "https://mosh-media.com" },
+		{ placeholder: "Firebase Collection", type: "storage", example: "/user/profile"}
+	]
+
 	constructor(
 		private _store: Store<IAppState>,
-		private _router: ActivatedRoute
+		private _router: ActivatedRoute,
+		private _location: Location
 	) {}
 
 	ngOnInit() {
@@ -67,7 +75,7 @@ export class EditProjectComponent implements OnInit {
 		this._store.dispatch(
 			new SaveProject({
 				...formData,
-				user: this.userUid
+				userID: this.userUid
 			})
 		);
 	};
@@ -90,4 +98,16 @@ export class EditProjectComponent implements OnInit {
 	deleteProject = userProject => {
 		this._store.dispatch(new DeleteProject(userProject));
 	};
+
+	open(): void {
+	  this.visible = true;
+	}
+  
+	close(): void {
+	  this.visible = false;
+	}
+
+	goBack() {
+		this._location.back();
+	  }
 }

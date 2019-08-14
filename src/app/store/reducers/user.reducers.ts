@@ -43,13 +43,13 @@ export function userReducers(
 				addedUser: action.payload
 			};
 		}
-		case EUserActions.UpdateUserProfile: {
+		case EUserActions.UpdateProfile: {
 			return {
 				...state,
 				profile: action.payload
 			};
 		}
-		case EUserActions.UpdateUserProfileSuccess: {
+		case EUserActions.UpdateProfileSuccess: {
 			return {
 				...state,
 				selectedUser: action.payload

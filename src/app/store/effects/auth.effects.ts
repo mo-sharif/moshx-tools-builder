@@ -1,16 +1,8 @@
 import { AuthService } from "../../services/auth/auth.service";
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { Store, select } from "@ngrx/store";
 import { of, from } from "rxjs";
-import {
-	switchMap,
-	map,
-	catchError,
-	tap,
-	withLatestFrom
-} from "rxjs/operators";
-import { IAppState } from "../state/app.state";
+import { switchMap, map, catchError } from "rxjs/operators";
 import {
 	EAuthActions,
 	GetUserAuth,
@@ -34,12 +26,10 @@ import {
 	ILoginData,
 	IEmailSignUpData
 } from "../../models/user.interface";
-import { UserService } from "src/app/services/user/user.service";
-import { AddUser, AddUserSuccess } from "../actions/user.actions";
-import { ProfileService } from "src/app/services/profile/profile.service";
+
 import { GetUserProfile } from "../actions/auth.actions";
 import { GetSettings } from "../actions/config.actions";
-import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
+import { SetErrorMsg } from "../actions/message.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -51,7 +41,7 @@ export class AuthEffects {
 			if (authData == null) {
 				return of(new NotAuthenticated());
 			}
-			
+
 			let displayName: string = null;
 			if (!authData.displayName && authData.email) {
 				displayName = authData.email.split("@")[0];
@@ -62,9 +52,9 @@ export class AuthEffects {
 				displayName,
 				authData.email,
 				authData.photoURL,
-				authData.isAnonymous,
+				authData.isAnonymous
 			);
-
+			// new AddUser(user) only if user is signed up first
 			return of(
 				new Authenticated(user),
 				new GetUserProfile(),
@@ -124,7 +114,10 @@ export class AuthEffects {
 			from(this.authService.emailLogin(loginData)).pipe(
 				switchMap((credential: IUser | any) => {
 					return credential.message
-						? of(new AuthError({ error: credential.message }), new SetErrorMsg(credential.message))
+						? of(
+								new AuthError({ error: credential.message }),
+								new SetErrorMsg(credential.message)
+						  )
 						: of(new GetUserAuth());
 				}),
 				catchError(err => of(new AuthError({ error: err.message })))
@@ -136,12 +129,15 @@ export class AuthEffects {
 	emailSignUp$ = this._actions$.pipe(
 		ofType<EmailSignUp>(EAuthActions.EmailSignUp),
 		map(action => action.payload),
-		switchMap((emailSignUpData: IEmailSignUpData) => 
+		switchMap((emailSignUpData: IEmailSignUpData) =>
 			from(this.authService.emailSignUp(emailSignUpData)).pipe(
 				switchMap((credential: any) => {
 					return credential.message
-					? of(new AuthError({ error: credential.message }), new SetErrorMsg(credential.message))
-					: of(new EmailSignUpSuccess(credential), new GetUserAuth());
+						? of(
+								new AuthError({ error: credential.message }),
+								new SetErrorMsg(credential.message)
+						  )
+						: of(new EmailSignUpSuccess(credential), new GetUserAuth());
 				}),
 				catchError(err => of(new AuthError({ error: err.message })))
 			)
@@ -162,28 +158,6 @@ export class AuthEffects {
 		}),
 		catchError(err => of(new AuthError({ error: err.message })))
 	);
-
-/* 	@Effect()
-	saveUserProfile$ = this._actions$.pipe(
-		ofType<Authenticated>(EAuthActions.Authenticated),
-		map(action => action.payload),
-		switchMap((user: IUser) => {
-			if (user && user.profile) {
-				user.profileSlug = user.profile.replace(/ /g, ".");
-			}
-			if (user && user.email && !user.displayName) {
-				user.displayName = user.email.split("@")[0];
-			}
-			// this._userService.addUser(user);
-
-			return of(new AddUserSuccess(user));
-		})
-	); */
-	constructor(
-		private authService: AuthService,
-		private _actions$: Actions,
-		private _store: Store<IAppState>,
-		private _userService: UserService,
-		private _profileService: ProfileService
-	) {}
+	
+	constructor(private authService: AuthService, private _actions$: Actions) {}
 }

@@ -12,8 +12,8 @@ export enum EUserActions {
   AddUserSuccess = "[User] Add User Success",
   UpdateUser = "[User] Update User",
   UpdateUserSuccess = "[User] Update User Success",
-  UpdateUserProfile = "[User] Update User Profile Name",
-  UpdateUserProfileSuccess = "[User] Update Profile Name Success"
+  UpdateProfile = "[User] Update Profile Name",
+  UpdateProfileSuccess = "[User] Update Profile Name Success"
 }
 
 export class GetUsers implements Action {
@@ -59,13 +59,13 @@ export class UpdateUserSuccess implements Action {
   constructor(public payload: IUser) {}
 }
 
-export class UpdateUserProfile implements Action {
-  public readonly type = EUserActions.UpdateUserProfile;
+export class UpdateProfile implements Action {
+  public readonly type = EUserActions.UpdateProfile;
   constructor(public payload?: IUser['profile']) {}
 }
 
-export class UpdateUserProfileSuccess implements Action {
-  public readonly type = EUserActions.UpdateUserProfileSuccess;
+export class UpdateProfileSuccess implements Action {
+  public readonly type = EUserActions.UpdateProfileSuccess;
   constructor(public payload: any) {}
 }
 
@@ -79,5 +79,5 @@ export type UserActions =
   | AddUserSuccess
   | UpdateUser
   | UpdateUserSuccess
-  | UpdateUserProfile
-  | UpdateUserProfileSuccess;
+  | UpdateProfile
+  | UpdateProfileSuccess;

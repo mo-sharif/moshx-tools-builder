@@ -21,7 +21,7 @@ export class ProjectService {
 		return this.firestore.collection(`/projects/${id}`).valueChanges();
 	}
 	getUserProjects(user: IUser): Observable<any> {
-		if (!user) {
+		if (!user.profile) {
 			return of("No User Was provided");
 		}
 		return this.firestore
