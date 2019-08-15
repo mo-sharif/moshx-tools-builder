@@ -7,10 +7,10 @@
 </div>
 <div nz-row nzType="flex" nzGutter="12" nzJustify="space-around" nzAlign="middle">
 	<div nz-col nzSpan="24">
-		<div nz-row nzGutter="12" [@listStagger]>
+		<div nz-row nzGutter="12">
 			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
 				<a [routerLink]="['new-project']">
-					<nz-card nzBordered="false" class="card center">
+					<nz-card nzBordered="false" class="card center"  [@listStagger]>
 						<nz-empty [nzNotFoundImage]="
 								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_1.png?alt=media&token=71c84225-232d-4ca2-b391-f60632506adc'
 							" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
@@ -28,9 +28,9 @@
 			</div>
 			<ng-container *ngIf="selectLoggedInUser$ | async as currentUser">
 				<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24"
-					*ngIf="currentUser.profileSlug">
-					<a [routerLink]="['/', currentUser.profileSlug]">
-						<nz-card nzBordered="false" class="card center">
+					*ngIf="currentUser.profileSlug" >
+					<a [routerLink]="['/', currentUser.profileSlug]" >
+						<nz-card nzBordered="false" class="card center" [@listStagger]="currentUser">
 							<nz-empty [nzNotFoundImage]="
 									'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_2.png?alt=media&token=e896ba8c-ef16-4f09-ac64-6b783bc8dd54'
 								" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
