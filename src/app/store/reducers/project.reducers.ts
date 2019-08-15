@@ -81,7 +81,8 @@ export function projectReducers(
 		case EProjectActions.GetProfileFromRouteSuccess: {
 			return {
 				...state,
-				projects: action.payload
+				projects: action.payload,
+				selectedProject: null
 			};
 		}
 
