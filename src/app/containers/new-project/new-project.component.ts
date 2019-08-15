@@ -8,27 +8,25 @@ import { selectContainers } from "../../store/selectors/config.selector";
 import { Router } from "@angular/router";
 
 @Component({
-	selector: "app-new-project",
-	templateUrl: "./new-project.component.html",
-	styleUrls: ["./new-project.component.css"],
-	animations: [listStagger]
+  selector: "app-new-project",
+  templateUrl: "./new-project.component.html",
+  styleUrls: ["./new-project.component.css"],
+  animations: [listStagger]
 })
 export class NewProjectComponent implements OnInit {
-	containers$ = this._store.pipe(select(selectContainers));
+  containers$ = this._store.pipe(select(selectContainers));
 
-	constructor(private _store: Store<IAppState>, private _router: Router) {}
+  constructor(private _store: Store<IAppState>, private _router: Router) {}
 
-	ngOnInit() {
-		// this._store.dispatch(new NewProject({ title: "NEW PROJECT", type: "NOT YET ASSIGNED", user: "NOT YET ASSIGNED" }));
-	}
-	navigateToProject(id: string) {
-		this._store.dispatch(
-			new NewProject({
-				title: "NEW PROJECT",
-				type: id,
-				userID: "NOT YET ASSIGNED"
-			})
-		);
-		this._router.navigate(["home/new-project", id]);
-	}
+  ngOnInit() {}
+  navigateToProject(id: string) {
+    this._store.dispatch(
+      new NewProject({
+        title: "NEW PROJECT",
+        type: id,
+        userID: "NOT YET ASSIGNED"
+      })
+    );
+    this._router.navigate(["home/new-project", id]);
+  }
 }
