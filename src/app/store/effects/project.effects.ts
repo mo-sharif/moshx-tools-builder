@@ -163,7 +163,8 @@ export class ProjectEffects {
 							new NewProject({
 								title: "NEW PROJECT",
 								type: action.payload,
-								userID: "NOT YET ASSIGNED"
+								userID: "NOT YET ASSIGNED",
+								UiComponents: null
 							})
 						);
 					}
