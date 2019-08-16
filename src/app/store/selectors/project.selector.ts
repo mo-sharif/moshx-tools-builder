@@ -34,3 +34,8 @@ export const selectedProject = createSelector(
 	selectProjects,
 	(state: IProjectState) => state.selectedProject
 );
+
+export const selectUiComponents = createSelector(
+	selectProjects,
+	(state: IProjectState) => state.UiComponents
+)

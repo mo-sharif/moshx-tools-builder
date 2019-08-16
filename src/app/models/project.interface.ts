@@ -1,14 +1,18 @@
 import { Type } from "@angular/core";
 
 export interface IProject {
-	id?: string
+	id?: string;
 	title: string;
 	type: string;
-	userID:string;
+	userID: string;
 	profile?: string;
 	slug?: string;
+	UiComponents: UiComponents[];
 }
 
+export interface UiComponents {
+	isNewProject: boolean;
+}
 export interface IProfile {
 	name: string;
 	user: string;
