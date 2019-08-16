@@ -20,5 +20,5 @@ export const initialProjectState: IProjectState = {
 	selectedProject: null,
 	container: [],
 	profile: null,
-	UiComponents: { isNewProject: true }
+	UiComponents: { isNewProject: false }
 };

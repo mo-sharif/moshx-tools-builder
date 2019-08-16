@@ -5,35 +5,17 @@
 		</h1>
 	</div>
 </div>
-<div
-	nz-row
-	nzType="flex"
-	nzGutter="12"
-	nzJustify="space-around"
-	nzAlign="middle"
->
+<div nz-row nzType="flex" nzGutter="12" nzJustify="space-around" nzAlign="middle">
 	<div nz-col nzSpan="24">
 		<div nz-row nzGutter="12" [@listStagger]>
-			<div
-				style="margin-bottom: 10px"
-				nz-col
-				[nzSpan]="6"
-				[nzMd]="6"
-				[nzSm]="24"
-				[nzXs]="24"
-				*ngFor="let container of containers$ | async | keyvalue"
-			>
-				<nz-card
-					class="card"
-					(click)="navigateToProject(container.value.name)"
-					[nzBordered]="false"
-					[nzTitle]="container.value.name"
-					[nzExtra]="extraTemplate"
-				>
+			<div nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24"
+				*ngFor="let container of containers$ | async | keyvalue" style="margin-bottom: 10px">
+				<nz-card class="card" (click)="navigateToProject(container.value.name)" [nzBordered]="false"
+					[nzTitle]="container.value.name" [nzExtra]="extraTemplate">
 					Continue building a {{ container.value.name }}
 				</nz-card>
 				<ng-template #extraTemplate>
-<!-- 					<i
+					<!-- 					<i
 						nz-icon
 						[nzType]="container.value.name | lowercase"
 						nzTheme="outline"
