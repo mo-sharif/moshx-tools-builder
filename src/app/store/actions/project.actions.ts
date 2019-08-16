@@ -19,6 +19,8 @@ export enum EProjectActions {
 	GetUserProjects = "[Project] Get User Projects",
 	GetProfileFromRoute = "[Profile] Get Profile From Route",
 	GetProfileFromRouteSuccess = "[Profile] Get Profile From Route Success",
+	GetUiComponents = "[Project] Get UI Components",
+	GetUiComponentsSuccess = "[Project] Get UI Components Success"
 }
 
 export class GetProjects implements Action {
@@ -82,6 +84,15 @@ export class GetProfileFromRouteSuccess implements Action {
 	constructor(public payload: any) {}
 }
 
+export class GetUiComponents implements Action {
+	public readonly type = EProjectActions.GetUiComponents;
+}
+
+export class GetUiComponentsSuccess implements Action {
+	public readonly type = EProjectActions.GetUiComponentsSuccess;
+	constructor(public payload: any) {}
+}
+
 
 export type ProjectActions =
 	| GetProject
@@ -98,4 +109,6 @@ export type ProjectActions =
 	| DeleteProjectSuccess
 	| GetUserProjects
 	| GetProfileFromRoute
-	| GetProfileFromRouteSuccess;
+	| GetProfileFromRouteSuccess
+	| GetUiComponents
+	| GetUiComponentsSuccess;
