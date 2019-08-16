@@ -16,7 +16,9 @@ import {
 	GetSelectedProjectFromRouteSuccess,
 	NewProject,
 	DeleteProject,
-	DeleteProjectSuccess
+	DeleteProjectSuccess,
+	UpdateUiComponents,
+	UpdateUiComponentsSuccess
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
@@ -33,13 +35,12 @@ import {
 import { UserService } from "src/app/services/user/user.service";
 import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
-import { IUser } from "src/app/models/user.interface";
 import {
 	EAuthActions,
 	GetUserProfileSuccess,
 	GetUserProfile
 } from "../actions/auth.actions";
-import { selectedProject } from "../selectors/project.selector";
+import { selectedProject, userProjects } from "../selectors/project.selector";
 
 @Injectable()
 export class ProjectEffects {
@@ -101,7 +102,7 @@ export class ProjectEffects {
 			return this._profileService
 				.loadProfile(profileName)
 				.pipe(
-					switchMap((profile: any) => [new GetProfileFromRouteSuccess(profile)])
+					switchMap((projects: IProject[]) => [new GetProfileFromRouteSuccess(projects), new UpdateUiComponents(projects)])
 				);
 		})
 	);
@@ -112,8 +113,8 @@ export class ProjectEffects {
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 		switchMap(([action, userProfile]) => {
 			return this._profileService.getUserProfile(userProfile.uid).pipe(
-				switchMap((user) => {
-					if (typeof user === 'undefined') {
+				switchMap(user => {
+					if (typeof user === "undefined") {
 						return of(new AddUser(userProfile));
 					} else {
 						if (user.profile && !user.profileSlug) {
@@ -122,7 +123,7 @@ export class ProjectEffects {
 						return of(new GetUserProfileSuccess(user), new UpdateUser(user));
 					}
 				}),
-				catchError(err => {	
+				catchError(err => {
 					return of(new SetErrorMsg(err));
 				})
 			);
@@ -192,6 +193,20 @@ export class ProjectEffects {
 			];
 		})
 	);
+
+	@Effect()
+	UpdateUiComponents$ = this._actions$.pipe(
+		ofType<UpdateUiComponents>(EProjectActions.UpdateUiComponents),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([projects, userID] )=> {
+			let isNewProject = {
+				isNewProject: projects[0].userID == userID
+			}
+			console.log( projects[0].userID == userID)
+			return of(new UpdateUiComponentsSuccess(isNewProject))
+		})
+	)
 
 	constructor(
 		private _actions$: Actions,

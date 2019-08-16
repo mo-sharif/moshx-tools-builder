@@ -85,12 +85,12 @@ export function projectReducers(
 				selectedProject: null
 			};
 		}
-		case EProjectActions.GetUiComponents: {
+		case EProjectActions.UpdateUiComponents: {
 			return {
 				...state
 			};
 		}
-		case EProjectActions.GetUiComponentsSuccess: {
+		case EProjectActions.UpdateUiComponentsSuccess: {
 			return {
 				...state,
 				UiComponents: action.payload

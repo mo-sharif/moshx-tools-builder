@@ -12,7 +12,7 @@
 		<nz-page-header-tags>
 			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
-		<nz-page-header-extra>
+		<nz-page-header-extra *ngIf="selectUiComponents$ | async">
 			<button nzShape="circle" nz-button nzType="default" (click)="open()">
 				<i nz-icon nzType="setting"></i>
 			</button>
@@ -42,9 +42,15 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
 <!-- Setting Drawer -->
 <!-- TODO: Move me to a component and import me in here-->
 <nz-drawer
+	*ngIf="selectUiComponents$ | async"
 	[nzVisible]="visible"
 	[nzWidth]="380"
 	nzPlacement="right"

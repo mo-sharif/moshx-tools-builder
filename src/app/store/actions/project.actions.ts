@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
 
-import { IProject, IProjectContainer } from "../../models/project.interface";
+import { IProject, IProjectContainer, UiComponents } from "../../models/project.interface";
 
 export enum EProjectActions {
 	GetProjects = "[Project] Get Projects",
@@ -19,8 +19,8 @@ export enum EProjectActions {
 	GetUserProjects = "[Project] Get User Projects",
 	GetProfileFromRoute = "[Profile] Get Profile From Route",
 	GetProfileFromRouteSuccess = "[Profile] Get Profile From Route Success",
-	GetUiComponents = "[Project] Get UI Components",
-	GetUiComponentsSuccess = "[Project] Get UI Components Success"
+	UpdateUiComponents = "[Project] Get UI Components",
+	UpdateUiComponentsSuccess = "[Project] Get UI Components Success"
 }
 
 export class GetProjects implements Action {
@@ -81,16 +81,17 @@ export class GetProfileFromRoute implements Action {
 
 export class GetProfileFromRouteSuccess implements Action {
 	public readonly type = EProjectActions.GetProfileFromRouteSuccess;
-	constructor(public payload: any) {}
+	constructor(public payload: IProject[]) {}
 }
 
-export class GetUiComponents implements Action {
-	public readonly type = EProjectActions.GetUiComponents;
+export class UpdateUiComponents implements Action {
+	public readonly type = EProjectActions.UpdateUiComponents;
+	constructor(public payload: IProject[]) {}
 }
 
-export class GetUiComponentsSuccess implements Action {
-	public readonly type = EProjectActions.GetUiComponentsSuccess;
-	constructor(public payload: any) {}
+export class UpdateUiComponentsSuccess implements Action {
+	public readonly type = EProjectActions.UpdateUiComponentsSuccess;
+	constructor(public payload: UiComponents) {}
 }
 
 
@@ -110,5 +111,5 @@ export type ProjectActions =
 	| GetUserProjects
 	| GetProfileFromRoute
 	| GetProfileFromRouteSuccess
-	| GetUiComponents
-	| GetUiComponentsSuccess;
+	| UpdateUiComponents
+	| UpdateUiComponentsSuccess;

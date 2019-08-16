@@ -2,9 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { IAppState } from "src/app/store/state/app.state";
 import { Store, select } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
-import { userProjects } from "../../store/selectors/project.selector";
+import {
+	userProjects,
+	selectUiComponents
+} from "../../store/selectors/project.selector";
 import {
 	GetProfileFromRoute,
+	UpdateUiComponents
 } from "../../store/actions/project.actions";
 import { IProject } from "src/app/models/project.interface";
 import { NavigateToRoute } from "src/app/store/actions/config.actions";
@@ -14,6 +18,7 @@ import { NavigateToRoute } from "src/app/store/actions/config.actions";
 	styleUrls: ["./project.component.css"]
 })
 export class ProjectComponent implements OnInit {
+	selectUiComponent$ = this._store.pipe(select(selectUiComponents));
 	userProjects$ = this._store.pipe(select(userProjects));
 
 	constructor(

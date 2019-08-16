@@ -13,7 +13,8 @@ import {
 	selectNewProject,
 	userProjects,
 	selectProfile,
-	selectedProject
+	selectedProject,
+	selectUiComponents,
 } from "../../store/selectors/project.selector";
 
 import { IProject } from "../../models/project.interface";
@@ -39,6 +40,9 @@ export class EditProjectComponent implements OnInit {
 	selectProfile$ = this._store.pipe(select(selectProfile));
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	selectedProject$ = this._store.pipe(select(selectedProject));
+	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
+	
+	/* Move me to an effect and make me come from firebase collection */
 
 	settings = [
 		{ placeholder: "Http Request", type: "Data in", example: "https://mosh-media.com" },

@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
 
 import { IConfig } from "../../models/config.interface";
+import { IProject } from "src/app/models/project.interface";
 
 export enum EConfigActions {
 	GetConfig = "[Config] Get Config",
@@ -49,7 +50,7 @@ export class GetSettings implements Action {
 
 export class GetSettingsSuccess implements Action {
 	public readonly type = EConfigActions.GetSettingsSuccess;
-	constructor(public payload: string) {}
+	constructor(public payload: IProject[]) {}
 }
 
 
