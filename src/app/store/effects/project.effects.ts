@@ -120,7 +120,7 @@ export class ProjectEffects {
 		  if (typeof user === "undefined") {
 			return of(new AddUser(userProfile));
 		  } else {
-			if (user.profile && !user.profileSlug) {
+			if (user.profile) {
 			  user.profileSlug = user.profile.replace(/ /g, ".");
 			}
 			return of(new GetUserProfileSuccess(user), new UpdateUser(user));
@@ -148,7 +148,7 @@ export class ProjectEffects {
 
   /* 
   This effect handles logic between creating a new project 
-  or editing an viewing and editing an existing project 
+  or editing an existing project 
   */
   @Effect()
   GetSelectedProjectFromRoute$ = this._actions$.pipe(

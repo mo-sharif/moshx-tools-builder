@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Location } from '@angular/common';
+import { Location } from "@angular/common";
 
 import {
 	SaveProject,
@@ -14,14 +14,15 @@ import {
 	userProjects,
 	selectProfile,
 	selectedProject,
-	selectUiComponents,
+	selectUiComponents
 } from "../../store/selectors/project.selector";
 
 import { IProject } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
-import { map } from "rxjs/operators";
+import { map, takeWhile } from "rxjs/operators";
 import { Components } from "../../custom/components-module";
+import { iif } from "rxjs";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
@@ -41,13 +42,21 @@ export class EditProjectComponent implements OnInit {
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	selectedProject$ = this._store.pipe(select(selectedProject));
 	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
-	
+
 	/* Move me to an effect and make me come from firebase collection */
 
 	settings = [
-		{ placeholder: "Http Request", type: "Data in", example: "https://mosh-media.com" },
-		{ placeholder: "Firebase Collection", type: "storage", example: "/user/profile"}
-	]
+		{
+			placeholder: "Http Request",
+			type: "Data in",
+			example: "https://mosh-media.com"
+		},
+		{
+			placeholder: "Firebase Collection",
+			type: "storage",
+			example: "/user/profile"
+		}
+	];
 
 	constructor(
 		private _store: Store<IAppState>,
@@ -59,8 +68,8 @@ export class EditProjectComponent implements OnInit {
 		this.currentUser$
 			.pipe(
 				map(user => {
-					this.userUid = user.uid;
-					if (user.profile) {
+					if (user.hasOwnProperty("profile")) {
+						this.userUid = user.uid;
 						this._store.dispatch(
 							new GetSelectedProjectFromRoute(this._router.snapshot.params.id)
 						);
@@ -101,14 +110,14 @@ export class EditProjectComponent implements OnInit {
 	};
 
 	open(): void {
-	  this.visible = true;
+		this.visible = true;
 	}
-  
+
 	close(): void {
-	  this.visible = false;
+		this.visible = false;
 	}
 
 	goBack() {
 		this._location.back();
-	  }
+	}
 }

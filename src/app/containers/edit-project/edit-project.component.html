@@ -43,10 +43,6 @@
 	</div>
 </div>
 
-
-
-
-
 <!-- Setting Drawer -->
 <!-- TODO: Move me to a component and import me in here-->
 <nz-drawer
@@ -75,7 +71,6 @@
 					[nzSm]="24"
 					[nzXs]="24"
 					style="margin-bottom: 10px;"
-					*ngIf="selectedProject$ | async; else newProjectSaveTemplate"
 				>
 					<nz-card
 						class="card"
@@ -84,40 +79,27 @@
 						[nzExtra]="extraTemplate"
 					>
 						<!-- Save New Project -->
-						<app-edit-project
-							(formData)="saveFormData($event)"
-							[selectedProject]="selectedProject$"
-							[selectLoggedInUser]="selectLoggedInUser$ | async"
+						<ng-container
+							*ngIf="selectedProject$ | async; else newProjectSaveTemplate"
 						>
-						</app-edit-project>
-					</nz-card>
-					<ng-template #extraTemplate> </ng-template>
-				</div>
-				<ng-template #newProjectSaveTemplate>
-					<div
-						nz-col
-						[nzSpan]="24"
-						[nzMd]="24"
-						[nzSm]="24"
-						[nzXs]="24"
-						style="margin-bottom: 10px;"
-					>
-						<nz-card
-							class="card"
-							[nzBordered]="false"
-							nzTitle="Save Project"
-							[nzExtra]="extraTemplate"
-						>
-							<!-- Save New Project -->
+							<app-edit-project
+								(formData)="saveFormData($event)"
+								[selectedProject]="selectedProject$"
+								[selectLoggedInUser]="selectLoggedInUser$ | async"
+							>
+							</app-edit-project>
+						</ng-container>
+
+						<ng-template #newProjectSaveTemplate>
 							<app-edit-project
 								(formData)="saveFormData($event)"
 								[selectedProject]="selectLoggedInUser$"
 							>
 							</app-edit-project>
-						</nz-card>
-						<ng-template #extraTemplate> </ng-template>
-					</div>
-				</ng-template>
+						</ng-template>
+					</nz-card>
+					<ng-template #extraTemplate> </ng-template>
+				</div>
 			</div>
 			<div nz-row nzGutter="12" [@listStagger]>
 				<div
