@@ -34,7 +34,6 @@ export class EditProjectComponent implements OnInit {
 	isVisible = false;
 	visible = false;
 	isOkLoading = false;
-	private userUid: string;
 	newProject$ = this._store.pipe(select(selectNewProject));
 	currentUser$ = this._store.pipe(select(selectLoggedInUser));
 	userProjects$ = this._store.pipe(select(userProjects));
@@ -68,7 +67,6 @@ export class EditProjectComponent implements OnInit {
 		this.currentUser$
 			.pipe(
 				map(user => {
-					this.userUid = user.uid;
 					if (user.hasOwnProperty("profile")) {
 						this._store.dispatch(
 							new GetSelectedProjectFromRoute(this._router.snapshot.params.id)
@@ -84,8 +82,7 @@ export class EditProjectComponent implements OnInit {
 		formData.type ? "" : (formData.type = this._router.snapshot.params.id);
 		this._store.dispatch(
 			new SaveProject({
-				...formData,
-				userID: this.userUid
+				...formData
 			})
 		);
 	};

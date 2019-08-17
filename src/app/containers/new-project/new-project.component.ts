@@ -24,7 +24,7 @@ export class NewProjectComponent implements OnInit {
       new NewProject({
         title: "NEW PROJECT",
         type: id,
-        userID: "NOT YET ASSIGNED",
+        uid: "NOT YET ASSIGNED",
         UiComponents: null
       })
     );

@@ -4,7 +4,7 @@ export interface IProject {
 	id?: string;
 	title: string;
 	type: string;
-	userID: string;
+	uid: string;
 	profile?: string;
 	slug?: string;
 	UiComponents: UiComponents[];

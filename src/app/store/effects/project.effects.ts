@@ -49,8 +49,11 @@ export class ProjectEffects {
 	ofType<SaveProject>(EProjectActions.SaveProject),
 	map(action => action.payload),
 	withLatestFrom(this._store.pipe(select(selectedProject))),
-	switchMap(([project, selectedProject]) => {
+	withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+	switchMap(([[project, selectedProject], user]) => {
+		console.log(project, selectedProject, user)
 	  project.slug = project.title.replace(/ /g, ".");
+	  project.uid = user.uid;
 	  if (selectedProject) {
 		project.id = selectedProject.id;
 		this._projectService.updateProject(project);
@@ -71,7 +74,7 @@ export class ProjectEffects {
 	map(action => action.payload),
 	withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
 	switchMap(([project, selectLoggedInUserUID]) => {
-	  if (selectLoggedInUserUID == project.userID) {
+	  if (selectLoggedInUserUID == project.uid) {
 		this._projectService.deleteProject(project);
 		return [
 		  new SetSuccessMsg("Project Deleted Successfully!"),
@@ -96,7 +99,7 @@ export class ProjectEffects {
 		.pipe(
 		  switchMap((projects: IProject[]) => [
 			new GetProfileFromRouteSuccess(projects),
-			new UpdateUiComponents(projects)
+			new UpdateUiComponents(projects[0].uid)
 		  ])
 		);
 	})
@@ -162,7 +165,7 @@ export class ProjectEffects {
 			  new NewProject({
 				title: "NEW PROJECT",
 				type: action.payload,
-				userID: "NOT YET ASSIGNED",
+				uid: "NOT YET ASSIGNED",
 				UiComponents: null
 			  })
 			);
@@ -186,7 +189,7 @@ export class ProjectEffects {
 	switchMap((project: IProject) => {
 	  this._userService.updateUserFromProjectName(project);
 	  return [
-		new UpdateProfileSuccess(project.userID),
+		new UpdateProfileSuccess(project.uid),
 		new NavigateToRoute([project.profile])
 	  ];
 	})
@@ -201,9 +204,9 @@ export class ProjectEffects {
 	ofType<UpdateUiComponents>(EProjectActions.UpdateUiComponents),
 	map(action => action.payload),
 	withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-	switchMap(([projects, userID]) => {
+	switchMap(([projectUid, uid]) => {
 	  let isNewProject = {
-		isNewProject: projects[0].userID == userID
+		isNewProject: projectUid == uid
 	  };
 	  return of(new UpdateUiComponentsSuccess(isNewProject));
 	})

@@ -86,7 +86,7 @@ export class GetProfileFromRouteSuccess implements Action {
 
 export class UpdateUiComponents implements Action {
 	public readonly type = EProjectActions.UpdateUiComponents;
-	constructor(public payload: IProject[]) {}
+	constructor(public payload: IProject['uid']) {}
 }
 
 export class UpdateUiComponentsSuccess implements Action {
