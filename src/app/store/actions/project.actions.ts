@@ -19,8 +19,8 @@ export enum EProjectActions {
 	GetUserProjects = "[Project] Get User Projects",
 	GetProfileFromRoute = "[Profile] Get Profile From Route",
 	GetProfileFromRouteSuccess = "[Profile] Get Profile From Route Success",
-	UpdateUiComponents = "[Project] Get UI Components",
-	UpdateUiComponentsSuccess = "[Project] Get UI Components Success"
+	UpdateUiComponents = "[Project] Update UI Components",
+	UpdateUiComponentsSuccess = "[Project] Update UI Components Success"
 }
 
 export class GetProjects implements Action {

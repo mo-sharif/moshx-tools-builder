@@ -81,11 +81,11 @@
 						<!-- Save New Project -->
 						<ng-container
 							*ngIf="selectedProject$ | async; else newProjectSaveTemplate"
-						>
+						>	<!-- edit Project -->
 							<app-edit-project
 								(formData)="saveFormData($event)"
-								[selectedProject]="selectedProject$"
-								[selectLoggedInUser]="selectLoggedInUser$ | async"
+								[selectedProject]="selectedProject$ | async"
+								[selectLoggedInUser]="selectLoggedInUser$"
 							>
 							</app-edit-project>
 						</ng-container>
@@ -94,6 +94,7 @@
 							<app-edit-project
 								(formData)="saveFormData($event)"
 								[selectedProject]="selectLoggedInUser$"
+								[selectLoggedInUser]="selectLoggedInUser$"
 							>
 							</app-edit-project>
 						</ng-template>

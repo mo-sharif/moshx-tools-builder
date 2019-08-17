@@ -68,8 +68,8 @@ export class EditProjectComponent implements OnInit {
 		this.currentUser$
 			.pipe(
 				map(user => {
+					this.userUid = user.uid;
 					if (user.hasOwnProperty("profile")) {
-						this.userUid = user.uid;
 						this._store.dispatch(
 							new GetSelectedProjectFromRoute(this._router.snapshot.params.id)
 						);

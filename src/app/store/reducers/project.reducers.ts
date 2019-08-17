@@ -82,7 +82,8 @@ export function projectReducers(
 			return {
 				...state,
 				projects: action.payload,
-				selectedProject: null
+				selectedProject: null,
+				newProject: null
 			};
 		}
 		case EProjectActions.UpdateUiComponents: {

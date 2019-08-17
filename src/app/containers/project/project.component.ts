@@ -28,9 +28,8 @@ export class ProjectComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this._route.params.subscribe(params =>
-			this._store.dispatch(new GetProfileFromRoute(params.id))
-		);
+		this._route.params.subscribe(params => 
+			this._store.dispatch(new GetProfileFromRoute(params.id)));
 	}
 
 	navigateToProject = (project: IProject) => {

@@ -21,10 +21,10 @@ export class EditProjectComponent implements OnInit {
 	formData: EventEmitter<any> = new EventEmitter();
 
 	@Input()
-	selectLoggedInUser: IUser;
+	selectLoggedInUser: Observable<IUser>;
 
 	@Input()
-	selectedProject: Observable<IProject>;
+	selectedProject: IProject;
 	
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: IProject) => {
@@ -41,7 +41,7 @@ export class EditProjectComponent implements OnInit {
 	titleAsyncValidator = (control: FormControl) =>
 		new Observable((observer: Observer<ValidationErrors | null>) => {
 			setTimeout(() => {
-				if (control.value === "New Project") {
+				if (control.value === "home") {
 					observer.next({ error: true, duplicated: true });
 				} else {
 					observer.next(null);
@@ -60,18 +60,16 @@ export class EditProjectComponent implements OnInit {
 	};
 
 	constructor(private fb: FormBuilder) {}
-
+	/* Sometimes profile comes in as null so we need to catch that */
 	ngOnInit() {
-		this.selectedProject.subscribe((selectedProject) => { 
-			this.validateForm = this.fb.group({
-				profile: [
-					selectedProject.profile,
-					[Validators.required],
-					[this.titleAsyncValidator]
-				],
-				title: [selectedProject.title, [Validators.required]],
-				type: [selectedProject.type]
-			});
-		})
+		this.validateForm = this.fb.group({
+			profile: [
+				null,
+				[Validators.required],
+				[this.titleAsyncValidator]
+			],
+			title: [this.selectedProject.title, [Validators.required]],
+			type: [this.selectedProject.type]
+		});
 	}
 }

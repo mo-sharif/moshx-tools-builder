@@ -59,7 +59,8 @@ export class ProjectEffects {
 	  }
 	  return [
 		new SetSuccessMsg("Project Saved Successfully"),
-		new SaveProjectSuccess(project)
+		new SaveProjectSuccess(project),
+		new NavigateToRoute([project.profile])
 	  ];
 	}),
 	catchError(err => of(new SetErrorMsg(err)))
@@ -85,19 +86,10 @@ export class ProjectEffects {
   );
 
   @Effect()
-  navigateToProfile$ = this._actions$.pipe(
-	ofType<SaveProject>(EProjectActions.SaveProject),
-	map(action => action.payload),
-	switchMap((project: IProject) => {
-	  return of(new NavigateToRoute([project.profile]));
-	})
-  );
-
-  @Effect()
   loadProfileFromRoute$ = this._actions$.pipe(
 	ofType<GetProfileFromRoute>(EProjectActions.GetProfileFromRoute),
 	map(action => action.payload),
-	switchMap(route => {
+	switchMap((route) => {
 	  let profileName = route.replace(".", " ");
 	  return this._profileService
 		.loadProfile(profileName)
@@ -158,8 +150,11 @@ export class ProjectEffects {
 	withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 	switchMap(([action, user]) => {
 	  let route = action.payload;
+	  console.warn('This needs to be fixed for loading other projects')
+	  console.log(route, user)
 	  return this._projectService.GetSelectedProjectFromRoute(user, route).pipe(
 		switchMap(([project]) => {
+			console.log(project)
 		  if (project) {
 			return of(new GetSelectedProjectFromRouteSuccess(project));
 		  } else {
