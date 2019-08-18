@@ -150,11 +150,11 @@ export class ProjectEffects {
 	ofType<GetSelectedProjectFromRoute>(
 	  EProjectActions.GetSelectedProjectFromRoute
 	),
+	map(action => action.payload),
 	withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-	switchMap(([action, user]) => {
-	  let route = action.payload;
-	  console.warn('This needs to be fixed for loading other projects')
-	  console.log(route, user)
+	withLatestFrom(this._store.pipe(select(selectedProject))),
+	switchMap(([[route, user], project]) => {
+	  console.log(route, user, project) // null
 	  return this._projectService.GetSelectedProjectFromRoute(user, route).pipe(
 		switchMap(([project]) => {
 			console.log(project)
@@ -164,7 +164,7 @@ export class ProjectEffects {
 			return of(
 			  new NewProject({
 				title: "NEW PROJECT",
-				type: action.payload,
+				type: route,
 				uid: "NOT YET ASSIGNED",
 				UiComponents: null
 			  })
