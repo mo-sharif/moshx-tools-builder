@@ -6,7 +6,7 @@
 	<nz-form-item>
 		<nz-form-label [nzSpan]="10" nzRequired>Profile Name</nz-form-label>
 		<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
-			<input nz-input formControlName="profile" placeholder="Awesome Profile" [value]="(selectLoggedInUser | async)?.profile || null"/>
+			<input nz-input formControlName="profile" placeholder="Awesome Profile"/>
 			<nz-form-explain
 				*ngIf="
 					(validateForm.get('profile')?.dirty &&

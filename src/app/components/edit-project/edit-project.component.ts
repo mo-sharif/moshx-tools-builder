@@ -21,7 +21,7 @@ export class EditProjectComponent implements OnInit {
 	formData: EventEmitter<any> = new EventEmitter();
 
 	@Input()
-	selectLoggedInUser: Observable<IUser>;
+	selectLoggedInUser: IUser;
 
 	@Input()
 	selectedProject: IProject;
@@ -64,7 +64,7 @@ export class EditProjectComponent implements OnInit {
 	ngOnInit() {
 		this.validateForm = this.fb.group({
 			profile: [
-				null,
+				this.selectLoggedInUser.profile,
 				[Validators.required],
 				[this.titleAsyncValidator]
 			],

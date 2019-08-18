@@ -40,11 +40,7 @@ import {
 	GetUserProfileSuccess,
 	GetUserProfile
 } from "../actions/auth.actions";
-import {
-	selectedProject,
-	userProjects,
-	selectFirstProject
-} from "../selectors/project.selector";
+import { selectedProject } from "../selectors/project.selector";
 
 @Injectable()
 export class ProjectEffects {
@@ -71,7 +67,7 @@ export class ProjectEffects {
 		}),
 		catchError(err => of(new SetErrorMsg(err)))
 	);
-	
+
 	@Effect()
 	deleteProject$ = this._actions$.pipe(
 		ofType<DeleteProject>(EProjectActions.DeleteProject),
