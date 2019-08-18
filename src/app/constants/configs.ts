@@ -1,5 +1,5 @@
 export class Configs {
-  public static SITE_NAME = "AngularX";
+  public static SITE_NAME = "MoshX";
   public static IS_COLLAPSED = false;
-  public static COPYRIGHT = "AngularX by Mo Sharif 💙";
+  public static COPYRIGHT = "MoshX by Mo Sharif 💙";
 }

@@ -1,7 +1,7 @@
 <div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
 	<div nz-col nzSpan="24">
 		<h1 class="h1-header">
-			Welcome to AngularX
+			Welcome to {{ (selectLoggedInUser$ | async).profile || 'MoshX' }}
 		</h1>
 	</div>
 </div>

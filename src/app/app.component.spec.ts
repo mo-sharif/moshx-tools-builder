@@ -22,6 +22,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('nz-layout').textContent).toContain('Welcome to AngularX!');
+    expect(compiled.querySelector('nz-layout').textContent).toContain('Welcome to MoshX!');
   }));
 });

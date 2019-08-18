@@ -26,7 +26,7 @@ import {
   animations: [listStagger]
 })
 export class AccountComponent implements OnInit {
-  user$ = this._store.pipe(select(selectLoggedInUser));
+  selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 
   constructor(private _store: Store<IAppState>, private _route: Router) {}
 
