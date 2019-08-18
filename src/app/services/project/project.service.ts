@@ -31,14 +31,11 @@ export class ProjectService {
 			.valueChanges();
 	}
 
-	GetSelectedProjectFromRoute(user: IUser, route: string): Observable<any> {
-		if (!user) {
-			return of("No User Was provided");
-		}
+	GetSelectedProjectFromRoute(profileName: string, projectName: string): Observable<any> {
 		return this.firestore
 			.collection(`/profiles/`)
-			.doc(user.profile)
-			.collection(`/projects/`, ref => ref.where("slug", "==", route))
+			.doc(profileName)
+			.collection(`/projects/`, ref => ref.where("slug", "==", projectName))
 			.valueChanges();
 	}
 

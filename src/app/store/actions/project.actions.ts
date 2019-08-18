@@ -32,7 +32,7 @@ export class GetProject implements Action {
 }
 export class GetSelectedProjectFromRoute implements Action {
 	public readonly type = EProjectActions.GetSelectedProjectFromRoute;
-	constructor(public payload: string) {}
+	constructor(public payload: string[]) {}
 }
 export class GetSelectedProjectFromRouteSuccess implements Action {
 	public readonly type = EProjectActions.GetSelectedProjectFromRouteSuccess;
