@@ -12,9 +12,9 @@ import { IProject } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
 
 @Component({
-	selector: "app-edit-project",
-	templateUrl: "./edit-project.component.html",
-	styleUrls: ["./edit-project.component.css"]
+	selector: "app-save-project",
+	templateUrl: "./save-project.component.html",
+	styleUrls: ["./save-project.component.css"]
 })
 export class EditProjectComponent implements OnInit {
 	@Output()
