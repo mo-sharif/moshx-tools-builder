@@ -32,7 +32,6 @@ import { iif } from "rxjs";
 export class EditProjectComponent implements OnInit {
 	public components = Components;
 	isVisible = false;
-	visible = false;
 	isOkLoading = false;
 	newProject$ = this._store.pipe(select(selectNewProject));
 	currentUser$ = this._store.pipe(select(selectLoggedInUser));
@@ -110,11 +109,11 @@ export class EditProjectComponent implements OnInit {
 	};
 
 	open(): void {
-		this.visible = true;
+		this.isVisible = true;
 	}
 
 	close(): void {
-		this.visible = false;
+		this.isVisible = false;
 	}
 
 	goBack() {

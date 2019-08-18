@@ -45,16 +45,13 @@
 
 <!-- Setting Drawer -->
 <!-- TODO: Move me to a component and import me in here-->
-<nz-drawer
+<nz-modal
 	*ngIf="selectUiComponents$ | async"
-	[nzVisible]="visible"
-	[nzWidth]="380"
-	nzPlacement="right"
-	(nzOnClose)="close()"
-	[nzMaskClosable]="true"
-	[nzClosable]="true"
+	[(nzVisible)]="isVisible"
+	nzTitle="Save Project"
+	(nzOnCancel)="handleCancel()"
+	[nzOkText]="null"
 >
-	<p class="title" style=" margin-bottom: 24px;">Settings</p>
 	<div
 		nz-row
 		nzType="flex"
@@ -75,19 +72,19 @@
 					<nz-card
 						class="card"
 						[nzBordered]="false"
-						nzTitle="Save Project"
+						nzTitle="Project Settings"
 						[nzExtra]="extraTemplate"
 					>
 						<!-- Save New Project -->
 						<ng-container
 							*ngIf="selectedProject$ | async; else newProjectSaveTemplate"
-						>	<!-- edit Project -->
+						>
+							<!-- edit Project -->
 							<app-save-project
 								(formData)="saveFormData($event)"
 								[selectedProject]="selectedProject$ | async"
 								[selectLoggedInUser]="selectLoggedInUser$ | async"
 							>
-
 							</app-save-project>
 						</ng-container>
 
@@ -144,4 +141,4 @@
 			</div>
 		</div>
 	</div>
-</nz-drawer>
+</nz-modal>
