@@ -7,7 +7,7 @@ export interface IProject {
 	uid: string;
 	profile?: string;
 	slug?: string;
-	UiComponents: UiComponents[];
+	UiComponents: UiComponents;
 }
 
 export interface UiComponents {
