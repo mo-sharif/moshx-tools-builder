@@ -20,7 +20,7 @@ import {
   templateUrl: "./short-form.component.html",
   styleUrls: ["./short-form.component.css"]
 })
-export class ShortFormComponent implements OnInit, OnDestroy {
+export class ShortFormComponent implements OnInit{
   @Input()
   dataInput;
 
@@ -45,8 +45,4 @@ export class ShortFormComponent implements OnInit, OnDestroy {
 	emitFormData = value => {
     this.formData.emit({[this.dataInput.type]:value});
   };
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }
