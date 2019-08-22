@@ -88,6 +88,10 @@ export class EditProjectComponent implements OnInit {
 			})
 		);
 	};
+
+	saveShortFormData = ($event) => {
+		console.log($event)
+	}
 	showModal(): void {
 		this.isVisible = true;
 	}

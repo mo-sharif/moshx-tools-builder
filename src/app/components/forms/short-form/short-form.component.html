@@ -1,16 +1,14 @@
 <form
 	nz-form
 	[nzLayout]="'inline'"
-	[formGroup]="validateForm"
-	(ngSubmit)="submitForm($event, validateForm.value)"
 >
 	<nz-form-item>
 		<nz-form-control>
 			<nz-input-group nzPrefixIcon="user">
 				<input
-					formControlName="dataInput"
 					nz-input
 					placeholder="{{ dataInput.placeholder }}"
+					(keyup)='keyUp.next($event)'
 				/>
 			</nz-input-group>
 		</nz-form-control>

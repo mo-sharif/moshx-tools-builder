@@ -115,7 +115,7 @@
 						[nzBordered]="false"
 						[nzTitle]="setting.placeholder"
 						[nzExtra]="extraTemplate"
-						><app-short-form [dataInput]="setting"></app-short-form>
+						><app-short-form [dataInput]="setting" (formData)="saveShortFormData($event)"></app-short-form>
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
 				</div>
