@@ -32,7 +32,7 @@ export class ShortFormComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   constructor() {}
 
-  ngOnInit() {
+	ngOnInit() {
     const subscription = this.keyUp
       .pipe(
         map(event => event.target.value),
@@ -42,8 +42,8 @@ export class ShortFormComponent implements OnInit, OnDestroy {
       )
       .subscribe(value => this.emitFormData(value));
   }
-  emitFormData = value => {
-    this.formData.emit(value);
+	emitFormData = value => {
+    this.formData.emit({[this.dataInput.type]:value});
   };
 
   ngOnDestroy(): void {

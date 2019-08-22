@@ -46,12 +46,12 @@ export class EditProjectComponent implements OnInit {
 	settings = [
 		{
 			placeholder: "Http Request",
-			type: "Data in",
+			type: "httpRequestUrl",
 			example: "https://mosh-media.com"
 		},
 		{
 			placeholder: "Firebase Collection",
-			type: "storage",
+			type: "collectionUrl",
 			example: "/user/profile"
 		}
 	];

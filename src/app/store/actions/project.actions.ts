@@ -13,6 +13,8 @@ export enum EProjectActions {
 	EditProject = "[Project] Edit Project",
 	SaveProject = "[Project] Save Project",
 	SaveProjectSuccess = "[Project] Save Project Success",
+	UpdateProject = "[Project] Update Project",
+	UpdateProjectSuccess = "[Project] Update Project Success",
 	DeleteProject = "[Project] Delete Project",
 	DeleteProjectSuccess = "[Project] Delete Project Success",
     GetContainers = "[Project] Get Containers",
@@ -62,6 +64,14 @@ export class SaveProjectSuccess implements Action {
 	public readonly type = EProjectActions.SaveProjectSuccess;
 	constructor(public payload: IProject) {}
 }
+export class UpdateProject implements Action {
+	public readonly type = EProjectActions.UpdateProject;
+	constructor(public payload: IProject) {}
+}
+export class UpdateProjectSuccess implements Action {
+	public readonly type = EProjectActions.UpdateProjectSuccess;
+	constructor(public payload: IProject) {}
+}
 export class DeleteProject implements Action {
 	public readonly type = EProjectActions.DeleteProject;
 	constructor(public payload: IProject) {}
@@ -106,6 +116,8 @@ export type ProjectActions =
 	| GetContainers
 	| SaveProject
 	| SaveProjectSuccess
+	| UpdateProject
+	| UpdateProjectSuccess
 	| DeleteProject
 	| DeleteProjectSuccess
 	| GetUserProjects

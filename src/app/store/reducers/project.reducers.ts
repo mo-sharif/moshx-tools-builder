@@ -61,6 +61,18 @@ export function projectReducers(
 				newProject: action.payload
 			};
 		}
+		case EProjectActions.UpdateProject: {
+			return {
+				...state,
+				selectedProject: action.payload,
+			};
+		}
+		case EProjectActions.UpdateProjectSuccess: {
+			return {
+				...state,
+				selectedProject: action.payload
+			};
+		}
 		case EProjectActions.DeleteProject: {
 			return {
 				...state,
