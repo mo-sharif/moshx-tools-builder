@@ -25,7 +25,8 @@ export class NewProjectComponent implements OnInit {
         title: "NEW PROJECT",
         type: id,
         uid: "NOT YET ASSIGNED",
-        UiComponents: null
+        UiComponents: null,
+        ComponentSettings: null,
       })
     );
     this._router.navigate(["home/new-project", id]);

@@ -8,11 +8,24 @@ export interface IProject {
 	profile?: string;
 	slug?: string;
 	UiComponents: UiComponents;
+	ComponentSettings: IComponentSettings;
 }
 
 export interface UiComponents {
 	isNewProject: boolean;
 }
+
+export interface IComponentSettings {
+	placeholder: string,
+	example: string,
+	type: ISettings
+}
+
+export interface ISettings {
+	httpRequestUrl: string,
+	collectionUrl: string,
+}
+
 export interface IProfile {
 	name: string;
 	user: string;

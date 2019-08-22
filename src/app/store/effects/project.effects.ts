@@ -165,7 +165,8 @@ export class ProjectEffects {
 									title: "NEW PROJECT",
 									type: type,
 									uid: "NOT YET ASSIGNED",
-									UiComponents: null
+									UiComponents: null,
+									ComponentSettings: null
 								})
 							);
 						}
