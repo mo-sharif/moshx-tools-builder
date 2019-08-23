@@ -64,7 +64,7 @@ export function projectReducers(
 		case EProjectActions.UpdateProject: {
 			return {
 				...state,
-				selectedProject: action.payload,
+				updateProject: action.payload
 			};
 		}
 		case EProjectActions.UpdateProjectSuccess: {

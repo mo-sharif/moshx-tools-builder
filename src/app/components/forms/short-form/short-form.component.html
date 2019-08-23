@@ -7,7 +7,8 @@
 			<nz-input-group nzPrefixIcon="user">
 				<input
 					nz-input
-					placeholder="{{ dataInput.placeholder }}"
+					[value]="this.dataInput?.ComponentSettings[this.ComponentSetting.type] || ''"
+					[placeholder]="ComponentSetting.example"
 					(keyup)='keyUp.next($event)'
 				/>
 			</nz-input-group>

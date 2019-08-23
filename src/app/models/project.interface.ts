@@ -16,14 +16,14 @@ export interface UiComponents {
 }
 
 export interface IComponentSettings {
-	placeholder: string,
-	example: string,
-	type: ISettings
+	httpRequestUrl: string,
+	collectionUrl: string,
 }
 
 export interface ISettings {
-	httpRequestUrl: string,
-	collectionUrl: string,
+	placeholder: string,
+	example: string,
+	type: ISettings
 }
 
 export interface IProfile {

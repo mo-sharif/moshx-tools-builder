@@ -1,7 +1,8 @@
 import {
 	IProject,
 	IProjectContainer,
-	UiComponents
+	UiComponents,
+	IComponentSettings
 } from "../../models/project.interface";
 import { IUser } from "src/app/models/user.interface";
 
@@ -12,6 +13,7 @@ export interface IProjectState {
 	container: IProjectContainer[];
 	profile: IUser;
 	UiComponents: UiComponents;
+	updateProject: IComponentSettings;
 }
 
 export const initialProjectState: IProjectState = {
@@ -20,5 +22,6 @@ export const initialProjectState: IProjectState = {
 	selectedProject: null,
 	container: [],
 	profile: null,
-	UiComponents: { isNewProject: true }
+	UiComponents: { isNewProject: true },
+	updateProject: null
 };

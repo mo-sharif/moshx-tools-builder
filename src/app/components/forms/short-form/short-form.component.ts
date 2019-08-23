@@ -6,7 +6,7 @@ import {
   EventEmitter,
   OnDestroy
 } from "@angular/core";
-import { of, Subject, Subscription } from "rxjs";
+import { of, Subject, Subscription, Observable } from "rxjs";
 import {
   debounceTime,
   delay,
@@ -14,6 +14,7 @@ import {
   flatMap,
   map
 } from "rxjs/operators";
+import { IProject } from "src/app/models/project.interface";
 
 @Component({
   selector: "app-short-form",
@@ -22,7 +23,10 @@ import {
 })
 export class ShortFormComponent implements OnInit{
   @Input()
-  dataInput;
+  dataInput: IProject;
+
+  @Input()
+  ComponentSetting;
 
   @Output()
   formData: EventEmitter<any> = new EventEmitter();
@@ -33,6 +37,8 @@ export class ShortFormComponent implements OnInit{
   constructor() {}
 
 	ngOnInit() {
+    console.log(this.dataInput.ComponentSettings[this.ComponentSetting.type])
+
     const subscription = this.keyUp
       .pipe(
         map(event => event.target.value),
@@ -43,6 +49,6 @@ export class ShortFormComponent implements OnInit{
       .subscribe(value => this.emitFormData(value));
   }
 	emitFormData = value => {
-    this.formData.emit({[this.dataInput.type]:value});
+    this.formData.emit({[this.ComponentSetting.type]:value});
   };
 }

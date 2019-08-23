@@ -18,7 +18,9 @@ import {
 	DeleteProject,
 	DeleteProjectSuccess,
 	UpdateUiComponents,
-	UpdateUiComponentsSuccess
+	UpdateUiComponentsSuccess,
+	UpdateProject,
+	UpdateProjectSuccess
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
@@ -64,6 +66,18 @@ export class ProjectEffects {
 				new SaveProjectSuccess(project),
 				new NavigateToRoute([project.profile])
 			];
+		}),
+		catchError(err => of(new SetErrorMsg(err)))
+	);
+
+	@Effect()
+	updateProject$ = this._actions$.pipe(
+		ofType<UpdateProject>(EProjectActions.UpdateProject),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectedProject))),
+		switchMap(([project, selectedProject]) => {
+			this._projectService.updateProject({...selectedProject, ComponentSettings:{...project}});
+			return of(new UpdateProjectSuccess(project['ComponentSettings']));
 		}),
 		catchError(err => of(new SetErrorMsg(err)))
 	);

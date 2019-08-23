@@ -4,7 +4,8 @@ import { Location } from "@angular/common";
 import {
 	SaveProject,
 	GetSelectedProjectFromRoute,
-	DeleteProject
+	DeleteProject,
+	UpdateProject
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -43,7 +44,7 @@ export class EditProjectComponent implements OnInit {
 
 	/* Move me to an effect and make me come from firebase collection */
 
-	settings = [
+	ComponentSettings = [
 		{
 			placeholder: "Http Request",
 			type: "httpRequestUrl",
@@ -89,9 +90,11 @@ export class EditProjectComponent implements OnInit {
 		);
 	};
 
-	saveShortFormData = ($event) => {
-		console.log($event)
-	}
+	saveShortFormData = (shortFormData: IProject["ComponentSettings"]) => {
+		console.log(shortFormData)
+		this._store.dispatch(new UpdateProject({ ...shortFormData }));
+	};
+
 	showModal(): void {
 		this.isVisible = true;
 	}
