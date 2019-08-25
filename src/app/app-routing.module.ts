@@ -2,13 +2,13 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthGuard } from "./services/guard/guard.service";
+import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
 const routes: Routes = [
 	{ path: "home", component: HomeComponent, data: { breadcrumb: "Home" } },
 	{
 		path: "home/not-allowed",
-		loadChildren:
-			"./containers/page-not-allowed/page-not-allowed.module#PageNotAllowedModule",
+		component: PageNotAllowedComponent,
 		data: { breadcrumb: "No Access!" }
 	},
 	{
@@ -37,13 +37,11 @@ const routes: Routes = [
 		path: "home/playground",
 		loadChildren: "./containers/playground/playground.module#PlaygroundModule",
 		data: { breadcrumb: "Playground" },
-		canActivate: [AuthGuard]
 	},
 	{
 		path: "home/new-project",
 		loadChildren: "./containers/new-project/new-project.module#NewProjectModule",
-		data: { breadcrumb: "New Project" },
-		canActivate: [AuthGuard]
+		data: { breadcrumb: "New Project" }
 	},
 	{ path: "", redirectTo: "/home", pathMatch: "full" },
 	{
