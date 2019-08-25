@@ -31,7 +31,10 @@ export class ProjectService {
 			.valueChanges();
 	}
 
-	GetSelectedProjectFromRoute(profileName: string, projectName: string): Observable<any> {
+	GetSelectedProjectFromRoute(
+		profileName: string,
+		projectName: string
+	): Observable<any> {
 		return this.firestore
 			.collection(`/profiles/`)
 			.doc(profileName)
@@ -59,13 +62,22 @@ export class ProjectService {
 	};
 
 	addAndUpdateProject = (project: IProject) => {
-		project.id = project.id ? project.id : this.firestore.createId();
-		return this.firestore
-			.collection("profiles")
-			.doc(project.profile)
-			.collection<IProject>("projects")
-			.doc(project.id)
-			.update(project);
+		if (project.id) {
+			return this.firestore
+				.collection("profiles")
+				.doc(project.profile)
+				.collection<IProject>("projects")
+				.doc(project.id)
+				.update(project);
+		} else {
+			project.id = this.firestore.createId();
+			return this.firestore
+				.collection("profiles")
+				.doc(project.profile)
+				.collection<IProject>("projects")
+				.doc(project.id)
+				.set(project);
+		}
 	};
 
 	deleteProject = (project: IProject) => {
