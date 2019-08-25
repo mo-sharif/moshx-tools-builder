@@ -42,7 +42,7 @@ import {
 	GetUserProfileSuccess,
 	GetUserProfile
 } from "../actions/auth.actions";
-import { selectedProject } from "../selectors/project.selector";
+import { selectProject } from "../selectors/project.selector";
 
 @Injectable()
 export class ProjectEffects {
@@ -50,35 +50,40 @@ export class ProjectEffects {
 	saveProject$ = this._actions$.pipe(
 		ofType<SaveProject>(EProjectActions.SaveProject),
 		map(action => action.payload),
-		withLatestFrom(this._store.pipe(select(selectedProject))),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-		switchMap(([[project, selectedProject], user]) => {
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([[project, selectProject], userUid]) => {
+			project.id = selectProject.id 
 			project.slug = project.title.replace(/ /g, ".");
-			project.uid = user.uid;
-			if (selectedProject) {
-				project.id = selectedProject.id;
+			project.uid = userUid;
+			this._projectService.addAndUpdateProject({...project, ...selectProject});
+/* 			if (selectProject.id) {
+				console.log('here')
 				this._projectService.updateProject(project);
 			} else {
 				this._projectService.addProject(project);
-			}
+			} */
 			return [
 				new SetSuccessMsg("Project Saved Successfully"),
 				new SaveProjectSuccess(project)
 			];
 		}),
-		catchError(err => of(new SetErrorMsg(err)))
+		catchError(err => of(new SetErrorMsg(`[SaveProject] ${err}`)))
 	);
 
 	@Effect()
 	updateProject$ = this._actions$.pipe(
 		ofType<UpdateProject>(EProjectActions.UpdateProject),
 		map(action => action.payload),
-		withLatestFrom(this._store.pipe(select(selectedProject))),
-		switchMap(([project, selectedProject]) => {
-			this._projectService.updateProject({...selectedProject, ComponentSettings:{...project}});
-			return of(new UpdateProjectSuccess(project['ComponentSettings']));
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		switchMap(([project, selectProject]) => {
+			this._projectService.updateProject({
+				...selectProject,
+				componentConfigs: { ...project }
+			});
+			return of(new UpdateProjectSuccess(project["componentConfigs"]));
 		}),
-		catchError(err => of(new SetErrorMsg(err)))
+		catchError(err => of(new SetErrorMsg(`[UpdateProject] ${err}`)))
 	);
 
 	@Effect()
@@ -135,7 +140,7 @@ export class ProjectEffects {
 					}
 				}),
 				catchError(err => {
-					return of(new SetErrorMsg(err));
+					return of(new SetErrorMsg(`[GetUserProfile] ${err}`));
 				})
 			);
 		})
@@ -148,7 +153,7 @@ export class ProjectEffects {
 		switchMap(([action, user]) => {
 			return this._projectService.getUserProjects(user).pipe(
 				catchError(err => {
-					return of(new SetErrorMsg(err));
+					return of(new SetErrorMsg(`[GetUserProfileSuccess] ${err}`));
 				})
 			);
 		})
@@ -178,14 +183,17 @@ export class ProjectEffects {
 									title: "NEW PROJECT",
 									type: type,
 									uid: "NOT YET ASSIGNED",
-									UiComponents: null,
-									ComponentSettings: null
+									UiComponents: { isNewProject: true },
+									componentConfigs: {
+										collectionUrl: null,
+										httpRequestUrl: null
+									}
 								})
 							);
 						}
 					}),
 					catchError(err => {
-						return of(new SetErrorMsg(err));
+						return of(new SetErrorMsg(`[GetSelectedProjectFromRoute] ${err}`));
 					})
 				);
 		})
@@ -218,10 +226,11 @@ export class ProjectEffects {
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
 		switchMap(([projectUid, uid]) => {
-			let isNewProject = {
-				isNewProject: projectUid == uid
+			let UiComponents = {
+				isNewProject: projectUid == uid,
+				isUserLoggedIn: uid ? true : false
 			};
-			return of(new UpdateUiComponentsSuccess(isNewProject));
+			return of(new UpdateUiComponentsSuccess(UiComponents));
 		})
 	);
 
