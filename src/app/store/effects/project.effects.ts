@@ -56,13 +56,7 @@ export class ProjectEffects {
 			project.id = selectProject.id 
 			project.slug = project.title.replace(/ /g, ".");
 			project.uid = userUid;
-			this._projectService.addAndUpdateProject({...project, ...selectProject});
-/* 			if (selectProject.id) {
-				console.log('here')
-				this._projectService.updateProject(project);
-			} else {
-				this._projectService.addProject(project);
-			} */
+			this._projectService.addAndUpdateProject(project);
 			return [
 				new SetSuccessMsg("Project Saved Successfully"),
 				new SaveProjectSuccess(project)
