@@ -50,8 +50,7 @@ export function projectReducers(
 		}
 		case EProjectActions.SaveProject: {
 			return {
-				...state,
-				selectProject: action.payload
+				...state
 			};
 		}
 		case EProjectActions.SaveProjectSuccess: {
