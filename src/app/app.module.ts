@@ -38,6 +38,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
 // Ant Design
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
@@ -46,7 +47,6 @@ import { ProjectService } from "./services/project/project.service";
 import { addComponentModule } from "./directives/addComponent.module";
 import { UserService } from "./services/user/user.service";
 import { ProfileService } from "./services/profile/profile.service";
-import { listStagger } from "./animations/list-stagger.animation";
 import { UserEffects } from "./store/effects/user.effects";
 
 
@@ -57,6 +57,7 @@ import { UserEffects } from "./store/effects/user.effects";
 		HomeComponent,
 		SideMenuComponent,
 		HeaderComponent,
+		PageNotAllowedComponent,
 	],
 	imports: [
 		addComponentModule,
