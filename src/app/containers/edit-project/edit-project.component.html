@@ -37,14 +37,14 @@
 <!-- Setting Drawer -->
 <!-- TODO: Move me to a component and import me in here-->
 <nz-modal
-	*ngIf="selectUiComponents$ | async"
+	*ngIf="selectUiComponents$ | async as selectUiComponents"
 	[(nzVisible)]="isVisible"
 	nzTitle="Save Project"
 	(nzOnCancel)="handleCancel()"
 	[nzOkText]="null"
 >
 	<ng-container
-		*ngIf="(selectLoggedInUser$ | async)?.profile; else notLoggedIn"
+		*ngIf="selectUiComponents?.isUserLoggedIn; else notLoggedIn"
 	>
 		<div
 			nz-row
@@ -86,7 +86,7 @@
 					nz-row
 					nzGutter="12"
 					[@listStagger]
-					*ngIf="(selectUiComponents$ | async).isNewProject"
+					*ngIf="selectUiComponents.isNewProject"
 				>
 					<div
 						nz-col
