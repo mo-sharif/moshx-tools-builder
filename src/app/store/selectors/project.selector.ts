@@ -15,19 +15,9 @@ export const selectFirstProject = createSelector(
 	(state: IProjectState) => state.projects[0]
 );
 
-export const selectNewProjects = createSelector(
-	selectProjects,
-	(state:IProjectState) => state.newProject
-)
-
 export const selectContainers = createSelector(
 	selectProjects,
 	(state: IProjectState) => state.container
-);
-
-export const selectNewProject = createSelector(
-	selectProjects,
-	(state: IProjectState) => state.newProject
 );
 
 export const selectProfile = createSelector(
@@ -35,9 +25,9 @@ export const selectProfile = createSelector(
 	(state: IProjectState) => state.profile
 );
 
-export const selectedProject = createSelector(
+export const selectProject = createSelector(
 	selectProjects,
-	(state: IProjectState) => state.selectedProject
+	(state: IProjectState) => state.selectProject
 );
 
 export const selectUiComponents = createSelector(
