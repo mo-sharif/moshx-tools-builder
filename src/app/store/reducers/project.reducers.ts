@@ -26,21 +26,20 @@ export function projectReducers(
 		case EProjectActions.GetProjectSuccess: {
 			return {
 				...state,
-				selectedProject: action.payload,
+				selectProject: action.payload,
 			};
 		}
 		case EProjectActions.GetSelectedProjectFromRouteSuccess: {
 			return {
 				...state,
-				selectedProject: action.payload,
-				newProject: null
+				selectProject: action.payload,
 			};
 		}
 		case EProjectActions.NewProject: {
 			return {
 				...state,
-				selectedProject: null,
-				newProject: action.payload
+				selectProject: action.payload,
+				UiComponents: action.payload.UiComponents
 			};
 		}
 		case EProjectActions.GetContainers: {
@@ -52,13 +51,13 @@ export function projectReducers(
 		case EProjectActions.SaveProject: {
 			return {
 				...state,
-				newProject: action.payload
+				selectProject: action.payload
 			};
 		}
 		case EProjectActions.SaveProjectSuccess: {
 			return {
 				...state,
-				newProject: action.payload
+				selectProject: action.payload
 			};
 		}
 		case EProjectActions.UpdateProject: {
@@ -70,13 +69,13 @@ export function projectReducers(
 		case EProjectActions.UpdateProjectSuccess: {
 			return {
 				...state,
-				selectedProject: action.payload
+				selectProject: action.payload
 			};
 		}
 		case EProjectActions.DeleteProject: {
 			return {
 				...state,
-				selectedProject: null
+				selectProject: null
 			};
 		}
 		case EProjectActions.DeleteProjectSuccess: {
@@ -94,8 +93,7 @@ export function projectReducers(
 			return {
 				...state,
 				projects: action.payload,
-				selectedProject: null,
-				newProject: null
+				selectProject: null
 			};
 		}
 		case EProjectActions.UpdateUiComponents: {
