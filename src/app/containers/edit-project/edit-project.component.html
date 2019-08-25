@@ -82,8 +82,9 @@
 							<!-- edit Project -->
 							<app-save-project
 								(formData)="saveFormData($event)"
-								[selectedProject]="selectedProject$ | async"
+								[selectedProject$]="selectedProject$"
 								[selectLoggedInUser]="selectLoggedInUser$ | async"
+								[componentSettings]="this.ComponentSettings"
 							>
 							</app-save-project>
 						</ng-container>
@@ -91,7 +92,7 @@
 						<ng-template #newProjectSaveTemplate>
 							<app-save-project
 								(formData)="saveFormData($event)"
-								[selectedProject]="selectLoggedInUser$"
+								[selectedProject$]="selectLoggedInUser$"
 								[selectLoggedInUser]="selectLoggedInUser$ | async"
 							>
 							</app-save-project>
@@ -100,25 +101,12 @@
 					<ng-template #extraTemplate> </ng-template>
 				</div>
 			</div>
-			<div nz-row nzGutter="12" [@listStagger] *ngIf="selectedProject$ | async as selectedProject">
-				<div
-					nz-col
-					[nzSpan]="24"
-					[nzMd]="24"
-					[nzSm]="24"
-					[nzXs]="24"
-					*ngFor="let ComponentSetting of ComponentSettings"
-					style="margin-bottom: 10px;"
-				>
-					<nz-card
-						class="card"
-						[nzBordered]="false"
-						[nzTitle]="ComponentSetting.placeholder"
-						[nzExtra]="extraTemplate"
-						><app-short-form [dataInput]="selectedProject" [ComponentSetting]="ComponentSetting" (formData)="saveShortFormData($event)"></app-short-form>
-					</nz-card>
-					<ng-template #extraTemplate> </ng-template>
-				</div>
+			<div
+				nz-row
+				nzGutter="12"
+				[@listStagger]
+				*ngIf="selectedProject$ | async as selectedProject"
+			>
 				<div
 					nz-col
 					[nzSpan]="24"
