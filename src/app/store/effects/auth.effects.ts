@@ -46,7 +46,7 @@ export class AuthEffects {
 				return of(
 					new NotAuthenticated(),
 					new GetSettings(),
-					new UpdateUiComponentsSuccess({ isUserLoggedIn: false })
+					new UpdateUiComponentsSuccess({ isNewProject: true, isUserLoggedIn: false })
 				);
 			}
 
