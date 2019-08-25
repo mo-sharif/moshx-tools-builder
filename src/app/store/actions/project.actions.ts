@@ -10,6 +10,7 @@ export enum EProjectActions {
 	GetSelectedProjectFromRouteSuccess = "[Project] Get Selected Project From Route Success",
 	GetProjectSuccess = "[Project] Get Project Success",
 	NewProject = "[Project] New Project",
+	NewProjectSuccess = "[Project] New Project Success",
 	EditProject = "[Project] Edit Project",
 	SaveProject = "[Project] Save Project",
 	SaveProjectSuccess = "[Project] Save Project Success",
@@ -54,6 +55,10 @@ export class GetProjectSuccess implements Action {
 }
 export class NewProject implements Action {
 	public readonly type = EProjectActions.NewProject;
+	constructor(public payload: IProject) {}
+}
+export class NewProjectSuccess implements Action {
+	public readonly type = EProjectActions.NewProjectSuccess;
 	constructor(public payload: IProject) {}
 }
 export class SaveProject implements Action {
@@ -113,6 +118,7 @@ export type ProjectActions =
 	| GetSelectedProjectFromRouteSuccess
 	| GetProjectsSuccess
 	| NewProject
+	| NewProjectSuccess
 	| GetContainers
 	| SaveProject
 	| SaveProjectSuccess
