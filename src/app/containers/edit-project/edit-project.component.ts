@@ -11,19 +11,17 @@ import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 import { ActivatedRoute } from "@angular/router";
 import {
-	selectNewProject,
 	userProjects,
 	selectProfile,
-	selectedProject,
+	selectProject,
 	selectUiComponents
 } from "../../store/selectors/project.selector";
 
 import { IProject } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
-import { map, takeWhile, withLatestFrom } from "rxjs/operators";
+import { map, withLatestFrom } from "rxjs/operators";
 import { Components } from "../../custom/components-module";
-import { iif } from "rxjs";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
@@ -34,17 +32,15 @@ export class EditProjectComponent implements OnInit {
 	public components = Components;
 	isVisible = false;
 	isOkLoading = false;
-	newProject$ = this._store.pipe(select(selectNewProject));
-	currentUser$ = this._store.pipe(select(selectLoggedInUser));
 	userProjects$ = this._store.pipe(select(userProjects));
 	selectProfile$ = this._store.pipe(select(selectProfile));
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
-	selectedProject$ = this._store.pipe(select(selectedProject));
+	selectProject$ = this._store.pipe(select(selectProject));
 	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
 
 	/* Move me to an effect and make me come from firebase collection */
 
-	ComponentSettings= [
+	componentConfigs= [
 		{
 			name: "Http Request",
 			type: "httpRequestUrl",
@@ -64,7 +60,7 @@ export class EditProjectComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.currentUser$
+		this.selectLoggedInUser$
 			.pipe(
 				withLatestFrom(this._router.pathFromRoot[1].url),
 				map(([user, urlSegment]) => {
@@ -90,7 +86,7 @@ export class EditProjectComponent implements OnInit {
 		);
 	};
 
-	saveShortFormData = (shortFormData: IProject["ComponentSettings"]) => {
+	saveShortFormData = (shortFormData: IProject["componentConfigs"]) => {
 		this._store.dispatch(new UpdateProject({ ...shortFormData }));
 	};
 
