@@ -42,6 +42,13 @@ export function projectReducers(
 				UiComponents: action.payload.UiComponents
 			};
 		}
+		case EProjectActions.NewProjectSuccess: {
+			return {
+				...state,
+				selectProject: action.payload,
+				UiComponents: action.payload.UiComponents
+			};
+		}
 		case EProjectActions.GetContainers: {
 			return {
 				...state,
