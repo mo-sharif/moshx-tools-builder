@@ -10,23 +10,23 @@
 		<nz-card
 			class="card"
 			[nzBordered]="false"
-			[nzTitle]="ComponentSetting.placeholder"
+			[nzTitle]="componentConfig.placeholder"
 			[nzExtra]="extraTemplate"
-			*ngFor="let ComponentSetting of ComponentSettings"
+			*ngFor="let componentConfig of componentConfigs"
 		>
 			<nz-form-item>
 				<nz-form-control>
 					<nz-input-group nzPrefixIcon="user">
 						<input
 							nz-input
-							[id]="ComponentSetting.type"
-            				[formControlName]="ComponentSetting.type"
+							[id]="componentConfig.type"
+            				[formControlName]="componentConfig.type"
 							[value]="
-								(this.dataInput?.ComponentSettings)[
-									this.ComponentSettings.type
+								(this.dataInput?.componentConfigs)[
+									this.componentConfigs.type
 								] || ''
 							"
-							[placeholder]="ComponentSetting.example"
+							[placeholder]="componentConfig.example"
 							(keyup)="keyUp.next($event)"
 						/>
 					</nz-input-group>
