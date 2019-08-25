@@ -7,14 +7,7 @@ import { addComponentModule } from "src/app/directives/addComponent.module";
 import { ComponentsModule } from "src/app/custom/components-module";
 
 @NgModule({
-  declarations: [
-    EditProjectContainer,
-    EditProjectComponent,
-  ],
-  imports: [
-    ComponentsModule,
-    addComponentModule,
-    EditProjectRoutingModule
-  ],
+	declarations: [EditProjectContainer, EditProjectComponent],
+	imports: [ComponentsModule, addComponentModule, EditProjectRoutingModule]
 })
-export class EditProjectModule { }
+export class EditProjectModule {}
