@@ -6,7 +6,7 @@
 	<nz-form-item>
 		<nz-form-label [nzSpan]="7" nzRequired>Profile Name</nz-form-label>
 		<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
-			<input nz-input formControlName="profile" placeholder="Awesome Profile"/>
+			<input nz-input formControlName="profile" placeholder="Awesome Profile" />
 			<nz-form-explain
 				*ngIf="
 					(validateForm.get('profile')?.dirty &&
@@ -17,7 +17,9 @@
 				<ng-container *ngIf="validateForm.get('profile')?.hasError('required')">
 					Please input your Profile Name!
 				</ng-container>
-				<ng-container *ngIf="validateForm.get('profile')?.hasError('duplicated')">
+				<ng-container
+					*ngIf="validateForm.get('profile')?.hasError('duplicated')"
+				>
 					The Project name is redundant!
 				</ng-container>
 				<ng-container *ngIf="validateForm.get('profile')?.pending">
@@ -39,10 +41,40 @@
 				formControlName="title"
 				placeholder="Awesome title"
 			/>
-			<nz-form-explain *ngIf="validateForm.get('title')?.dirty && validateForm.get('title')?.error">
+			<nz-form-explain
+				*ngIf="
+					validateForm.get('title')?.dirty && validateForm.get('title')?.error
+				"
+			>
 				Please input your Project Name!
 			</nz-form-explain>
 		</nz-form-control>
+	</nz-form-item>
+	<nz-form-item *ngFor="let componentSetting of componentSettings">
+		<div formGroupName="ComponentSettings">
+			<nz-form-label [nzSpan]="7" [nzFor]="componentSetting.type">{{
+				componentSetting.name
+			}}</nz-form-label>
+			<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
+				<input
+					nz-input
+					[name]="componentSetting.type"
+					[type]="componentSetting.type"
+					[id]="componentSetting.type"
+					[formControlName]="componentSetting.type"
+					[placeholder]="componentSetting.placeholder"
+			
+				/>
+				<nz-form-explain
+					*ngIf="
+						validateForm.get('componentSetting.type')?.dirty &&
+						validateForm.get('componentSetting.type')?.error
+					"
+				>
+					Please input your {{ componentSetting.name }}!
+				</nz-form-explain>
+			</nz-form-control>
+		</div>
 	</nz-form-item>
 	<nz-form-item>
 		<nz-form-control [nzOffset]="0" [nzSpan]="12">
