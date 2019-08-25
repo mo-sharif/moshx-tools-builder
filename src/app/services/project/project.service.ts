@@ -51,7 +51,6 @@ export class ProjectService {
 	};
 
 	updateProject = (project: IProject) => {
-		console.log(project)
 		return this.firestore
 			.collection("profiles")
 			.doc(project.profile)
