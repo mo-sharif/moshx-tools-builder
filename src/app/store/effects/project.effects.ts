@@ -20,11 +20,12 @@ import {
 	UpdateUiComponents,
 	UpdateUiComponentsSuccess,
 	UpdateProject,
-	UpdateProjectSuccess
+	UpdateProjectSuccess,
+	NewProjectSuccess
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
-import { IProject } from "src/app/models/project.interface";
+import { IProject, Project } from "src/app/models/project.interface";
 import {
 	selectLoggedInUserUID,
 	selectLoggedInUser
@@ -53,7 +54,7 @@ export class ProjectEffects {
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
 		switchMap(([[project, selectProject], userUid]) => {
-			project.id = selectProject.id 
+			project.id = selectProject.id;
 			project.slug = project.title.replace(/ /g, ".");
 			project.uid = userUid;
 			this._projectService.addAndUpdateProject(project);
@@ -65,6 +66,18 @@ export class ProjectEffects {
 		catchError(err => of(new SetErrorMsg(`[SaveProject] ${err}`)))
 	);
 
+	@Effect()
+	newProject$ = this._actions$.pipe(
+		ofType<NewProject>(EProjectActions.NewProject),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([project, selectLoggedInUserUID]) => {
+			return of(
+				new UpdateUiComponents(selectLoggedInUserUID),
+				new NewProjectSuccess(project)
+			);
+		})
+	);
 	@Effect()
 	updateProject$ = this._actions$.pipe(
 		ofType<UpdateProject>(EProjectActions.UpdateProject),
@@ -171,19 +184,13 @@ export class ProjectEffects {
 						if (project) {
 							return of(new GetSelectedProjectFromRouteSuccess(project));
 						} else {
-							let type = projectName;
-							return of(
-								new NewProject({
-									title: "NEW PROJECT",
-									type: type,
-									uid: "NOT YET ASSIGNED",
-									UiComponents: { isNewProject: true },
-									componentConfigs: {
-										collectionUrl: null,
-										httpRequestUrl: null
-									}
-								})
+							let project = new Project(
+								"New Project",
+								"NOT_YET_ASSIGNED",
+								projectName
 							);
+
+							return of(new NewProject(project));
 						}
 					}),
 					catchError(err => {
