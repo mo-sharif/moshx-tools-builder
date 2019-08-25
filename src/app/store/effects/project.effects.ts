@@ -202,7 +202,8 @@ export class ProjectEffects {
 		switchMap((project: IProject) => {
 			this._userService.updateUserFromProjectName(project);
 			return [
-				new UpdateProfileSuccess(project.uid)
+				new UpdateProfileSuccess(project.uid),
+				new NavigateToRoute([project.profile])
 			];
 		})
 	);
