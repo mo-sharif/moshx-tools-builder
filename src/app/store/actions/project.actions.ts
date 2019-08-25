@@ -66,7 +66,7 @@ export class SaveProjectSuccess implements Action {
 }
 export class UpdateProject implements Action {
 	public readonly type = EProjectActions.UpdateProject;
-	constructor(public payload: IProject['ComponentSettings']) {}
+	constructor(public payload: IProject['componentConfigs']) {}
 }
 export class UpdateProjectSuccess implements Action {
 	public readonly type = EProjectActions.UpdateProjectSuccess;
@@ -96,7 +96,7 @@ export class GetProfileFromRouteSuccess implements Action {
 
 export class UpdateUiComponents implements Action {
 	public readonly type = EProjectActions.UpdateUiComponents;
-	constructor(public payload: IProject['uid']) {}
+	constructor(public payload: IProject['uid'] | boolean) {}
 }
 
 export class UpdateUiComponentsSuccess implements Action {
