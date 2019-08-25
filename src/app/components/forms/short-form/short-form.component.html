@@ -1,17 +1,38 @@
-<form
-	nz-form
-	[nzLayout]="'inline'"
+<div
+	nz-col
+	[nzSpan]="24"
+	[nzMd]="24"
+	[nzSm]="24"
+	[nzXs]="24"
+	style="margin-bottom: 10px;"
 >
-	<nz-form-item>
-		<nz-form-control>
-			<nz-input-group nzPrefixIcon="user">
-				<input
-					nz-input
-					[value]="this.dataInput?.ComponentSettings[this.ComponentSetting.type] || ''"
-					[placeholder]="ComponentSetting.example"
-					(keyup)='keyUp.next($event)'
-				/>
-			</nz-input-group>
-		</nz-form-control>
-	</nz-form-item>
-</form>
+	<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm">
+		<nz-card
+			class="card"
+			[nzBordered]="false"
+			[nzTitle]="ComponentSetting.placeholder"
+			[nzExtra]="extraTemplate"
+			*ngFor="let ComponentSetting of ComponentSettings"
+		>
+			<nz-form-item>
+				<nz-form-control>
+					<nz-input-group nzPrefixIcon="user">
+						<input
+							nz-input
+							[id]="ComponentSetting.type"
+            				[formControlName]="ComponentSetting.type"
+							[value]="
+								(this.dataInput?.ComponentSettings)[
+									this.ComponentSettings.type
+								] || ''
+							"
+							[placeholder]="ComponentSetting.example"
+							(keyup)="keyUp.next($event)"
+						/>
+					</nz-input-group>
+				</nz-form-control>
+			</nz-form-item>
+		</nz-card>
+		<ng-template #extraTemplate> </ng-template>
+	</form>
+</div>
