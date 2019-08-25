@@ -44,16 +44,16 @@ export class EditProjectComponent implements OnInit {
 
 	/* Move me to an effect and make me come from firebase collection */
 
-	ComponentSettings = [
+	ComponentSettings= [
 		{
-			placeholder: "Http Request",
+			name: "Http Request",
 			type: "httpRequestUrl",
-			example: "https://mosh-media.com"
+			placeholder: "https://mosh-media.com"
 		},
 		{
-			placeholder: "Firebase Collection",
+			name: "Firebase Collection",
 			type: "collectionUrl",
-			example: "/user/profile"
+			placeholder: "/user/profile"
 		}
 	];
 
@@ -91,7 +91,6 @@ export class EditProjectComponent implements OnInit {
 	};
 
 	saveShortFormData = (shortFormData: IProject["ComponentSettings"]) => {
-		console.log(shortFormData)
 		this._store.dispatch(new UpdateProject({ ...shortFormData }));
 	};
 
