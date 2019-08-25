@@ -41,7 +41,6 @@ export class ProjectService {
 
 	addProject = (project: IProject) => {
 		project.id = project.id ? project.id : this.firestore.createId();
-
 		return this.firestore
 			.collection("profiles")
 			.doc(project.profile)
@@ -51,6 +50,16 @@ export class ProjectService {
 	};
 
 	updateProject = (project: IProject) => {
+		return this.firestore
+			.collection("profiles")
+			.doc(project.profile)
+			.collection<IProject>("projects")
+			.doc(project.id)
+			.update(project);
+	};
+
+	addAndUpdateProject = (project: IProject) => {
+		project.id = project.id ? project.id : this.firestore.createId();
 		return this.firestore
 			.collection("profiles")
 			.doc(project.profile)
