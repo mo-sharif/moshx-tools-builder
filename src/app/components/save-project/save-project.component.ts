@@ -7,9 +7,10 @@ import {
 	ValidationErrors,
 	Validators
 } from "@angular/forms";
-import { Observable, Observer } from "rxjs";
+import { Observable, Observer, of } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
+import { map, catchError } from "rxjs/operators";
 
 @Component({
 	selector: "app-save-project",
@@ -24,8 +25,11 @@ export class EditProjectComponent implements OnInit {
 	selectLoggedInUser: IUser;
 
 	@Input()
-	selectedProject: IProject;
-	
+	selectedProject$: Observable<IProject>;
+
+	@Input()
+	componentSettings: IProject["ComponentSettings"];
+
 	validateForm: FormGroup;
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
@@ -61,6 +65,7 @@ export class EditProjectComponent implements OnInit {
 
 	constructor(private fb: FormBuilder) {}
 	/* Sometimes profile comes in as null so we need to catch that */
+
 	ngOnInit() {
 		this.validateForm = this.fb.group({
 			profile: [
@@ -68,8 +73,35 @@ export class EditProjectComponent implements OnInit {
 				[Validators.required],
 				[this.titleAsyncValidator]
 			],
-			title: [this.selectedProject.title, [Validators.required]],
-			type: [this.selectedProject.type]
+			title: [null, [Validators.required]],
+			type: [null],
+			ComponentSettings: this.fb.group({
+				httpRequestUrl: [null],
+				collectionUrl: [null]
+			})
 		});
+
+		this.selectedProject$
+			.pipe(
+				map((project: IProject) => {
+					this.validateForm.patchValue({
+						title: project.title,
+						type: project.type,
+						ComponentSettings: {
+							httpRequestUrl: project.ComponentSettings.httpRequestUrl,
+							collectionUrl: project.ComponentSettings.collectionUrl
+						}
+					});
+				}),
+				catchError(error => of(error))
+			)
+			.subscribe();
 	}
+
+	/* 	formConfigs = () => {
+		return {
+			httpRequestUrl: [this.selectedProject.ComponentSettings.httpRequestUrl],
+			collectionUrl: [this.selectedProject.ComponentSettings.httpRequestUrl]
+		}
+	}; */
 }
