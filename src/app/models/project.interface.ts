@@ -2,13 +2,13 @@ import { Type } from "@angular/core";
 
 export interface IProject {
 	id?: string;
-	title: string;
-	type: string;
-	uid: string;
+	title?: string;
+	type?: string;
+	uid?: string;
 	profile?: string;
 	slug?: string;
-	UiComponents: UiComponents;
-	componentConfigs: IComponentConfigs;
+	UiComponents?: UiComponents;
+	componentConfigs?: IComponentConfigs;
 }
 
 export interface UiComponents {
@@ -40,4 +40,14 @@ export interface IProjectContainer {
 
 export interface IProjectComponent {
 	[key: string]: Type<any>;
+}
+
+export class Project implements IProject {
+	constructor(
+		public title?: string,
+		public uid?: string,
+		public type?: string,
+		public UiComponents?: UiComponents,
+		public componentConfigs?: IComponentConfigs
+	) {}
 }
