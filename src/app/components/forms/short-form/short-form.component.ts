@@ -6,6 +6,8 @@ import {
   EventEmitter,
   OnDestroy
 } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { of, Subject, Subscription, Observable } from "rxjs";
 import {
   debounceTime,
@@ -26,19 +28,18 @@ export class ShortFormComponent implements OnInit{
   dataInput: IProject;
 
   @Input()
-  ComponentSetting;
+  ComponentSettings;
 
   @Output()
   formData: EventEmitter<any> = new EventEmitter();
 
+  validateForm: FormGroup;
   name: string;
   public keyUp = new Subject<any>();
   private subscription: Subscription;
   constructor() {}
 
 	ngOnInit() {
-    console.log(this.dataInput.ComponentSettings[this.ComponentSetting.type])
-
     const subscription = this.keyUp
       .pipe(
         map(event => event.target.value),
@@ -49,6 +50,7 @@ export class ShortFormComponent implements OnInit{
       .subscribe(value => this.emitFormData(value));
   }
 	emitFormData = value => {
-    this.formData.emit({[this.ComponentSetting.type]:value});
+    console.log(value)
+    this.formData.emit(value);
   };
 }
