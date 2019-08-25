@@ -63,8 +63,7 @@ export class ProjectEffects {
 			}
 			return [
 				new SetSuccessMsg("Project Saved Successfully"),
-				new SaveProjectSuccess(project),
-				new NavigateToRoute([project.profile])
+				new SaveProjectSuccess(project)
 			];
 		}),
 		catchError(err => of(new SetErrorMsg(err)))
@@ -93,7 +92,7 @@ export class ProjectEffects {
 				return [
 					new SetSuccessMsg("Project Deleted Successfully!"),
 					new DeleteProjectSuccess(),
-					new NavigateToRoute(["home"])
+					new NavigateToRoute([project.profile])
 				];
 			} else {
 				new SetErrorMsg("You don't have permission to delete this project");
@@ -203,8 +202,7 @@ export class ProjectEffects {
 		switchMap((project: IProject) => {
 			this._userService.updateUserFromProjectName(project);
 			return [
-				new UpdateProfileSuccess(project.uid),
-				new NavigateToRoute([project.profile])
+				new UpdateProfileSuccess(project.uid)
 			];
 		})
 	);
