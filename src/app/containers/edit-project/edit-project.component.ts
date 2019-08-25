@@ -5,7 +5,8 @@ import {
 	SaveProject,
 	GetSelectedProjectFromRoute,
 	DeleteProject,
-	UpdateProject
+	UpdateProject,
+	NewProject
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -17,10 +18,10 @@ import {
 	selectUiComponents
 } from "../../store/selectors/project.selector";
 
-import { IProject } from "../../models/project.interface";
+import { IProject, Project } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
-import { map, withLatestFrom } from "rxjs/operators";
+import { map, withLatestFrom, first } from "rxjs/operators";
 import { Components } from "../../custom/components-module";
 
 @Component({
@@ -40,7 +41,7 @@ export class EditProjectComponent implements OnInit {
 
 	/* Move me to an effect and make me come from firebase collection */
 
-	componentConfigs= [
+	componentConfigs = [
 		{
 			name: "Http Request",
 			type: "httpRequestUrl",
@@ -62,14 +63,13 @@ export class EditProjectComponent implements OnInit {
 	ngOnInit() {
 		this.selectLoggedInUser$
 			.pipe(
+				first(),
 				withLatestFrom(this._router.pathFromRoot[1].url),
 				map(([user, urlSegment]) => {
-					let profileName = urlSegment[0].path;
-					let projectName = this._router.snapshot.params.id;
 					if (user.hasOwnProperty("profile")) {
-						this._store.dispatch(
-							new GetSelectedProjectFromRoute([profileName, projectName])
-						);
+						this.getSelectedProjectFromRoute(urlSegment);
+					} else {
+						this.dispatchNewProject();
 					}
 				})
 			)
@@ -86,8 +86,18 @@ export class EditProjectComponent implements OnInit {
 		);
 	};
 
-	saveShortFormData = (shortFormData: IProject["componentConfigs"]) => {
-		this._store.dispatch(new UpdateProject({ ...shortFormData }));
+	dispatchNewProject = () => {
+		let type = this._router.snapshot.params.id;
+		let project = new Project("New Project", "NOT_YET_ASSIGNED", type);
+		this._store.dispatch(new NewProject(project));
+	};
+
+	getSelectedProjectFromRoute = urlSegment => {
+		let profileName = urlSegment[0].path;
+		let projectName = this._router.snapshot.params.id;
+		this._store.dispatch(
+			new GetSelectedProjectFromRoute([profileName, projectName])
+		);
 	};
 
 	showModal(): void {
