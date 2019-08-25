@@ -83,11 +83,16 @@ export class EditProjectComponent implements OnInit, OnChanges {
 				collectionUrl: [null]
 			})
 		});
-		this.projectFrom.patchValue({ ...this.selectLoggedInUser});
+		this.projectFrom.patchValue({ ...this.selectLoggedInUser });
 	}
 	ngOnChanges() {
 		if (this.selectProject) {
-			this.projectFrom.patchValue({ ...this.selectProject });
+			try {
+				this.projectFrom.patchValue({ ...this.selectProject });
+			} catch (err) {
+				/* Fix undefined values in patchValues */
+				console.warn(err);
+			}
 		}
 	}
 }
