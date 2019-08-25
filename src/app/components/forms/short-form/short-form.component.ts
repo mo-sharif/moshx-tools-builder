@@ -28,7 +28,7 @@ export class ShortFormComponent implements OnInit{
   dataInput: IProject;
 
   @Input()
-  ComponentSettings;
+  componentConfigs;
 
   @Output()
   formData: EventEmitter<any> = new EventEmitter();
