@@ -8,14 +8,15 @@ export interface IProject {
 	profile?: string;
 	slug?: string;
 	UiComponents: UiComponents;
-	ComponentSettings: IComponentSettings;
+	componentConfigs: IComponentConfigs;
 }
 
 export interface UiComponents {
-	isNewProject: boolean;
+	isNewProject?: boolean;
+	isUserLoggedIn?: boolean;
 }
 
-export interface IComponentSettings {
+export interface IComponentConfigs {
 	httpRequestUrl: string,
 	collectionUrl: string,
 }
