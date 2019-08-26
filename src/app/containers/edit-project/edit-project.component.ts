@@ -21,7 +21,7 @@ import {
 import { IProject, Project } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
-import { map, withLatestFrom, first } from "rxjs/operators";
+import { map, withLatestFrom, delay, last, startWith, tap, switchMap, takeLast, first, combineLatest } from "rxjs/operators";
 import { Components } from "../../custom/components-module";
 
 @Component({
@@ -63,13 +63,10 @@ export class EditProjectComponent implements OnInit {
 	ngOnInit() {
 		this.selectLoggedInUser$
 			.pipe(
-				first(),
 				withLatestFrom(this._router.pathFromRoot[1].url),
 				map(([user, urlSegment]) => {
 					if (user.hasOwnProperty("profile")) {
 						this.getSelectedProjectFromRoute(urlSegment);
-					} else {
-						this.dispatchNewProject();
 					}
 				})
 			)
