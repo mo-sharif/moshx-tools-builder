@@ -10,7 +10,7 @@
 		<nz-page-header-tags>
 			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
-		<nz-page-header-extra *ngIf="(selectUiComponents$ | async).isNewProject">
+		<nz-page-header-extra *ngIf="(selectUiComponents$ | async)?.isNewProject">
 			<button nzShape="circle" nz-button nzType="default" (click)="open()">
 				<i nz-icon nzType="save"></i>
 			</button>
@@ -20,11 +20,13 @@
 	<ng-container
 		*ngIf="selectProject$ | async as selectProject; else showLoading"
 	>
-		<ng-container
-			add-comp
-			[comp]="components[selectProject['type']]"
-			[selectProject]="selectProject$"
-		></ng-container>
+		<ng-container *ngIf="selectProject !== 'null'">
+			<ng-container
+				add-comp
+				[comp]="components[selectProject['type']]"
+				[selectProject$]="selectProject$"
+			></ng-container>
+		</ng-container>
 	</ng-container>
 	<!-- Loading Tab -->
 	<ng-template #showLoading>
@@ -43,9 +45,7 @@
 	(nzOnCancel)="handleCancel()"
 	[nzOkText]="null"
 >
-	<ng-container
-		*ngIf="selectUiComponents?.isUserLoggedIn; else notLoggedIn"
-	>
+	<ng-container *ngIf="selectUiComponents?.isUserLoggedIn; else notLoggedIn">
 		<div
 			nz-row
 			nzType="flex"
@@ -86,7 +86,7 @@
 					nz-row
 					nzGutter="12"
 					[@listStagger]
-					*ngIf="selectUiComponents.isNewProject"
+					*ngIf="selectUiComponents?.isNewProject"
 				>
 					<div
 						nz-col
@@ -96,7 +96,12 @@
 						[nzXs]="24"
 						style="margin-bottom: 10px;"
 					>
-						<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project" *ngIf="selectProject$ | async as selectProject">
+						<nz-card
+							class="card"
+							[nzBordered]="false"
+							nzTitle="Delete Project"
+							*ngIf="selectProject$ | async as selectProject"
+						>
 							<button
 								nz-button
 								nzType="danger"
