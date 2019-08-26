@@ -4,7 +4,6 @@ import {
 	ViewContainerRef,
 	Input,
 	ComponentFactoryResolver,
-	OnChanges,
 	OnInit,
 	OnDestroy
 } from "@angular/core";
@@ -14,21 +13,24 @@ import {
 })
 export class AddComponentDirective implements OnInit, OnDestroy {
 	@Input("comp") comp: Type<any>;
-	@Input("selectProject") selectProject: Type<any>;
+	@Input("selectProject$") selectProject$: Type<any>;
+
 	constructor(
 		public viewContainerRef: ViewContainerRef,
 		public componentFactoryResolver: ComponentFactoryResolver
 	) {}
-	ngOnInit(): void {
+
+	ngOnInit() {
 		Promise.resolve().then(() => {
 			let componentFactory = this.componentFactoryResolver.resolveComponentFactory(
 				this.comp
 			);
 			this.viewContainerRef.clear();
 			let cmpRef = this.viewContainerRef.createComponent(componentFactory);
-			cmpRef.instance.selectProject = this.selectProject;
+			cmpRef.instance.selectProject$ = this.selectProject$;
 		}).catch(error => console.log(error));
 	}
+
 	ngOnDestroy(): void {
 		this.viewContainerRef.clear();
 	}
