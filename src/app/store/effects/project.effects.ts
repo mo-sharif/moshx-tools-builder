@@ -119,14 +119,18 @@ export class ProjectEffects {
 		map(action => action.payload),
 		switchMap(route => {
 			let profileName = route.replace(".", " ");
-			return this._profileService
-				.loadProfile(profileName)
-				.pipe(
-					switchMap((projects: IProject[]) => [
-						new GetProfileFromRouteSuccess(projects),
-						new UpdateUiComponents(projects[0].uid)
-					])
-				);
+			return this._profileService.loadProfile(profileName).pipe(
+				switchMap((projects: IProject[]) => {
+					if (projects.length > 0) {
+						return of(
+							new GetProfileFromRouteSuccess(projects),
+							new UpdateUiComponents(projects[0].uid)
+						);
+					} else {
+						return of(new GetProfileFromRouteSuccess(projects));
+					}
+				})
+			);
 		})
 	);
 
