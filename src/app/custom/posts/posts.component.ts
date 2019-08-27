@@ -19,12 +19,12 @@ export class PostsComponent implements OnInit {
 	@Input()
 	selectProject$: Observable<IProject>;
 
-	public ds;
+	public dataStore;
 	constructor(private http: HttpClient) {}
 
 	ngOnInit() {
 		this.selectProject$.subscribe(
-			(project: IProject) => (this.ds = new MyDataSource(this.http, project))
+			(project: IProject) => (this.dataStore = new MyDataSource(this.http, project))
 		);
 	}
 }
