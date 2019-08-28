@@ -24,7 +24,7 @@
 			<ng-container
 				add-comp
 				[comp]="components[selectProject['type']]"
-				[selectProject$]="selectProject$"
+				[componentConfigs]="selectProject?.componentConfigs"
 			></ng-container>
 		</ng-container>
 	</ng-container>
