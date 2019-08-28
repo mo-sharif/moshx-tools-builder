@@ -17,15 +17,13 @@ import { IProject } from "src/app/models/project.interface";
 })
 export class PostsComponent implements OnInit {
 	@Input()
-	selectProject$: Observable<IProject>;
+	componentConfigs: IProject['componentConfigs'];
 
 	public dataStore;
 	constructor(private http: HttpClient) {}
 
 	ngOnInit() {
-		this.selectProject$.subscribe(
-			(project: IProject) => (this.dataStore = new MyDataSource(this.http, project))
-		);
+		this.dataStore = new MyDataSource(this.http, this.componentConfigs)
 	}
 
 	isObject = (value) => typeof value === 'number';
@@ -39,7 +37,7 @@ class MyDataSource extends DataSource<string | undefined> {
 	private dataStream = new BehaviorSubject<any[]>(this.cachedData);
 	private subscription = new Subscription();
 	private httpRequestUrl = `https://jsonplaceholder.typicode.com/todos`;
-	constructor(private http: HttpClient, private project: IProject) {
+	constructor(private http: HttpClient, private componentConfigs: IProject['componentConfigs']) {
 		super();
 	}
 
@@ -71,7 +69,7 @@ class MyDataSource extends DataSource<string | undefined> {
 		}
 		this.fetchedPages.add(page);
 		this.http
-			.get(this.project.componentConfigs.httpRequestUrl || this.httpRequestUrl)
+			.get(this.componentConfigs.httpRequestUrl || this.httpRequestUrl)
 			/* `https://jsonplaceholder.typicode.com/todos` */
 			/* 		`https://randomuser.me/api/?results=${
 					this.pageSize
