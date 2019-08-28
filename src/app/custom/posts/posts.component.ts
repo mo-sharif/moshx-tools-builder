@@ -27,11 +27,13 @@ export class PostsComponent implements OnInit {
 			(project: IProject) => (this.dataStore = new MyDataSource(this.http, project))
 		);
 	}
+
+	isObject = (value) => typeof value === 'number';
 }
 
 class MyDataSource extends DataSource<string | undefined> {
 	private length = 100000;
-	private pageSize = 10;
+	private pageSize = 500;
 	private cachedData = Array.from<any>({ length: this.length });
 	private fetchedPages = new Set<number>();
 	private dataStream = new BehaviorSubject<any[]>(this.cachedData);
@@ -47,6 +49,7 @@ class MyDataSource extends DataSource<string | undefined> {
 				const startPage = this.getPageForIndex(range.start);
 				const endPage = this.getPageForIndex(range.end - 1);
 				for (let i = startPage; i <= endPage; i++) {
+					console.log(i)
 					this.fetchPage(i);
 				}
 			})
@@ -75,6 +78,7 @@ class MyDataSource extends DataSource<string | undefined> {
 				}&inc=name,gender,email,nat&noinfo` */
 
 			.subscribe((res: any) => {
+				console.log(res)
 				this.cachedData.splice(page * this.pageSize, this.pageSize, ...res);
 				this.dataStream.next(this.cachedData);
 			});
