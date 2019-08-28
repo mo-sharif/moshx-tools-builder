@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { IProjectComponent } from "../models/project.interface";
 import { FormComponent } from "./ant-design/form/form.component";
-import { TableComponent } from "./ant-design/table/table.component";
+import { TableComponent } from "./table/table.component";
 import { CalendarComponent } from "./ant-design/calendar/calendar.component";
 import { PostsComponent } from "./posts/posts.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
