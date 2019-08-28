@@ -1,20 +1,24 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpParams,
+  HttpErrorResponse
+} from "@angular/common/http";
 import { Component, Injectable, OnInit, Input } from "@angular/core";
-import { Observable, iif } from "rxjs";
+import { Observable, of } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
-import { map, switchMap, distinctUntilChanged } from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class RandomUserService {
-  randomUserUrl = "https://api.randomuser.me/";
+  httpRequestUrl = "https://api.randomuser.me/";
 
-	getTableData(
-		pageIndex: number = 1,
-		pageSize: number = 10,
-		sortField: string,
-		sortOrder: string,
-		genders: string[],
-		componentConfigs: IProject['componentConfigs']
+  getTableData(
+    pageIndex: number = 1,
+    pageSize: number = 10,
+    sortField: string,
+    sortOrder: string,
+    genders: string[],
+    componentConfigs: IProject["componentConfigs"]
   ): Observable<{}> {
     let params = new HttpParams()
       .append("page", `${pageIndex}`)
@@ -24,12 +28,37 @@ export class RandomUserService {
     genders.forEach(gender => {
       params = params.append("gender", gender);
     });
-    return this.http.get(
-      `${componentConfigs.httpRequestUrl || this.randomUserUrl}`,
-      {
-        params
-      }
-    );
+    return this.http
+      .get(
+        `${
+          componentConfigs
+            ? componentConfigs.httpRequestUrl
+            : this.httpRequestUrl
+        }`,
+        {
+          params
+        }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.log(`An error occurred: ${err.error.message}`);
+          } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong,
+            console.log(
+              `Backend returned code ${err.status}, body was: ${err.error}`
+            );
+          }
+
+          // ...optionally return a default fallback value so app can continue (pick one)
+          // which could be a default value
+          // return Observable.of<any>({my: "default value..."});
+          // or simply an empty observable
+          return of();
+        })
+      );
   }
 
   constructor(private http: HttpClient) {}
@@ -42,8 +71,8 @@ export class RandomUserService {
   styleUrls: ["./table.component.css"]
 })
 export class TableComponent implements OnInit {
-	@Input()
-	componentConfigs: IProject['componentConfigs'];
+  @Input()
+  componentConfigs: IProject["componentConfigs"];
 
   pageIndex = 1;
   pageSize = 10;
@@ -66,7 +95,7 @@ export class TableComponent implements OnInit {
 
   constructor(private randomUserService: RandomUserService) {}
 
-	searchData(reset: boolean = false): void {
+  searchData(reset: boolean = false): void {
     if (reset) {
       this.pageIndex = 1;
     }
@@ -95,7 +124,7 @@ export class TableComponent implements OnInit {
     this.searchData(true);
   }
 
-	ngOnInit(): void {
-		this.searchData()
+  ngOnInit(): void {
+    this.searchData();
   }
 }
