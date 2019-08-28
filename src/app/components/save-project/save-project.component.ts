@@ -86,7 +86,7 @@ export class EditProjectComponent implements OnInit, OnChanges {
 		this.projectFrom.patchValue({ ...this.selectLoggedInUser });
 	}
 	ngOnChanges() {
-		if (this.selectProject) {
+		if (this.selectProject && this.selectProject.componentConfigs) {
 			try {
 				this.projectFrom.patchValue({ ...this.selectProject });
 			} catch (err) {
