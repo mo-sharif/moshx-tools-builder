@@ -44,10 +44,13 @@
 	nzTitle="Save Project"
 	(nzOnCancel)="handleCancel()"
 	[nzOkText]="null"
+	nzWidth="100%"
+	[nzStyle]="{ top: '0px' }"
 >
 	<ng-container *ngIf="selectUiComponents?.isUserLoggedIn; else notLoggedIn">
 		<app-save-project
 			(formData)="saveFormData($event)"
+			(deleteProject)="deleteProject($event)"
 			[selectLoggedInUser]="selectLoggedInUser$ | async"
 			[componentConfigs]="this.componentConfigs"
 			[selectProject]="selectProject$ | async"
