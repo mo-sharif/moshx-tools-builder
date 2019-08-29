@@ -59,7 +59,7 @@ export class ProjectEffects {
 			project.uid = userUid;
 			this._projectService.addAndUpdateProject(project);
 			return [
-				new SetSuccessMsg("Project Saved Successfully"),
+				new SetSuccessMsg(`${project.title} Saved Successfully`),
 				new SaveProjectSuccess(project)
 			];
 		}),
@@ -102,7 +102,7 @@ export class ProjectEffects {
 			if (selectLoggedInUserUID == project.uid) {
 				this._projectService.deleteProject(project);
 				return [
-					new SetSuccessMsg("Project Deleted Successfully!"),
+					new SetSuccessMsg(`${project.title} Deleted Successfully!`),
 					new DeleteProjectSuccess(),
 					new NavigateToRoute([project.profile])
 				];
@@ -217,10 +217,13 @@ export class ProjectEffects {
 			this._userService.updateUserFromProjectName(project);
 			return [
 				new UpdateProfileSuccess(project.uid),
-				/* Fix me!!!! */
-				// new NavigateToRoute([project.profile, "projects", selectProject.title])
+				/* Fix me!!!! Still broken, need to navigate to proj on success */
+				// new NavigateToRoute([project.profile, "projects", selectProject.title]),
 				new NavigateToRoute([project.profile])
 			];
+		}),
+		catchError(err => {
+			return of(new SetErrorMsg(`[SaveProject] ${err}`));
 		})
 	);
 
