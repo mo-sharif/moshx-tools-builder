@@ -29,7 +29,11 @@ export class routerEffects {
 		ofType<NavigateToRoute>(EConfigActions.NavigateToRoute),
 		map(action => action.payload),
 		map((routes) => {
-			return routes.map((route) => route.replace(/ /g, "."))
+			return routes.map((route) => {
+				if (route) {
+					return route.replace(/ /g, ".")
+				}
+			})
 		}),
 		map((routes: Array<string>) => {
 			this._router.navigate(routes);
