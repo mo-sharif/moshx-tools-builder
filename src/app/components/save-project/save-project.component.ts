@@ -18,25 +18,33 @@ import { Observable, Observer, of } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
 import { map, catchError, tap, delay } from "rxjs/operators";
+import { listStagger } from "src/app/animations/list-stagger.animation";
 
 @Component({
 	selector: "app-save-project",
 	templateUrl: "./save-project.component.html",
-	styleUrls: ["./save-project.component.css"]
+	styleUrls: ["./save-project.component.css"],
+	animations: [listStagger]
 })
 export class EditProjectComponent implements OnInit, OnChanges {
+	@Input()
+	selectLoggedInUser: IUser;
+	
+	@Input()
+	selectProject: IProject;
+	
+	@Input()
+	componentConfigs: IProject["componentConfigs"];
+	
+	@Input()
+	selectUiComponents: any;
+	
 	@Output()
 	formData: EventEmitter<any> = new EventEmitter();
 
-	@Input()
-	selectLoggedInUser: IUser;
-
-	@Input()
-	selectProject: IProject;
-
-	@Input()
-	componentConfigs: IProject["componentConfigs"];
-
+	@Output()
+	deleteProject: EventEmitter<any> = new EventEmitter();
+	
 	projectFrom: FormGroup;
 
 	submitForm = ($event: any, value: IProject) => {
@@ -49,6 +57,9 @@ export class EditProjectComponent implements OnInit, OnChanges {
 	};
 	emitFormData = value => {
 		this.formData.emit(value);
+	};
+	emitDeleteProject = value => {
+		this.deleteProject.emit(value)
 	};
 	titleAsyncValidator = (control: FormControl) =>
 		new Observable((observer: Observer<ValidationErrors | null>) => {
