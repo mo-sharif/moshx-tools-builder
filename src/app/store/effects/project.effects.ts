@@ -212,10 +212,13 @@ export class ProjectEffects {
 	updateUserProfile$ = this._actions$.pipe(
 		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
 		map(action => action.payload),
-		switchMap((project: IProject) => {
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		switchMap(([project, selectProject]) => {
 			this._userService.updateUserFromProjectName(project);
 			return [
 				new UpdateProfileSuccess(project.uid),
+				/* Fix me!!!! */
+				// new NavigateToRoute([project.profile, "projects", selectProject.title])
 				new NavigateToRoute([project.profile])
 			];
 		})
