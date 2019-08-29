@@ -9,23 +9,23 @@
 		<div nz-row nzGutter="12" [@listStagger]>
 			<div
 				nz-col
-				[nzSpan]="24"
-				[nzMd]="24"
+				[nzSpan]="12"
+				[nzMd]="12"
 				[nzSm]="24"
 				[nzXs]="24"
 				style="margin-bottom: 10px;"
 			>
-				<nz-card
-					class="card"
-					[nzBordered]="false"
-					nzTitle="Project Settings"
-					[nzExtra]="extraTemplate"
+				<!-- Save and Edit Project -->
+				<form
+					nz-form
+					[formGroup]="projectFrom"
+					(ngSubmit)="submitForm($event, projectFrom.value)"
 				>
-					<!-- Save and Edit Project -->
-					<form
-						nz-form
-						[formGroup]="projectFrom"
-						(ngSubmit)="submitForm($event, projectFrom.value)"
+					<nz-card
+						class="card"
+						[nzBordered]="false"
+						nzTitle="Project Settings"
+						[nzExtra]="extraTemplate"
 					>
 						<nz-form-item>
 							<nz-form-label [nzSpan]="7" nzRequired
@@ -119,34 +119,25 @@
 								</button>
 							</nz-form-control>
 						</nz-form-item>
-					</form>
-				</nz-card>
+					</nz-card>
+				</form>
 				<ng-template #extraTemplate> </ng-template>
 			</div>
 		</div>
-		<div
-			nz-row
-			nzGutter="12"
-			[@listStagger]
-			*ngIf="selectProject?.profile"
-		>
+		<div nz-row nzGutter="12" [@listStagger] *ngIf="selectProject?.profile">
 			<div
 				nz-col
-				[nzSpan]="24"
-				[nzMd]="24"
+				[nzSpan]="12"
+				[nzMd]="12"
 				[nzSm]="24"
 				[nzXs]="24"
 				style="margin-bottom: 10px;"
 			>
-				<nz-card
-					class="card"
-					[nzBordered]="false"
-					nzTitle="Delete Project"
-				>
+				<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
 					<button
 						nz-button
 						nzType="danger"
-						(click)="deleteProject(selectProject)"
+						(click)="emitDeleteProject(selectProject)"
 					>
 						<i nz-icon nzType="delete"></i>Delete
 					</button>
