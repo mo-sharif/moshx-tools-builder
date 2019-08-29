@@ -186,7 +186,7 @@ export class ProjectEffects {
 				.pipe(
 					switchMap(([project]) => {
 						if (project) {
-							return of(new GetSelectedProjectFromRouteSuccess(project));
+							return of(new UpdateUiComponents(project.uid), new GetSelectedProjectFromRouteSuccess(project));
 						} else {
 							let project = new Project(
 								"New Project",
