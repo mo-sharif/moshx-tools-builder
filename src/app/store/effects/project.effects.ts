@@ -185,6 +185,7 @@ export class ProjectEffects {
 				.GetSelectedProjectFromRoute(profileName, projectName)
 				.pipe(
 					switchMap(([project]) => {
+		/* Finish ME!!! */
 						if (project) {
 							return of(new UpdateUiComponents(project.uid), new GetSelectedProjectFromRouteSuccess(project));
 						} else {
@@ -193,7 +194,7 @@ export class ProjectEffects {
 								"NOT_YET_ASSIGNED",
 								projectName
 							);
-
+							console.log('FINISH MNE')
 							return of(new NewProject(project));
 						}
 					}),
