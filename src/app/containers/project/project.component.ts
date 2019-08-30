@@ -8,7 +8,7 @@ import {
 } from "../../store/selectors/project.selector";
 import {
 	GetProfileFromRoute,
-	UpdateUiComponents
+	UpdateProjectSuccess
 } from "../../store/actions/project.actions";
 import { IProject } from "src/app/models/project.interface";
 import { NavigateToRoute } from "src/app/store/actions/config.actions";
@@ -33,6 +33,9 @@ export class ProjectComponent implements OnInit {
 	}
 
 	navigateToProject = (project: IProject) => {
+		this._store.dispatch(
+			new UpdateProjectSuccess(null)
+		);
 		this._store.dispatch(
 			new NavigateToRoute([project.profile, "projects", project.title])
 		);
