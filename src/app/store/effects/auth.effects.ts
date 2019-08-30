@@ -67,7 +67,6 @@ export class AuthEffects {
 				new Authenticated(user),
 				new GetUserProfile(),
 				new GetSettings(),
-				new UpdateUiComponents(user.uid)
 			);
 		}),
 		catchError(err => {
