@@ -64,6 +64,7 @@ export class EditProjectComponent implements OnInit {
 			.pipe(
 				withLatestFrom(this._router.pathFromRoot[1].url),
 				map(([user, urlSegment]) => {
+					console.log(urlSegment)
 					if (user.hasOwnProperty("profile")) {
 						this.getSelectedProjectFromRoute(urlSegment);
 					}
