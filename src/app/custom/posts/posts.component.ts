@@ -53,7 +53,6 @@ class MyDataSource extends DataSource<string | undefined> {
         const startPage = this.getPageForIndex(range.start);
         const endPage = this.getPageForIndex(range.end - 1);
         for (let i = startPage; i <= endPage; i++) {
-          console.log(i);
           this.fetchPage(i);
         }
       })
@@ -106,7 +105,6 @@ class MyDataSource extends DataSource<string | undefined> {
 				}&inc=name,gender,email,nat&noinfo` */
 
       .subscribe((res: any) => {
-        console.log(res);
         this.cachedData.splice(page * this.pageSize, this.pageSize, ...res);
         this.dataStream.next(this.cachedData);
       });
