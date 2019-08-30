@@ -38,7 +38,6 @@ export class EditProjectComponent implements OnInit {
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	selectProject$ = this._store.pipe(select(selectProject));
 	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
-
 	/* Move me to an effect and make me come from firebase collection */
 
 	componentConfigs = [
