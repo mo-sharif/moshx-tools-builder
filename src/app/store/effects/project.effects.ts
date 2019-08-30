@@ -218,8 +218,8 @@ export class ProjectEffects {
 			return [
 				new UpdateProfileSuccess(project.uid),
 				/* Fix me!!!! Still broken, need to navigate to proj on success */
-				// new NavigateToRoute([project.profile, "projects", selectProject.title]),
-				new NavigateToRoute([project.profile])
+				new NavigateToRoute([project.profile, "projects", selectProject.title]),
+				// new NavigateToRoute([project.profile])
 			];
 		}),
 		catchError(err => {
