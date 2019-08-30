@@ -63,7 +63,7 @@ export class ProjectEffects {
         new SaveProjectSuccess(project)
       ];
     }),
-    catchError(err => of(new SetErrorMsg(`[SaveProject] ${err}`)))
+    catchError(err => of(new SetErrorMsg(`${err}`)))
   );
 
   @Effect()
@@ -90,7 +90,7 @@ export class ProjectEffects {
       });
       return of(new UpdateProjectSuccess(project["componentConfigs"]));
     }),
-    catchError(err => of(new SetErrorMsg(`[UpdateProject] ${err}`)))
+    catchError(err => of(new SetErrorMsg(`${err}`)))
   );
 
   @Effect()
@@ -121,7 +121,10 @@ export class ProjectEffects {
       let profileName = route.replace(".", " ");
       return this._profileService.loadProfile(profileName).pipe(
         switchMap((projects: IProject[]) => {
-          return of(new GetProfileFromRouteSuccess(projects), new UpdateUiComponents(projects[0].uid));
+          return of(
+            new GetProfileFromRouteSuccess(projects),
+            new UpdateUiComponents(projects[0].uid)
+          );
         })
       );
     })
@@ -144,7 +147,7 @@ export class ProjectEffects {
           }
         }),
         catchError(err => {
-          return of(new SetErrorMsg(`[GetUserProfile] ${err}`));
+          return of(new SetErrorMsg(`${err}`));
         })
       );
     })
@@ -157,7 +160,7 @@ export class ProjectEffects {
     switchMap(([action, user]) => {
       return this._projectService.getUserProjects(user).pipe(
         catchError(err => {
-          return of(new SetErrorMsg(`[GetUserProfileSuccess] ${err}`));
+          return of(new SetErrorMsg(`${err}`));
         })
       );
     })
@@ -173,23 +176,28 @@ export class ProjectEffects {
       EProjectActions.GetSelectedProjectFromRoute
     ),
     map(action => action.payload),
-    switchMap(([profileName, projectName]) => {
-      return this._projectService
-        .GetSelectedProjectFromRoute(profileName, projectName)
-        .pipe(
-          switchMap(([project]) => {
-            if (project) {
-              return of(
-                new UpdateUiComponents(project.uid),
-                new GetSelectedProjectFromRouteSuccess(project)
-              );
-            }
-            return of();
-          }),
-          catchError(err => {
-            return of(new SetErrorMsg(`[GetSelectedProjectFromRoute] ${err}`));
-          })
-        );
+    withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+    switchMap(([[profileName, projectName], selectLoggedInUserUID]) => {
+		if (selectLoggedInUserUID) {
+			return this._projectService
+				.GetSelectedProjectFromRoute(profileName, projectName)
+				.pipe(
+					switchMap(([project]) => {
+						if (project) {
+							return of(
+								new UpdateUiComponents(project.uid),
+								new GetSelectedProjectFromRouteSuccess(project)
+							);
+						}
+						return of();
+					}),
+					catchError(err => {
+						return of(new SetErrorMsg(`${err}`));
+					})
+				);
+		} else {
+			return of (new UpdateUiComponents(selectLoggedInUserUID))
+		}
     })
   );
 
@@ -212,7 +220,7 @@ export class ProjectEffects {
       ];
     }),
     catchError(err => {
-      return of(new SetErrorMsg(`[SaveProject] ${err}`));
+      return of(new SetErrorMsg(`${err}`));
     })
   );
 
