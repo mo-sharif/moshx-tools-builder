@@ -18,7 +18,7 @@ export class RandomUserService {
     sortField: string,
     sortOrder: string,
     genders: string[],
-    componentConfigs: IProject["componentConfigs"]
+    project: IProject
   ): Observable<{}> {
     let params = new HttpParams()
       .append("page", `${pageIndex}`)
@@ -31,8 +31,8 @@ export class RandomUserService {
     return this.http
       .get(
         `${
-          componentConfigs
-            ? componentConfigs.httpRequestUrl
+          project && project.componentConfigs
+            ? project.componentConfigs.httpRequestUrl
             : this.httpRequestUrl
         }`,
         {
@@ -72,7 +72,7 @@ export class RandomUserService {
 })
 export class TableComponent implements OnInit {
   @Input()
-  componentConfigs: IProject["componentConfigs"];
+  selectProject$: Observable<IProject>;
 
   pageIndex = 1;
   pageSize = 10;
@@ -101,26 +101,27 @@ export class TableComponent implements OnInit {
     }
     this.loading = true;
 
-    this.randomUserService
-      .getTableData(
-        this.pageIndex,
-        this.pageSize,
-        this.sortKey!,
-        this.sortValue!,
-        this.searchGenderList,
-        this.componentConfigs
-      )
-      .subscribe((data: any) => {
-        console.log(data);
-        this.loading = false;
-        this.total = 200;
-        this.listOfData = data.results;
-      });
+		this.selectProject$.subscribe((project) => {
+			this.randomUserService
+				.getTableData(
+					this.pageIndex,
+					this.pageSize,
+					this.sortKey!,
+					this.sortValue!,
+					this.searchGenderList,
+					project
+				)
+				.subscribe((data: any) => {
+					console.log(data);
+					this.loading = false;
+					this.total = 200;
+					this.listOfData = data.results;
+				});
+		})
   }
 
   updateFilter(value: string[]): void {
     this.searchGenderList = value;
-    console.log("data");
     this.searchData(true);
   }
 
