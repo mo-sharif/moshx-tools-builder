@@ -13,7 +13,7 @@ import {
 })
 export class AddComponentDirective implements OnInit, OnDestroy {
 	@Input("comp") comp: Type<any>;
-	@Input("componentConfigs") componentConfigs: Type<any>;
+	@Input("selectProject$") selectProject$: Type<any>;
 
 	constructor(
 		public viewContainerRef: ViewContainerRef,
@@ -27,7 +27,7 @@ export class AddComponentDirective implements OnInit, OnDestroy {
 			);
 			this.viewContainerRef.clear();
 			let cmpRef = this.viewContainerRef.createComponent(componentFactory);
-			cmpRef.instance.componentConfigs = this.componentConfigs;
+			cmpRef.instance.selectProject$ = this.selectProject$;
 		}).catch(error => console.log(error));
 	}
 
