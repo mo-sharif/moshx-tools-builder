@@ -131,20 +131,20 @@ app
 ```
 ## Dev WorkFlow
 
-###Components -> Presentation only
+### Components -> Presentation only
 - These components don't alter app state in any way
 - State and props are passed down to them
 - Presentational only
 
-###Containers -> Functionality and Presentation
+### Containers -> Functionality and Presentation
 - These components can alter app state and receive state and props from other components
 - They are like pages contain smaller components
 
-###Effects -> Logic and Functionality
+### Effects -> Logic and Functionality
 - Handle async actions between components
 - App logic and functionality can exist in them
 
-###Services -> API Logic
+### Services -> API Logic
 - Handles communications with backend and cloud
 
 
