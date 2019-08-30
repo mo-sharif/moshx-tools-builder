@@ -3,10 +3,7 @@ import { Location } from "@angular/common";
 
 import {
 	SaveProject,
-	GetSelectedProjectFromRoute,
 	DeleteProject,
-	UpdateProject,
-	NewProject
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -59,19 +56,7 @@ export class EditProjectComponent implements OnInit {
 		private _location: Location
 	) {}
 
-	ngOnInit() {
-		this.selectLoggedInUser$
-			.pipe(
-				withLatestFrom(this._router.pathFromRoot[1].url),
-				map(([user, urlSegment]) => {
-					console.log(urlSegment)
-					if (user.hasOwnProperty("profile")) {
-						this.getSelectedProjectFromRoute(urlSegment);
-					}
-				})
-			)
-			.subscribe();
-	}
+	ngOnInit() {}
 
 	saveFormData = (formData: IProject) => {
 		// Add component type to formData from route id
@@ -80,20 +65,6 @@ export class EditProjectComponent implements OnInit {
 			new SaveProject({
 				...formData
 			})
-		);
-	};
-
-	dispatchNewProject = () => {
-		let type = this._router.snapshot.params.id;
-		let project = new Project("New Project", "NOT_YET_ASSIGNED", type);
-		this._store.dispatch(new NewProject(project));
-	};
-
-	getSelectedProjectFromRoute = urlSegment => {
-		let profileName = urlSegment[0].path;
-		let projectName = this._router.snapshot.params.id;
-		this._store.dispatch(
-			new GetSelectedProjectFromRoute([profileName, projectName])
 		);
 	};
 
