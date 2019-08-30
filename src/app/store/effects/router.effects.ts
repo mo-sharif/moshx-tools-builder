@@ -18,15 +18,20 @@ import { GetSelectedProjectFromRoute } from "../actions/project.actions";
 @Injectable()
 export class routerEffects {
 	/* FINISH ME!! */
-	/* @Effect()
+	@Effect()
 	routeChange$ = this._actions$.pipe(
 		ofType<RouterNavigationAction>(ROUTER_NAVIGATION),
-		switchMap((route)=> {
+		switchMap((route) => {
 			let profileName = route.payload.routerState.url.split('/')[1]
 			let projectName = route.payload.routerState.url.split('/')[3]
-			return of(new GetSelectedProjectFromRoute([profileName, projectName]))
+
+			if (profileName && projectName) {
+				return of(new GetSelectedProjectFromRoute([profileName, projectName]))
+			} else { 
+				return of()
+			}
 		})
-	); */
+	);
 
 	@Effect()
 	navigateToRoute$ = this._actions$.pipe(
