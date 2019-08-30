@@ -18,13 +18,15 @@ import { catchError } from "rxjs/operators";
 })
 export class PostsComponent implements OnInit {
   @Input()
-  componentConfigs: IProject["componentConfigs"];
+  selectProject$: Observable<IProject>;
 
   public dataStore;
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.dataStore = new MyDataSource(this.http, this.componentConfigs);
+	ngOnInit() {
+		this.selectProject$.subscribe((project) => { 
+			this.dataStore = new MyDataSource(this.http, project);
+		})
   }
 
   isObject = value => typeof value === "number";
@@ -40,7 +42,7 @@ class MyDataSource extends DataSource<string | undefined> {
   private httpRequestUrl = `https://jsonplaceholder.typicode.com/todos`;
   constructor(
     private http: HttpClient,
-    private componentConfigs: IProject["componentConfigs"]
+    private project: IProject
   ) {
     super();
   }
@@ -74,8 +76,8 @@ class MyDataSource extends DataSource<string | undefined> {
     this.fetchedPages.add(page);
     this.http
       .get(
-        this.componentConfigs
-          ? this.componentConfigs.httpRequestUrl
+        this.project && this.project.componentConfigs
+          ? this.project.componentConfigs.httpRequestUrl
           : this.httpRequestUrl
       )
       .pipe(
