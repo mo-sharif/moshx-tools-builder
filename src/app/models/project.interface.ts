@@ -8,17 +8,18 @@ export interface IProject {
 	profile?: string;
 	slug?: string;
 	UiComponents?: UiComponents;
-	componentConfigs?: IComponentConfigs;
+	httpConfigs?: IComponentConfigs;
 }
 
 export interface UiComponents {
-	isNewProject?: boolean;
+	showProjectSaveMenu?: boolean;
 	isUserLoggedIn?: boolean;
+	isNewProject?: boolean;
 }
 
 export interface IComponentConfigs {
 	httpRequestUrl: string,
-	collectionUrl: string,
+	httpParams: string[]
 }
 
 export interface ISettings {
@@ -48,6 +49,6 @@ export class Project implements IProject {
 		public uid?: string,
 		public type?: string,
 		public UiComponents?: UiComponents,
-		public componentConfigs?: IComponentConfigs
+		public httpConfigs?: IComponentConfigs
 	) {}
 }
