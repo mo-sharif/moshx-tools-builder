@@ -19,3 +19,8 @@ export const selectContainers = createSelector(
 	configState,
 	(state: IConfigState) => state.containers
 )
+
+export const selectUrlSegment = createSelector(
+	configState,
+	(state: IConfigState) => state.urlSegments
+)
