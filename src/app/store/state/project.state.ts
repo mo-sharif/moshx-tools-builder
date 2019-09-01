@@ -22,6 +22,6 @@ export const initialProjectState: IProjectState = {
 	selectProject: null,
 	container: [],
 	profile: null,
-	UiComponents: { isNewProject: true, isUserLoggedIn: false },
+	UiComponents: { showProjectSaveMenu: true, isUserLoggedIn: false, isNewProject: true },
 	updateProject: null
 };
