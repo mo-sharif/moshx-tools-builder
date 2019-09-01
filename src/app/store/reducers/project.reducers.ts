@@ -29,7 +29,7 @@ export function projectReducers(
 				selectProject: action.payload,
 			};
 		}
-		case EProjectActions.GetSelectedProjectFromRouteSuccess: {
+		case EProjectActions.GetSelectedProjectSuccess: {
 			return {
 				...state,
 				selectProject: action.payload,
