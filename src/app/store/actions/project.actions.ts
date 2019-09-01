@@ -6,8 +6,8 @@ export enum EProjectActions {
 	GetProjects = "[Project] Get Projects",
 	GetProjectsSuccess = "[Project] Get Projects Success",
 	GetProject = "[Project] Get Project",
-	GetSelectedProjectFromRoute = "[Project] Get Selected Project From Route",
-	GetSelectedProjectFromRouteSuccess = "[Project] Get Selected Project From Route Success",
+	GetSelectedProject = "[Project] Get Selected Project From Route",
+	GetSelectedProjectSuccess = "[Project] Get Selected Project From Route Success",
 	GetProjectSuccess = "[Project] Get Project Success",
 	NewProject = "[Project] New Project",
 	NewProjectSuccess = "[Project] New Project Success",
@@ -33,12 +33,11 @@ export class GetProjects implements Action {
 export class GetProject implements Action {
 	public readonly type = EProjectActions.GetProject;
 }
-export class GetSelectedProjectFromRoute implements Action {
-	public readonly type = EProjectActions.GetSelectedProjectFromRoute;
-	constructor(public payload: string[]) {}
+export class GetSelectedProject implements Action {
+	public readonly type = EProjectActions.GetSelectedProject;
 }
-export class GetSelectedProjectFromRouteSuccess implements Action {
-	public readonly type = EProjectActions.GetSelectedProjectFromRouteSuccess;
+export class GetSelectedProjectSuccess implements Action {
+	public readonly type = EProjectActions.GetSelectedProjectSuccess;
 	constructor(public payload: IProject) {}
 }
 export class GetUserProjects implements Action {
@@ -71,7 +70,7 @@ export class SaveProjectSuccess implements Action {
 }
 export class UpdateProject implements Action {
 	public readonly type = EProjectActions.UpdateProject;
-	constructor(public payload: IProject['componentConfigs']) {}
+	constructor(public payload: IProject['httpConfigs']) {}
 }
 export class UpdateProjectSuccess implements Action {
 	public readonly type = EProjectActions.UpdateProjectSuccess;
@@ -114,8 +113,8 @@ export type ProjectActions =
 	| GetProject
 	| GetProjectSuccess
 	| GetProjects
-	| GetSelectedProjectFromRoute
-	| GetSelectedProjectFromRouteSuccess
+	| GetSelectedProject
+	| GetSelectedProjectSuccess
 	| GetProjectsSuccess
 	| NewProject
 	| NewProjectSuccess
