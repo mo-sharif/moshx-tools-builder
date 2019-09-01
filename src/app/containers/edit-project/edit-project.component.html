@@ -10,7 +10,7 @@
 		<nz-page-header-tags>
 			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
-		<nz-page-header-extra *ngIf="(selectUiComponents$ | async)?.isNewProject">
+		<nz-page-header-extra *ngIf="(selectUiComponents$ | async)?.showProjectSaveMenu">
 			<button nzShape="circle" nz-button nzType="default" (click)="open()">
 				<i nz-icon nzType="save"></i>
 			</button>
@@ -51,9 +51,9 @@
 		<app-save-project
 			(formData)="saveFormData($event)"
 			(deleteProject)="deleteProject($event)"
-			[selectLoggedInUser]="selectLoggedInUser$ | async"
-			[componentConfigs]="this.componentConfigs"
-			[selectProject]="selectProject$ | async"
+			[selectLoggedInUser$]="selectLoggedInUser$"
+			[httpConfigs]="this.httpConfigs"
+			[selectProject$]="selectProject$"
 			[selectUiComponents]="selectUiComponents$ | async"
 		>
 		</app-save-project>
