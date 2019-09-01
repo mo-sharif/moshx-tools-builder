@@ -18,7 +18,7 @@
 					<ng-template #extraTemplate>
 					</ng-template>
 				</div>
-				<div nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="12" [nzXs]="12" *ngIf="UiComponents?.isNewProject">
+				<div nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="12" [nzXs]="12" *ngIf="UiComponents?.showProjectSaveMenu">
 					<a [routerLink]="['/home/new-project']">
 						<nz-card class="card" [nzBordered]="false" nzTitle="New Project" [nzExtra]="extraTemplate">
 							Add New Project
