@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import {
 	SaveProject,
 	DeleteProject,
+	GetSelectedProject
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -18,7 +19,6 @@ import {
 import { IProject, Project } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
-import { map, withLatestFrom, delay, last, startWith, tap, switchMap, takeLast, first, combineLatest } from "rxjs/operators";
 import { Components } from "../../custom/components-module";
 
 @Component({
@@ -37,16 +37,11 @@ export class EditProjectComponent implements OnInit {
 	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
 	/* Move me to an effect and make me come from firebase collection */
 
-	componentConfigs = [
+	httpConfigs = [
 		{
 			name: "Http Request",
 			type: "httpRequestUrl",
 			placeholder: "https://mosh-media.com"
-		},
-		{
-			name: "Firebase Collection",
-			type: "collectionUrl",
-			placeholder: "/user/profile"
 		}
 	];
 
@@ -56,7 +51,9 @@ export class EditProjectComponent implements OnInit {
 		private _location: Location
 	) {}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this._store.dispatch(new GetSelectedProject());
+	}
 
 	saveFormData = (formData: IProject) => {
 		// Add component type to formData from route id
