@@ -4,7 +4,6 @@ import {
 	Input,
 	EventEmitter,
 	OnInit,
-	OnChanges
 } from "@angular/core";
 
 import {
@@ -17,8 +16,14 @@ import {
 import { Observable, Observer, of } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
-import { map, catchError, tap, delay } from "rxjs/operators";
 import { listStagger } from "src/app/animations/list-stagger.animation";
+
+export interface Item {
+	id: number;
+	controlInstance: string;
+	label: string;
+	type: string;
+}
 
 @Component({
 	selector: "app-save-project",
@@ -26,15 +31,16 @@ import { listStagger } from "src/app/animations/list-stagger.animation";
 	styleUrls: ["./save-project.component.css"],
 	animations: [listStagger]
 })
-export class EditProjectComponent implements OnInit, OnChanges {
+
+export class EditProjectComponent implements OnInit {
 	@Input()
-	selectLoggedInUser: IUser;
+	selectLoggedInUser$: Observable<IUser>;
 	
 	@Input()
-	selectProject: IProject;
+	selectProject$: Observable<IProject>;
 	
 	@Input()
-	componentConfigs: IProject["componentConfigs"];
+	httpConfigs: IProject["httpConfigs"];
 	
 	@Input()
 	selectUiComponents: any;
@@ -46,6 +52,8 @@ export class EditProjectComponent implements OnInit, OnChanges {
 	deleteProject: EventEmitter<any> = new EventEmitter();
 	
 	projectFrom: FormGroup;
+
+	controls: Array<Item> = [];
 
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
@@ -82,6 +90,43 @@ export class EditProjectComponent implements OnInit, OnChanges {
 		return {};
 	};
 
+	addField(e?: MouseEvent): void {
+		if (e) {
+			e.preventDefault();
+		}
+		const id =
+			this.controls.length > 0
+				? this.controls[this.controls.length - 1].id + 1
+				: 0;
+
+		const control = {
+			id,
+			controlInstance: `field${id}`,
+			label: `Field ${id}`,
+			type: 'text'
+		};
+		const index = this.controls.push(control);
+		console.log(this.controls[this.controls.length - 1]);
+		const httpConfigsGroup = this.projectFrom.get(`httpConfigs`) as FormGroup;
+
+		httpConfigsGroup.addControl(
+			this.controls[index - 1].controlInstance,
+			new FormControl(null)
+			//Validators.required
+		);
+	}
+
+	removeField(i: Item, e: MouseEvent): void {
+		e.preventDefault();
+		if (this.controls.length > 1) {
+			const index = this.controls.indexOf(i);
+			this.controls.splice(index, 1);
+			console.log(this.controls);
+			const httpConfigsGroup = this.projectFrom.get(`httpConfigs`) as FormGroup;
+			httpConfigsGroup.removeControl(i.controlInstance);
+		}
+	}
+
 	constructor(private fb: FormBuilder) {}
 
 	ngOnInit() {
@@ -89,21 +134,19 @@ export class EditProjectComponent implements OnInit, OnChanges {
 			profile: [null, [Validators.required], [this.titleAsyncValidator]],
 			title: [null, [Validators.required]],
 			type: [null],
-			componentConfigs: this.fb.group({
+			httpConfigs: this.fb.group({
 				httpRequestUrl: [null],
-				collectionUrl: [null]
+				httpParams: [null]
 			})
 		});
-		this.projectFrom.patchValue({ ...this.selectLoggedInUser });
-	}
-	ngOnChanges() {
-		if (this.selectProject && this.selectProject.componentConfigs) {
-			try {
-				this.projectFrom.patchValue({ ...this.selectProject });
-			} catch (err) {
-				/* Fix undefined values in patchValues */
-				console.warn(err);
-			}
-		}
+
+		this.selectLoggedInUser$.subscribe(
+			(selectLoggedInUser) => {this.projectFrom.patchValue({...selectLoggedInUser})}
+		)
+
+		this.selectProject$.subscribe(
+			(selectProject) => {if (selectProject && selectProject.httpConfigs) {this.projectFrom.patchValue({ ...selectProject })}}
+		)
+		this.addField();
 	}
 }
