@@ -39,7 +39,7 @@ export class EditProjectComponent implements OnInit {
 
 	httpConfigs = [
 		{
-			name: "Http Request",
+			name: "Request Url",
 			type: "httpRequestUrl",
 			placeholder: "https://mosh-media.com"
 		}
