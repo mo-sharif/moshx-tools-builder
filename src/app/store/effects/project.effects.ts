@@ -12,8 +12,8 @@ import {
   SaveProjectSuccess,
   GetProfileFromRouteSuccess,
   GetProfileFromRoute,
-  GetSelectedProjectFromRoute,
-  GetSelectedProjectFromRouteSuccess,
+  GetSelectedProject,
+  GetSelectedProjectSuccess,
   NewProject,
   DeleteProject,
   DeleteProjectSuccess,
@@ -44,6 +44,7 @@ import {
   GetUserProfile
 } from "../actions/auth.actions";
 import { selectProject } from "../selectors/project.selector";
+import { selectUrlSegment } from "../selectors/config.selector";
 
 @Injectable()
 export class ProjectEffects {
@@ -86,9 +87,9 @@ export class ProjectEffects {
     switchMap(([project, selectProject]) => {
       this._projectService.updateProject({
         ...selectProject,
-        componentConfigs: { ...project }
+        httpConfigs: { ...project }
       });
-      return of(new UpdateProjectSuccess(project["componentConfigs"]));
+      return of(new UpdateProjectSuccess(project["httpConfigs"]));
     }),
     catchError(err => of(new SetErrorMsg(`${err}`)))
   );
@@ -143,7 +144,7 @@ export class ProjectEffects {
             if (user.profile) {
               user.profileSlug = user.profile.replace(/ /g, ".");
             }
-            return of(new GetUserProfileSuccess(user), new UpdateUser(user));
+            return of(new GetUserProfileSuccess(user), new UpdateUser(user), new GetSelectedProject());
           }
         }),
         catchError(err => {
@@ -171,22 +172,22 @@ export class ProjectEffects {
   or editing an existing project 
   */
   @Effect()
-  GetSelectedProjectFromRoute$ = this._actions$.pipe(
-    ofType<GetSelectedProjectFromRoute>(
-      EProjectActions.GetSelectedProjectFromRoute
+  GetSelectedProject$ = this._actions$.pipe(
+    ofType<GetSelectedProject>(
+      EProjectActions.GetSelectedProject
     ),
-    map(action => action.payload),
+    withLatestFrom(this._store.pipe(select(selectUrlSegment))),
     withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-    switchMap(([[profileName, projectName], selectLoggedInUserUID]) => {
-		if (selectLoggedInUserUID) {
+    switchMap(([[action, selectUrlSegment], selectLoggedInUserUID]) => {
+		if (selectLoggedInUserUID && selectUrlSegment) {
 			return this._projectService
-				.GetSelectedProjectFromRoute(profileName, projectName)
+				.GetSelectedProject(selectUrlSegment)
 				.pipe(
 					switchMap(([project]) => {
 						if (project) {
 							return of(
 								new UpdateUiComponents(project.uid),
-								new GetSelectedProjectFromRouteSuccess(project)
+								new GetSelectedProjectSuccess(project)
 							);
 						}
 						return of();
@@ -214,9 +215,7 @@ export class ProjectEffects {
       this._userService.updateUserFromProjectName(project);
       return [
         new UpdateProfileSuccess(project.uid),
-        /* Fix me!!!! Still broken, need to navigate to proj on success */
         new NavigateToRoute([project.profile, "projects", selectProject.title])
-        // new NavigateToRoute([project.profile])
       ];
     }),
     catchError(err => {
@@ -235,8 +234,9 @@ export class ProjectEffects {
     withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
     switchMap(([projectUid, uid]) => {
       let UiComponents = {
-        isNewProject: projectUid == uid,
-        isUserLoggedIn: uid ? true : false
+        showProjectSaveMenu: projectUid == uid,
+		isUserLoggedIn: uid ? true : false,
+		isNewProject: !projectUid || !uid,
       };
       return of(new UpdateUiComponentsSuccess(UiComponents));
     })
