@@ -1,23 +1,57 @@
-<div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle" class="collapse-content">
+<div
+	nz-row
+	nzType="flex"
+	nzJustify="space-around"
+	nzAlign="middle"
+	class="collapse-content"
+>
 	<div nz-col nzSpan="24">
 		<div nz-row nzGutter="12" [@listStagger]>
 			<!-- Save and Edit Project -->
-			<form nz-form [formGroup]="projectFrom" (ngSubmit)="submitForm($event, projectFrom.value)">
-				<div nz-col [nzSpan]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" style="margin-bottom: 10px;">
-					<nz-card class="card" [nzBordered]="false" nzTitle="Project Settings" [nzExtra]="extraTemplate">
+			<form
+				nz-form
+				[formGroup]="projectFrom"
+				(ngSubmit)="submitForm($event, projectFrom.value)"
+			>
+				<div
+					nz-col
+					[nzSpan]="12"
+					[nzMd]="12"
+					[nzSm]="24"
+					[nzXs]="24"
+					style="margin-bottom: 10px;"
+				>
+					<nz-card
+						class="card"
+						[nzBordered]="false"
+						nzTitle="Project Settings"
+						[nzExtra]="extraTemplate"
+					>
 						<nz-form-item>
-							<nz-form-label [nzSpan]="7" nzRequired>Profile Name</nz-form-label>
+							<nz-form-label [nzSpan]="7" nzRequired
+								>Profile Name</nz-form-label
+							>
 							<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
-								<input nz-input formControlName="profile" placeholder="Awesome Profile" />
-								<nz-form-explain *ngIf="
+								<input
+									nz-input
+									formControlName="profile"
+									placeholder="Awesome Profile"
+								/>
+								<nz-form-explain
+									*ngIf="
 										(projectFrom.get('profile')?.dirty &&
 											projectFrom.get('profile')?.errors) ||
 										projectFrom.get('profile')?.pending
-									">
-									<ng-container *ngIf="projectFrom.get('profile')?.hasError('required')">
+									"
+								>
+									<ng-container
+										*ngIf="projectFrom.get('profile')?.hasError('required')"
+									>
 										Please input your Profile Name!
 									</ng-container>
-									<ng-container *ngIf="projectFrom.get('profile')?.hasError('duplicated')">
+									<ng-container
+										*ngIf="projectFrom.get('profile')?.hasError('duplicated')"
+									>
 										The Project name is redundant!
 									</ng-container>
 									<ng-container *ngIf="projectFrom.get('profile')?.pending">
@@ -27,21 +61,35 @@
 							</nz-form-control>
 						</nz-form-item>
 						<nz-form-item>
-							<nz-form-label [nzSpan]="7" nzRequired nzFor="title">Project name</nz-form-label>
+							<nz-form-label [nzSpan]="7" nzRequired nzFor="title"
+								>Project name</nz-form-label
+							>
 							<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
-								<input nz-input name="title" type="title" id="title" formControlName="title"
-									placeholder="Awesome title" />
-								<nz-form-explain *ngIf="
+								<input
+									nz-input
+									name="title"
+									type="title"
+									id="title"
+									formControlName="title"
+									placeholder="Awesome title"
+								/>
+								<nz-form-explain
+									*ngIf="
 										projectFrom.get('title')?.dirty &&
 										projectFrom.get('title')?.error
-									">
+									"
+								>
 									Please input your Project Name!
 								</nz-form-explain>
 							</nz-form-control>
 						</nz-form-item>
 						<nz-form-item>
 							<nz-form-control [nzOffset]="0" [nzSpan]="12">
-								<button nz-button nzType="primary" [disabled]="!projectFrom.valid">
+								<button
+									nz-button
+									nzType="primary"
+									[disabled]="!projectFrom.valid"
+								>
 									Save Project
 								</button>
 							</nz-form-control>
@@ -49,39 +97,119 @@
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
 				</div>
-				<div nz-col [nzSpan]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" style="margin-bottom: 10px;">
-					<nz-card class="card" [nzBordered]="false" nzTitle="HTTP Settings" [nzExtra]="extraTemplate">
-						<nz-form-item *ngFor="let componentConfig of componentConfigs">
-							<div formGroupName="componentConfigs">
-								<nz-form-label [nzSpan]="7" [nzFor]="componentConfig.type">{{
-									componentConfig.name
+				<div
+					nz-col
+					[nzSpan]="12"
+					[nzMd]="12"
+					[nzSm]="24"
+					[nzXs]="24"
+					style="margin-bottom: 10px;"
+				>
+					<nz-card
+						class="card"
+						[nzBordered]="false"
+						nzTitle="HTTP Settings"
+						[nzExtra]="extraTemplate"
+					>
+						<nz-form-item *ngFor="let httpConfig of httpConfigs">
+							<div formGroupName="httpConfigs">
+								<nz-form-label [nzSpan]="7" [nzFor]="httpConfig.type">{{
+									httpConfig.name
 								}}</nz-form-label>
 								<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
-									<input nz-input [name]="componentConfig.type" [type]="componentConfig.type"
-										[id]="componentConfig.type" [formControlName]="componentConfig.type"
-										[placeholder]="componentConfig.placeholder" />
-									<nz-form-explain *ngIf="
-											projectFrom.get('componentConfig.type')?.dirty &&
-											projectFrom.get('componentConfig.type')?.error
-										">
-										Please input your {{ componentConfig.name }}!
+									<input
+										nz-input
+										[name]="httpConfig.type"
+										[type]="httpConfig.type"
+										[id]="httpConfig.type"
+										[formControlName]="httpConfig.type"
+										[placeholder]="httpConfig.placeholder"
+									/>
+									<nz-form-explain
+										*ngIf="
+											projectFrom.get('httpConfig.type')?.dirty &&
+											projectFrom.get('httpConfig.type')?.error
+										"
+									>
+										Please input your {{ httpConfig.name }}!
 									</nz-form-explain>
 								</nz-form-control>
 							</div>
 						</nz-form-item>
+						<nz-form-item
+							class="box"
+							*ngFor="let control of controls; let i = index"
+						>
+							<nz-form-label
+								[nzXs]="24"
+								[nzSm]="4"
+								*ngIf="i == 0"
+								[nzFor]="control.controlInstance"
+								>{{ control.label }}
+							</nz-form-label>
+							<nz-form-control
+								[nzXs]="24"
+								[nzSm]="20"
+								[nzOffset]="i == 0 ? 0 : 4"
+								nzErrorTip="Please input value"
+							>
+								<input
+									class="passenger-input"
+									nz-input
+									placeholder="placeholder"
+									[attr.id]="control.id"
+									[formControlName]="control.controlInstance"
+								/>
+								<i
+									nz-icon
+									nzType="minus-circle-o"
+									class="dynamic-delete-button"
+									(click)="removeField(control, $event)"
+								></i>
+							</nz-form-control>
+						</nz-form-item>
+						<nz-form-item>
+							<nz-form-control
+								[nzXs]="{ span: 24, offset: 0 }"
+								[nzSm]="{ span: 20, offset: 4 }"
+							>
+								<button
+									nz-button
+									nzType="dashed"
+									class="add-button"
+									(click)="addField($event)"
+								>
+									<i nz-icon nzType="plus"></i>
+									Add field
+								</button>
+							</nz-form-control>
+						</nz-form-item>
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
 				</div>
+				<ng-container *ngIf="selectProject$ | async as selectProject">
+						<div
+							nz-col
+							[nzSpan]="12"
+							[nzMd]="12"
+							[nzSm]="24"
+							[nzXs]="24"
+							style="margin-bottom: 10px;"
+							[@listStagger]
+							*ngIf="selectProject.profile"
+						>
+							<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
+								<button
+									nz-button
+									nzType="danger"
+									(click)="emitDeleteProject(selectProject)"
+								>
+									<i nz-icon nzType="delete"></i>Delete
+								</button>
+							</nz-card>
+						</div>
+					</ng-container>
 			</form>
-		</div>
-		<div nz-row nzGutter="12" [@listStagger] *ngIf="selectProject?.profile">
-			<div nz-col [nzSpan]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" style="margin-bottom: 10px;">
-				<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
-					<button nz-button nzType="danger" (click)="emitDeleteProject(selectProject)">
-						<i nz-icon nzType="delete"></i>Delete
-					</button>
-				</nz-card>
-			</div>
 		</div>
 	</div>
 </div>
