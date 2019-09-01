@@ -46,7 +46,7 @@ export class AuthEffects {
 				return of(
 					new NotAuthenticated(),
 					new GetSettings(),
-					new UpdateUiComponentsSuccess({ isNewProject: true, isUserLoggedIn: false })
+					new UpdateUiComponentsSuccess({ showProjectSaveMenu: true, isUserLoggedIn: false, isNewProject: true })
 				);
 			}
 
@@ -67,6 +67,7 @@ export class AuthEffects {
 				new Authenticated(user),
 				new GetUserProfile(),
 				new GetSettings(),
+				new UpdateUiComponents(user.uid)
 			);
 		}),
 		catchError(err => {
