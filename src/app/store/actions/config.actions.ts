@@ -12,7 +12,8 @@ export enum EConfigActions {
 	NavigateToRoute = "[Route] Navigate To Route",
 	NavigateSuccess = "[Route} Navigate Success",
 	GetSettings = "[Settings] Get Settings",
-	GetSettingsSuccess = "[Settings] Get Settings Success"
+	GetSettingsSuccess = "[Settings] Get Settings Success",
+	StoreUrlSegments = "[Route] Store Url Segments"
 }
 
 export class GetConfig implements Action {
@@ -44,6 +45,11 @@ export class NavigateToRoute implements Action {
 export class NavigateSuccess implements Action {
 	public readonly type = EConfigActions.NavigateSuccess;
 }
+export class StoreUrlSegments implements Action {
+	public readonly type = EConfigActions.StoreUrlSegments;
+	constructor(public payload: [string, string]) {}
+}
+
 export class GetSettings implements Action {
 	public readonly type = EConfigActions.GetSettings;
 }
@@ -63,4 +69,5 @@ export type ConfigActions =
 	| NavigateToRoute
 	| NavigateSuccess
 	| GetSettings
-	| GetSettingsSuccess;
+	| GetSettingsSuccess
+	| StoreUrlSegments;
