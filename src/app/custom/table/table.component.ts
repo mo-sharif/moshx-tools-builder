@@ -1,17 +1,19 @@
 import {
 	HttpClient,
 	HttpParams,
-	HttpErrorResponse
+	HttpErrorResponse,
+  HttpHeaders,
 } from "@angular/common/http";
 import { Component, Injectable, OnInit, Input, OnDestroy } from "@angular/core";
 import { Observable, of, Subscription } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
 import { catchError, map, switchMap } from "rxjs/operators";
+import { HttpParamsOptions } from "@angular/common/http/src/params";
 
 @Injectable()
 export class RandomUserService {
 	httpRequestUrl = "https://api.randomuser.me/";
-
+  
 	getTableData(
 		pageIndex: number = 1,
 		pageSize: number = 10,
@@ -20,24 +22,33 @@ export class RandomUserService {
 		genders: string[],
 		project: IProject
 	): Observable<{}> {
-		let params = new HttpParams()
+/* 		let httpParams = new HttpParams()
 			.append("page", `${pageIndex}`)
 			.append("results", `${pageSize}`)
 			.append("sortField", sortField)
 			.append("sortOrder", sortOrder);
 		genders.forEach(gender => {
-			params = params.append("gender", gender);
-		});
+			httpParams = httpParams.append("gender", gender);
+    }); */
+
+    const myObject: any = { page: `${pageIndex}`, results: `${pageSize}`, sortField: sortField, sortOrder: sortOrder };
+
+    const httpParams: HttpParamsOptions = { fromObject: myObject } as HttpParamsOptions;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'sds'
+    })
+
+    const options = { params: new HttpParams(httpParams), headers: headers };
+
 		return this.http
 			.get(
 				`${
-					project && project.componentConfigs
-						? project.componentConfigs.httpRequestUrl
+					project && project.httpConfigs
+						? project.httpConfigs.httpRequestUrl
 						: this.httpRequestUrl
-				}`,
-				{
-					params
-				}
+				}`,options
 			)
 			.pipe(
 				catchError((err: HttpErrorResponse) => {
