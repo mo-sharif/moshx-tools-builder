@@ -20,7 +20,6 @@ import { listStagger } from "src/app/animations/list-stagger.animation";
 
 export interface Item {
 	id: number;
-	controlInstance: string;
 	label: string;
 	type: string;
 }
@@ -52,8 +51,10 @@ export class EditProjectComponent implements OnInit {
 	deleteProject: EventEmitter<any> = new EventEmitter();
 	
 	projectFrom: FormGroup;
+	
+	controllerName: string = '';
 
-	controls: Array<Item> = [];
+	controls: Array<Item>  = [];
 
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
@@ -101,8 +102,7 @@ export class EditProjectComponent implements OnInit {
 
 		const control = {
 			id,
-			controlInstance: `field${id}`,
-			label: `Field ${id}`,
+			label: `${this.controllerName}`,
 			type: 'text'
 		};
 		const index = this.controls.push(control);
@@ -110,10 +110,11 @@ export class EditProjectComponent implements OnInit {
 		const httpConfigsGroup = this.projectFrom.get(`httpConfigs`) as FormGroup;
 
 		httpConfigsGroup.addControl(
-			this.controls[index - 1].controlInstance,
+			this.controls[index - 1].label,
 			new FormControl(null)
 			//Validators.required
 		);
+		console.log(this.controls)
 	}
 
 	removeField(i: Item, e: MouseEvent): void {
@@ -123,8 +124,13 @@ export class EditProjectComponent implements OnInit {
 			this.controls.splice(index, 1);
 			console.log(this.controls);
 			const httpConfigsGroup = this.projectFrom.get(`httpConfigs`) as FormGroup;
-			httpConfigsGroup.removeControl(i.controlInstance);
+			httpConfigsGroup.removeControl(i.label);
 		}
+	}
+	storeControllerName($event) {
+		$event.preventDefault();
+		this.controllerName = $event.target.value;
+
 	}
 
 	constructor(private fb: FormBuilder) {}
@@ -145,8 +151,8 @@ export class EditProjectComponent implements OnInit {
 		)
 
 		this.selectProject$.subscribe(
-			(selectProject) => {if (selectProject && selectProject.httpConfigs) {this.projectFrom.patchValue({ ...selectProject })}}
+			(selectProject) => {if (selectProject) {this.projectFrom.patchValue({ ...selectProject })}}
 		)
-		this.addField();
+		// this.addField();
 	}
 }
