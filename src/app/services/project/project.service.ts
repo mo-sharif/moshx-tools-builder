@@ -31,10 +31,7 @@ export class ProjectService {
 			.valueChanges();
 	}
 
-	GetSelectedProjectFromRoute(
-		profileName: string,
-		projectName: string
-	): Observable<any> {
+	GetSelectedProject([profileName, projectName]): Observable<any> {
 		return this.firestore
 			.collection(`/profiles/`)
 			.doc(profileName)
