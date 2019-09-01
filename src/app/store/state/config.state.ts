@@ -5,7 +5,8 @@ export interface IConfigState {
 	config: IConfig;
 	isCollapsed: boolean;
 	route: Array<string>;
-	containers: {}
+	containers: {};
+	urlSegments: any;
 }
 
 export const initialConfigState: IConfigState = {
@@ -16,5 +17,6 @@ export const initialConfigState: IConfigState = {
 	},
 	isCollapsed: Configs.IS_COLLAPSED,
 	route: null,
-	containers: {}
+	containers: {},
+	urlSegments: null
 };
