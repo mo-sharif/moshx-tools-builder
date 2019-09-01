@@ -9,11 +9,11 @@ import {
 	CloseDrawer,
 	NavigateToRoute,
 	EConfigActions,
-	NavigateSuccess
+	NavigateSuccess,
+	StoreUrlSegments
 } from "../actions/config.actions";
 import { ROUTER_NAVIGATION, RouterNavigationAction } from "@ngrx/router-store";
 import { Router } from "@angular/router";
-import { GetSelectedProjectFromRoute } from "../actions/project.actions";
 
 @Injectable()
 export class routerEffects {
@@ -24,11 +24,10 @@ export class routerEffects {
 		switchMap((route) => {
 			let profileName = route.payload.routerState.url.split('/')[1]
 			let projectName = route.payload.routerState.url.split('/')[3]
-
 			if (profileName && projectName) {
-				return of(new GetSelectedProjectFromRoute([profileName, projectName]))
+				return of(new StoreUrlSegments([profileName, projectName]), new CloseDrawer())
 			} else { 
-				return of()
+				return of(new CloseDrawer())
 			}
 		})
 	);
