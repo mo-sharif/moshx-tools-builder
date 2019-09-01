@@ -28,7 +28,7 @@
 						[nzExtra]="extraTemplate"
 					>
 						<nz-form-item>
-							<nz-form-label [nzSpan]="7" nzRequired
+							<nz-form-label [nzSpan]="5" nzRequired
 								>Profile Name</nz-form-label
 							>
 							<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
@@ -61,7 +61,7 @@
 							</nz-form-control>
 						</nz-form-item>
 						<nz-form-item>
-							<nz-form-label [nzSpan]="7" nzRequired nzFor="title"
+							<nz-form-label [nzSpan]="5" nzRequired nzFor="title"
 								>Project name</nz-form-label
 							>
 							<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
@@ -111,9 +111,9 @@
 						nzTitle="HTTP Settings"
 						[nzExtra]="extraTemplate"
 					>
-						<nz-form-item *ngFor="let httpConfig of httpConfigs">
-							<div formGroupName="httpConfigs">
-								<nz-form-label [nzSpan]="7" [nzFor]="httpConfig.type">{{
+						<div formGroupName="httpConfigs">
+							<nz-form-item *ngFor="let httpConfig of httpConfigs">
+								<nz-form-label [nzSpan]="4" [nzFor]="httpConfig.type">{{
 									httpConfig.name
 								}}</nz-form-label>
 								<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
@@ -134,81 +134,77 @@
 										Please input your {{ httpConfig.name }}!
 									</nz-form-explain>
 								</nz-form-control>
-							</div>
-						</nz-form-item>
-						<nz-form-item
-							class="box"
-							*ngFor="let control of controls; let i = index"
-						>
-							<nz-form-label
-								[nzXs]="24"
-								[nzSm]="4"
-								*ngIf="i == 0"
-								[nzFor]="control.controlInstance"
-								>{{ control.label }}
-							</nz-form-label>
-							<nz-form-control
-								[nzXs]="24"
-								[nzSm]="20"
-								[nzOffset]="i == 0 ? 0 : 4"
-								nzErrorTip="Please input value"
+							</nz-form-item>
+							<nz-form-item
+								class="box"
+								*ngFor="let control of controls; let i = index"
 							>
-								<input
-									class="passenger-input"
-									nz-input
-									placeholder="placeholder"
-									[attr.id]="control.id"
-									[formControlName]="control.controlInstance"
-								/>
-								<i
-									nz-icon
-									nzType="minus-circle-o"
-									class="dynamic-delete-button"
-									(click)="removeField(control, $event)"
-								></i>
-							</nz-form-control>
-						</nz-form-item>
-						<nz-form-item>
-							<nz-form-control
-								[nzXs]="{ span: 24, offset: 0 }"
-								[nzSm]="{ span: 20, offset: 4 }"
-							>
-								<button
-									nz-button
-									nzType="dashed"
-									class="add-button"
-									(click)="addField($event)"
+								<nz-form-label [nzSpan]="4"> {{ control.label }}</nz-form-label>
+								<nz-form-control
+									[nzOffset]="0"
+									[nzSpan]="20"
+									nzErrorTip="Please input value"
 								>
-									<i nz-icon nzType="plus"></i>
-									Add field
-								</button>
-							</nz-form-control>
-						</nz-form-item>
+									<input
+										class="text-input"
+										nz-input
+										[value]="control.label"
+										placeholder="placeholder"
+										[attr.id]="control.label"
+										[formControlName]="control.label"
+									/>
+									<i
+										nz-icon
+										nzType="minus-circle-o"
+										class="dynamic-button"
+										(click)="removeField(control, $event)"
+									></i>
+								</nz-form-control>
+							</nz-form-item>
+							<nz-form-item>
+								<nz-form-label [nzSpan]="4">Field Name</nz-form-label>
+								<nz-form-control [nzOffset]="0" [nzSpan]="20">
+									<input
+										class="text-input"
+										nz-input
+										nzType="dashed"
+										placeholder="Http Param"
+										(keyup)="storeControllerName($event)"
+									/>
+									<i
+										nz-icon
+										class="dynamic-button"
+										nzType="plus-circle-o"
+										(click)="addField($event)"
+									></i>
+								</nz-form-control>
+							</nz-form-item>
+						</div>
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
 				</div>
 				<ng-container *ngIf="selectProject$ | async as selectProject">
-						<div
-							nz-col
-							[nzSpan]="12"
-							[nzMd]="12"
-							[nzSm]="24"
-							[nzXs]="24"
-							style="margin-bottom: 10px;"
-							[@listStagger]
-							*ngIf="selectProject.profile"
-						>
-							<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
-								<button
-									nz-button
-									nzType="danger"
-									(click)="emitDeleteProject(selectProject)"
-								>
-									<i nz-icon nzType="delete"></i>Delete
-								</button>
-							</nz-card>
-						</div>
-					</ng-container>
+					<div
+						nz-col
+						[nzSpan]="12"
+						[nzMd]="12"
+						[nzSm]="24"
+						[nzXs]="24"
+						style="margin-bottom: 10px;"
+						[@listStagger]
+						*ngIf="selectProject.profile"
+					>
+						<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
+							<button
+								nz-button
+								nzType="danger"
+								(click)="emitDeleteProject(selectProject)"
+							>
+								<i nz-icon nzType="delete"></i>Delete
+							</button>
+						</nz-card>
+					</div>
+				</ng-container>
 			</form>
 		</div>
 	</div>
