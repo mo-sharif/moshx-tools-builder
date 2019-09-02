@@ -151,7 +151,7 @@ export class EditProjectComponent implements OnInit {
 		)
 
 		this.selectProject$.subscribe(
-			(selectProject) => {if (selectProject) {this.projectFrom.patchValue({ ...selectProject })}}
+			(selectProject) => {if (selectProject && selectProject.httpConfigs) {this.projectFrom.patchValue({ ...selectProject })}}
 		)
 		// this.addField();
 	}
