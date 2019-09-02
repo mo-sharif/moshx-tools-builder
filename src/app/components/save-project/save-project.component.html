@@ -183,29 +183,29 @@
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
 				</div>
-				<ng-container *ngIf="selectProject$ | async as selectProject">
-					<div
-						nz-col
-						[nzSpan]="12"
-						[nzMd]="12"
-						[nzSm]="24"
-						[nzXs]="24"
-						style="margin-bottom: 10px;"
-						[@listStagger]
-						*ngIf="selectProject.profile"
-					>
-						<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
-							<button
-								nz-button
-								nzType="danger"
-								(click)="emitDeleteProject(selectProject)"
-							>
-								<i nz-icon nzType="delete"></i>Delete
-							</button>
-						</nz-card>
-					</div>
-				</ng-container>
 			</form>
+			<ng-container *ngIf="selectProject$ | async as selectProject">
+				<div
+					nz-col
+					[nzSpan]="12"
+					[nzMd]="12"
+					[nzSm]="24"
+					[nzXs]="24"
+					style="margin-bottom: 10px;"
+					[@listStagger]
+					*ngIf="selectProject.profile"
+				>
+					<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
+						<button
+							nz-button
+							nzType="danger"
+							(click)="emitDeleteProject(selectProject)"
+						>
+							<i nz-icon nzType="delete"></i>Delete
+						</button>
+					</nz-card>
+				</div>
+			</ng-container>
 		</div>
 	</div>
 </div>
