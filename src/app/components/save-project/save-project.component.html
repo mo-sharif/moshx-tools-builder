@@ -111,71 +111,76 @@
 						nzTitle="HTTP Settings"
 						[nzExtra]="extraTemplate"
 					>
-						<div formGroupName="httpConfigs">
-							<nz-form-item *ngFor="let httpConfig of httpConfigs">
-								<nz-form-label [nzSpan]="4" [nzFor]="httpConfig.type">{{
-									httpConfig.name
+						<div formGroupName="componentConfigs">
+							<nz-form-item *ngFor="let componentConfig of componentConfigs">
+								<nz-form-label [nzSpan]="4" [nzFor]="componentConfig.type">{{
+									componentConfig.name
 								}}</nz-form-label>
 								<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
 									<input
 										nz-input
-										[name]="httpConfig.type"
-										[type]="httpConfig.type"
-										[id]="httpConfig.type"
-										[formControlName]="httpConfig.type"
-										[placeholder]="httpConfig.placeholder"
+										[name]="componentConfig.type"
+										[type]="componentConfig.type"
+										[id]="componentConfig.type"
+										[formControlName]="componentConfig.type"
+										[placeholder]="componentConfig.placeholder"
 									/>
 									<nz-form-explain
 										*ngIf="
-											projectFrom.get('httpConfig.type')?.dirty &&
-											projectFrom.get('httpConfig.type')?.error
+											projectFrom.get('componentConfig.type')?.dirty &&
+											projectFrom.get('componentConfig.type')?.error
 										"
 									>
-										Please input your {{ httpConfig.name }}!
+										Please input your {{ componentConfig.name }}!
 									</nz-form-explain>
 								</nz-form-control>
 							</nz-form-item>
-							<nz-form-item
-								class="box"
-								*ngFor="let control of controls; let i = index"
-							>
-								<nz-form-label [nzSpan]="4"> {{ control.label }}</nz-form-label>
-								<nz-form-control
-									[nzOffset]="0"
-									[nzSpan]="20"
-									nzErrorTip="Please input value"
+							<div formGroupName="httpParams">
+								<nz-form-item
+									class="box"
+									*ngFor="let control of controls; let i = index"
 								>
-									<input
-										class="text-input"
-										nz-input
-										[value]="control.label"
-										placeholder="placeholder"
-										[attr.id]="control.label"
-										[formControlName]="control.label"
-									/>
-									<i
-										nz-icon
-										nzType="minus-circle-o"
-										class="dynamic-button"
-										(click)="removeField(control, $event)"
-									></i>
-								</nz-form-control>
-							</nz-form-item>
+									<nz-form-label [nzSpan]="4">
+										{{ control.key }}</nz-form-label
+									>
+									<nz-form-control
+										[nzOffset]="0"
+										[nzSpan]="20"
+										nzErrorTip="Please input value"
+									>
+										<input
+											class="text-input"
+											nz-input
+											[value]="control.value"
+											placeholder="placeholder"
+											[attr.id]="control.key"
+											[formControlName]="control.key"
+										/>
+										<i
+											nz-icon
+											nzType="minus-circle-o"
+											class="dynamic-button"
+											(click)="removeField(control, $event)"
+										></i>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+
 							<nz-form-item>
-								<nz-form-label [nzSpan]="4">Field Name</nz-form-label>
+								<nz-form-label [nzSpan]="4">Field Key</nz-form-label>
 								<nz-form-control [nzOffset]="0" [nzSpan]="20">
 									<input
 										class="text-input"
 										nz-input
 										nzType="dashed"
-										placeholder="Http Param"
-										(keyup)="storeControllerName($event)"
+										placeholder="Field Value"
+										#fieldKey
 									/>
 									<i
 										nz-icon
 										class="dynamic-button"
 										nzType="plus-circle-o"
-										(click)="addField($event)"
+										(click)="addField(fieldKey.value, '')"
 									></i>
 								</nz-form-control>
 							</nz-form-item>
