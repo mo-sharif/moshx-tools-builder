@@ -22,17 +22,10 @@ export class RandomUserService {
 		genders: string[],
 		project: IProject
 	): Observable<{}> {
-/* 		let httpParams = new HttpParams()
-			.append("page", `${pageIndex}`)
-			.append("results", `${pageSize}`)
-			.append("sortField", sortField)
-			.append("sortOrder", sortOrder);
-		genders.forEach(gender => {
-			httpParams = httpParams.append("gender", gender);
-    }); */
 
-    const myObject: any = { page: `${pageIndex}`, results: `${pageSize}`, sortField: sortField, sortOrder: sortOrder };
-
+    // const myObject: any = { page: `${pageIndex}`, results: `${pageSize}`, sortField: sortField, sortOrder: sortOrder };
+    const myObject: any = { ...project.componentConfigs.httpParams };
+    
     const httpParams: HttpParamsOptions = { fromObject: myObject } as HttpParamsOptions;
 
     const headers = new HttpHeaders({
@@ -45,8 +38,8 @@ export class RandomUserService {
 		return this.http
 			.get(
 				`${
-					project && project.httpConfigs
-						? project.httpConfigs.httpRequestUrl
+					project && project.componentConfigs
+						? project.componentConfigs.httpRequestUrl
 						: this.httpRequestUrl
 				}`,options
 			)
