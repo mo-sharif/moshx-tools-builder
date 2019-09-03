@@ -1,10 +1,4 @@
-import {
-	Component,
-	Output,
-	Input,
-	EventEmitter,
-	OnInit,
-} from "@angular/core";
+import { Component, Output, Input, EventEmitter, OnInit } from "@angular/core";
 
 import {
 	FormBuilder,
@@ -20,7 +14,8 @@ import { listStagger } from "src/app/animations/list-stagger.animation";
 
 export interface Item {
 	id: number;
-	label: string;
+	key: string;
+	value: string;
 	type: string;
 }
 
@@ -30,31 +25,28 @@ export interface Item {
 	styleUrls: ["./save-project.component.css"],
 	animations: [listStagger]
 })
-
 export class EditProjectComponent implements OnInit {
 	@Input()
 	selectLoggedInUser$: Observable<IUser>;
-	
+
 	@Input()
 	selectProject$: Observable<IProject>;
-	
+
 	@Input()
-	httpConfigs: IProject["httpConfigs"];
-	
+	componentConfigs: IProject["componentConfigs"];
+
 	@Input()
 	selectUiComponents: any;
-	
+
 	@Output()
 	formData: EventEmitter<any> = new EventEmitter();
 
 	@Output()
 	deleteProject: EventEmitter<any> = new EventEmitter();
-	
-	projectFrom: FormGroup;
-	
-	controllerName: string = '';
 
-	controls: Array<Item>  = [];
+	projectFrom: FormGroup;
+
+	controls: Array<Item> = [];
 
 	submitForm = ($event: any, value: IProject) => {
 		$event.preventDefault();
@@ -68,7 +60,7 @@ export class EditProjectComponent implements OnInit {
 		this.formData.emit(value);
 	};
 	emitDeleteProject = value => {
-		this.deleteProject.emit(value)
+		this.deleteProject.emit(value);
 	};
 	titleAsyncValidator = (control: FormControl) =>
 		new Observable((observer: Observer<ValidationErrors | null>) => {
@@ -91,10 +83,7 @@ export class EditProjectComponent implements OnInit {
 		return {};
 	};
 
-	addField(e?: MouseEvent): void {
-		if (e) {
-			e.preventDefault();
-		}
+	addField(key, value): void {
 		const id =
 			this.controls.length > 0
 				? this.controls[this.controls.length - 1].id + 1
@@ -102,35 +91,36 @@ export class EditProjectComponent implements OnInit {
 
 		const control = {
 			id,
-			label: `${this.controllerName}`,
-			type: 'text'
+			key: `${key}`,
+			value: `${value}`,
+			type: "text"
 		};
 		const index = this.controls.push(control);
-		console.log(this.controls[this.controls.length - 1]);
-		const httpConfigsGroup = this.projectFrom.get(`httpConfigs`) as FormGroup;
+
+		const httpConfigsGroup = this.projectFrom.get([
+			"componentConfigs",
+			"httpParams"
+		]) as FormGroup;
 
 		httpConfigsGroup.addControl(
-			this.controls[index - 1].label,
+			this.controls[index - 1].key,
 			new FormControl(null)
 			//Validators.required
 		);
-		console.log(this.controls)
+
 	}
 
 	removeField(i: Item, e: MouseEvent): void {
 		e.preventDefault();
-		if (this.controls.length > 1) {
+		if (this.controls.length > 0) {
 			const index = this.controls.indexOf(i);
 			this.controls.splice(index, 1);
-			console.log(this.controls);
-			const httpConfigsGroup = this.projectFrom.get(`httpConfigs`) as FormGroup;
-			httpConfigsGroup.removeControl(i.label);
+			const httpConfigsGroup = this.projectFrom.get([
+				"componentConfigs",
+				"httpParams"
+			]) as FormGroup;
+			httpConfigsGroup.removeControl(i.key);
 		}
-	}
-	storeControllerName($event) {
-		$event.preventDefault();
-		this.controllerName = $event.target.value;
-
 	}
 
 	constructor(private fb: FormBuilder) {}
@@ -140,19 +130,30 @@ export class EditProjectComponent implements OnInit {
 			profile: [null, [Validators.required], [this.titleAsyncValidator]],
 			title: [null, [Validators.required]],
 			type: [null],
-			httpConfigs: this.fb.group({
+			componentConfigs: this.fb.group({
 				httpRequestUrl: [null],
-				httpParams: [null]
+				httpParams: this.fb.group({})
 			})
 		});
 
-		this.selectLoggedInUser$.subscribe(
-			(selectLoggedInUser) => {this.projectFrom.patchValue({...selectLoggedInUser})}
-		)
+		this.selectLoggedInUser$.subscribe(selectLoggedInUser => {
+			if (selectLoggedInUser) {
+				this.projectFrom.patchValue({ ...selectLoggedInUser });
+			}
+		});
 
-		this.selectProject$.subscribe(
-			(selectProject) => {if (selectProject && selectProject.httpConfigs) {this.projectFrom.patchValue({ ...selectProject })}}
-		)
-		// this.addField();
+		this.selectProject$.subscribe(selectProject => {
+			if (selectProject) {
+				this.projectFrom.patchValue({ ...selectProject });
+				if (this.controls.length == 0) {
+					for (let [key, value] of Object.entries(
+						selectProject.componentConfigs.httpParams
+					)) {
+						this.addField(key, value);
+						this.projectFrom.patchValue({ ...selectProject });
+					}
+				}
+			}
+		});
 	}
 }
