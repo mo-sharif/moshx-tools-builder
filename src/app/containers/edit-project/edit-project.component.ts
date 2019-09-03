@@ -37,7 +37,7 @@ export class EditProjectComponent implements OnInit {
 	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
 	/* Move me to an effect and make me come from firebase collection */
 
-	httpConfigs = [
+	componentConfigs = [
 		{
 			name: "Request Url",
 			type: "httpRequestUrl",
