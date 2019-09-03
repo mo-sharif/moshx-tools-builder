@@ -1,7 +1,7 @@
 <nz-layout class="inner-layout">
 	<app-header
 		[configs]="configs$ | async"
-		[loggedInUser]="loggedInUser$ | async"
+		[selectLoggedInUser]="selectLoggedInUser$ | async"
 		(openDrawer)="openDrawer()"
 		(googleLogin)="googleLogin()"
 		(githubLogin)="githubLogin()"
