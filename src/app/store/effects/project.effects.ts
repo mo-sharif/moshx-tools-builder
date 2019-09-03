@@ -87,9 +87,9 @@ export class ProjectEffects {
     switchMap(([project, selectProject]) => {
       this._projectService.updateProject({
         ...selectProject,
-        httpConfigs: { ...project }
+        componentConfigs: { ...project }
       });
-      return of(new UpdateProjectSuccess(project["httpConfigs"]));
+      return of(new UpdateProjectSuccess(project["componentConfigs"]));
     }),
     catchError(err => of(new SetErrorMsg(`${err}`)))
   );
