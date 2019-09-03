@@ -23,7 +23,7 @@ import { SetLoading } from "./store/actions/loading.actions";
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	configs$ = this._store.pipe(select(selectConfig));
-	loggedInUser$ = this._store.pipe(select(selectLoggedInUser));
+	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	message$ = this._store.pipe(select(selectMessage));
 	userProjects$ = this._store.pipe(select(userProjects));
 	isCollapsed = true;
