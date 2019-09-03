@@ -8,7 +8,7 @@ export interface IProject {
 	profile?: string;
 	slug?: string;
 	UiComponents?: UiComponents;
-	httpConfigs?: IComponentConfigs;
+	componentConfigs?: IComponentConfigs;
 }
 
 export interface UiComponents {
