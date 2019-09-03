@@ -75,8 +75,8 @@ class MyDataSource extends DataSource<string | undefined> {
     this.fetchedPages.add(page);
     this.http
       .get(
-        this.project && this.project.httpConfigs
-          ? this.project.httpConfigs.httpRequestUrl
+        this.project && this.project.componentConfigs
+          ? this.project.componentConfigs.httpRequestUrl
           : this.httpRequestUrl
       )
       .pipe(
