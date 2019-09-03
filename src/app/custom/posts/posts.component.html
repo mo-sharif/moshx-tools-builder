@@ -10,7 +10,10 @@
 					></nz-skeleton>
 					<div
 						nz-col
-						[nzSpan]="8"
+            [nzSpan]="8"
+            [nzMd]="6"
+            [nzSm]="12"
+            [nzXs]="24"
 						*ngFor="let rows of data | keyvalue; let i = index"
 					>
 						<nz-card
