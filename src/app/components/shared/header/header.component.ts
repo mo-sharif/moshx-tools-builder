@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   configs: IConfig;
 
   @Input()
-  loggedInUser: IUser;
+  selectLoggedInUser: IUser;
 
   @Output()
   openDrawer: EventEmitter<any> = new EventEmitter();
