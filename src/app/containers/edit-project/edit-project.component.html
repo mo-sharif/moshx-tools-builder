@@ -44,8 +44,8 @@
 	nzTitle="Save Project"
 	(nzOnCancel)="handleCancel()"
 	[nzOkText]="null"
-	nzWidth="100%"
-	[nzStyle]="{ top: '0px' }"
+	nzWidth="90%"
+	[nzStyle]="{ top: '15%' }"
 >
 	<ng-container *ngIf="selectUiComponents?.isUserLoggedIn; else notLoggedIn">
 		<app-save-project
