@@ -23,10 +23,10 @@ export class PostsComponent implements OnInit {
   public dataStore;
   constructor(private http: HttpClient) {}
 
-	ngOnInit() {
-		this.selectProject$.subscribe((project) => { 
-			this.dataStore = new MyDataSource(this.http, project);
-		})
+  ngOnInit() {
+    this.selectProject$.subscribe(project => {
+      this.dataStore = new MyDataSource(this.http, project);
+    });
   }
 
   isObject = value => typeof value === "number";
@@ -40,10 +40,8 @@ class MyDataSource extends DataSource<string | undefined> {
   private dataStream = new BehaviorSubject<any[]>(this.cachedData);
   private subscription = new Subscription();
   private httpRequestUrl = `https://jsonplaceholder.typicode.com/todos`;
-  constructor(
-    private http: HttpClient,
-    private project: IProject
-  ) {
+  private responseData = "results";
+  constructor(private http: HttpClient, private project: IProject) {
     super();
   }
 
@@ -104,7 +102,7 @@ class MyDataSource extends DataSource<string | undefined> {
 					this.pageSize
 				}&inc=name,gender,email,nat&noinfo` */
 
-      .subscribe((res: any) => {
+      .subscribe((res: any) => {	
         this.cachedData.splice(page * this.pageSize, this.pageSize, ...res);
         this.dataStream.next(this.cachedData);
       });
