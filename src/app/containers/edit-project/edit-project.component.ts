@@ -42,6 +42,11 @@ export class EditProjectComponent implements OnInit {
 			name: "Request Url",
 			type: "httpRequestUrl",
 			placeholder: "https://mosh-media.com"
+		},
+		{
+			name: "Response Data",
+			type: "responseData",
+			placeholder: "results"
 		}
 	];
 
