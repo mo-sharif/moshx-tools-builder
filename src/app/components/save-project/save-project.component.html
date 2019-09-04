@@ -113,7 +113,7 @@
 					>
 						<div formGroupName="componentConfigs">
 							<nz-form-item *ngFor="let componentConfig of componentConfigs">
-								<nz-form-label [nzSpan]="4" [nzFor]="componentConfig.type">{{
+								<nz-form-label [nzSpan]="6" [nzFor]="componentConfig.type">{{
 									componentConfig.name
 								}}</nz-form-label>
 								<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
@@ -140,12 +140,12 @@
 									class="box"
 									*ngFor="let control of controls; let i = index"
 								>
-									<nz-form-label [nzSpan]="4">
+									<nz-form-label [nzSpan]="6">
 										{{ control.key }}</nz-form-label
 									>
 									<nz-form-control
 										[nzOffset]="0"
-										[nzSpan]="20"
+										[nzSpan]="18"
 										nzErrorTip="Please input value"
 									>
 										<input
@@ -167,8 +167,8 @@
 							</div>
 
 							<nz-form-item>
-								<nz-form-label [nzSpan]="4">Field Key</nz-form-label>
-								<nz-form-control [nzOffset]="0" [nzSpan]="20">
+								<nz-form-label [nzSpan]="6">Field Key</nz-form-label>
+								<nz-form-control [nzOffset]="0" [nzSpan]="18">
 									<input
 										class="text-input"
 										nz-input
