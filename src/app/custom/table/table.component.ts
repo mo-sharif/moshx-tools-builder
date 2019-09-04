@@ -13,7 +13,7 @@ import { HttpParamsOptions } from "@angular/common/http/src/params";
 @Injectable()
 export class RandomUserService {
 	httpRequestUrl = "https://api.randomuser.me/";
-  
+	responseData = 'results';
 	getTableData(
 		pageIndex: number = 1,
 		pageSize: number = 10,
@@ -44,6 +44,7 @@ export class RandomUserService {
 				}`,options
 			)
 			.pipe(
+				map((data) => data[project.componentConfigs.responseData || this.responseData]),
 				catchError((err: HttpErrorResponse) => {
 					if (err.error instanceof Error) {
 						// A client-side or network error occurred. Handle it accordingly.
@@ -78,7 +79,7 @@ export class TableComponent implements OnInit, OnDestroy {
 	@Input()
 	selectProject$: Observable<IProject>;
 
-  subscription: Subscription;
+	subscription: Subscription;
 	pageIndex = 1;
 	pageSize = 10;
 	total = 1;
@@ -121,7 +122,7 @@ export class TableComponent implements OnInit, OnDestroy {
 				map((data: any) => {
 					this.loading = false;
 					this.total = 200;
-					this.listOfData = data.results;
+					this.listOfData = data;
 				})
 			)
 			.subscribe();
