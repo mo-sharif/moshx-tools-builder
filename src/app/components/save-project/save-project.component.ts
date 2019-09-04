@@ -91,7 +91,7 @@ export class EditProjectComponent implements OnInit {
 
 		const control = {
 			id,
-			key: `${key}`,
+			key: `${key || `Field${id}` }`,
 			value: `${value}`,
 			type: "text"
 		};
@@ -146,7 +146,7 @@ export class EditProjectComponent implements OnInit {
 		this.selectProject$.subscribe(selectProject => {
 			if (selectProject) {
 				this.projectFrom.patchValue({ ...selectProject });
-				if (this.controls.length == 0) {
+				if (this.controls.length == 0 && selectProject.componentConfigs) {
 					for (let [key, value] of Object.entries(
 						selectProject.componentConfigs.httpParams
 					)) {
