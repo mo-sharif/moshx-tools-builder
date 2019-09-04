@@ -132,6 +132,7 @@ export class EditProjectComponent implements OnInit {
 			type: [null],
 			componentConfigs: this.fb.group({
 				httpRequestUrl: [null],
+				responseData: [null],
 				httpParams: this.fb.group({})
 			})
 		});
