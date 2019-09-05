@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "mosh-599d5"
+    "prod": "mosh-599d5",
+    "staging": "tool-builder"
   }
 }

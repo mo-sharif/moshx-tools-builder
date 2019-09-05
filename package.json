@@ -8,8 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod --build-optimizer --vendor-chunk=true && firebase deploy --only hosting:mosh-media",
-    "build-aot":"ng build --prod --aot --build-optimizer",
+    "deploy:staging": "firebase use staging && ng build --prod --build-optimizer --vendor-chunk=true && firebase deploy --only hosting:mosh-media",
+    "deploy:prod": "firebase use prod && ng build --prod --build-optimizer --vendor-chunk=true && firebase deploy --only hosting:mosh-media",
+    "build-aot":"ng build --aot --build-optimizer",
     "deploy-only":"firebase deploy --only hosting:mosh-media",
     "testComponent": "ngentest src/app/compon…"
   },

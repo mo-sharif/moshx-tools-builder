@@ -6,13 +6,13 @@ export const environment = {
 	production: false,
 	apiUrl: "http://localhost:4200/assets/data/",
 	firebase: {
-		apiKey: "AIzaSyCGGglBuxoBKJCfy5CXV8Tmy3R6k_SzU0g",
-		authDomain: "mosh-599d5.firebaseapp.com",
-		databaseURL: "https://mosh-599d5.firebaseio.com",
-		projectId: "mosh-599d5",
+		apiKey: "AIzaSyBbS3pEN2RqR35UtS26lzykMvuWJ2jwUEg",
+		authDomain: "tool-builder.firebaseapp.com",
+		databaseURL: "https://tool-builder.firebaseio.com",
+		projectId: "tool-builder",
 		storageBucket: "mosh-599d5.appspot.com",
-		messagingSenderId: "907191462853",
-		appId: "1:907191462853:web:946c218799ad4f59"
+		messagingSenderId: "1062012551888",
+		appId: "1:1062012551888:web:aba769cf1164b5ae"
 	}
 };
 /*
