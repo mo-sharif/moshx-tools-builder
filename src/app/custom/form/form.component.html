@@ -1,0 +1,46 @@
+<nz-alert nzType="error" nzMessage="Form component is still under development!"></nz-alert>
+<div class="example-container">
+	<h2>My Form <i nz-icon nzType="form" nzTheme="outline"></i></h2>
+
+	<div
+		cdkDropList
+		#componentsList="cdkDropList"
+		[cdkDropListData]="formComponents"
+		[cdkDropListConnectedTo]="[libraryComponentsList]"
+		class="list"
+    (cdkDropListDropped)="drop($event)"
+    id="formComponents"
+  >
+<!--   <ng-container *ngIf="formComponents.length == 0">
+      <nz-empty [nzNotFoundContent]="contentTpl"></nz-empty>
+      <ng-template #contentTpl>
+        <span> Drag and drop components from Library </span>
+      </ng-template>
+    </ng-container> -->
+		<div class="box" *ngFor="let component of formComponents" cdkDrag>
+			{{ component.label }}
+			<ng-container add-comp [comp]="component.component"></ng-container>
+      <div class="placeholder" *cdkDragPlaceholder></div>
+		</div>
+	</div>
+</div>
+
+<div class="example-container">
+	<h2>Library <i nz-icon nzType="drag" nzTheme="outline"></i></h2>
+
+	<div
+		cdkDropList
+		#libraryComponentsList="cdkDropList"
+		[cdkDropListData]="libraryComponents"
+		[cdkDropListConnectedTo]="[componentsList]"
+		class="list"
+    (cdkDropListDropped)="drop($event)"
+    id="libraryComponents"
+	>
+		<div class="box" *ngFor="let component of libraryComponents" cdkDrag>
+			{{ component.label }}
+			<ng-container add-comp [comp]="component.component"></ng-container>
+			<div class="placeholder" *cdkDragPlaceholder></div>
+		</div>
+	</div>
+</div>
