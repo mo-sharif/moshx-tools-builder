@@ -34,11 +34,6 @@ const routes: Routes = [
 		data: { breadcrumb: "Account" }
 	},
 	{
-		path: "home/playground",
-		loadChildren: "./containers/playground/playground.module#PlaygroundModule",
-		data: { breadcrumb: "Playground" },
-	},
-	{
 		path: "home/new-project",
 		loadChildren: "./containers/new-project/new-project.module#NewProjectModule",
 		data: { breadcrumb: "New Project" }
