@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { IProjectComponent } from "../models/project.interface";
-import { FormComponent } from "./ant-design/form/form.component";
+import { FormComponent } from "./form/form.component";
 import { TableComponent } from "./table/table.component";
 import { CalendarComponent } from "./ant-design/calendar/calendar.component";
 import { PostsComponent } from "./posts/posts.component";
@@ -10,6 +10,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgZorroAntdModule } from "ng-zorro-antd";
 import { ScrollDispatchModule } from "@angular/cdk/scrolling";
 import { UndefinedComponent } from "./undefined/undefined.component"
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { addComponentModule } from "src/app/directives/addComponent.module";
+import { CheckboxComponent } from "./ant-design/checkbox/checkbox.component";
+import { UploadComponent } from "./ant-design/upload/upload.component";
+import { CarouselComponent } from "./ant-design/carousel/carousel.component";
+import { ButtonComponent } from "./ant-design/button/button.component";
+import { SelectComponent } from "./ant-design/select/select.component";
+import { InputComponent } from "./ant-design/input/input.component";
 
 export const Components: IProjectComponent = {
 	Form: FormComponent,
@@ -25,6 +33,8 @@ export const Components: IProjectComponent = {
 		CommonModule,
 		ReactiveFormsModule,
 		NgZorroAntdModule,
+		DragDropModule,
+		addComponentModule,
 		ScrollDispatchModule
 	],
 
@@ -33,7 +43,13 @@ export const Components: IProjectComponent = {
 		TableComponent,
 		CalendarComponent,
 		PostsComponent,
-		UndefinedComponent
+		UndefinedComponent,
+		CheckboxComponent,
+		CarouselComponent,
+		UploadComponent,
+		ButtonComponent,
+		SelectComponent,
+		InputComponent
 	],
 	exports: [
 		FormComponent,
@@ -42,6 +58,7 @@ export const Components: IProjectComponent = {
 		PostsComponent,
 		UndefinedComponent,
 		NgZorroAntdModule,
+		DragDropModule,
 		FormsModule,
 		CommonModule,
 		ReactiveFormsModule
@@ -51,7 +68,13 @@ export const Components: IProjectComponent = {
 		TableComponent,
 		CalendarComponent,
 		PostsComponent,
-		UndefinedComponent
+		UndefinedComponent,
+		CheckboxComponent,
+		CarouselComponent,
+		UploadComponent,
+		ButtonComponent,
+		SelectComponent,
+		InputComponent
 	]
 })
 export class ComponentsModule {}
