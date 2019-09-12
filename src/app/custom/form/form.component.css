@@ -46,7 +46,9 @@
 .example-box:last-child {
 	border: none;
 }
-
+.cdk-drop-list {
+    min-height: 100px;  
+}
 .cdk-drop-list-dragging {
 	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
 		0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -84,4 +86,9 @@
 
 .add-button {
 	width: 60%;
+}
+
+.dropPlaceholder {
+    position: absolute;
+    margin: 26px;
 }
