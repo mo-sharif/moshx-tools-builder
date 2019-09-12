@@ -5,6 +5,8 @@ import {
 	Type,
 	OnInit
 } from "@angular/core";
+import {style, state, animate, transition, trigger} from '@angular/animations';
+
 import {
 	AbstractControl,
 	FormBuilder,
@@ -33,22 +35,37 @@ export interface Comp {
 }
 export interface Item {
 	id: number;
-	controlInstance: string;
-	label: string;
-	component: Type<any>;
+	key: string;
+	value: string;
+	type: string;
 }
 @Component({
 	selector: "app-form",
 	templateUrl: "./form.component.html",
-	styleUrls: ["./form.component.css"]
+  styleUrls: ["./form.component.css"],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({opacity:0}),
+        animate(500, style({opacity:1})) 
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(500, style({opacity:0})) 
+      ])
+    ])
+  ]
 })
 export class FormComponent implements OnInit {
 	@Input() data: any;
 
-	validateForm: FormGroup;
-	// controls: Array<{ id: number; controlInstance: string }> = [];
+  projectFrom: FormGroup;
+	controls: Array<Item> = [];
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+
+    this.projectFrom = this.fb.group({});
+    
+  }
 
 	formComponents: Comp[] = [];
 
@@ -83,8 +100,39 @@ export class FormComponent implements OnInit {
     }
 	];
 
-	constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
+  
+	addField(key, value): void {
+		const id =
+			this.controls.length > 0
+				? this.controls[this.controls.length - 1].id + 1
+				: 0;
 
+		const control = {
+			id,
+			key: `${key || `Field${id}` }`,
+			value: `${value}`,
+			type: "text"
+		};
+		const index = this.controls.push(control);
+
+		this.projectFrom.addControl(
+			this.controls[index - 1].key,
+			new FormControl(null)
+			//Validators.required
+		);
+
+  }
+
+  removeField(i: Item, e: MouseEvent): void {
+		e.preventDefault();
+		if (this.controls.length > 0) {
+			const index = this.controls.indexOf(i);
+			this.controls.splice(index, 1);
+			this.projectFrom.removeControl(i.key);
+		}
+  }
+  
 	drop(event: CdkDragDrop<Comp[]>) {
 		if (event.container.id === "libraryComponents") {
 			console.log("remove me");
@@ -102,7 +150,9 @@ export class FormComponent implements OnInit {
 				event.container.data,
 				event.previousIndex,
 				event.currentIndex
-			);
+      );
+      console.log(event)
+      // addField();
 		}
 	}
 
