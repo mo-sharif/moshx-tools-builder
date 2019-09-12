@@ -15,7 +15,7 @@
 		id="formComponents"
 	>
 		<ng-container *ngIf="formComponents.length == 0">
-			<nz-empty></nz-empty>
+			<div class="dropPlaceholder">Drop Components Here</div>
 			<ng-template #contentTpl>
 				<span> Drag and drop components from Library </span>
 			</ng-template>
@@ -23,7 +23,7 @@
 		<div class="box" *ngFor="let component of formComponents" cdkDrag>
 			{{ component.label }}
 			<ng-container add-comp [comp]="component.component"></ng-container>
-			<div class="placeholder" *cdkDragPlaceholder></div>
+			<div class="placeholder" *cdkDragPlaceholder [@fadeInOut]></div>
 		</div>
 	</div>
 </div>
