@@ -151,7 +151,7 @@ export class FormComponent implements OnInit {
 				event.previousIndex,
 				event.currentIndex
       );
-      console.log(event)
+      console.log(event.item)
       // addField();
 		}
 	}
