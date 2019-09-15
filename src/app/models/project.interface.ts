@@ -9,6 +9,7 @@ export interface IProject {
 	slug?: string;
 	UiComponents?: UiComponents;
 	componentConfigs?: IComponentConfigs;
+	[key: string]: any;
 }
 
 export interface UiComponents {
@@ -18,9 +19,7 @@ export interface UiComponents {
 }
 
 export interface IComponentConfigs {
-	httpRequestUrl: string,
-	responseData: string,
-	httpParams: string[],
+	[key: string]: any,
 }
 
 export interface ISettings {
