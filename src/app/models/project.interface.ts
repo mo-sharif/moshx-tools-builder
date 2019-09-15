@@ -20,7 +20,7 @@ export interface UiComponents {
 export interface IComponentConfigs {
 	httpRequestUrl: string,
 	responseData: string,
-	httpParams: string[]
+	httpParams: string[],
 }
 
 export interface ISettings {
