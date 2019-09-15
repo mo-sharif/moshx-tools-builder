@@ -3,9 +3,17 @@ import {
 	Component,
 	Input,
 	Type,
-	OnInit
+	OnInit,
+	Output,
+	EventEmitter
 } from "@angular/core";
-import {style, state, animate, transition, trigger} from '@angular/animations';
+import {
+	style,
+	state,
+	animate,
+	transition,
+	trigger
+} from "@angular/animations";
 
 import {
 	AbstractControl,
@@ -28,6 +36,7 @@ import { UploadComponent } from "src/app/custom/ant-design/upload/upload.compone
 import { ButtonComponent } from "src/app/custom/ant-design/button/button.component";
 import { InputComponent } from "../ant-design/input/input.component";
 import { SelectComponent } from "../ant-design/select/select.component";
+import { IProject } from "src/app/models/project.interface";
 
 export interface Comp {
 	label: string;
@@ -42,30 +51,31 @@ export interface Item {
 @Component({
 	selector: "app-form",
 	templateUrl: "./form.component.html",
-  styleUrls: ["./form.component.css"],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [   // :enter is alias to 'void => *'
-        style({opacity:0}),
-        animate(500, style({opacity:1})) 
-      ]),
-      transition(':leave', [   // :leave is alias to '* => void'
-        animate(500, style({opacity:0})) 
-      ])
-    ])
-  ]
+	styleUrls: ["./form.component.css"],
+	animations: [
+		trigger("fadeInOut", [
+			transition(":enter", [
+				// :enter is alias to 'void => *'
+				style({ opacity: 0 }),
+				animate(500, style({ opacity: 1 }))
+			]),
+			transition(":leave", [
+				// :leave is alias to '* => void'
+				animate(500, style({ opacity: 0 }))
+			])
+		])
+	]
 })
 export class FormComponent implements OnInit {
 	@Input() data: any;
+	@Output() formData: EventEmitter<any> = new EventEmitter();
 
-  projectFrom: FormGroup;
+	projectFrom: FormGroup;
 	controls: Array<Item> = [];
 
 	ngOnInit(): void {
-
-    this.projectFrom = this.fb.group({});
-    
-  }
+		this.projectFrom = this.fb.group({});
+	}
 
 	formComponents: Comp[] = [];
 
@@ -89,19 +99,19 @@ export class FormComponent implements OnInit {
 		{
 			label: "Button",
 			component: ButtonComponent
-    },
-    {
-      label: "Input",
-      component: InputComponent,
-    },
-    {
-      label: "Select",
-      component: SelectComponent,
-    }
+		},
+		{
+			label: "Input",
+			component: InputComponent
+		},
+		{
+			label: "Select",
+			component: SelectComponent
+		}
 	];
 
-  constructor(private fb: FormBuilder) {}
-  
+	constructor(private fb: FormBuilder) {}
+
 	addField(key, value): void {
 		const id =
 			this.controls.length > 0
@@ -110,7 +120,7 @@ export class FormComponent implements OnInit {
 
 		const control = {
 			id,
-			key: `${key || `Field${id}` }`,
+			key: `${key || `Field${id}`}`,
 			value: `${value}`,
 			type: "text"
 		};
@@ -121,21 +131,32 @@ export class FormComponent implements OnInit {
 			new FormControl(null)
 			//Validators.required
 		);
+	}
 
-  }
-
-  removeField(i: Item, e: MouseEvent): void {
+	removeField(i: Item, e: MouseEvent): void {
 		e.preventDefault();
 		if (this.controls.length > 0) {
 			const index = this.controls.indexOf(i);
 			this.controls.splice(index, 1);
 			this.projectFrom.removeControl(i.key);
 		}
-  }
-  
+	}
+	submitForm = ($event: any, value: IProject) => {
+		$event.preventDefault();
+		for (const key in this.projectFrom.controls) {
+			this.projectFrom.controls[key].markAsDirty();
+			this.projectFrom.controls[key].updateValueAndValidity();
+		}
+		alert(JSON.stringify(value));
+		this.emitFormData(value);
+	};
+
+	emitFormData = value => {
+		this.formData.emit(value);
+	};
+
 	drop(event: CdkDragDrop<Comp[]>) {
 		if (event.container.id === "libraryComponents") {
-			console.log("remove me");
 		}
 
 		if (event.previousContainer === event.container) {
@@ -150,9 +171,9 @@ export class FormComponent implements OnInit {
 				event.container.data,
 				event.previousIndex,
 				event.currentIndex
-      );
-      console.log(event.item)
-      // addField();
+			);
+			// console.log(event.item);
+			// addField();
 		}
 	}
 
