@@ -1,36 +1,22 @@
 .container {
-	width: 400px;
 	max-width: 100%;
 	margin: 0 25px 25px 0;
 	display: inline-block;
 	vertical-align: top;
 }
 
-.list {
-	min-height: 60px;
-	border-radius: 4px;
-	overflow: hidden;
-	border: 2px dashed #f0f2f5;
-	display: block;
-	padding: 10px;
-}
-
 .box {
 	padding: 20px 10px;
-	border: solid 1px rgb(253, 249, 249);
 	color: rgba(0, 0, 0, 0.87);
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	box-sizing: border-box;
 	cursor: move;
 	background: white;
-	font-size: 14px;
-	box-sizing: border-box;
 	border-radius: 4px;
-	margin: 10px 0px;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+.box-placeholder {
+	padding: 20px 10px;
+	background: white;
+	border-radius: 4px;
 }
 
 .cdk-drag-preview {
@@ -46,27 +32,23 @@
 	transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-
 .example-box:last-child {
 	border: none;
 }
-.cdk-drop-list {
-    min-height: 100px;  
-}
+
 .cdk-drop-list-dragging {
-	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-		0 10px 10px -5px rgba(0, 0, 0, 0.04);
 	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 	height: 100%;
 }
 .placeholder {
 	border-radius: 4px;
 	background: rgb(238, 238, 238);
-	height: 74px;
+	height: 100px;
+	margin: 20px 0;
 	transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.dynamic-delete-button {
+.dynamic-button {
 	cursor: pointer;
 	position: relative;
 	top: 4px;
@@ -75,24 +57,21 @@
 	transition: all 0.3s;
 }
 
-.dynamic-delete-button:hover {
+.dynamic-button:hover {
 	color: #777;
 }
 
-.passenger-input {
+.form-field {
 	width: 60%;
 	margin-right: 8px;
 }
 
 [nz-form] {
 	max-width: 600px;
+	padding: 19px;
+    margin-bottom: 10px;
 }
 
 .add-button {
 	width: 60%;
-}
-
-.dropPlaceholder {
-    position: absolute;
-    margin: 26px;
 }
