@@ -18,6 +18,7 @@ import { CarouselComponent } from "./ant-design/carousel/carousel.component";
 import { ButtonComponent } from "./ant-design/button/button.component";
 import { SelectComponent } from "./ant-design/select/select.component";
 import { InputComponent } from "./ant-design/input/input.component";
+import { DragAndDropComponent } from "./drag-and-drop/drag-and-drop.component";
 
 export const Components: IProjectComponent = {
 	Form: FormComponent,
@@ -40,6 +41,7 @@ export const Components: IProjectComponent = {
 
 	declarations: [
 		FormComponent,
+		DragAndDropComponent,
 		TableComponent,
 		CalendarComponent,
 		PostsComponent,
