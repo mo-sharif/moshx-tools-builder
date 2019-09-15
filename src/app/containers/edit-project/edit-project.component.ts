@@ -70,16 +70,9 @@ export class EditProjectComponent implements OnInit {
 			})
 		);
 	};
-	
+
 	updateFormData = (formData: IProject) => {
-		// Add component type to formData from route id
-		formData.type ? "" : (formData.type = this._router.snapshot.params.id);
-		console.log(formData)
-/* 		this._store.dispatch(
-			new UpdateProject({
-				...formData
-			})
-		); */
+		this._store.dispatch(new UpdateProject(formData));
 	};
 
 	showModal(): void {
