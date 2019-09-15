@@ -1,0 +1,136 @@
+<!-- <nz-alert
+	nzType="error"
+	nzMessage="Form component is still under development!"
+></nz-alert>
+<div class="container">
+    <form
+    nz-form
+    [formGroup]="projectFrom"
+    (ngSubmit)="submitForm($event, projectFrom.value)"
+  >
+    <div
+      nz-col
+      [nzSpan]="12"
+      [nzMd]="12"
+      [nzSm]="24"
+      [nzXs]="24"
+      style="margin-bottom: 10px;"
+    >
+      <div formGroupName="componentConfigs">
+        <nz-form-item *ngFor="let componentConfig of componentConfigs">
+          <nz-form-label [nzSpan]="6" [nzFor]="componentConfig.type">{{
+            componentConfig.name
+          }}</nz-form-label>
+          <nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
+            <input
+              nz-input
+              [name]="componentConfig.type"
+              [type]="componentConfig.type"
+              [id]="componentConfig.type"
+              [formControlName]="componentConfig.type"
+              [placeholder]="componentConfig.placeholder"
+            />
+            <nz-form-explain
+              *ngIf="
+                projectFrom.get('componentConfig.type')?.dirty &&
+                projectFrom.get('componentConfig.type')?.error
+              "
+            >
+              Please input your {{ componentConfig.name }}!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <div formGroupName="httpParams">
+          <nz-form-item
+            class="box"
+            *ngFor="let control of controls; let i = index"
+          >
+            <nz-form-label [nzSpan]="6"> {{ control.key }}</nz-form-label>
+            <nz-form-control
+              [nzOffset]="0"
+              [nzSpan]="18"
+              nzErrorTip="Please input value"
+            >
+              <input
+                class="text-input"
+                nz-input
+                [value]="control.value"
+                placeholder="Field Value"
+                [attr.id]="control.key"
+                [formControlName]="control.key"
+              />
+              <i
+                nz-icon
+                nzType="minus-circle-o"
+                class="dynamic-button"
+                (click)="removeField(control, $event)"
+              ></i>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+  
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6">Query string</nz-form-label>
+          <nz-form-control [nzOffset]="0" [nzSpan]="18">
+            <input
+              class="text-input"
+              nz-input
+              nzType="dashed"
+              placeholder="Field Key"
+              #fieldKey
+            />
+            <i
+              nz-icon
+              class="dynamic-button"
+              nzType="plus-circle-o"
+              (click)="addField(fieldKey.value, '')"
+            ></i>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+	<div
+		cdkDropList
+		#componentsList="cdkDropList"
+		[cdkDropListData]="formComponents"
+		[cdkDropListConnectedTo]="[libraryComponentsList]"
+		class="list"
+		(cdkDropListDropped)="drop($event)"
+		id="formComponents"
+	>
+		<ng-container *ngIf="formComponents.length == 0">
+			<div class="dropPlaceholder">Drop Components Here</div>
+			<ng-template #contentTpl>
+				<span> Drag and drop components from Library </span>
+			</ng-template>
+		</ng-container>
+		<div class="box" *ngFor="let component of formComponents" cdkDrag>
+			{{ component.label }}
+			<ng-container add-comp [comp]="component.component"></ng-container>
+			<div class="placeholder" *cdkDragPlaceholder [@fadeInOut]></div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<h2>Library <i nz-icon nzType="drag" nzTheme="outline"></i></h2>
+	Finish Here
+	https://medium.com/@krishnaregmi/how-to-create-dynamic-forms-in-angular-7-using-formcontrol-a443a2c5e3a9
+	<div
+		cdkDropList
+		#libraryComponentsList="cdkDropList"
+		[cdkDropListData]="libraryComponents"
+		[cdkDropListConnectedTo]="[componentsList]"
+		class="list"
+		(cdkDropListDropped)="drop($event)"
+		id="libraryComponents"
+	>
+		<div class="box" *ngFor="let component of libraryComponents" cdkDrag>
+			{{ component.label }}
+			<ng-container add-comp [comp]="component.component"></ng-container>
+			<div class="placeholder" *cdkDragPlaceholder></div>
+		</div>
+	</div>
+</div>
+ -->
