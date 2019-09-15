@@ -37,6 +37,7 @@ import { ButtonComponent } from "src/app/custom/ant-design/button/button.compone
 import { InputComponent } from "../ant-design/input/input.component";
 import { SelectComponent } from "../ant-design/select/select.component";
 import { IProject } from "src/app/models/project.interface";
+import { Observable } from "rxjs";
 
 export interface Comp {
 	label: string;
@@ -67,14 +68,22 @@ export interface Item {
 	]
 })
 export class FormComponent implements OnInit {
-	@Input() data: any;
+	@Input() selectProject$: Observable<IProject>;
 	@Output() formData: EventEmitter<any> = new EventEmitter();
 
 	projectFrom: FormGroup;
 	controls: Array<Item> = [];
 
 	ngOnInit(): void {
-		this.projectFrom = this.fb.group({});
+		this.selectProject$.subscribe(selectProject => {
+			if (selectProject && selectProject.Form) {
+				for (let [key, value] of Object.entries(
+					selectProject[selectProject.type]
+				)) {
+					this.addField(key, value);
+				}
+			}
+		});
 	}
 
 	formComponents: Comp[] = [];
@@ -110,7 +119,9 @@ export class FormComponent implements OnInit {
 		}
 	];
 
-	constructor(private fb: FormBuilder) {}
+	constructor(private fb: FormBuilder) {
+		this.projectFrom = this.fb.group({});
+	}
 
 	addField(key, value): void {
 		const id =
@@ -172,8 +183,6 @@ export class FormComponent implements OnInit {
 				event.previousIndex,
 				event.currentIndex
 			);
-			// console.log(event.item);
-			// addField();
 		}
 	}
 
