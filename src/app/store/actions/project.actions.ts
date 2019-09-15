@@ -70,7 +70,7 @@ export class SaveProjectSuccess implements Action {
 }
 export class UpdateProject implements Action {
 	public readonly type = EProjectActions.UpdateProject;
-	constructor(public payload: IProject['componentConfigs']) {}
+	constructor(public payload: IProject) {}
 }
 export class UpdateProjectSuccess implements Action {
 	public readonly type = EProjectActions.UpdateProjectSuccess;
