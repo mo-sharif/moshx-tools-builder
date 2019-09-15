@@ -57,7 +57,7 @@ import { UserEffects } from "./store/effects/user.effects";
 		HomeComponent,
 		SideMenuComponent,
 		HeaderComponent,
-		PageNotAllowedComponent,
+		PageNotAllowedComponent
 	],
 	imports: [
 		addComponentModule,
