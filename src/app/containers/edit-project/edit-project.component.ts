@@ -4,7 +4,8 @@ import { Location } from "@angular/common";
 import {
 	SaveProject,
 	DeleteProject,
-	GetSelectedProject
+	GetSelectedProject,
+	UpdateProject
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -68,6 +69,17 @@ export class EditProjectComponent implements OnInit {
 				...formData
 			})
 		);
+	};
+	
+	updateFormData = (formData: IProject) => {
+		// Add component type to formData from route id
+		formData.type ? "" : (formData.type = this._router.snapshot.params.id);
+		console.log(formData)
+/* 		this._store.dispatch(
+			new UpdateProject({
+				...formData
+			})
+		); */
 	};
 
 	showModal(): void {
