@@ -4,7 +4,7 @@ import {
   HttpErrorResponse,
   HttpHeaders
 } from "@angular/common/http";
-import { Component, Injectable, OnInit, Input, OnDestroy } from "@angular/core";
+import { Component, Injectable, OnInit, Input, OnDestroy, Output, EventEmitter } from "@angular/core";
 import { Observable, of, Subscription } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
@@ -92,6 +92,8 @@ export class RandomUserService {
 export class TableComponent implements OnInit, OnDestroy {
   @Input()
   selectProject$: Observable<IProject>;
+
+  @Output() formData: EventEmitter<any> = new EventEmitter();
 
   subscription: Subscription;
   pageIndex = 1;
