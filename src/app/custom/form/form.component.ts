@@ -77,15 +77,13 @@ export class FormComponent implements OnInit {
 	ngOnInit(): void {
 		this.selectProject$.subscribe(selectProject => {
 			if (selectProject && selectProject.Form) {
-				for (let [key, value] of Object.entries(
-					selectProject[selectProject.type]
-				)) {
-					this.addField(key, value);
-				}
+				let selectControls: Array<Item> = Object.values(selectProject.Form);
+				selectControls.map((control, key) =>
+					this.addField(control.key, control.value)
+				);
 			}
 		});
 	}
-
 	formComponents: Comp[] = [];
 
 	libraryComponents: Comp[] = [
@@ -159,7 +157,6 @@ export class FormComponent implements OnInit {
 			this.projectFrom.controls[key].updateValueAndValidity();
 		}
 		alert(JSON.stringify(value));
-		this.emitFormData(value);
 	};
 
 	emitFormData = value => {
@@ -188,5 +185,7 @@ export class FormComponent implements OnInit {
 
 	ngAfterContentInit() {}
 
-	ngOnDestroy() {}
+	ngOnDestroy() {
+		this.controls.length ? this.emitFormData(this.controls) : "";
+	}
 }
