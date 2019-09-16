@@ -72,7 +72,7 @@ export class EditProjectComponent implements OnInit {
 	};
 
 	updateFormData = (formData: IProject) => {
-		this._store.dispatch(new UpdateProject(formData));
+		this._store.dispatch(new UpdateProject({...formData}));
 	};
 
 	showModal(): void {
