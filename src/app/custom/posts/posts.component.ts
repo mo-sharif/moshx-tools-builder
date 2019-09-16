@@ -4,7 +4,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit
+  OnInit,
+  Output,
+  EventEmitter
 } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription, of } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
@@ -19,6 +21,8 @@ import { catchError } from "rxjs/operators";
 export class PostsComponent implements OnInit {
   @Input()
   selectProject$: Observable<IProject>;
+
+  @Output() formData: EventEmitter<any> = new EventEmitter();
 
   public dataStore;
   constructor(private http: HttpClient) {}
