@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarComponent implements OnInit {
 
+  @Output() formData: EventEmitter<any> = new EventEmitter();
+  
   constructor() { }
   selectedValue = new Date('2017-01-25');
 
