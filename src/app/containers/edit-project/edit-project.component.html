@@ -10,10 +10,22 @@
 		<nz-page-header-tags>
 			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
-		<nz-page-header-extra *ngIf="(selectUiComponents$ | async)?.showProjectSaveMenu">
-			<button nzShape="circle" nz-button nzType="default" (click)="open()">
+		<nz-page-header-extra>
+			<button
+				*ngIf="(selectUiComponents$ | async)?.showProjectSaveMenu"
+				nzShape="circle"
+				nz-button
+				nzType="default"
+				(click)="open()"
+			>
 				<i nz-icon nzType="save"></i>
 			</button>
+			<nz-switch
+				[(ngModel)]="this.isAdmin"
+				(ngModelChange)="this.switchProjectView()"
+				nzCheckedChildren="Live"
+				nzUnCheckedChildren="Dev"
+			></nz-switch>
 		</nz-page-header-extra>
 	</nz-page-header>
 	<!-- Selected Project -->
