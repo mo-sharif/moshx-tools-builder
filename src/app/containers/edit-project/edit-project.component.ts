@@ -5,7 +5,8 @@ import {
 	SaveProject,
 	DeleteProject,
 	GetSelectedProject,
-	UpdateProject
+	UpdateProject,
+	UpdateUiComponentsSuccess
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -36,6 +37,7 @@ export class EditProjectComponent implements OnInit {
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	selectProject$ = this._store.pipe(select(selectProject));
 	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
+	isAdmin = false;
 	/* Move me to an effect and make me come from firebase collection */
 
 	componentConfigs = [
@@ -60,7 +62,11 @@ export class EditProjectComponent implements OnInit {
 	ngOnInit() {
 		this._store.dispatch(new GetSelectedProject());
 	}
-
+	switchProjectView = () => {
+		this._store.dispatch(new UpdateUiComponentsSuccess({
+			showProjectSaveMenu: !this.isAdmin
+		}))
+	}
 	saveFormData = (formData: IProject) => {
 		// Add component type to formData from route id
 		formData.type ? "" : (formData.type = this._router.snapshot.params.id);
