@@ -69,10 +69,12 @@ export interface Item {
 })
 export class FormComponent implements OnInit {
 	@Input() selectProject$: Observable<IProject>;
+	@Input() selectUiComponents$: Observable<IProject['UiComponents']>;
 	@Output() formData: EventEmitter<any> = new EventEmitter();
 
 	projectFrom: FormGroup;
 	controls: Array<Item> = [];
+	isProjectOwner: boolean;
 
 	ngOnInit(): void {
 		this.selectProject$.subscribe(selectProject => {
@@ -83,6 +85,7 @@ export class FormComponent implements OnInit {
 				);
 			}
 		});
+		this.selectUiComponents$.subscribe((selectUiComponents) => this.isProjectOwner = selectUiComponents && !selectUiComponents.showProjectSaveMenu)
 	}
 	formComponents: Comp[] = [];
 
