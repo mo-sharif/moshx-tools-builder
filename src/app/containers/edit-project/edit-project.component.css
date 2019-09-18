@@ -31,13 +31,21 @@
 .ant-collapse-content {
 	padding-top: 20px;
 }
-
+.ant-page-header-title-view-extra {
+	display: flex;
+}
+.isAdminSwitch {
+	margin-top: 5px;
+}
 .switch-container {
 	position: absolute;
 }
 .ant-page-header {
 	padding: 19px;
 	margin-bottom: 10px;
+}
+.save-button {
+	margin-right: 20px;
 }
 
 @media only screen and (max-width: 767px) {
