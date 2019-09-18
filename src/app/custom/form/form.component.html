@@ -16,16 +16,26 @@
 	id="controls"
 >
 	<nz-form-item
-    class="box"
-    [class.noDragging]="this.isProjectOwner"
+		class="box"
+		[class.noDragging]="this.isProjectOwner"
 		*ngFor="let control of controls; let i = index"
-    cdkDrag
-    [cdkDragDisabled]="this.isProjectOwner"
+		cdkDrag
+		[cdkDragDisabled]="this.isProjectOwner"
 	>
-		<nz-form-label [nzSpan]="8" [nzNoColon]="true"> {{ control.key }}</nz-form-label>
+		<nz-form-label
+			[nzOffset]="0"
+			[nzMd]="8"
+			[nzSm]="24"
+			[nzXs]="32"
+			[nzNoColon]="true"
+		>
+			{{ control.key }}</nz-form-label
+		>
 		<nz-form-control
 			[nzOffset]="0"
-			[nzSpan]="16"
+			[nzMd]="12"
+			[nzSm]="24"
+			[nzXs]="32"
 			nzErrorTip="Please input value"
 		>
 			<input
@@ -40,15 +50,27 @@
 				nz-icon
 				nzType="minus-circle-o"
 				class="dynamic-button"
-        (click)="removeField(control, $event)"
-        [class.hidden]="isProjectOwner"
+				(click)="removeField(control, $event)"
+				[class.hidden]="isProjectOwner"
 			></i>
 		</nz-form-control>
 		<div class="placeholder box" *cdkDragPlaceholder [@fadeInOut]></div>
 	</nz-form-item>
 	<nz-form-item class="box-placeholder" [class.hidden]="this.isProjectOwner">
-		<nz-form-label [nzSpan]="8" [nzNoColon]="true">Add New Field</nz-form-label>
-		<nz-form-control [nzOffset]="0" [nzSpan]="16">
+		<nz-form-label
+			[nzOffset]="0"
+			[nzMd]="8"
+			[nzSm]="24"
+			[nzXs]="24"
+			[nzNoColon]="true"
+			>Add New Field</nz-form-label
+		>
+		<nz-form-control
+			[nzOffset]="0"
+			[nzMd]="12"
+			[nzSm]="24"
+			[nzXs]="24"
+		>
 			<input
 				class="form-field"
 				nz-input
@@ -65,8 +87,12 @@
 		</nz-form-control>
 	</nz-form-item>
 	<nz-form-item>
-		<nz-form-control [nzOffset]="3" [nzSpan]="18">
-			<button nz-button nzType="primary">Submit</button>
+		<nz-form-control
+			[nzMd]="10"
+			[nzSm]="24"
+			[nzXs]="24"
+		>
+			<button class="submit-button" nz-button nzType="primary">Submit</button>
 		</nz-form-control>
 	</nz-form-item>
 </form>
