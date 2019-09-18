@@ -17,14 +17,16 @@
 				nz-button
 				nzType="default"
 				(click)="open()"
+				class="save-button"
 			>
 				<i nz-icon nzType="save"></i>
 			</button>
 			<nz-switch
+				class="isAdminSwitch"
 				[(ngModel)]="this.isAdmin"
 				(ngModelChange)="this.switchProjectView()"
-				nzCheckedChildren="Live"
-				nzUnCheckedChildren="Dev"
+				nzCheckedChildren="Dev"
+				nzUnCheckedChildren="Live"
 			></nz-switch>
 		</nz-page-header-extra>
 	</nz-page-header>
