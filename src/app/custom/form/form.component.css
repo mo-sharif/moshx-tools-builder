@@ -80,7 +80,7 @@
 }
 
 .form-field {
-	width: 60%;
+	width: 80%;
 	margin-right: 8px;
 }
 
@@ -96,4 +96,17 @@
 
 .hidden {
 	display: none;
+}
+.submit-button {
+	margin-left: 191px;
+}
+
+@media only screen and (max-width: 767px) {
+	.box {
+		flex-direction: column;
+	}
+	.submit-button {
+		margin-left: 10px;
+		width: 74%;
+	}
 }
