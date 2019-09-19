@@ -7,10 +7,12 @@ import {
 	ValidationErrors,
 	Validators
 } from "@angular/forms";
-import { Observable, Observer, of } from "rxjs";
+import { Observable, Observer, of, from } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
 import { listStagger } from "src/app/animations/list-stagger.animation";
+import { ProfileService } from "src/app/services/profile/profile.service";
+import { switchMap, map, tap, distinctUntilChanged, debounce, debounceTime } from "rxjs/operators";
 
 export interface Item {
 	id: number;
@@ -56,23 +58,32 @@ export class EditProjectComponent implements OnInit {
 		}
 		this.emitFormData(value);
 	};
+
 	emitFormData = value => {
 		this.formData.emit(value);
 	};
+
 	emitDeleteProject = value => {
 		this.deleteProject.emit(value);
 	};
-	titleAsyncValidator = (control: FormControl) =>
-		new Observable((observer: Observer<ValidationErrors | null>) => {
-			setTimeout(() => {
-				if (control.value === "home") {
-					observer.next({ error: true, duplicated: true });
-				} else {
-					observer.next(null);
-				}
-				observer.complete();
-			}, 1000);
+
+	titleAsyncValidator = (control: FormControl) => {
+		return new Observable((observer: Observer<ValidationErrors | null>) => {
+			this._profileService.loadProfile(control.value).pipe(
+				distinctUntilChanged(),
+				debounceTime(500),
+				map(data => {
+					let isTaken = data.length ? true : false;
+					if (isTaken) {
+						observer.next({ error: true, duplicated: true });
+					} else {
+						observer.next(null);
+					}
+					observer.complete();
+				})
+			).subscribe()
 		});
+	};
 
 	confirmValidator = (control: FormControl): { [s: string]: boolean } => {
 		if (!control.value) {
@@ -91,7 +102,7 @@ export class EditProjectComponent implements OnInit {
 
 		const control = {
 			id,
-			key: `${key || `Field${id}` }`,
+			key: `${key || `Field${id}`}`,
 			value: `${value}`,
 			type: "text"
 		};
@@ -107,7 +118,6 @@ export class EditProjectComponent implements OnInit {
 			new FormControl(null)
 			//Validators.required
 		);
-
 	}
 
 	removeField(i: Item, e: MouseEvent): void {
@@ -123,7 +133,10 @@ export class EditProjectComponent implements OnInit {
 		}
 	}
 
-	constructor(private fb: FormBuilder) {}
+	constructor(
+		private fb: FormBuilder,
+		private _profileService: ProfileService
+	) {}
 
 	ngOnInit() {
 		this.projectFrom = this.fb.group({
