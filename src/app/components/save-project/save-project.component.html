@@ -52,7 +52,7 @@
 									<ng-container
 										*ngIf="projectFrom.get('profile')?.hasError('duplicated')"
 									>
-										The Project name is redundant!
+										This Project name is taken!
 									</ng-container>
 									<ng-container *ngIf="projectFrom.get('profile')?.pending">
 										Validating...
@@ -108,7 +108,7 @@
 					<nz-card
 						class="card"
 						[nzBordered]="false"
-						nzTitle="HTTP Settings"
+						nzTitle="Data In"
 						[nzExtra]="extraTemplate"
 					>
 						<div formGroupName="componentConfigs">
