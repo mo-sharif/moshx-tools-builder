@@ -50,121 +50,134 @@ import { selectUrlSegment } from "../selectors/config.selector";
 export class ProjectEffects {
   @Effect()
   saveProject$ = this._actions$.pipe(
-    ofType<SaveProject>(EProjectActions.SaveProject),
-    map(action => action.payload),
-    withLatestFrom(this._store.pipe(select(selectProject))),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-    switchMap(([[project, selectProject], userUid]) => {
-      project.id = selectProject.id;
-      project.slug = project.title.replace(/ /g, ".");
-      project.uid = userUid;
-      this._projectService.addAndUpdateProject(project);
-      return [
-        new SetSuccessMsg(`${project.title} Saved Successfully`),
-        new SaveProjectSuccess(project)
-      ];
-    }),
-    catchError(err => of(new SetErrorMsg(`${err}`)))
+	ofType<SaveProject>(EProjectActions.SaveProject),
+	map(action => action.payload),
+	withLatestFrom(this._store.pipe(select(selectProject))),
+	withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+	switchMap(([[project, selectProject], user]) => {
+	  if (!project.profile) {
+		project.profile = user.profile;
+	  }
+	  if (!project.id) {
+		project.id = selectProject.id;
+	  }
+	  if (!project.slug) {
+		project.slug = project.title.replace(/ /g, ".");
+	  }
+	  if (!project.uid) {
+		project.uid = user.uid;
+	  }
+	  this._projectService.addAndUpdateProject(project);
+	  return [
+		new SetSuccessMsg(`${project.title} Saved Successfully`),
+		new SaveProjectSuccess(project)
+	  ];
+	}),
+	catchError(err => of(new SetErrorMsg(`${err}`)))
   );
 
   @Effect()
   newProject$ = this._actions$.pipe(
-    ofType<NewProject>(EProjectActions.NewProject),
-    map(action => action.payload),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-    switchMap(([project, selectLoggedInUserUID]) => {
-      return of(
-        new UpdateUiComponents(selectLoggedInUserUID),
-        new NewProjectSuccess(project)
-      );
-    })
+	ofType<NewProject>(EProjectActions.NewProject),
+	map(action => action.payload),
+	withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+	switchMap(([project, selectLoggedInUserUID]) => {
+	  return of(
+		new UpdateUiComponents(selectLoggedInUserUID),
+		new NewProjectSuccess(project)
+	  );
+	})
   );
   @Effect()
   updateProject$ = this._actions$.pipe(
-    ofType<UpdateProject>(EProjectActions.UpdateProject),
-    map(action => action.payload),
-    withLatestFrom(this._store.pipe(select(selectProject))),
-    switchMap(([project, selectProject]) => {
-      this._projectService.updateProject({
-        ...selectProject,
-        [selectProject.type]: { ...project }
-      });
-      return of(new UpdateProjectSuccess(project[project.type]));
-    }),
-    catchError(err => of(new SetErrorMsg(`${err}`)))
+	ofType<UpdateProject>(EProjectActions.UpdateProject),
+	map(action => action.payload),
+	withLatestFrom(this._store.pipe(select(selectProject))),
+	switchMap(([project, selectProject]) => {
+	  this._projectService.updateProject({
+		...selectProject,
+		[selectProject.type]: { ...project }
+	  });
+	  return of(new UpdateProjectSuccess(project[project.type]));
+	}),
+	catchError(err => of(new SetErrorMsg(`${err}`)))
   );
 
   @Effect()
   deleteProject$ = this._actions$.pipe(
-    ofType<DeleteProject>(EProjectActions.DeleteProject),
-    map(action => action.payload),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-    switchMap(([project, selectLoggedInUserUID]) => {
-      if (selectLoggedInUserUID == project.uid) {
-        this._projectService.deleteProject(project);
-        return [
-          new SetSuccessMsg(`${project.title} Deleted Successfully!`),
-          new DeleteProjectSuccess(),
-          new NavigateToRoute([project.profile])
-        ];
-      } else {
-        new SetErrorMsg("You don't have permission to delete this project");
-      }
-    }),
-    catchError(err => of(new SetErrorMsg(err)))
+	ofType<DeleteProject>(EProjectActions.DeleteProject),
+	map(action => action.payload),
+	withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+	switchMap(([project, selectLoggedInUserUID]) => {
+	  if (selectLoggedInUserUID == project.uid) {
+		this._projectService.deleteProject(project);
+		return [
+		  new SetSuccessMsg(`${project.title} Deleted Successfully!`),
+		  new DeleteProjectSuccess(),
+		  new NavigateToRoute([project.profile])
+		];
+	  } else {
+		new SetErrorMsg("You don't have permission to delete this project");
+	  }
+	}),
+	catchError(err => of(new SetErrorMsg(err)))
   );
 
   @Effect()
   loadProfileFromRoute$ = this._actions$.pipe(
-    ofType<GetProfileFromRoute>(EProjectActions.GetProfileFromRoute),
-    map(action => action.payload),
-    switchMap(route => {
-      let profileName = route.replace(".", " ");
-      return this._profileService.loadProfile(profileName).pipe(
-        switchMap((projects: IProject[]) => {
-          return of(
-            new GetProfileFromRouteSuccess(projects),
-            new UpdateUiComponents(projects[0].uid)
-          );
-        })
-      );
-    })
+	ofType<GetProfileFromRoute>(EProjectActions.GetProfileFromRoute),
+	map(action => action.payload),
+	switchMap(route => {
+	  let profileName = route.replace(".", " ");
+	  return this._profileService.loadProfile(profileName).pipe(
+		switchMap((projects: IProject[]) => {
+		  return of(
+			new GetProfileFromRouteSuccess(projects),
+			new UpdateUiComponents(projects[0].uid)
+		  );
+		})
+	  );
+	})
   );
 
   @Effect()
   getUserProfile$ = this._actions$.pipe(
-    ofType<GetUserProfile>(EAuthActions.GetUserProfile),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-    switchMap(([action, userProfile]) => {
-      return this._profileService.getUserProfile(userProfile.uid).pipe(
-        switchMap(user => {
-          if (typeof user === "undefined") {
-            return of(new AddUser(userProfile));
-          } else {
-            if (user.profile) {
-              user.profileSlug = user.profile.replace(/ /g, ".");
-            }
-            return of(new GetUserProfileSuccess(user), new UpdateUser(user), new GetSelectedProject());
-          }
-        }),
-        catchError(err => {
-          return of(new SetErrorMsg(`${err}`));
-        })
-      );
-    })
+	ofType<GetUserProfile>(EAuthActions.GetUserProfile),
+	withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+	switchMap(([action, userProfile]) => {
+	  return this._profileService.getUserProfile(userProfile.uid).pipe(
+		switchMap(user => {
+		  if (typeof user === "undefined") {
+			return of(new AddUser(userProfile));
+		  } else {
+			if (user.profile) {
+			  user.profileSlug = user.profile.replace(/ /g, ".");
+			}
+			return of(
+			  new GetUserProfileSuccess(user),
+			  new UpdateUser(user),
+			  new GetSelectedProject()
+			);
+		  }
+		}),
+		catchError(err => {
+		  return of(new SetErrorMsg(`${err}`));
+		})
+	  );
+	})
   );
 
   @Effect({ dispatch: false })
   getUserProjects$ = this._actions$.pipe(
-    ofType<GetUserProfileSuccess>(EAuthActions.GetUserProfileSuccess),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-    switchMap(([action, user]) => {
-      return this._projectService.getUserProjects(user).pipe(
-        catchError(err => {
-          return of(new SetErrorMsg(`${err}`));
-        })
-      );
-    })
+	ofType<GetUserProfileSuccess>(EAuthActions.GetUserProfileSuccess),
+	withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+	switchMap(([action, user]) => {
+	  return this._projectService.getUserProjects(user).pipe(
+		catchError(err => {
+		  return of(new SetErrorMsg(`${err}`));
+		})
+	  );
+	})
   );
 
   /* 
@@ -173,33 +186,29 @@ export class ProjectEffects {
   */
   @Effect()
   GetSelectedProject$ = this._actions$.pipe(
-    ofType<GetSelectedProject>(
-      EProjectActions.GetSelectedProject
-    ),
-    withLatestFrom(this._store.pipe(select(selectUrlSegment))),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-    switchMap(([[action, selectUrlSegment], selectLoggedInUserUID]) => {
-		if (selectLoggedInUserUID && selectUrlSegment) {
-			return this._projectService
-				.GetSelectedProject(selectUrlSegment)
-				.pipe(
-					switchMap(([project]) => {
-						if (project) {
-							return of(
-								new UpdateUiComponents(project.uid),
-								new GetSelectedProjectSuccess(project)
-							);
-						}
-						return of();
-					}),
-					catchError(err => {
-						return of(new SetErrorMsg(`${err}`));
-					})
-				);
-		} else {
-			return of (new UpdateUiComponents(selectLoggedInUserUID))
-		}
-    })
+	ofType<GetSelectedProject>(EProjectActions.GetSelectedProject),
+	withLatestFrom(this._store.pipe(select(selectUrlSegment))),
+	withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+	switchMap(([[action, selectUrlSegment], selectLoggedInUserUID]) => {
+	  if (selectLoggedInUserUID && selectUrlSegment) {
+		return this._projectService.GetSelectedProject(selectUrlSegment).pipe(
+		  switchMap(([project]) => {
+			if (project) {
+			  return of(
+				new UpdateUiComponents(project.uid),
+				new GetSelectedProjectSuccess(project)
+			  );
+			}
+			return of();
+		  }),
+		  catchError(err => {
+			return of(new SetErrorMsg(`${err}`));
+		  })
+		);
+	  } else {
+		return of(new UpdateUiComponents(selectLoggedInUserUID));
+	  }
+	})
   );
 
   /* 
@@ -208,19 +217,19 @@ export class ProjectEffects {
   */
   @Effect()
   updateUserProfile$ = this._actions$.pipe(
-    ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
-    map(action => action.payload),
-    withLatestFrom(this._store.pipe(select(selectProject))),
-    switchMap(([project, selectProject]) => {
-      this._userService.updateUserFromProjectName(project);
-      return [
-        new UpdateProfileSuccess(project.uid),
-        new NavigateToRoute([project.profile, "projects", selectProject.title])
-      ];
-    }),
-    catchError(err => {
-      return of(new SetErrorMsg(`${err}`));
-    })
+	ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
+	map(action => action.payload),
+	withLatestFrom(this._store.pipe(select(selectProject))),
+	switchMap(([project, selectProject]) => {
+	  this._userService.updateUserFromProjectName(project);
+	  return [
+		new UpdateProfileSuccess(project.uid),
+		new NavigateToRoute([project.profile, "projects", selectProject.title])
+	  ];
+	}),
+	catchError(err => {
+	  return of(new SetErrorMsg(`${err}`));
+	})
   );
 
   /* Update Component UI for projects
@@ -229,24 +238,24 @@ export class ProjectEffects {
 	*/
   @Effect()
   UpdateUiComponents$ = this._actions$.pipe(
-    ofType<UpdateUiComponents>(EProjectActions.UpdateUiComponents),
-    map(action => action.payload),
-    withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-    switchMap(([projectUid, uid]) => {
-      let UiComponents = {
-        showProjectSaveMenu: projectUid == uid,
+	ofType<UpdateUiComponents>(EProjectActions.UpdateUiComponents),
+	map(action => action.payload),
+	withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+	switchMap(([projectUid, uid]) => {
+	  let UiComponents = {
+		showProjectSaveMenu: projectUid == uid,
 		isUserLoggedIn: uid ? true : false,
-		isNewProject: !projectUid || !uid,
-      };
-      return of(new UpdateUiComponentsSuccess(UiComponents));
-    })
+		isNewProject: !projectUid || !uid
+	  };
+	  return of(new UpdateUiComponentsSuccess(UiComponents));
+	})
   );
 
   constructor(
-    private _actions$: Actions,
-    private _store: Store<IAppState>,
-    private _projectService: ProjectService,
-    private _userService: UserService,
-    private _profileService: ProfileService
+	private _actions$: Actions,
+	private _store: Store<IAppState>,
+	private _projectService: ProjectService,
+	private _userService: UserService,
+	private _profileService: ProfileService
   ) {}
 }
