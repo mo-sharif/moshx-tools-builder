@@ -64,7 +64,8 @@ export class EditProjectComponent implements OnInit {
 	}
 	switchProjectView = () => {
 		this._store.dispatch(new UpdateUiComponentsSuccess({
-			showProjectSaveMenu: !this.isAdmin
+			showProjectSaveMenu: !this.isAdmin,
+			isUserLoggedIn: true,
 		}))
 	}
 	saveFormData = (formData: IProject) => {
