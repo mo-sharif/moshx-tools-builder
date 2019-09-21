@@ -23,9 +23,10 @@ export class routerEffects {
 		ofType<RouterNavigationAction>(ROUTER_NAVIGATION),
 		switchMap((route) => {
 			let profileName = route.payload.routerState.url.split('/')[1]
+			let projectLifeCycle = route.payload.routerState.url.split('/')[2]
 			let projectName = route.payload.routerState.url.split('/')[3]
 			if (profileName && projectName) {
-				return of(new StoreUrlSegments([profileName, projectName]), new CloseDrawer())
+				return of(new StoreUrlSegments([profileName, projectLifeCycle, projectName]), new CloseDrawer())
 			} else { 
 				return of(new CloseDrawer())
 			}
