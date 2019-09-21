@@ -47,7 +47,7 @@ export class NavigateSuccess implements Action {
 }
 export class StoreUrlSegments implements Action {
 	public readonly type = EConfigActions.StoreUrlSegments;
-	constructor(public payload: [string, string]) {}
+	constructor(public payload: [string, string, string]) {}
 }
 
 export class GetSettings implements Action {
