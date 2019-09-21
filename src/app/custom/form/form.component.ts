@@ -5,7 +5,10 @@ import {
 	Type,
 	OnInit,
 	Output,
-	EventEmitter
+	EventEmitter,
+	ViewChild,
+	TemplateRef,
+	ElementRef
 } from "@angular/core";
 import {
 	style,
@@ -68,9 +71,14 @@ export interface Item {
 	]
 })
 export class FormComponent implements OnInit {
+
 	@Input() selectProject$: Observable<IProject>;
+
 	@Input() selectUiComponents$: Observable<IProject['UiComponents']>;
+
 	@Output() formData: EventEmitter<any> = new EventEmitter();
+
+	@ViewChild('fieldKey') fieldKey:ElementRef;
 
 	projectFrom: FormGroup;
 	controls: Array<Item> = [];
@@ -143,7 +151,7 @@ export class FormComponent implements OnInit {
 			new FormControl(null)
 			//Validators.required
 		);
-	}
+		this.fieldKey.nativeElement.value = ''	}
 
 	removeField(i: Item, e: MouseEvent): void {
 		e.preventDefault();
