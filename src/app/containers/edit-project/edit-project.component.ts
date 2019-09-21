@@ -6,7 +6,8 @@ import {
 	DeleteProject,
 	GetSelectedProject,
 	UpdateProject,
-	UpdateUiComponentsSuccess
+	UpdateUiComponentsSuccess,
+	UpdateProjectView
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -63,11 +64,8 @@ export class EditProjectComponent implements OnInit {
 		this._store.dispatch(new GetSelectedProject());
 	}
 	switchProjectView = () => {
-		this._store.dispatch(new UpdateUiComponentsSuccess({
-			showProjectSaveMenu: !this.isAdmin,
-			isUserLoggedIn: true,
-		}))
-	}
+		this._store.dispatch(new UpdateProjectView(!this.isAdmin));
+	};
 	saveFormData = (formData: IProject) => {
 		// Add component type to formData from route id
 		formData.type ? "" : (formData.type = this._router.snapshot.params.id);
@@ -79,7 +77,7 @@ export class EditProjectComponent implements OnInit {
 	};
 
 	updateFormData = (formData: IProject) => {
-		this._store.dispatch(new UpdateProject({...formData}));
+		this._store.dispatch(new UpdateProject({ ...formData }));
 	};
 
 	showModal(): void {
