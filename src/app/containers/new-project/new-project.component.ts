@@ -22,7 +22,7 @@ export class NewProjectComponent implements OnInit {
 
 	ngOnInit() {}
 	navigateToProject(type: string) {
-		this.dispatchNewProject(type);
+		// this.dispatchNewProject(type);
 		this._store.dispatch(new NavigateToRoute(["home", "new-project", type]));
 	}
 
