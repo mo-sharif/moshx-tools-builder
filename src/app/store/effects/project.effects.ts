@@ -21,7 +21,8 @@ import {
 	UpdateUiComponentsSuccess,
 	UpdateProject,
 	UpdateProjectSuccess,
-	NewProjectSuccess
+	NewProjectSuccess,
+	UpdateProjectView
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
@@ -153,10 +154,7 @@ export class ProjectEffects {
 						if (user.profile) {
 							user.profileSlug = user.profile.replace(/ /g, ".");
 						}
-						return of(
-							new GetUserProfileSuccess(user),
-							new UpdateUser(user),
-						);
+						return of(new GetUserProfileSuccess(user), new UpdateUser(user));
 					}
 				}),
 				catchError(err => {
@@ -202,7 +200,10 @@ export class ProjectEffects {
 					new UpdateUiComponents(selectLoggedInUserUID)
 				);
 			}
-			if (selectUrlSegment[1] == "edit-project" || selectUrlSegment[1] == "projects") {
+			if (
+				selectUrlSegment[1] == "edit-project" ||
+				selectUrlSegment[1] == "projects"
+			) {
 				return this._projectService.GetSelectedProject(selectUrlSegment).pipe(
 					switchMap(([project]) => {
 						if (project) {
@@ -257,6 +258,21 @@ export class ProjectEffects {
 				showProjectSaveMenu: projectUid == uid,
 				isUserLoggedIn: uid ? true : false,
 				isNewProject: !projectUid || !uid
+			};
+			return of(new UpdateUiComponentsSuccess(UiComponents));
+		})
+	);
+
+	@Effect()
+	UpdateProjectView$ = this._actions$.pipe(
+		ofType<UpdateProjectView>(EProjectActions.UpdateProjectView),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([isAdmin, uid]) => {
+			let UiComponents = {
+				showProjectSaveMenu: isAdmin,
+				isUserLoggedIn: uid ? true : false,
+				isNewProject: !uid
 			};
 			return of(new UpdateUiComponentsSuccess(UiComponents));
 		})
