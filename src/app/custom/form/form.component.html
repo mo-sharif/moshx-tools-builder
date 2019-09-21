@@ -7,7 +7,8 @@
 <form
 	nz-form
 	[formGroup]="projectFrom"
-	(ngSubmit)="submitForm($event, projectFrom.value)"
+  (ngSubmit)="submitForm($event, projectFrom.value)"
+  (keydown.enter)="$event.preventDefault()"
 	cdkDropList
 	#libraryComponentsList="cdkDropList"
 	[cdkDropListData]="controls"
@@ -76,13 +77,14 @@
 				nz-input
 				nzType="dashed"
 				placeholder="Field Key"
-				#fieldKey
+        #fieldKey
+        (keyup.enter)="addField(fieldKey.value, '')"
 			/>
 			<i
 				nz-icon
 				class="dynamic-button"
 				nzType="plus-circle-o"
-				(click)="addField(fieldKey.value, '')"
+        (click)="addField(fieldKey.value, '')"
 			></i>
 		</nz-form-control>
 	</nz-form-item>
