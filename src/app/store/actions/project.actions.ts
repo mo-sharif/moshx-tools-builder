@@ -23,7 +23,8 @@ export enum EProjectActions {
 	GetProfileFromRoute = "[Profile] Get Profile From Route",
 	GetProfileFromRouteSuccess = "[Profile] Get Profile From Route Success",
 	UpdateUiComponents = "[Project] Update UI Components",
-	UpdateUiComponentsSuccess = "[Project] Update UI Components Success"
+	UpdateUiComponentsSuccess = "[Project] Update UI Components Success",
+	UpdateProjectView = "[Project] Update Project View",
 }
 
 export class GetProjects implements Action {
@@ -108,6 +109,11 @@ export class UpdateUiComponentsSuccess implements Action {
 	constructor(public payload: UiComponents) {}
 }
 
+export class UpdateProjectView implements Action {
+	public readonly type = EProjectActions.UpdateProjectView;
+	constructor(public payload: boolean) {}
+}
+
 
 export type ProjectActions =
 	| GetProject
@@ -129,4 +135,5 @@ export type ProjectActions =
 	| GetProfileFromRoute
 	| GetProfileFromRouteSuccess
 	| UpdateUiComponents
-	| UpdateUiComponentsSuccess;
+	| UpdateUiComponentsSuccess
+	| UpdateProjectView;
