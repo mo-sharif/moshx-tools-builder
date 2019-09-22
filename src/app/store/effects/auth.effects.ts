@@ -62,7 +62,6 @@ export class AuthEffects {
 				authData.photoURL,
 				authData.isAnonymous
 			);
-			// new AddUser(user) only if user is signed up first
 			return of(
 				new Authenticated(user),
 				new GetUserProfile(),
