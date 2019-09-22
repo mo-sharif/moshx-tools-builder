@@ -17,22 +17,16 @@ export function projectReducers(
 				...state
 			};
 		}
-		case EProjectActions.GetProjectsSuccess: {
-			return {
-				...state,
-				projects: action.payload
-			};
-		}
 		case EProjectActions.GetProjectSuccess: {
 			return {
 				...state,
-				selectProject: action.payload,
+				selectProject: action.payload
 			};
 		}
 		case EProjectActions.GetSelectedProjectSuccess: {
 			return {
 				...state,
-				selectProject: action.payload,
+				selectProject: action.payload
 			};
 		}
 		case EProjectActions.NewProject: {
@@ -89,18 +83,7 @@ export function projectReducers(
 				...state
 			};
 		}
-
-		case EProjectActions.GetProfileFromRoute: {
-			return {
-				...state
-			};
-		}
-		case EProjectActions.GetProfileFromRouteSuccess: {
-			return {
-				...state,
-				projects: action.payload,
-			};
-		}
+		
 		case EProjectActions.UpdateUiComponents: {
 			return {
 				...state
