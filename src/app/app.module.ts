@@ -20,7 +20,7 @@ import { appReducers } from "./store/reducers/app.reducers";
 import { ConfigEffects } from "./store/effects/config.effects";
 import { MessageEffects } from "./store/effects/message.effects";
 import { routerEffects } from "./store/effects/router.effects";
-
+import { ProfileEffects } from "./store/effects/profile.effects";
 import { AuthService } from "./services/auth/auth.service";
 import { AuthGuard } from "./services/guard/guard.service";
 
@@ -70,7 +70,7 @@ import { UserEffects } from "./store/effects/user.effects";
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects, UserEffects]),
+		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects, UserEffects, ProfileEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,
