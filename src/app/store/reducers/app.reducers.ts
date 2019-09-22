@@ -1,5 +1,4 @@
 import { ActionReducerMap } from "@ngrx/store";
-
 import { routerReducer } from "@ngrx/router-store";
 import { IAppState } from "../state/app.state";
 import { configReducers } from "./config.reducers";
@@ -9,6 +8,7 @@ import { loadingReducers } from "./loading.reducers";
 import { authReducers } from "./auth.reducers";
 import { messageReducers } from "./message.reducer";
 import { projectReducers } from "./project.reducers";
+import { profileReducers } from "./profile.reducer";
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
 	router: routerReducer,
@@ -18,5 +18,6 @@ export const appReducers: ActionReducerMap<IAppState, any> = {
 	loading: loadingReducers,
 	auth: authReducers,
 	message: messageReducers,
-	projects: projectReducers
+	projects: projectReducers,
+	profile: profileReducers
 };
