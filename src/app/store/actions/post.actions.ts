@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-
 import { IPost } from '../../models/post.interface';
 
 export enum EPostActions {
