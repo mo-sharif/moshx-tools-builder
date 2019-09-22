@@ -3,15 +3,13 @@ import { IAppState } from "src/app/store/state/app.state";
 import { Store, select } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
 import {
-	userProjects,
 	selectUiComponents
 } from "../../store/selectors/project.selector";
-import {
-	GetProfileFromRoute,
-	UpdateProjectSuccess
-} from "../../store/actions/project.actions";
+import { UpdateProjectSuccess } from "../../store/actions/project.actions";
 import { IProject } from "src/app/models/project.interface";
 import { NavigateToRoute } from "src/app/store/actions/config.actions";
+import { GetProfileFromRoute } from "src/app/store/actions/profile.actions";
+import { userProjects } from "src/app/store/selectors/profile.selector";
 
 @Component({
 	templateUrl: "./project.component.html",
@@ -28,14 +26,13 @@ export class ProjectComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this._route.params.subscribe(params => 
-			this._store.dispatch(new GetProfileFromRoute(params.id)));
+		this._route.params.subscribe(params =>
+			this._store.dispatch(new GetProfileFromRoute(params.id))
+		);
 	}
 
 	navigateToProject = (project: IProject) => {
-		this._store.dispatch(
-			new UpdateProjectSuccess(null)
-		);
+		this._store.dispatch(new UpdateProjectSuccess(null));
 		this._store.dispatch(
 			new NavigateToRoute([project.profile, "projects", project.title])
 		);
