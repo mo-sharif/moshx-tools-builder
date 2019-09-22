@@ -1,5 +1,4 @@
 import { createSelector } from '@ngrx/store';
-
 import { IAppState } from '../state/app.state';
 import { IMessageState } from '../state/message.state';
 
