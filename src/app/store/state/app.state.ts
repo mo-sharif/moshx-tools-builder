@@ -7,6 +7,7 @@ import { initialLoadingState, ILoadingState } from "./loading.state";
 import { initialAuthState, IAuthState } from "./auth.state";
 import { initialMessageState, IMessageState } from "./message.state";
 import { initialProjectState, IProjectState } from "./project.state";
+import { IProfileState, initialProfileState } from "./profile.state";
 
 export interface IAppState {
 	router?: RouterReducerState;
@@ -17,6 +18,7 @@ export interface IAppState {
 	auth: IAuthState;
 	message: IMessageState;
 	projects: IProjectState;
+	profile: IProfileState;
 }
 
 export const initialAppState: IAppState = {
@@ -26,7 +28,8 @@ export const initialAppState: IAppState = {
 	loading: initialLoadingState,
 	auth: initialAuthState,
 	message: initialMessageState,
-	projects: initialProjectState
+	projects: initialProjectState,
+	profile: initialProfileState
 };
 
 export function getInitialState(): IAppState {
