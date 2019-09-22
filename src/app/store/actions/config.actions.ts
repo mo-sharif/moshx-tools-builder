@@ -1,5 +1,4 @@
 import { Action } from "@ngrx/store";
-
 import { IConfig } from "../../models/config.interface";
 import { IProject } from "src/app/models/project.interface";
 
