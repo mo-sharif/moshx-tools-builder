@@ -6,23 +6,21 @@ import {
 	DeleteProject,
 	GetSelectedProject,
 	UpdateProject,
-	UpdateUiComponentsSuccess,
 	UpdateProjectView
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 import { ActivatedRoute } from "@angular/router";
 import {
-	userProjects,
-	selectProfile,
 	selectProject,
 	selectUiComponents
 } from "../../store/selectors/project.selector";
 
-import { IProject, Project } from "../../models/project.interface";
+import { IProject } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
 import { Components } from "../../custom/components-module";
+import { userProjects } from "src/app/store/selectors/profile.selector";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
@@ -34,7 +32,6 @@ export class EditProjectComponent implements OnInit {
 	isVisible = false;
 	isOkLoading = false;
 	userProjects$ = this._store.pipe(select(userProjects));
-	selectProfile$ = this._store.pipe(select(selectProfile));
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	selectProject$ = this._store.pipe(select(selectProject));
 	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
