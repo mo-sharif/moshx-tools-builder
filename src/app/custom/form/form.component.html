@@ -19,6 +19,7 @@
 	<nz-form-item
 		class="box"
 		[class.noDragging]="this.isProjectOwner"
+		[class.noMargin]="this.isProjectOwner"
 		*ngFor="let control of controls; let i = index"
 		cdkDrag
 		[cdkDragDisabled]="this.isProjectOwner"
