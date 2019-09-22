@@ -10,8 +10,6 @@ import {
 	EProjectActions,
 	SaveProject,
 	SaveProjectSuccess,
-	GetProfileFromRouteSuccess,
-	GetProfileFromRoute,
 	GetSelectedProject,
 	GetSelectedProjectSuccess,
 	NewProject,
@@ -124,23 +122,7 @@ export class ProjectEffects {
 		catchError(err => of(new SetErrorMsg(err)))
 	);
 
-	@Effect()
-	loadProfileFromRoute$ = this._actions$.pipe(
-		ofType<GetProfileFromRoute>(EProjectActions.GetProfileFromRoute),
-		map(action => action.payload),
-		switchMap(route => {
-			let profileName = route.replace(".", " ");
-			return this._profileService.loadProfile(profileName).pipe(
-				switchMap((projects: IProject[]) => {
-					return of(
-						new GetProfileFromRouteSuccess(projects),
-						new UpdateUiComponents(projects[0].uid)
-					);
-				})
-			);
-		})
-	);
-
+	/*  Responsible for Adding or updating user */
 	@Effect()
 	getUserProfile$ = this._actions$.pipe(
 		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
@@ -263,6 +245,10 @@ export class ProjectEffects {
 		})
 	);
 
+	/*  
+		- Dispatched from edit-project
+		- a toggle between Live and Dev when editing or viewing a project
+	*/
 	@Effect()
 	UpdateProjectView$ = this._actions$.pipe(
 		ofType<UpdateProjectView>(EProjectActions.UpdateProjectView),
