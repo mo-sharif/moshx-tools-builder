@@ -1,10 +1,8 @@
 import { Action } from "@ngrx/store";
-
 import { IProject, IProjectContainer, UiComponents } from "../../models/project.interface";
 
 export enum EProjectActions {
 	GetProjects = "[Project] Get Projects",
-	GetProjectsSuccess = "[Project] Get Projects Success",
 	GetProject = "[Project] Get Project",
 	GetSelectedProject = "[Project] Get Selected Project From Route",
 	GetSelectedProjectSuccess = "[Project] Get Selected Project From Route Success",
@@ -20,8 +18,6 @@ export enum EProjectActions {
 	DeleteProjectSuccess = "[Project] Delete Project Success",
     GetContainers = "[Project] Get Containers",
 	GetUserProjects = "[Project] Get User Projects",
-	GetProfileFromRoute = "[Profile] Get Profile From Route",
-	GetProfileFromRouteSuccess = "[Profile] Get Profile From Route Success",
 	UpdateUiComponents = "[Project] Update UI Components",
 	UpdateUiComponentsSuccess = "[Project] Update UI Components Success",
 	UpdateProjectView = "[Project] Update Project View",
@@ -43,10 +39,6 @@ export class GetSelectedProjectSuccess implements Action {
 }
 export class GetUserProjects implements Action {
     public readonly type = EProjectActions.GetUserProjects;
-}
-export class GetProjectsSuccess implements Action {
-	public readonly type = EProjectActions.GetProjectsSuccess;
-	constructor(public payload: IProject[]) {}
 }
 
 export class GetProjectSuccess implements Action {
@@ -89,16 +81,6 @@ export class GetContainers implements Action {
 	constructor(public payload: IProjectContainer[]) {}
 }
 
-export class GetProfileFromRoute implements Action {
-	public readonly type = EProjectActions.GetProfileFromRoute;
-	constructor(public payload: string) {}
-}
-
-export class GetProfileFromRouteSuccess implements Action {
-	public readonly type = EProjectActions.GetProfileFromRouteSuccess;
-	constructor(public payload: IProject[]) {}
-}
-
 export class UpdateUiComponents implements Action {
 	public readonly type = EProjectActions.UpdateUiComponents;
 	constructor(public payload: IProject['uid'] | boolean) {}
@@ -121,7 +103,6 @@ export type ProjectActions =
 	| GetProjects
 	| GetSelectedProject
 	| GetSelectedProjectSuccess
-	| GetProjectsSuccess
 	| NewProject
 	| NewProjectSuccess
 	| GetContainers
@@ -132,8 +113,6 @@ export type ProjectActions =
 	| DeleteProject
 	| DeleteProjectSuccess
 	| GetUserProjects
-	| GetProfileFromRoute
-	| GetProfileFromRouteSuccess
 	| UpdateUiComponents
 	| UpdateUiComponentsSuccess
 	| UpdateProjectView;
