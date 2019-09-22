@@ -28,12 +28,6 @@ export interface ISettings {
 	type: ISettings
 }
 
-export interface IProfile {
-	name: string;
-	user: string;
-	projects: IProject[];
-}
-
 export interface IProjectContainer {
 	name: string;
 	type: string;
