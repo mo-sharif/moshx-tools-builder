@@ -18,11 +18,11 @@
 >
 	<nz-form-item
 		class="box"
-		[class.noDragging]="this.isProjectOwner"
-		[class.noMargin]="this.isProjectOwner"
+		[class.noDragging]="this.isEditMode"
+		[class.noMargin]="this.isEditMode"
 		*ngFor="let control of controls; let i = index"
 		cdkDrag
-		[cdkDragDisabled]="this.isProjectOwner"
+		[cdkDragDisabled]="this.isEditMode"
 	>
 		<nz-form-label
 			[nzOffset]="0"
@@ -53,12 +53,12 @@
 				nzType="minus-circle-o"
 				class="dynamic-button"
 				(click)="removeField(control, $event)"
-				[class.hidden]="isProjectOwner"
+				[class.hidden]="this.isEditMode"
 			></i>
 		</nz-form-control>
 		<div class="placeholder box" *cdkDragPlaceholder [@fadeInOut]></div>
 	</nz-form-item>
-	<nz-form-item class="box-placeholder" [class.hidden]="this.isProjectOwner">
+	<nz-form-item class="box-placeholder" [class.hidden]="this.isEditMode">
 		<nz-form-label
 			[nzOffset]="0"
 			[nzMd]="8"
