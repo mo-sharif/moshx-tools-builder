@@ -71,18 +71,18 @@ export interface Item {
 	]
 })
 export class FormComponent implements OnInit {
-
 	@Input() selectProject$: Observable<IProject>;
 
-	@Input() selectUiComponents$: Observable<IProject['UiComponents']>;
+	@Input() selectUiComponents$: Observable<IProject["UiComponents"]>;
 
 	@Output() formData: EventEmitter<any> = new EventEmitter();
 
-	@ViewChild('fieldKey') fieldKey:ElementRef;
+	@ViewChild("fieldKey") fieldKey: ElementRef;
 
 	projectFrom: FormGroup;
 	controls: Array<Item> = [];
 	isProjectOwner: boolean;
+	isEditMode: boolean;
 
 	ngOnInit(): void {
 		this.selectProject$.subscribe(selectProject => {
@@ -93,7 +93,13 @@ export class FormComponent implements OnInit {
 				);
 			}
 		});
-		this.selectUiComponents$.subscribe((selectUiComponents) => this.isProjectOwner = selectUiComponents && !selectUiComponents.showProjectSaveMenu)
+		this.selectUiComponents$.subscribe(selectUiComponents => {
+			this.isProjectOwner = selectUiComponents && selectUiComponents.isProjectOwner;
+			this.isEditMode = selectUiComponents && selectUiComponents.projectViewToggle;
+			if (!this.isProjectOwner) {
+				this.isEditMode = true
+			}
+		});
 	}
 	formComponents: Comp[] = [];
 
@@ -151,7 +157,8 @@ export class FormComponent implements OnInit {
 			new FormControl(null)
 			//Validators.required
 		);
-		this.fieldKey.nativeElement.value = ''	}
+		this.fieldKey.nativeElement.value = "";
+	}
 
 	removeField(i: Item, e: MouseEvent): void {
 		e.preventDefault();
