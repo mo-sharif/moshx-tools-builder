@@ -20,7 +20,6 @@ export enum EProjectActions {
 	GetUserProjects = "[Project] Get User Projects",
 	UpdateUiComponents = "[Project] Update UI Components",
 	UpdateUiComponentsSuccess = "[Project] Update UI Components Success",
-	UpdateProjectView = "[Project] Update Project View",
 }
 
 export class GetProjects implements Action {
@@ -91,12 +90,6 @@ export class UpdateUiComponentsSuccess implements Action {
 	constructor(public payload: UiComponents) {}
 }
 
-export class UpdateProjectView implements Action {
-	public readonly type = EProjectActions.UpdateProjectView;
-	constructor(public payload: boolean) {}
-}
-
-
 export type ProjectActions =
 	| GetProject
 	| GetProjectSuccess
@@ -114,5 +107,4 @@ export type ProjectActions =
 	| DeleteProjectSuccess
 	| GetUserProjects
 	| UpdateUiComponents
-	| UpdateUiComponentsSuccess
-	| UpdateProjectView;
+	| UpdateUiComponentsSuccess;
