@@ -10,9 +10,9 @@
 		<nz-page-header-tags>
 			<!-- <nz-tag [nzColor]="'red'">Warning</nz-tag> -->
 		</nz-page-header-tags>
-		<nz-page-header-extra>
+		<nz-page-header-extra *ngIf="(selectUiComponents$ | async)?.isProjectOwner">
 			<button
-				*ngIf="(selectUiComponents$ | async)?.showProjectSaveMenu"
+				*ngIf="!(selectUiComponents$ | async)?.projectViewToggle"
 				nzShape="circle"
 				nz-button
 				nzType="default"
@@ -63,7 +63,7 @@
 	nzWidth="90%"
 	[nzStyle]="{ top: '15%' }"
 >
-	<ng-container *ngIf="selectUiComponents?.isUserLoggedIn; else notLoggedIn">
+	<ng-container *ngIf="selectUiComponents?.isProjectOwner && selectUiComponents?.isUserLoggedIn; else notLoggedIn">
 		<app-save-project
 			(formData)="saveFormData($event)"
 			(deleteProject)="deleteProject($event)"
