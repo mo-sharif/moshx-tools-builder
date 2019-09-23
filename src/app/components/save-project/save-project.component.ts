@@ -7,17 +7,14 @@ import {
   ValidationErrors,
   Validators
 } from "@angular/forms";
-import { Observable, Observer, of, from } from "rxjs";
+import { Observable, Observer } from "rxjs";
 import { IProject } from "src/app/models/project.interface";
 import { IUser } from "src/app/models/user.interface";
 import { listStagger } from "src/app/animations/list-stagger.animation";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import {
-  switchMap,
   map,
-  tap,
   distinctUntilChanged,
-  debounce,
   debounceTime,
   withLatestFrom
 } from "rxjs/operators";
