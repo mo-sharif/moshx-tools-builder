@@ -6,7 +6,7 @@ import {
 	DeleteProject,
 	GetSelectedProject,
 	UpdateProject,
-	UpdateProjectView
+	UpdateUiComponents
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
@@ -61,7 +61,7 @@ export class EditProjectComponent implements OnInit {
 		this._store.dispatch(new GetSelectedProject());
 	}
 	switchProjectView = () => {
-		this._store.dispatch(new UpdateProjectView(!this.isAdmin));
+		this._store.dispatch(new UpdateUiComponents(this.isAdmin));
 	};
 	saveFormData = (formData: IProject) => {
 		// Add component type to formData from route id
