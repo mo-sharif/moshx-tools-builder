@@ -13,9 +13,10 @@ export interface IProject {
 }
 
 export interface UiComponents {
-	showProjectSaveMenu?: boolean;
+	projectViewToggle?: boolean;
 	isUserLoggedIn?: boolean;
 	isNewProject?: boolean;
+	isProjectOwner?: boolean;
 }
 
 export interface IComponentConfigs {
