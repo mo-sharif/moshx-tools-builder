@@ -19,8 +19,7 @@ import {
 	UpdateUiComponentsSuccess,
 	UpdateProject,
 	UpdateProjectSuccess,
-	NewProjectSuccess,
-	UpdateProjectView
+	NewProjectSuccess
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
@@ -226,39 +225,41 @@ export class ProjectEffects {
 		})
 	);
 
-	/* Update Component UI for projects
-	Here we are checking if a project
-	has a user matches the current user's Id
+	/* 	
+		Update Component UI for projects
+		Here we are checking if a project
+		has a user matches the current user's Id
+	*/
+	/*  
+		- Dispatched from edit-project
+		- a toggle between Live and Dev when editing or viewing a project
 	*/
 	@Effect()
 	UpdateUiComponents$ = this._actions$.pipe(
 		ofType<UpdateUiComponents>(EProjectActions.UpdateUiComponents),
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		switchMap(([projectUid, uid]) => {
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		switchMap(([[projectUid, uid], selectProject]) => {
+			let isProjectOwner = false;
+			let projectViewToggle = false;
+			if (selectProject && selectProject.uid) {
+				isProjectOwner = selectProject.uid == uid;
+			}
+			if (selectProject && selectProject.uid == "NOT_YET_ASSIGNED") {
+				isProjectOwner = true;
+			}
+			if (projectUid === true) {
+				projectViewToggle = true;
+			}
+			if ( projectUid == uid ) {
+				isProjectOwner = true;
+			}
 			let UiComponents = {
-				showProjectSaveMenu: projectUid == uid,
+				projectViewToggle,
 				isUserLoggedIn: uid ? true : false,
-				isNewProject: !projectUid || !uid
-			};
-			return of(new UpdateUiComponentsSuccess(UiComponents));
-		})
-	);
-
-	/*  
-		- Dispatched from edit-project
-		- a toggle between Live and Dev when editing or viewing a project
-	*/
-	@Effect()
-	UpdateProjectView$ = this._actions$.pipe(
-		ofType<UpdateProjectView>(EProjectActions.UpdateProjectView),
-		map(action => action.payload),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		switchMap(([isAdmin, uid]) => {
-			let UiComponents = {
-				showProjectSaveMenu: isAdmin,
-				isUserLoggedIn: uid ? true : false,
-				isNewProject: !uid
+				isNewProject: !projectUid || !uid,
+				isProjectOwner
 			};
 			return of(new UpdateUiComponentsSuccess(UiComponents));
 		})
