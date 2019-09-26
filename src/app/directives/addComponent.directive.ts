@@ -35,7 +35,9 @@ export class AddComponentDirective implements OnInit, OnDestroy {
 				let cmpRef = this.viewContainerRef.createComponent(componentFactory);
 				cmpRef.instance.selectProject$ = this.selectProject$;
 				cmpRef.instance.selectUiComponents$ = this.selectUiComponents$;
-				cmpRef.instance.formData.subscribe((data) => this.formData.emit(data));
+				if (cmpRef.instance.formData) {
+					cmpRef.instance.formData.subscribe((data) => this.formData.emit(data));
+				}
 			})
 			.catch(error => console.log(error));
 	}
