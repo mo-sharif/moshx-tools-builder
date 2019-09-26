@@ -52,4 +52,7 @@
 	.card-padding {
 		padding: 10px;
 	}
+	.ant-page-header-title-view-sub-title {
+		display: none;
+	}
 }
