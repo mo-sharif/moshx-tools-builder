@@ -18,13 +18,14 @@ import { CarouselComponent } from "./ant-design/carousel/carousel.component";
 import { ButtonComponent } from "./ant-design/button/button.component";
 import { SelectComponent } from "./ant-design/select/select.component";
 import { InputComponent } from "./ant-design/input/input.component";
-import { DragAndDropComponent } from "./drag-and-drop/drag-and-drop.component";
+import { CustomComponent } from "./custom-component/custom-component.component";
 
 export const Components: IProjectComponent = {
 	Form: FormComponent,
 	Table: TableComponent,
 	Calendar: CalendarComponent,
 	Posts: PostsComponent,
+	Custom: CustomComponent,
 	undefined: UndefinedComponent
 };
 
@@ -41,7 +42,7 @@ export const Components: IProjectComponent = {
 
 	declarations: [
 		FormComponent,
-		DragAndDropComponent,
+		CustomComponent,
 		TableComponent,
 		CalendarComponent,
 		PostsComponent,
@@ -59,6 +60,7 @@ export const Components: IProjectComponent = {
 		CalendarComponent,
 		PostsComponent,
 		UndefinedComponent,
+		CustomComponent,
 		NgZorroAntdModule,
 		DragDropModule,
 		FormsModule,
@@ -71,6 +73,7 @@ export const Components: IProjectComponent = {
 		CalendarComponent,
 		PostsComponent,
 		UndefinedComponent,
+		CustomComponent,
 		CheckboxComponent,
 		CarouselComponent,
 		UploadComponent,
