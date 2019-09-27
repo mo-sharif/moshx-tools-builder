@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomComponent } from './custom-component.component';
 
-describe('DragAndDropComponent', () => {
+describe('Custom Component', () => {
   let component: CustomComponent;
   let fixture: ComponentFixture<CustomComponent>;
 
@@ -17,6 +17,10 @@ describe('DragAndDropComponent', () => {
     fixture = TestBed.createComponent(CustomComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
   it('should create', () => {
