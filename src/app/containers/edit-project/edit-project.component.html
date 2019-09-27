@@ -13,7 +13,7 @@
 		<nz-page-header-extra *ngIf="(selectUiComponents$ | async)?.isProjectOwner">
 			<button
 				*ngIf="!(selectUiComponents$ | async)?.projectViewToggle"
-				nzShape="circle"
+				[nzGhost]="true"
 				nz-button
 				nzType="default"
 				(click)="open()"
