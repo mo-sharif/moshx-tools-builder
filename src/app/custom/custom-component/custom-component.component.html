@@ -3,14 +3,7 @@
   nzMessage="Form component is still under development!"
 ></nz-alert>
 <div nz-row nzGutter="12">
-  <div
-    nz-col
-    [nzSpan]="12"
-    [nzMd]="12"
-    [nzSm]="24"
-    [nzXs]="24"
-    style="margin-bottom: 10px;"
-  >
+  <div nz-col [nzMd]="8" [nzSm]="24" [nzXs]="24" style="margin-bottom: 10px;">
     <div
       cdkDropList
       #componentsList="cdkDropList"
@@ -36,11 +29,11 @@
           nz-button
           nzType="default"
         >
-          <i nz-icon nzType="more" nzTheme="outline"></i>
+          <i nz-icon nzType="edit" nzTheme="twotone"></i>
         </button>
         <div class="placeholder" *cdkDragPlaceholder [@fadeInOut]></div>
       </div>
-      <form
+      <!-- <form
         nz-form
         [formGroup]="projectFrom"
         (ngSubmit)="submitForm($event, projectFrom.value)"
@@ -73,7 +66,7 @@
           </nz-form-control>
         </nz-form-item>
 
-        <!--         <nz-form-item>
+                <nz-form-item>
           <nz-form-label [nzSpan]="6">Query string</nz-form-label>
           <nz-form-control [nzOffset]="0" [nzSpan]="18">
             <input
@@ -91,19 +84,12 @@
               (click)="addField(fieldKey.value, '')"
             ></i>
           </nz-form-control>
-        </nz-form-item> -->
-      </form>
+        </nz-form-item>
+      </form> -->
     </div>
   </div>
 
-  <div
-    nz-col
-    [nzSpan]="12"
-    [nzMd]="12"
-    [nzSm]="24"
-    [nzXs]="24"
-    style="margin-bottom: 10px;"
-  >
+  <div nz-col [nzMd]="8" [nzSm]="24" [nzXs]="24" style="margin-bottom: 10px;">
     <!-- Finish Here -->
     <!-- https://medium.com/@krishnaregmi/how-to-create-dynamic-forms-in-angular-7-using-formcontrol-a443a2c5e3a9 -->
     <div
@@ -118,9 +104,14 @@
       <h2>Library <i nz-icon nzType="drag" nzTheme="outline"></i></h2>
       <div class="box" *ngFor="let component of libraryComponents" cdkDrag>
         <ng-container add-comp [comp]="component.component"></ng-container>
-        <span class="show-more-details">
-          {{ component.label }}
-        </span>
+        <button
+          class="show-more-details"
+          nzShape="circle"
+          nz-button
+          nzType="default"
+        >
+          <i nz-icon nzType="info" nzTheme="outline"></i>
+        </button>
         <div class="placeholder" *cdkDragPlaceholder></div>
       </div>
     </div>
