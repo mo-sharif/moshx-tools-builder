@@ -2,41 +2,49 @@
   nzType="error"
   nzMessage="Form component is still under development!"
 ></nz-alert>
-<div class="container">
-  <h2>My Component <i nz-icon nzType="form" nzTheme="outline"></i></h2>
+<div nz-row nzGutter="12">
   <div
-    cdkDropList
-    #componentsList="cdkDropList"
-    [cdkDropListData]="formComponents"
-    [cdkDropListConnectedTo]="[libraryComponentsList]"
-    class="list"
-    (cdkDropListDropped)="drop($event)"
-    id="formComponents"
+    nz-col
+    [nzSpan]="12"
+    [nzMd]="12"
+    [nzSm]="24"
+    [nzXs]="24"
+    style="margin-bottom: 10px;"
   >
-    <ng-container *ngIf="formComponents.length == 0">
-      <div class="dropPlaceholder">Drop Components Here</div>
-      <ng-template #contentTpl>
-        <span> Drag and drop components from Library </span>
-      </ng-template>
-    </ng-container>
-    <div class="box" *ngFor="let component of formComponents" cdkDrag>
-      {{ component.label }}
-      <ng-container add-comp [comp]="component.component"></ng-container>
-      <div class="placeholder" *cdkDragPlaceholder [@fadeInOut]></div>
-    </div>
-    <form
-      nz-form
-      [formGroup]="projectFrom"
-      (ngSubmit)="submitForm($event, projectFrom.value)"
-      (keydown.enter)="$event.preventDefault()"
+    <div
+      cdkDropList
+      #componentsList="cdkDropList"
+      [cdkDropListData]="formComponents"
+      [cdkDropListConnectedTo]="[libraryComponentsList]"
+      class="list"
+      (cdkDropListDropped)="drop($event)"
+      id="formComponents"
     >
-      <div
-        nz-col
-        [nzSpan]="12"
-        [nzMd]="12"
-        [nzSm]="24"
-        [nzXs]="24"
-        style="margin-bottom: 10px;"
+      <h2>My Component <i nz-icon nzType="form" nzTheme="outline"></i></h2>
+      <ng-container *ngIf="formComponents.length == 0">
+        <div class="dropPlaceholder">Drop Components Here</div>
+        <ng-template #contentTpl>
+          <span> Drag and drop components from Library </span>
+        </ng-template>
+      </ng-container>
+      <div class="box" *ngFor="let component of formComponents" cdkDrag>
+        <!-- {{ component.label }} -->
+        <ng-container add-comp [comp]="component.component"></ng-container>
+        <button
+          class="show-more-details"
+          nzShape="circle"
+          nz-button
+          nzType="default"
+        >
+          <i nz-icon nzType="more" nzTheme="outline"></i>
+        </button>
+        <div class="placeholder" *cdkDragPlaceholder [@fadeInOut]></div>
+      </div>
+      <form
+        nz-form
+        [formGroup]="projectFrom"
+        (ngSubmit)="submitForm($event, projectFrom.value)"
+        (keydown.enter)="$event.preventDefault()"
       >
         <nz-form-item
           class="box"
@@ -65,7 +73,7 @@
           </nz-form-control>
         </nz-form-item>
 
-        <nz-form-item>
+        <!--         <nz-form-item>
           <nz-form-label [nzSpan]="6">Query string</nz-form-label>
           <nz-form-control [nzOffset]="0" [nzSpan]="18">
             <input
@@ -83,29 +91,38 @@
               (click)="addField(fieldKey.value, '')"
             ></i>
           </nz-form-control>
-        </nz-form-item>
-      </div>
-    </form>
+        </nz-form-item> -->
+      </form>
+    </div>
   </div>
-</div>
 
-<div class="container">
-  <h2>Library <i nz-icon nzType="drag" nzTheme="outline"></i></h2>
-  <!-- Finish Here -->
-  <!-- https://medium.com/@krishnaregmi/how-to-create-dynamic-forms-in-angular-7-using-formcontrol-a443a2c5e3a9 -->
   <div
-    cdkDropList
-    #libraryComponentsList="cdkDropList"
-    [cdkDropListData]="libraryComponents"
-    [cdkDropListConnectedTo]="[componentsList]"
-    class="list"
-    (cdkDropListDropped)="drop($event)"
-    id="libraryComponents"
+    nz-col
+    [nzSpan]="12"
+    [nzMd]="12"
+    [nzSm]="24"
+    [nzXs]="24"
+    style="margin-bottom: 10px;"
   >
-    <div class="box" *ngFor="let component of libraryComponents" cdkDrag>
-      {{ component.label }}
-      <ng-container add-comp [comp]="component.component"></ng-container>
-      <div class="placeholder" *cdkDragPlaceholder></div>
+    <!-- Finish Here -->
+    <!-- https://medium.com/@krishnaregmi/how-to-create-dynamic-forms-in-angular-7-using-formcontrol-a443a2c5e3a9 -->
+    <div
+      cdkDropList
+      #libraryComponentsList="cdkDropList"
+      [cdkDropListData]="libraryComponents"
+      [cdkDropListConnectedTo]="[componentsList]"
+      class="list"
+      (cdkDropListDropped)="drop($event)"
+      id="libraryComponents"
+    >
+      <h2>Library <i nz-icon nzType="drag" nzTheme="outline"></i></h2>
+      <div class="box" *ngFor="let component of libraryComponents" cdkDrag>
+        <ng-container add-comp [comp]="component.component"></ng-container>
+        <span class="show-more-details">
+          {{ component.label }}
+        </span>
+        <div class="placeholder" *cdkDragPlaceholder></div>
+      </div>
     </div>
   </div>
 </div>
