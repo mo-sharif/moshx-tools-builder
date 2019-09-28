@@ -24,7 +24,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	message$ = this._store.pipe(select(selectMessage));
 	userProjects$ = this._store.pipe(select(userProjects));
-	isCollapsed = true;
 	
 	constructor(private _store: Store<IAppState>) {}
 
