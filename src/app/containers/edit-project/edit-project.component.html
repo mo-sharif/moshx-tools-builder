@@ -13,9 +13,8 @@
 		<nz-page-header-extra *ngIf="(selectUiComponents$ | async)?.isProjectOwner">
 			<button
 				*ngIf="!(selectUiComponents$ | async)?.projectViewToggle"
-				[nzGhost]="true"
 				nz-button
-				nzType="default"
+				nzType="circle"
 				(click)="open()"
 				class="save-button"
 			>
