@@ -6,3 +6,7 @@ ul {
 ul li {
   margin: 10px;
 }
+
+.userItem {
+  text-transform: uppercase;
+}
