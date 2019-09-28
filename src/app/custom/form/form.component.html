@@ -1,100 +1,32 @@
-<nz-alert
-	nzType="warning"
-	nzMessage="This component is under development, limited functionality is still available"
-	nzShowIcon
-></nz-alert>
+<nz-alert nzType="warning" nzMessage="This component is under development, limited functionality is still available"
+	nzShowIcon></nz-alert>
 
-<form
-	nz-form
-	[formGroup]="projectFrom"
-  (ngSubmit)="submitForm($event, projectFrom.value)"
-  (keydown.enter)="$event.preventDefault()"
-	cdkDropList
-	#libraryComponentsList="cdkDropList"
-	[cdkDropListData]="controls"
-	class="list"
-	(cdkDropListDropped)="drop($event)"
-	id="controls"
->
-	<nz-form-item
-		class="box"
-		[class.noDragging]="this.isEditMode"
-		[class.noMargin]="this.isEditMode"
-		*ngFor="let control of controls; let i = index"
-		cdkDrag
-		[cdkDragDisabled]="this.isEditMode"
-	>
-		<nz-form-label
-			[nzOffset]="0"
-			[nzMd]="8"
-			[nzSm]="24"
-			[nzXs]="32"
-			[nzNoColon]="true"
-		>
-			{{ control.key }}</nz-form-label
-		>
-		<nz-form-control
-			[nzOffset]="0"
-			[nzMd]="12"
-			[nzSm]="24"
-			[nzXs]="32"
-			nzErrorTip="Please input value"
-		>
-			<input
-				class="form-field"
-				nz-input
-				[value]="control.value"
-				placeholder="Field Value"
-				[attr.id]="control.key"
-				[formControlName]="control.key"
-			/>
-			<i
-				nz-icon
-				nzType="minus-circle-o"
-				class="dynamic-button"
-				(click)="removeField(control, $event)"
-				[class.hidden]="this.isEditMode"
-			></i>
+<form nz-form [formGroup]="projectFrom" (ngSubmit)="submitForm($event, projectFrom.value)"
+	(keydown.enter)="$event.preventDefault()" cdkDropList #libraryComponentsList="cdkDropList"
+	[cdkDropListData]="controls" class="list" (cdkDropListDropped)="drop($event)" id="controls">
+	<nz-form-item class="box" [class.noDragging]="this.isEditMode" [class.noMargin]="this.isEditMode"
+		*ngFor="let control of controls; let i = index" cdkDrag [cdkDragDisabled]="this.isEditMode">
+		<nz-form-label [nzOffset]="0" [nzMd]="8" [nzSm]="24" [nzXs]="32" [nzNoColon]="true">
+			{{ control.key }}</nz-form-label>
+		<nz-form-control [nzOffset]="0" [nzMd]="12" [nzSm]="24" [nzXs]="32" nzErrorTip="Please input value">
+			<input class="form-field" nz-input [value]="control.value" placeholder="Field Value" [attr.id]="control.key"
+				[formControlName]="control.key" />
+			<i nz-icon nzType="minus-circle-o" class="dynamic-button" (click)="removeField(control, $event)"
+				[class.hidden]="this.isEditMode"></i>
 		</nz-form-control>
 		<div class="placeholder box" *cdkDragPlaceholder [@fadeInOut]></div>
 	</nz-form-item>
 	<nz-form-item class="box-placeholder" [class.hidden]="this.isEditMode">
-		<nz-form-label
-			[nzOffset]="0"
-			[nzMd]="8"
-			[nzSm]="24"
-			[nzXs]="24"
-			[nzNoColon]="true"
-			>Add New Field</nz-form-label
-		>
-		<nz-form-control
-			[nzOffset]="0"
-			[nzMd]="12"
-			[nzSm]="24"
-			[nzXs]="24"
-		>
-			<input
-				class="form-field"
-				nz-input
-				nzType="dashed"
-				placeholder="Field Key"
-				#fieldKey
-				(keyup.enter)="addField(fieldKey.value, '')"
-			/>
-			<i
-				nz-icon
-				class="dynamic-button"
-				nzType="plus-circle-o"
-        (click)="addField(fieldKey.value, '')"
-			></i>
+		<nz-form-label [nzOffset]="0" [nzMd]="8" [nzSm]="24" [nzXs]="24" [nzNoColon]="true">Add New Field
+		</nz-form-label>
+		<nz-form-control [nzOffset]="0" [nzMd]="12" [nzSm]="24" [nzXs]="24">
+			<input class="form-field" nz-input nzType="dashed" placeholder="Field Key" #fieldKey
+				(keyup.enter)="addField(fieldKey.value, '')" />
+			<i nz-icon class="dynamic-button" nzType="plus-circle-o" (click)="addField(fieldKey.value, '')"></i>
 		</nz-form-control>
 	</nz-form-item>
 	<nz-form-item>
-		<nz-form-control
-			[nzMd]="10"
-			[nzSm]="24"
-			[nzXs]="24"
-		>
+		<nz-form-control [nzMd]="10" [nzSm]="24" [nzXs]="24">
 			<button class="submit-button" nz-button nzType="primary">Submit</button>
 		</nz-form-control>
 	</nz-form-item>
