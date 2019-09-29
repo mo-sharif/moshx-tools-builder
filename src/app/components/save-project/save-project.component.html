@@ -50,7 +50,7 @@
 					<ng-template #extraTemplate> </ng-template>
 				</div>
 				<div nz-col [nzSpan]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="column">
-					<nz-card class="card" [nzBordered]="false" nzTitle="Data In" [nzExtra]="extraTemplate">
+					<nz-card class="card" [nzBordered]="false" nzTitle="Http configs" [nzExtra]="extraTemplate">
 						<div formGroupName="componentConfigs">
 							<nz-form-item *ngFor="let componentConfig of componentConfigs">
 								<nz-form-label [nzSpan]="6" [nzFor]="componentConfig.type">{{
@@ -93,40 +93,7 @@
 					</nz-card>
 					<ng-template #extraTemplate> </ng-template>
 				</div>
-<!-- 				<div nz-col [nzSpan]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="column">
-					<nz-card class="card" [nzBordered]="false" nzTitle="Http Configs" [nzExtra]="extraTemplate">
-						<div formGroupName="componentConfigs">
-							<nz-form-item *ngFor="let componentConfig of componentConfigs">
-								<nz-form-label [nzSpan]="6" [nzFor]="componentConfig.type">{{
-									componentConfig.name
-								}}</nz-form-label>
-								<nz-form-control [nzOffset]="0" [nzSpan]="12" nzHasFeedback>
-									<input nz-input [name]="componentConfig.type" [type]="componentConfig.type"
-										[id]="componentConfig.type" [formControlName]="componentConfig.type"
-										[placeholder]="componentConfig.placeholder" />
-									<nz-form-explain *ngIf="
-											projectFrom.get('componentConfig.type')?.dirty &&
-											projectFrom.get('componentConfig.type')?.error
-										">
-										Please input your {{ componentConfig.name }}!
-									</nz-form-explain>
-								</nz-form-control>
-							</nz-form-item>
-						</div>
-					</nz-card>
-					<ng-template #extraTemplate> </ng-template>
-				</div> -->
 			</form>
-			<ng-container *ngIf="selectProject$ | async as selectProject">
-				<div nz-col [nzSpan]="12" [nzMd]="12" [nzSm]="24" [nzXs]="24" class="column"
-					[@listStagger] *ngIf="selectProject.profile">
-					<nz-card class="card" [nzBordered]="false" nzTitle="Delete Project">
-						<button nz-button nzType="danger" (click)="emitDeleteProject(selectProject)">
-							<i nz-icon nzType="delete"></i>Delete
-						</button>
-					</nz-card>
-				</div>
-			</ng-container>
 		</div>
 	</div>
 </div>
