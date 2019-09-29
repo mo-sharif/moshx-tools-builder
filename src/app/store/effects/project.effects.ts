@@ -111,8 +111,8 @@ export class ProjectEffects {
 				this._projectService.deleteProject(project);
 				return [
 					new SetSuccessMsg(`${project.title} Deleted Successfully!`),
+					new NavigateToRoute([project.profile]),
 					new DeleteProjectSuccess(),
-					new NavigateToRoute([project.profile])
 				];
 			} else {
 				new SetErrorMsg("You don't have permission to delete this project");
