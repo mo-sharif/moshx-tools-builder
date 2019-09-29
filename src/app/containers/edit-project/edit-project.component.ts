@@ -48,7 +48,12 @@ export class EditProjectComponent implements OnInit {
 			name: "Response Data",
 			type: "responseData",
 			placeholder: "results"
-		}
+		},
+		{
+			name: "Post Url",
+			type: "httpPostUrl",
+			placeholder: "https://mosh-media.com"
+		},
 	];
 
 	constructor(
