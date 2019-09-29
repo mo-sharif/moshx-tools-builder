@@ -88,9 +88,11 @@ export class FormComponent implements OnInit {
 		this.selectProject$.subscribe(selectProject => {
 			if (selectProject && selectProject.Form) {
 				let selectControls: Array<Item> = Object.values(selectProject.Form);
-				selectControls.map((control, key) =>
-					this.addField(control.key, control.value)
-				);
+				if (selectControls.length !== this.controls.length) {
+					selectControls.map((control, key) =>
+						this.addField(control.key, control.value)
+					);
+				}
 			}
 			if (
 				selectProject &&
@@ -207,6 +209,7 @@ export class FormComponent implements OnInit {
 						// which could be a default value
 						// return Observable.of<any>({my: "default value..."});
 						// or simply an empty observable
+						alert("Post success");
 						return of();
 					})
 				)
