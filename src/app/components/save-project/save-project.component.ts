@@ -48,9 +48,6 @@ export class EditProjectComponent implements OnInit {
   @Output()
   formData: EventEmitter<any> = new EventEmitter();
 
-  @Output()
-  deleteProject: EventEmitter<any> = new EventEmitter();
-
   projectFrom: FormGroup;
 
   controls: Array<Item> = [];
@@ -66,10 +63,6 @@ export class EditProjectComponent implements OnInit {
 
   emitFormData = value => {
     this.formData.emit(value);
-  };
-
-  emitDeleteProject = value => {
-    this.deleteProject.emit(value);
   };
 
   titleAsyncValidator = (control: FormControl) => {
@@ -160,6 +153,7 @@ export class EditProjectComponent implements OnInit {
       componentConfigs: this.fb.group({
         httpRequestUrl: [null],
         responseData: [null],
+        httpPostUrl: [null],
         httpParams: this.fb.group({})
       })
     });
