@@ -1,5 +1,4 @@
 import {
-	AfterContentInit,
 	Component,
 	Input,
 	Type,
@@ -7,7 +6,6 @@ import {
 	Output,
 	EventEmitter,
 	ViewChild,
-	TemplateRef,
 	ElementRef
 } from "@angular/core";
 import {
@@ -40,7 +38,9 @@ import { ButtonComponent } from "src/app/custom/ant-design/button/button.compone
 import { InputComponent } from "../ant-design/input/input.component";
 import { SelectComponent } from "../ant-design/select/select.component";
 import { IProject } from "src/app/models/project.interface";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
 
 export interface Comp {
 	label: string;
@@ -83,7 +83,7 @@ export class FormComponent implements OnInit {
 	controls: Array<Item> = [];
 	isProjectOwner: boolean;
 	isEditMode: boolean;
-
+	httpPostUrl: string;
 	ngOnInit(): void {
 		this.selectProject$.subscribe(selectProject => {
 			if (selectProject && selectProject.Form) {
@@ -92,12 +92,21 @@ export class FormComponent implements OnInit {
 					this.addField(control.key, control.value)
 				);
 			}
+			if (
+				selectProject &&
+				selectProject.componentConfigs &&
+				selectProject.componentConfigs.httpPostUrl
+			) {
+				this.httpPostUrl = selectProject.componentConfigs.httpPostUrl;
+			}
 		});
 		this.selectUiComponents$.subscribe(selectUiComponents => {
-			this.isProjectOwner = selectUiComponents && selectUiComponents.isProjectOwner;
-			this.isEditMode = selectUiComponents && selectUiComponents.projectViewToggle;
+			this.isProjectOwner =
+				selectUiComponents && selectUiComponents.isProjectOwner;
+			this.isEditMode =
+				selectUiComponents && selectUiComponents.projectViewToggle;
 			if (!this.isProjectOwner) {
-				this.isEditMode = true
+				this.isEditMode = true;
 			}
 		});
 	}
@@ -134,7 +143,7 @@ export class FormComponent implements OnInit {
 		}
 	];
 
-	constructor(private fb: FormBuilder) {
+	constructor(private fb: FormBuilder, private http: HttpClient) {
 		this.projectFrom = this.fb.group({});
 	}
 
@@ -168,13 +177,43 @@ export class FormComponent implements OnInit {
 			this.projectFrom.removeControl(i.key);
 		}
 	}
-	submitForm = ($event: any, value: IProject) => {
+	submitForm = ($event: any, sendData: IProject) => {
 		$event.preventDefault();
 		for (const key in this.projectFrom.controls) {
 			this.projectFrom.controls[key].markAsDirty();
 			this.projectFrom.controls[key].updateValueAndValidity();
 		}
-		alert(JSON.stringify(value));
+		this.handlePostSubmit(sendData);
+	};
+
+	handlePostSubmit = sendData => {
+		if (this.httpPostUrl) {
+			this.http
+				.post(this.httpPostUrl, sendData)
+				.pipe(
+					catchError((err: HttpErrorResponse) => {
+						if (err.error instanceof Error) {
+							// A client-side or network error occurred. Handle it accordingly.
+							console.log(`An error occurred: ${err.error.message}`);
+						} else {
+							// The backend returned an unsuccessful response code.
+							// The response body may contain clues as to what went wrong,
+							console.log(
+								`Backend returned code ${err.status}, body was: ${err.error}`
+							);
+						}
+
+						// ...optionally return a default fallback value so app can continue (pick one)
+						// which could be a default value
+						// return Observable.of<any>({my: "default value..."});
+						// or simply an empty observable
+						return of();
+					})
+				)
+				.subscribe();
+		} else {
+			alert("Please add a post url first");
+		}
 	};
 
 	emitFormData = value => {
