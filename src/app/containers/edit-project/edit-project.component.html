@@ -58,14 +58,18 @@
 	[(nzVisible)]="isVisible"
 	nzTitle="Save Project"
 	(nzOnCancel)="handleCancel()"
-	[nzOkText]="null"
 	nzWidth="90%"
-	[nzStyle]="{ top: '15%' }"
+	[nzStyle]="{ top: '10%' }"
+	[nzFooter]="modalFooter"
 >
-	<ng-container *ngIf="selectUiComponents?.isProjectOwner && selectUiComponents?.isUserLoggedIn; else notLoggedIn">
+	<ng-container
+		*ngIf="
+			selectUiComponents?.isProjectOwner && selectUiComponents?.isUserLoggedIn;
+			else notLoggedIn
+		"
+	>
 		<app-save-project
 			(formData)="saveFormData($event)"
-			(deleteProject)="deleteProject($event)"
 			[selectLoggedInUser$]="selectLoggedInUser$"
 			[componentConfigs]="this.componentConfigs"
 			[selectProject$]="selectProject$"
@@ -115,5 +119,13 @@
 				</div>
 			</div>
 		</div>
+	</ng-template>
+	<ng-template #modalFooter>
+		<button nz-button nzType="default" (click)="handleCancel()">
+			Close
+		</button>
+		<button *ngIf="selectProject$ | async as selectProject" nz-button nzType="danger" (click)="deleteProject(selectProject)">
+			Delete Project
+		</button>
 	</ng-template>
 </nz-modal>
