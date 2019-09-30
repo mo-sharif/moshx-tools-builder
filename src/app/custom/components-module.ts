@@ -19,6 +19,8 @@ import { ButtonComponent } from "./ant-design/button/button.component";
 import { SelectComponent } from "./ant-design/select/select.component";
 import { InputComponent } from "./ant-design/input/input.component";
 import { CustomComponent } from "./custom-component/custom-component.component";
+import { EffectsModule } from "@ngrx/effects";
+import { CompEffects } from "../store/effects/comp.effects";
 
 export const Components: IProjectComponent = {
 	Form: FormComponent,
@@ -37,7 +39,8 @@ export const Components: IProjectComponent = {
 		NgZorroAntdModule,
 		DragDropModule,
 		addComponentModule,
-		ScrollDispatchModule
+		ScrollDispatchModule,
+		EffectsModule.forFeature([CompEffects])
 	],
 
 	declarations: [
