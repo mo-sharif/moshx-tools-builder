@@ -22,13 +22,23 @@ export class CompEffects {
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		switchMap(([data, project]) => {
 			if (project.componentConfigs && project.componentConfigs.httpPostUrl) {
-				  return this._requestService.sendPostRequest(project.componentConfigs.httpPostUrl, data).pipe(
-                    switchMap((res) => {
-                        console.log(res)
-                        return of(new SendHttpRequestSuccess(res))})
-                 );
+				return this._requestService.sendPostRequest(
+					project.componentConfigs.httpPostUrl,
+					data
+				);
 			}
-        }),
+		}),
+		switchMap(([a,res]) => {
+            console.log(a)
+            console.log(res)
+			if (res) {
+				return of(
+					new SetErrorMsg(
+						`Please configure a post url to perform a post request`
+					)
+				);
+			}
+		}),
 		catchError(err => of(new SetErrorMsg(`${err}`)))
 	);
 	constructor(
