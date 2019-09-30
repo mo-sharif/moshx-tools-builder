@@ -10,7 +10,6 @@ import {
 } from "@angular/core";
 import {
 	style,
-	state,
 	animate,
 	transition,
 	trigger
@@ -38,9 +37,12 @@ import { ButtonComponent } from "src/app/custom/ant-design/button/button.compone
 import { InputComponent } from "../ant-design/input/input.component";
 import { SelectComponent } from "../ant-design/select/select.component";
 import { IProject } from "src/app/models/project.interface";
-import { Observable, of } from "rxjs";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { IAppState } from "src/app/store/state/app.state";
+import { Store, select } from "@ngrx/store";
+import { SendHttpRequest } from "src/app/store/actions/comp.actions";
+import { selectSendRequestResults } from "src/app/store/selectors/comp.selectors";
 
 export interface Comp {
 	label: string;
@@ -84,6 +86,8 @@ export class FormComponent implements OnInit {
 	isProjectOwner: boolean;
 	isEditMode: boolean;
 	httpPostUrl: string;
+	selectRequestResults$ = this._store.pipe(select(selectSendRequestResults));
+
 	ngOnInit(): void {
 		this.selectProject$.subscribe(selectProject => {
 			if (selectProject && selectProject.Form) {
@@ -145,7 +149,7 @@ export class FormComponent implements OnInit {
 		}
 	];
 
-	constructor(private fb: FormBuilder, private http: HttpClient) {
+	constructor(private fb: FormBuilder, private http: HttpClient,private _store: Store<IAppState>,) {
 		this.projectFrom = this.fb.group({});
 	}
 
@@ -189,34 +193,7 @@ export class FormComponent implements OnInit {
 	};
 
 	handlePostSubmit = sendData => {
-		if (this.httpPostUrl) {
-			this.http
-				.post(this.httpPostUrl, sendData)
-				.pipe(
-					catchError((err: HttpErrorResponse) => {
-						if (err.error instanceof Error) {
-							// A client-side or network error occurred. Handle it accordingly.
-							console.log(`An error occurred: ${err.error.message}`);
-						} else {
-							// The backend returned an unsuccessful response code.
-							// The response body may contain clues as to what went wrong,
-							console.log(
-								`Backend returned code ${err.status}, body was: ${err.error}`
-							);
-						}
-
-						// ...optionally return a default fallback value so app can continue (pick one)
-						// which could be a default value
-						// return Observable.of<any>({my: "default value..."});
-						// or simply an empty observable
-						alert("Post success");
-						return of();
-					})
-				)
-				.subscribe();
-		} else {
-			alert("Please add a post url first");
-		}
+		this._store.dispatch(new SendHttpRequest(sendData))
 	};
 
 	emitFormData = value => {
