@@ -9,6 +9,7 @@ import { authReducers } from "./auth.reducers";
 import { messageReducers } from "./message.reducer";
 import { projectReducers } from "./project.reducers";
 import { profileReducers } from "./profile.reducer";
+import { compReducers } from "./comp.reducers";
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
 	router: routerReducer,
@@ -19,5 +20,6 @@ export const appReducers: ActionReducerMap<IAppState, any> = {
 	auth: authReducers,
 	message: messageReducers,
 	projects: projectReducers,
-	profile: profileReducers
+	profile: profileReducers,
+	comp: compReducers,
 };
