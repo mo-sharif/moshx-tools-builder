@@ -112,7 +112,7 @@ export class ProjectEffects {
 				return [
 					new SetSuccessMsg(`${project.title} Deleted Successfully!`),
 					new NavigateToRoute([project.profile]),
-					new DeleteProjectSuccess(),
+					new DeleteProjectSuccess()
 				];
 			} else {
 				new SetErrorMsg("You don't have permission to delete this project");
@@ -252,7 +252,7 @@ export class ProjectEffects {
 			if (projectUid === true) {
 				projectViewToggle = true;
 			}
-			if ( projectUid == uid ) {
+			if (projectUid == uid) {
 				isProjectOwner = true;
 			}
 			let UiComponents = {
