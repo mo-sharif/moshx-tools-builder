@@ -12,7 +12,7 @@ export class SendHttpRequest implements Action {
 
 export class SendHttpRequestSuccess implements Action {
 	public readonly type = ECompActions.SendHttpRequestSuccess;
-	constructor(public payload: any) {}
+	// constructor(public payload: any) {}
 }
 
 export type CompActions = SendHttpRequest | SendHttpRequestSuccess;
