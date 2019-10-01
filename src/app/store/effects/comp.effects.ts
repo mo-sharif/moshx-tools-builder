@@ -26,10 +26,10 @@ export class CompEffects {
 					.sendPostRequest(project.componentConfigs.httpPostUrl, data)
 					.pipe(
 						catchError((err) => {
-                            if(err == 200) {
-                                return of(new SendHttpRequestSuccess(), new SetSuccessMsg(`Form submitted successfully`)    )
+                            if(err.status == 200) {
+                                return of(new SendHttpRequestSuccess(), new SetSuccessMsg(`Form submitted successfully, response was: ${err.error.text}`)    )
                             }
-                            return of(new SetErrorMsg(`${err}`))
+                            return of(new SetErrorMsg(`${err.error.text}`))
                         })
 					);
 			} else {
