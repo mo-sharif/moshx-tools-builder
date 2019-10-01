@@ -11,14 +11,20 @@
   cursor: move;
   border-radius: 4px;
   padding: 20px;
-  transition: box-shadow 0.2s ease-in-out;
+  /* transition: box-shadow 0.2s ease-in-out; */
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.5);
   /* box-shadow: -1px 3px 13px 0px rgba(0, 0, 0, 0.08),
-		1px 2px 6px 0px rgba(0, 0, 0, 0.05); */
+        1px 2px 6px 0px rgba(0, 0, 0, 0.05); */
+  transition: box-shadow 0.2s ease-in-out;
+  box-shadow: -1px 3px 13px 0px rgba(0, 0, 0, 0.08),
+    1px 2px 6px 0px rgba(0, 0, 0, 0.05);
+  margin: 0 0 24px;
 }
 
 .box:hover {
+  /* box-shadow: 0px 0px 114px 0px rgba(0, 0, 0, 0.08),
+    0px 30px 25px 0px rgba(0, 0, 0, 0.05); */
   box-shadow: 0px 7px 15px 0px rgba(0, 0, 0, 0.08),
     0px 12px 12px 0px rgba(0, 0, 0, 0.05);
 }
