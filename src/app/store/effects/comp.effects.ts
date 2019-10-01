@@ -27,9 +27,9 @@ export class CompEffects {
 					.pipe(
 						catchError((err) => {
                             if(err.status == 200) {
-                                return of(new SendHttpRequestSuccess(), new SetSuccessMsg(`Form submitted successfully, response was: ${err.error.text}`)    )
+                                return of(new SendHttpRequestSuccess(), new SetSuccessMsg(`Form submitted successfully, response was: ${err.error.text}`))
                             }
-                            return of(new SetErrorMsg(`${err.error.text}`))
+                            return of(new SetErrorMsg(err.error.text))
                         })
 					);
 			} else {
