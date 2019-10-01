@@ -15,7 +15,7 @@ export function compReducers(
 		case ECompActions.SendHttpRequestSuccess: {
 			return {
 				...state,
-				sendRequestResults: action.payload
+				// sendRequestResults: action.payload
 			};
 		}
 		default:
