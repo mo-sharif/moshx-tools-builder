@@ -7,9 +7,9 @@ import {
 	ECompActions,
 	SendHttpRequestSuccess
 } from "../actions/comp.actions";
-import { map, switchMap, catchError, withLatestFrom } from "rxjs/operators";
+import { map, switchMap, catchError, withLatestFrom, finalize } from "rxjs/operators";
 import { of } from "rxjs";
-import { SetErrorMsg } from "../actions/message.actions";
+import { SetErrorMsg, SetSuccessMsg } from "../actions/message.actions";
 import { RequestService } from "src/app/services/comp/request.service";
 import { selectProject } from "../selectors/project.selector";
 
@@ -22,24 +22,20 @@ export class CompEffects {
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		switchMap(([data, project]) => {
 			if (project.componentConfigs && project.componentConfigs.httpPostUrl) {
-				return this._requestService.sendPostRequest(
-					project.componentConfigs.httpPostUrl,
-					data
-				);
-			}
-		}),
-		switchMap(([a,res]) => {
-            console.log(a)
-            console.log(res)
-			if (res) {
-				return of(
-					new SetErrorMsg(
-						`Please configure a post url to perform a post request`
-					)
-				);
-			}
-		}),
-		catchError(err => of(new SetErrorMsg(`${err}`)))
+				return this._requestService
+					.sendPostRequest(project.componentConfigs.httpPostUrl, data)
+					.pipe(
+						catchError((err) => {
+                            if(err == 200) {
+                                return of(new SendHttpRequestSuccess(), new SetSuccessMsg(`Form submitted successfully`)    )
+                            }
+                            return of(new SetErrorMsg(`${err}`))
+                        })
+					);
+			} else {
+                return of(new SetErrorMsg(`Please provide Post URL in save menu to submit form`))
+            }
+		})
 	);
 	constructor(
 		private _actions$: Actions,
