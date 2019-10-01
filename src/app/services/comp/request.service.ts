@@ -20,7 +20,6 @@ export class RequestService {
 		} else {
 			// The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      let message =''
       return throwError(error);
 		}
 	}
