@@ -21,7 +21,7 @@ export class RequestService {
 			// The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       let message =''
-      return throwError(`${error.status}`);
+      return throwError(error);
 		}
 	}
 
