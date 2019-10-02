@@ -84,6 +84,7 @@ export class FormComponent implements OnInit {
 	projectFrom: FormGroup;
 	controls: Array<Item> = [];
 	isProjectOwner: boolean;
+	isNewProject: boolean;
 	isEditMode: boolean;
 	httpPostUrl: string;
 	selectRequestResults$ = this._store.pipe(select(selectSendRequestResults));
@@ -107,6 +108,7 @@ export class FormComponent implements OnInit {
 			}
 		});
 		this.selectUiComponents$.subscribe(selectUiComponents => {
+			this.isNewProject = selectUiComponents && selectUiComponents.isNewProject;
 			this.isProjectOwner =
 				selectUiComponents && selectUiComponents.isProjectOwner;
 			this.isEditMode =
@@ -223,6 +225,8 @@ export class FormComponent implements OnInit {
 	ngAfterContentInit() {}
 
 	ngOnDestroy() {
-		this.controls.length ? this.emitFormData(this.controls) : "";
+		if (!this.isNewProject) {
+			this.controls.length ? this.emitFormData(this.controls) : "";
+		}
 	}
 }
