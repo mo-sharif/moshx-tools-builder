@@ -258,7 +258,7 @@ export class ProjectEffects {
 			let UiComponents = {
 				projectViewToggle,
 				isUserLoggedIn: uid ? true : false,
-				isNewProject: !projectUid || !uid,
+				isNewProject: !!selectProject.id,
 				isProjectOwner
 			};
 			return of(new UpdateUiComponentsSuccess(UiComponents));
