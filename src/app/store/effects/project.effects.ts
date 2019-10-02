@@ -241,8 +241,11 @@ export class ProjectEffects {
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		switchMap(([[projectUid, uid], selectProject]) => {
+			
 			let isProjectOwner = false;
 			let projectViewToggle = false;
+			let isNewProject = true;
+
 			if (selectProject && selectProject.uid) {
 				isProjectOwner = selectProject.uid == uid;
 			}
@@ -255,10 +258,13 @@ export class ProjectEffects {
 			if (projectUid == uid) {
 				isProjectOwner = true;
 			}
+			if (selectProject && selectProject.id) {
+				isNewProject = false;
+			}
 			let UiComponents = {
 				projectViewToggle,
 				isUserLoggedIn: uid ? true : false,
-				isNewProject: !!selectProject.id,
+				isNewProject,
 				isProjectOwner
 			};
 			return of(new UpdateUiComponentsSuccess(UiComponents));
