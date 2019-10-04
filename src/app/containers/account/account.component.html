@@ -1,20 +1,44 @@
-<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle" [nzGutter]="12">
+<div
+	nz-row
+	nzType="flex"
+	nzJustify="space-between"
+	nzAlign="middle"
+	[nzGutter]="12"
+>
 	<div nz-col nzSpan="24">
 		<h1 class="h1-header">
-			Welcome to AngularX
+			Welcome to {{ (selectLoggedInUser$ | async).profile || "MoshX" }}
 		</h1>
 	</div>
 </div>
-<div *ngIf="user$ | async; let user;" [@listStagger]>
-	<div nz-row [nzGutter]="12">
+<div *ngIf="selectLoggedInUser$ | async; let user" [@listStagger]>
+	<div nz-row [nzGutter]="12" *ngIf="user.uid">
 		<div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">
-			<button nz-button nzType="primary" *ngIf="user.uid" (click)="logout()">
-				Logout
-			</button>
+			<nz-list
+				nzBordered
+				[nzDataSource]="user | keyvalue"
+				[nzRenderItem]="defaultItem"
+			>
+				<ng-template #defaultItem let-item>
+					<nz-list-item>
+						<span class="userItem">{{ item.key }}</span
+						>: {{ item.value }}
+					</nz-list-item>
+				</ng-template>
+				<nz-list-item>
+					<button
+						nz-button
+						nzType="primary"
+						(click)="logout()"
+					>
+						Logout
+					</button>
+				</nz-list-item>
+			</nz-list>
 		</div>
 	</div>
 </div>
-<div *ngIf="!(user$ | async)?.uid">
+<div *ngIf="!(selectLoggedInUser$ | async)?.uid">
 	<div nz-row [nzGutter]="12">
 		<div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
 			<nz-card class="card" [nzBordered]="false">
@@ -32,15 +56,24 @@
 			<nz-card class="card" [nzBordered]="false" [nzTitle]="'Social Login In'">
 				<ul>
 					<li>
-						<google-login (logoutEvent)="logout()" (googleLoginEvent)="googleLogin()">
+						<google-login
+							(logoutEvent)="logout()"
+							(googleLoginEvent)="googleLogin()"
+						>
 						</google-login>
 					</li>
 					<li>
-						<github-login (logoutEvent)="logout()" (githubLoginEvent)="githubLogin()">
+						<github-login
+							(logoutEvent)="logout()"
+							(githubLoginEvent)="githubLogin()"
+						>
 						</github-login>
 					</li>
 					<li>
-						<facebook-login (logoutEvent)="logout()" (facebookLoginEvent)="facebookLogin()">
+						<facebook-login
+							(logoutEvent)="logout()"
+							(facebookLoginEvent)="facebookLogin()"
+						>
 						</facebook-login>
 					</li>
 				</ul>

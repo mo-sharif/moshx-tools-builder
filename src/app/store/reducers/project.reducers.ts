@@ -17,30 +17,30 @@ export function projectReducers(
 				...state
 			};
 		}
-		case EProjectActions.GetProjectsSuccess: {
-			return {
-				...state,
-				projects: action.payload
-			};
-		}
 		case EProjectActions.GetProjectSuccess: {
 			return {
 				...state,
-				selectedProject: action.payload,
+				selectProject: action.payload
 			};
 		}
-		case EProjectActions.GetSelectedProjectFromRouteSuccess: {
+		case EProjectActions.GetSelectedProjectSuccess: {
 			return {
 				...state,
-				selectedProject: action.payload,
-				newProject: null
+				selectProject: action.payload
 			};
 		}
 		case EProjectActions.NewProject: {
 			return {
 				...state,
-				selectedProject: null,
-				newProject: action.payload
+				selectProject: action.payload,
+				UiComponents: action.payload.UiComponents
+			};
+		}
+		case EProjectActions.NewProjectSuccess: {
+			return {
+				...state,
+				selectProject: action.payload,
+				UiComponents: action.payload.UiComponents
 			};
 		}
 		case EProjectActions.GetContainers: {
@@ -51,20 +51,31 @@ export function projectReducers(
 		}
 		case EProjectActions.SaveProject: {
 			return {
-				...state,
-				newProject: action.payload
+				...state
 			};
 		}
 		case EProjectActions.SaveProjectSuccess: {
 			return {
 				...state,
-				newProject: action.payload
+				selectProject: action.payload
+			};
+		}
+		case EProjectActions.UpdateProject: {
+			return {
+				...state,
+				updateProject: action.payload
+			};
+		}
+		case EProjectActions.UpdateProjectSuccess: {
+			return {
+				...state,
+				selectProject: action.payload
 			};
 		}
 		case EProjectActions.DeleteProject: {
 			return {
 				...state,
-				selectedProject: null
+				selectProject: null
 			};
 		}
 		case EProjectActions.DeleteProjectSuccess: {
@@ -72,16 +83,16 @@ export function projectReducers(
 				...state
 			};
 		}
-
-		case EProjectActions.GetProfileFromRoute: {
+		
+		case EProjectActions.UpdateUiComponents: {
 			return {
 				...state
 			};
 		}
-		case EProjectActions.GetProfileFromRouteSuccess: {
+		case EProjectActions.UpdateUiComponentsSuccess: {
 			return {
 				...state,
-				projects: action.payload
+				UiComponents: action.payload
 			};
 		}
 

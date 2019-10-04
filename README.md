@@ -1,4 +1,4 @@
-# AngularX 🏆
+# MoshX 🏆
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6825a5f1db8f4856aa48f38121f2f993)](https://app.codacy.com/app/Mosh-Media/AngularX?utm_source=github.com&utm_medium=referral&utm_content=Mosh-Media/AngularX&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/Mosh-Media/AngularX.svg?branch=master)](https://travis-ci.com/Mosh-Media/AngularX)
@@ -131,6 +131,24 @@ app
 │   app.component.ts
 └───app.module
 ```
+## Dev WorkFlow
+
+### Components -> Presentation only
+- These components don't alter app state in any way
+- State and props are passed down to them
+- Presentational only
+
+### Containers -> Functionality and Presentation
+- These components can alter app state and receive state and props from other components
+- They are like pages contain smaller components
+
+### Effects -> Logic and Functionality
+- Handle async actions between components
+- App logic and functionality can exist in them
+
+### Services -> API Logic
+- Handles communications with backend and cloud
+
 
 ## Upcoming tasks
 

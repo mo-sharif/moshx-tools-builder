@@ -45,6 +45,12 @@ export function configReducers(
 				containers: action.payload 
 			}
 		}
+		case EConfigActions.StoreUrlSegments: {
+			return {
+				...state,
+				urlSegments: action.payload
+			}
+		}
 
 		default:
 			return state;

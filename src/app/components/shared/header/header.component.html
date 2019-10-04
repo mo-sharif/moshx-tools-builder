@@ -2,11 +2,7 @@
 	<div nz-row nzType="flex" nzJustify="end" nzAlign="end">
 		<div nz-col nzSpan="8">
 			<p class="height-120">
-				<button
-					nz-button
-					(click)="openSideDrawer()"
-					class="toggle-menu"
-				>
+				<button nz-button (click)="openSideDrawer()" class="toggle-menu">
 					<i nz-icon nzType="menu" nzTheme="outline"></i>
 				</button>
 			</p>
@@ -15,7 +11,10 @@
 			<p class="height-100">
 				<a [routerLink]="['home']">
 					<div class="logo">
-						{{ configs.siteName }}
+						<ng-container *ngIf="selectLoggedInUser?.profile; else noProfile">{{
+							selectLoggedInUser.profile
+						}}</ng-container>
+						<ng-template #noProfile>{{ configs.siteName }}</ng-template>
 					</div>
 				</a>
 			</p>
@@ -23,14 +22,30 @@
 		<div nz-col nzSpan="8" style="text-align: right">
 			<p class="height-80">
 				<ng-template #accountTemplate>
-					<ng-container *ngIf="!loggedInUser.uid; else loggedOut">
-						<button  class="loginButtons" nz-button nzShape="circle" (click)="googleLoginClick()">
+					<ng-container *ngIf="!selectLoggedInUser?.uid; else loggedOut">
+						<button
+							class="loginButtons"
+							nz-button
+							nzShape="circle"
+							(click)="googleLoginClick()"
+						>
 							<i nz-icon nzType="google" nzTheme="outline"></i>
 						</button>
-						<button  class="loginButtons" nz-button nzShape="circle" (click)="githubLoginClick()">
+						<button
+							class="loginButtons"
+							nz-button
+							nzShape="circle"
+							(click)="githubLoginClick()"
+						>
 							<i nz-icon nzType="github" nzTheme="outline"></i>
 						</button>
-						<button  class="loginButtons" nz-button nzShape="circle" (click)="facebookLoginClick()" disabled="true">
+						<button
+							class="loginButtons"
+							nz-button
+							nzShape="circle"
+							(click)="facebookLoginClick()"
+							disabled="true"
+						>
 							<i nz-icon nzType="facebook" nzTheme="outline"></i>
 						</button>
 					</ng-container>
@@ -53,8 +68,8 @@
 					nzPlacement="bottomRight"
 				>
 					<nz-avatar
-						[nzSrc]="loggedInUser?.photoURL"
-						[nzText]="loggedInUser?.displayName | slice: 0:1"
+						[nzSrc]="selectLoggedInUser?.photoURL"
+						[nzText]="selectLoggedInUser?.displayName | slice: 0:1"
 					>
 					</nz-avatar>
 				</button>

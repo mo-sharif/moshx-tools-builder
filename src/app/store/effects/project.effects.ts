@@ -10,17 +10,20 @@ import {
 	EProjectActions,
 	SaveProject,
 	SaveProjectSuccess,
-	GetProfileFromRouteSuccess,
-	GetProfileFromRoute,
-	GetSelectedProjectFromRoute,
-	GetSelectedProjectFromRouteSuccess,
+	GetSelectedProject,
+	GetSelectedProjectSuccess,
 	NewProject,
 	DeleteProject,
-	DeleteProjectSuccess
+	DeleteProjectSuccess,
+	UpdateUiComponents,
+	UpdateUiComponentsSuccess,
+	UpdateProject,
+	UpdateProjectSuccess,
+	NewProjectSuccess
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
-import { IProject } from "src/app/models/project.interface";
+import { IProject, Project } from "src/app/models/project.interface";
 import {
 	selectLoggedInUserUID,
 	selectLoggedInUser
@@ -33,13 +36,13 @@ import {
 import { UserService } from "src/app/services/user/user.service";
 import { NavigateToRoute } from "../actions/config.actions";
 import { ProfileService } from "src/app/services/profile/profile.service";
-import { IUser } from "src/app/models/user.interface";
 import {
 	EAuthActions,
 	GetUserProfileSuccess,
 	GetUserProfile
 } from "../actions/auth.actions";
-import { selectedProject } from "../selectors/project.selector";
+import { selectProject } from "../selectors/project.selector";
+import { selectUrlSegment } from "../selectors/config.selector";
 
 @Injectable()
 export class ProjectEffects {
@@ -47,34 +50,69 @@ export class ProjectEffects {
 	saveProject$ = this._actions$.pipe(
 		ofType<SaveProject>(EProjectActions.SaveProject),
 		map(action => action.payload),
-		withLatestFrom(this._store.pipe(select(selectedProject))),
-		switchMap(([project, selectedProject]) => {
-			project.slug = project.title.replace(/ /g, ".");
-			if (selectedProject) {
-				project.id = selectedProject.id;
-				this._projectService.updateProject(project);
-			} else {
-				this._projectService.addProject(project);
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+		switchMap(([[project, selectProject], user]) => {
+			if (!project.profile) {
+				project.profile = user.profile;
 			}
+			if (!project.id) {
+				project.id = selectProject.id;
+			}
+			if (!project.slug) {
+				project.slug = project.title.replace(/ /g, ".");
+			}
+			if (!project.uid) {
+				project.uid = user.uid;
+			}
+			this._projectService.addAndUpdateProject(project);
 			return [
-				new SetSuccessMsg("Project Saved Successfully"),
+				new SetSuccessMsg(`${project.title} Saved Successfully`),
 				new SaveProjectSuccess(project)
 			];
 		}),
-		catchError(err => of(new SetErrorMsg(err)))
+		catchError(err => of(new SetErrorMsg(`${err}`)))
 	);
+
+	@Effect()
+	newProject$ = this._actions$.pipe(
+		ofType<NewProject>(EProjectActions.NewProject),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([project, selectLoggedInUserUID]) => {
+			return of(
+				new UpdateUiComponents(selectLoggedInUserUID),
+				new NewProjectSuccess(project)
+			);
+		})
+	);
+	@Effect()
+	updateProject$ = this._actions$.pipe(
+		ofType<UpdateProject>(EProjectActions.UpdateProject),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		switchMap(([project, selectProject]) => {
+			this._projectService.updateProject({
+				...selectProject,
+				[selectProject.type]: { ...project }
+			});
+			return of(new UpdateProjectSuccess(project[project.type]));
+		}),
+		catchError(err => of(new SetErrorMsg(`${err}`)))
+	);
+
 	@Effect()
 	deleteProject$ = this._actions$.pipe(
 		ofType<DeleteProject>(EProjectActions.DeleteProject),
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
 		switchMap(([project, selectLoggedInUserUID]) => {
-			if (selectLoggedInUserUID == project.userID) {
+			if (selectLoggedInUserUID == project.uid) {
 				this._projectService.deleteProject(project);
 				return [
-					new SetSuccessMsg("Project Deleted Successfully!"),
-					new DeleteProjectSuccess(),
-					new NavigateToRoute(["home"])
+					new SetSuccessMsg(`${project.title} Deleted Successfully!`),
+					new NavigateToRoute([project.profile]),
+					new DeleteProjectSuccess()
 				];
 			} else {
 				new SetErrorMsg("You don't have permission to delete this project");
@@ -83,47 +121,25 @@ export class ProjectEffects {
 		catchError(err => of(new SetErrorMsg(err)))
 	);
 
-	@Effect()
-	navigateToProfile$ = this._actions$.pipe(
-		ofType<SaveProject>(EProjectActions.SaveProject),
-		map(action => action.payload),
-		switchMap((project: IProject) => {
-			return of(new NavigateToRoute([project.profile]));
-		})
-	);
-
-	@Effect()
-	loadProfileFromRoute$ = this._actions$.pipe(
-		ofType<GetProfileFromRoute>(EProjectActions.GetProfileFromRoute),
-		map(action => action.payload),
-		switchMap(route => {
-			let profileName = route.replace(".", " ");
-			return this._profileService
-				.loadProfile(profileName)
-				.pipe(
-					switchMap((profile: any) => [new GetProfileFromRouteSuccess(profile)])
-				);
-		})
-	);
-
+	/*  Responsible for Adding or updating user */
 	@Effect()
 	getUserProfile$ = this._actions$.pipe(
 		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
 		switchMap(([action, userProfile]) => {
 			return this._profileService.getUserProfile(userProfile.uid).pipe(
-				switchMap((user) => {
-					if (typeof user === 'undefined') {
+				switchMap(user => {
+					if (typeof user === "undefined") {
 						return of(new AddUser(userProfile));
 					} else {
-						if (user.profile && !user.profileSlug) {
+						if (user.profile) {
 							user.profileSlug = user.profile.replace(/ /g, ".");
 						}
 						return of(new GetUserProfileSuccess(user), new UpdateUser(user));
 					}
 				}),
-				catchError(err => {	
-					return of(new SetErrorMsg(err));
+				catchError(err => {
+					return of(new SetErrorMsg(`${err}`));
 				})
 			);
 		})
@@ -136,7 +152,7 @@ export class ProjectEffects {
 		switchMap(([action, user]) => {
 			return this._projectService.getUserProjects(user).pipe(
 				catchError(err => {
-					return of(new SetErrorMsg(err));
+					return of(new SetErrorMsg(`${err}`));
 				})
 			);
 		})
@@ -144,34 +160,47 @@ export class ProjectEffects {
 
 	/* 
   This effect handles logic between creating a new project 
-  or editing an viewing and editing an existing project 
+  or editing an existing project 
+  Can handle these cases:
+  - Logged out User creating New Project
+  - Logged in User creating New Project
+  - Logged in User editing Existing Project
+  - Logged in User viewing unowned Projects
   */
 	@Effect()
-	GetSelectedProjectFromRoute$ = this._actions$.pipe(
-		ofType<GetSelectedProjectFromRoute>(
-			EProjectActions.GetSelectedProjectFromRoute
-		),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-		switchMap(([action, user]) => {
-			let route = action.payload;
-			return this._projectService.GetSelectedProjectFromRoute(user, route).pipe(
-				switchMap(([project]) => {
-					if (project) {
-						return of(new GetSelectedProjectFromRouteSuccess(project));
-					} else {
-						return of(
-							new NewProject({
-								title: "NEW PROJECT",
-								type: action.payload,
-								userID: "NOT YET ASSIGNED"
-							})
-						);
-					}
-				}),
-				catchError(err => {
-					return of(new SetErrorMsg(err));
-				})
-			);
+	GetSelectedProject$ = this._actions$.pipe(
+		ofType<GetSelectedProject>(EProjectActions.GetSelectedProject),
+		withLatestFrom(this._store.pipe(select(selectUrlSegment))),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([[action, selectUrlSegment], selectLoggedInUserUID]) => {
+			if (selectUrlSegment[1] == "new-project") {
+				let type = selectUrlSegment[2];
+				let project = new Project("New Project", "NOT_YET_ASSIGNED", type);
+				return of(
+					new NewProject(project),
+					new UpdateUiComponents(selectLoggedInUserUID)
+				);
+			}
+			if (
+				selectUrlSegment[1] == "edit-project" ||
+				selectUrlSegment[1] == "projects"
+			) {
+				return this._projectService.GetSelectedProject(selectUrlSegment).pipe(
+					switchMap(([project]) => {
+						if (project) {
+							return of(
+								new GetSelectedProjectSuccess(project),
+								new UpdateUiComponents(project.uid)
+							);
+						}
+						return of(new SetErrorMsg(`Project not found`));
+					}),
+					catchError(err => {
+						return of(new SetErrorMsg(`${err}`));
+					})
+				);
+			}
+			return of(new UpdateUiComponents(selectLoggedInUserUID));
 		})
 	);
 
@@ -183,12 +212,62 @@ export class ProjectEffects {
 	updateUserProfile$ = this._actions$.pipe(
 		ofType<SaveProjectSuccess>(EProjectActions.SaveProjectSuccess),
 		map(action => action.payload),
-		switchMap((project: IProject) => {
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		switchMap(([project, selectProject]) => {
 			this._userService.updateUserFromProjectName(project);
 			return [
-				new UpdateProfileSuccess(project.userID),
-				new NavigateToRoute([project.profile])
+				new UpdateProfileSuccess(project.uid),
+				new NavigateToRoute([project.profile, "projects", selectProject.title])
 			];
+		}),
+		catchError(err => {
+			return of(new SetErrorMsg(`${err}`));
+		})
+	);
+
+	/* 	
+		Update Component UI for projects
+		Here we are checking if a project
+		has a user matches the current user's Id
+	*/
+	/*  
+		- Dispatched from edit-project
+		- a toggle between Live and Dev when editing or viewing a project
+	*/
+	@Effect()
+	UpdateUiComponents$ = this._actions$.pipe(
+		ofType<UpdateUiComponents>(EProjectActions.UpdateUiComponents),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		withLatestFrom(this._store.pipe(select(selectProject))),
+		switchMap(([[projectUid, uid], selectProject]) => {
+			
+			let isProjectOwner = false;
+			let projectViewToggle = false;
+			let isNewProject = true;
+
+			if (selectProject && selectProject.uid) {
+				isProjectOwner = selectProject.uid == uid;
+			}
+			if (selectProject && selectProject.uid == "NOT_YET_ASSIGNED") {
+				isProjectOwner = true;
+			}
+			if (projectUid === true) {
+				projectViewToggle = true;
+			}
+			if (projectUid == uid) {
+				isProjectOwner = true;
+			}
+			if (selectProject && selectProject.id) {
+				isNewProject = false;
+			}
+			let UiComponents = {
+				projectViewToggle,
+				isUserLoggedIn: uid ? true : false,
+				isNewProject,
+				isProjectOwner
+			};
+			return of(new UpdateUiComponentsSuccess(UiComponents));
 		})
 	);
 

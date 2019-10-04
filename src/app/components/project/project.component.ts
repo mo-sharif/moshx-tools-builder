@@ -13,6 +13,9 @@ export class ProjectComponent implements OnInit {
   @Input()
   userProjects: IProject[]
 
+  @Input()
+  UiComponents: IProject['UiComponents']
+
   @Output()
   navigateToProject: EventEmitter<string> = new EventEmitter();
 

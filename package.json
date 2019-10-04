@@ -1,5 +1,5 @@
 {
-  "name": "AngularX",
+  "name": "MoshX",
   "version": "0.8.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod && firebase deploy --only hosting:mosh-media",
+    "deploy:staging": "firebase use staging && ng build --prod --build-optimizer --vendor-chunk=true && firebase deploy --only hosting:mosh-media",
+    "deploy:prod": "firebase use prod && ng build --prod --build-optimizer --vendor-chunk=true && firebase deploy --only hosting:mosh-media",
+    "build-aot":"ng build --aot --build-optimizer",
+    "deploy-only":"firebase deploy --only hosting:mosh-media",
     "testComponent": "ngentest src/app/compon…"
   },
   "private": true,

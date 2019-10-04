@@ -1,5 +1,4 @@
 import { createSelector } from "@ngrx/store";
-
 import { IAppState } from "../state/app.state";
 import { IConfigState } from "../state/config.state";
 
@@ -18,4 +17,9 @@ export const selectIsCollapsed = createSelector(
 export const selectContainers = createSelector(
 	configState,
 	(state: IConfigState) => state.containers
+)
+
+export const selectUrlSegment = createSelector(
+	configState,
+	(state: IConfigState) => state.urlSegments
 )

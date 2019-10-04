@@ -1,13 +1,13 @@
 <div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
 	<div nz-col nzSpan="24">
 		<h1 class="h1-header">
-			Welcome to AngularX
+			Welcome to {{ (selectLoggedInUser$ | async).profile || 'MoshX' }}
 		</h1>
 	</div>
 </div>
 <div nz-row nzType="flex" nzGutter="12" nzJustify="space-around" nzAlign="middle">
 	<div nz-col nzSpan="24">
-		<div nz-row nzGutter="12" [@listStagger]>
+		<div nz-row nzGutter="12">
 			<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24">
 				<a [routerLink]="['new-project']">
 					<nz-card nzBordered="false" class="card center">
@@ -28,9 +28,9 @@
 			</div>
 			<ng-container *ngIf="selectLoggedInUser$ | async as currentUser">
 				<div style="margin-bottom: 10px" nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="24" [nzXs]="24"
-					*ngIf="currentUser.profileSlug">
-					<a [routerLink]="['/', currentUser.profileSlug]">
-						<nz-card nzBordered="false" class="card center">
+					*ngIf="currentUser.profileSlug" >
+					<a [routerLink]="['/', currentUser.profileSlug]" >
+						<nz-card nzBordered="false" class="card center" [@listStagger]="currentUser">
 							<nz-empty [nzNotFoundImage]="
 									'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_2.png?alt=media&token=e896ba8c-ef16-4f09-ac64-6b783bc8dd54'
 								" [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
@@ -71,11 +71,11 @@
 								'https://firebasestorage.googleapis.com/v0/b/mosh-599d5.appspot.com/o/tech_3.png?alt=media&token=5426000f-2adb-4167-84dc-9b127caa5c58'
 							" [nzNotFoundContent]="userTpl" [nzNotFoundFooter]="userFooterTpl">
 							<ng-template #userTpl>
-								<span>Signed up folks</span>
+								<span>Your team</span>
 							</ng-template>
 							<ng-template #userFooterTpl>
 								<button nz-button nzType="primary" [nzLoading]="currentUser">
-									<i nz-icon nzType="user"></i>Users
+									<i nz-icon nzType="user"></i>Teammates
 								</button>
 							</ng-template>
 						</nz-empty>

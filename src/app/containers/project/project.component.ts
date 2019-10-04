@@ -2,18 +2,21 @@ import { Component, OnInit } from "@angular/core";
 import { IAppState } from "src/app/store/state/app.state";
 import { Store, select } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
-import { userProjects } from "../../store/selectors/project.selector";
 import {
-	GetProfileFromRoute,
-} from "../../store/actions/project.actions";
+	selectUiComponents
+} from "../../store/selectors/project.selector";
+import { UpdateProjectSuccess } from "../../store/actions/project.actions";
 import { IProject } from "src/app/models/project.interface";
 import { NavigateToRoute } from "src/app/store/actions/config.actions";
+import { GetProfileFromRoute } from "src/app/store/actions/profile.actions";
+import { userProjects } from "src/app/store/selectors/profile.selector";
 
 @Component({
 	templateUrl: "./project.component.html",
 	styleUrls: ["./project.component.css"]
 })
 export class ProjectComponent implements OnInit {
+	selectUiComponent$ = this._store.pipe(select(selectUiComponents));
 	userProjects$ = this._store.pipe(select(userProjects));
 
 	constructor(
@@ -29,6 +32,7 @@ export class ProjectComponent implements OnInit {
 	}
 
 	navigateToProject = (project: IProject) => {
+		this._store.dispatch(new UpdateProjectSuccess(null));
 		this._store.dispatch(
 			new NavigateToRoute([project.profile, "projects", project.title])
 		);

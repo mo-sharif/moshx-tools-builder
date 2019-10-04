@@ -6,15 +6,13 @@ import {
 	GetConfig,
 	OpenDrawer,
 	CloseDrawer,
-	GetSettings
 } from "./store/actions/config.actions";
 import { GetUserAuth, GoogleLogin, Logout, GithubLogin, FacebookLogin } from "./store/actions/auth.actions";
 
 import { selectConfig } from "./store/selectors/config.selector";
 import { selectLoggedInUser } from "./store/selectors/auth.selectors";
 import { selectMessage } from "./store/selectors/message.selectors";
-import { userProjects } from "./store/selectors/project.selector";
-import { SetLoading } from "./store/actions/loading.actions";
+import { userProjects } from "./store/selectors/profile.selector";
 
 @Component({
 	selector: "app-root",
@@ -23,10 +21,9 @@ import { SetLoading } from "./store/actions/loading.actions";
 })
 export class AppComponent implements OnInit, AfterViewInit {
 	configs$ = this._store.pipe(select(selectConfig));
-	loggedInUser$ = this._store.pipe(select(selectLoggedInUser));
+	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
 	message$ = this._store.pipe(select(selectMessage));
 	userProjects$ = this._store.pipe(select(userProjects));
-	isCollapsed = true;
 	
 	constructor(private _store: Store<IAppState>) {}
 

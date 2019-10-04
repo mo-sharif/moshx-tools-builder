@@ -19,6 +19,9 @@ export class UserService {
 	getUser(uid): Observable<any> {
 		return this.firestore.collection("/users", ref => ref.where("uid", "==", uid)).valueChanges();
 	}
+	getTeammates(user: IUser): Observable<any>{
+		 return this.firestore.collection("/users", ref => ref.where("profile", "==", user.profile)).valueChanges();
+	}
 	addUser(user: IUser) {
 		return this.firestore
 			.collection<IUser>(`/users/`)
@@ -34,7 +37,7 @@ export class UserService {
 	updateUserFromProjectName(project: IProject) {
 		return this.firestore
 			.collection<IUser>(`/users/`)
-			.doc(project.userID)
+			.doc(project.uid)
 			.update({ profile: project.profile });
 	}
 }

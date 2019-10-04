@@ -31,20 +31,16 @@ export class ProjectService {
 			.valueChanges();
 	}
 
-	GetSelectedProjectFromRoute(user: IUser, route: string): Observable<any> {
-		if (!user) {
-			return of("No User Was provided");
-		}
+	GetSelectedProject([profileName, projectLifeCycle, projectName]): Observable<any> {
 		return this.firestore
 			.collection(`/profiles/`)
-			.doc(user.profile)
-			.collection(`/projects/`, ref => ref.where("slug", "==", route))
+			.doc(profileName)
+			.collection(`/projects/`, ref => ref.where("slug", "==", projectName))
 			.valueChanges();
 	}
 
 	addProject = (project: IProject) => {
 		project.id = project.id ? project.id : this.firestore.createId();
-
 		return this.firestore
 			.collection("profiles")
 			.doc(project.profile)
@@ -60,6 +56,25 @@ export class ProjectService {
 			.collection<IProject>("projects")
 			.doc(project.id)
 			.update(project);
+	};
+
+	addAndUpdateProject = (project: IProject) => {
+		if (project.id) {
+			return this.firestore
+				.collection("profiles")
+				.doc(project.profile)
+				.collection<IProject>("projects")
+				.doc(project.id)
+				.update(project);
+		} else {
+			project.id = this.firestore.createId();
+			return this.firestore
+				.collection("profiles")
+				.doc(project.profile)
+				.collection<IProject>("projects")
+				.doc(project.id)
+				.set(project);
+		}
 	};
 
 	deleteProject = (project: IProject) => {

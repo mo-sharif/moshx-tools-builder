@@ -1,26 +1,26 @@
 import { Component, OnInit } from "@angular/core";
-import { Location } from '@angular/common';
+import { Location } from "@angular/common";
 
 import {
 	SaveProject,
-	GetSelectedProjectFromRoute,
-	DeleteProject
+	DeleteProject,
+	GetSelectedProject,
+	UpdateProject,
+	UpdateUiComponents
 } from "../../store/actions/project.actions";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../../store/state/app.state";
 import { ActivatedRoute } from "@angular/router";
 import {
-	selectNewProject,
-	userProjects,
-	selectProfile,
-	selectedProject
+	selectProject,
+	selectUiComponents
 } from "../../store/selectors/project.selector";
 
 import { IProject } from "../../models/project.interface";
 import { listStagger } from "../../animations/list-stagger.animation";
 import { selectLoggedInUser } from "../../store/selectors/auth.selectors";
-import { map } from "rxjs/operators";
 import { Components } from "../../custom/components-module";
+import { userProjects } from "src/app/store/selectors/profile.selector";
 
 @Component({
 	templateUrl: "./edit-project.component.html",
@@ -30,20 +30,31 @@ import { Components } from "../../custom/components-module";
 export class EditProjectComponent implements OnInit {
 	public components = Components;
 	isVisible = false;
-	visible = false;
 	isOkLoading = false;
-	private userUid: string;
-	newProject$ = this._store.pipe(select(selectNewProject));
-	currentUser$ = this._store.pipe(select(selectLoggedInUser));
 	userProjects$ = this._store.pipe(select(userProjects));
-	selectProfile$ = this._store.pipe(select(selectProfile));
 	selectLoggedInUser$ = this._store.pipe(select(selectLoggedInUser));
-	selectedProject$ = this._store.pipe(select(selectedProject));
+	selectProject$ = this._store.pipe(select(selectProject));
+	selectUiComponents$ = this._store.pipe(select(selectUiComponents));
+	isAdmin = false;
+	/* Move me to an effect and make me come from firebase collection */
 
-	settings = [
-		{ placeholder: "Http Request", type: "Data in", example: "https://mosh-media.com" },
-		{ placeholder: "Firebase Collection", type: "storage", example: "/user/profile"}
-	]
+	componentConfigs = [
+		{
+			name: "Request Url",
+			type: "httpRequestUrl",
+			placeholder: "https://mosh-media.com"
+		},
+		{
+			name: "Response Data",
+			type: "responseData",
+			placeholder: "results"
+		},
+		{
+			name: "Post Url",
+			type: "httpPostUrl",
+			placeholder: "https://mosh-media.com"
+		},
+	];
 
 	constructor(
 		private _store: Store<IAppState>,
@@ -52,33 +63,25 @@ export class EditProjectComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.currentUser$
-			.pipe(
-				map(user => {
-					this.userUid = user.uid;
-					return user;
-				}),
-				map(user => {
-					if (user.profile) {
-						this._store.dispatch(
-							new GetSelectedProjectFromRoute(this._router.snapshot.params.id)
-						);
-					}
-				})
-			)
-			.subscribe();
+		this._store.dispatch(new GetSelectedProject());
 	}
-
+	switchProjectView = () => {
+		this._store.dispatch(new UpdateUiComponents(this.isAdmin));
+	};
 	saveFormData = (formData: IProject) => {
 		// Add component type to formData from route id
 		formData.type ? "" : (formData.type = this._router.snapshot.params.id);
 		this._store.dispatch(
 			new SaveProject({
-				...formData,
-				userID: this.userUid
+				...formData
 			})
 		);
 	};
+
+	updateFormData = (formData: IProject) => {
+		this._store.dispatch(new UpdateProject({ ...formData }));
+	};
+
 	showModal(): void {
 		this.isVisible = true;
 	}
@@ -100,14 +103,14 @@ export class EditProjectComponent implements OnInit {
 	};
 
 	open(): void {
-	  this.visible = true;
+		this.isVisible = true;
 	}
-  
+
 	close(): void {
-	  this.visible = false;
+		this.isVisible = false;
 	}
 
 	goBack() {
 		this._location.back();
-	  }
+	}
 }

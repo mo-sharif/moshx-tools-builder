@@ -1,5 +1,4 @@
 import { Action } from "@ngrx/store";
-
 import { IUser } from "../../models/user.interface";
 
 export enum EUserActions {

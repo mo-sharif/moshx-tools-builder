@@ -20,7 +20,7 @@ import { appReducers } from "./store/reducers/app.reducers";
 import { ConfigEffects } from "./store/effects/config.effects";
 import { MessageEffects } from "./store/effects/message.effects";
 import { routerEffects } from "./store/effects/router.effects";
-
+import { ProfileEffects } from "./store/effects/profile.effects";
 import { AuthService } from "./services/auth/auth.service";
 import { AuthGuard } from "./services/guard/guard.service";
 
@@ -38,6 +38,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
 import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
 // Ant Design
 import { NgZorroAntdModule, NZ_I18N, en_US } from "ng-zorro-antd";
@@ -46,7 +47,6 @@ import { ProjectService } from "./services/project/project.service";
 import { addComponentModule } from "./directives/addComponent.module";
 import { UserService } from "./services/user/user.service";
 import { ProfileService } from "./services/profile/profile.service";
-import { listStagger } from "./animations/list-stagger.animation";
 import { UserEffects } from "./store/effects/user.effects";
 
 
@@ -57,6 +57,7 @@ import { UserEffects } from "./store/effects/user.effects";
 		HomeComponent,
 		SideMenuComponent,
 		HeaderComponent,
+		PageNotAllowedComponent
 	],
 	imports: [
 		addComponentModule,
@@ -69,7 +70,7 @@ import { UserEffects } from "./store/effects/user.effects";
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects, UserEffects]),
+		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects, UserEffects, ProfileEffects]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,

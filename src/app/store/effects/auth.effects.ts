@@ -30,6 +30,10 @@ import {
 import { GetUserProfile } from "../actions/auth.actions";
 import { GetSettings } from "../actions/config.actions";
 import { SetErrorMsg } from "../actions/message.actions";
+import {
+	UpdateUiComponents,
+	UpdateUiComponentsSuccess
+} from "../actions/project.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -39,7 +43,11 @@ export class AuthEffects {
 		switchMap(() => this.authService.currentUserObservable),
 		switchMap(authData => {
 			if (authData == null) {
-				return of(new NotAuthenticated());
+				return of(
+					new NotAuthenticated(),
+					new GetSettings(),
+					new UpdateUiComponentsSuccess({ projectViewToggle: true, isUserLoggedIn: false, isNewProject: true })
+				);
 			}
 
 			let displayName: string = null;
@@ -54,11 +62,11 @@ export class AuthEffects {
 				authData.photoURL,
 				authData.isAnonymous
 			);
-			// new AddUser(user) only if user is signed up first
 			return of(
 				new Authenticated(user),
 				new GetUserProfile(),
-				new GetSettings()
+				new GetSettings(),
+				new UpdateUiComponents(user.uid)
 			);
 		}),
 		catchError(err => {
@@ -158,6 +166,6 @@ export class AuthEffects {
 		}),
 		catchError(err => of(new AuthError({ error: err.message })))
 	);
-	
+
 	constructor(private authService: AuthService, private _actions$: Actions) {}
 }

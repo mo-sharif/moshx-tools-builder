@@ -1,11 +1,11 @@
 import { IPost } from '../../models/post.interface';
 
 export interface IPostState {
-    posts: IPost[];
-    selectedPost: IPost;
+	posts: IPost[];
+	selectedPost: IPost;
 }
 
 export const initialPostState: IPostState = {
-    posts: null,
-    selectedPost: null
+	posts: null,
+	selectedPost: null
 }

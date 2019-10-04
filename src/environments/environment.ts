@@ -6,13 +6,13 @@ export const environment = {
 	production: false,
 	apiUrl: "http://localhost:4200/assets/data/",
 	firebase: {
-		apiKey: "....",
-		authDomain: "....",
-		databaseURL: "....",
-		projectId: "....",
-		storageBucket: "....",
-		messagingSenderId: "....",
-		appId: "...."
+		apiKey: "AIzaSyBbS3pEN2RqR35UtS26lzykMvuWJ2jwUEg",
+		authDomain: "tool-builder.firebaseapp.com",
+		databaseURL: "https://tool-builder.firebaseio.com",
+		projectId: "tool-builder",
+		storageBucket: "mosh-599d5.appspot.com",
+		messagingSenderId: "1062012551888",
+		appId: "1:1062012551888:web:aba769cf1164b5ae"
 	}
 };
 /*

@@ -1,22 +1,36 @@
+<nz-alert nzType="warning" nzMessage="This component is under development, limited functionality is still available" nzShowIcon></nz-alert>
+
 <div>
-<!--   <li *ngIf="selectedProject | async as project">
-     {{ project | json}}
-  </li> -->
-    <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
-      <nz-list>
-        <nz-list-item *cdkVirtualFor="let item of ds">
-          <nz-skeleton *ngIf="!item" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>
-          <nz-list-item-meta
-            *ngIf="item"
-            [nzTitle]="nzTitle"
-            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            [nzDescription]="item.email"
-          >
-            <ng-template #nzTitle>
-              <a href="https://ng.ant.design">{{ item.name.last }}</a>
-            </ng-template>
-          </nz-list-item-meta>
-        </nz-list-item>
-      </nz-list>
-    </cdk-virtual-scroll-viewport>
-  </div>
+	<cdk-virtual-scroll-viewport itemSize="73" class="posts-infinite-container">
+		<nz-list>
+			<nz-list-item *cdkVirtualFor="let data of dataStore">
+				<div nz-row [nzGutter]="8">
+					<nz-skeleton
+						*ngIf="!data"
+						[nzAvatar]="true"
+						[nzParagraph]="{ rows: 4 }"
+					></nz-skeleton>
+					<div
+						nz-col
+            [nzSpan]="8"
+            [nzMd]="6"
+            [nzSm]="12"
+            [nzXs]="24"
+            *ngFor="let rows of data | keyvalue; let i = index"
+					>
+						<nz-card
+							nzType="inner"
+							style="margin-top:16px;"
+							class="card"
+							[nzTitle]="rows.key"
+							[nzExtra]="extraTemplate"
+							nzBordered="false"
+						>
+							{{ rows.value }}
+						</nz-card>
+					</div>
+				</div>
+			</nz-list-item>
+		</nz-list>
+	</cdk-virtual-scroll-viewport>
+</div>

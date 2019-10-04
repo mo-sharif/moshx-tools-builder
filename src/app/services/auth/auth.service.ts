@@ -182,7 +182,7 @@ export class AuthService {
 		this.afAuth.auth.signOut().then(() => {
 			// this.navigateToPath("home")
 			// This is a temp fix for logging out causing a breaking issue. 
-			location.reload();
+			location.href="/";
 		}).catch(error => error);
 	}
 

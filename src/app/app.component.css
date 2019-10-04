@@ -28,6 +28,7 @@
 	}
 	.content {
 		padding: 00 10px;
+		overflow: hidden;
 	}
 	.sidebar {
 		position: relative;

@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
-
 import { IConfig } from "../../models/config.interface";
+import { IProject } from "src/app/models/project.interface";
 
 export enum EConfigActions {
 	GetConfig = "[Config] Get Config",
@@ -11,7 +11,8 @@ export enum EConfigActions {
 	NavigateToRoute = "[Route] Navigate To Route",
 	NavigateSuccess = "[Route} Navigate Success",
 	GetSettings = "[Settings] Get Settings",
-	GetSettingsSuccess = "[Settings] Get Settings Success"
+	GetSettingsSuccess = "[Settings] Get Settings Success",
+	StoreUrlSegments = "[Route] Store Url Segments"
 }
 
 export class GetConfig implements Action {
@@ -43,13 +44,18 @@ export class NavigateToRoute implements Action {
 export class NavigateSuccess implements Action {
 	public readonly type = EConfigActions.NavigateSuccess;
 }
+export class StoreUrlSegments implements Action {
+	public readonly type = EConfigActions.StoreUrlSegments;
+	constructor(public payload: [string, string, string]) {}
+}
+
 export class GetSettings implements Action {
 	public readonly type = EConfigActions.GetSettings;
 }
 
 export class GetSettingsSuccess implements Action {
 	public readonly type = EConfigActions.GetSettingsSuccess;
-	constructor(public payload: string) {}
+	constructor(public payload: IProject[]) {}
 }
 
 
@@ -62,4 +68,5 @@ export type ConfigActions =
 	| NavigateToRoute
 	| NavigateSuccess
 	| GetSettings
-	| GetSettingsSuccess;
+	| GetSettingsSuccess
+	| StoreUrlSegments;
