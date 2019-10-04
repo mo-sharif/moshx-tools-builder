@@ -22,7 +22,7 @@
       </ng-container>
       <div class="box" *ngFor="let component of formComponents" cdkDrag>
         <!-- {{ component.label }} -->
-        <ng-container add-comp [comp]="component.component"></ng-container>
+        <ng-container add-comp [inputData$]="component.text" (outputEvent)="outputEvent($event)" [comp]="component.component"></ng-container>
         <button
           class="show-more-details"
           nzShape="circle"
@@ -103,7 +103,7 @@
     >
       <h2>Library <i nz-icon nzType="drag" nzTheme="outline"></i></h2>
       <div class="box" *ngFor="let component of libraryComponents" cdkDrag>
-        <ng-container add-comp [comp]="component.component"></ng-container>
+          <ng-container add-comp [inputData$]="component.text" (outputEvent)="outputEvent($event)" [comp]="component.component"></ng-container>
         <button
           class="show-more-details"
           nzShape="circle"
