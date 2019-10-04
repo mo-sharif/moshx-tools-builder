@@ -33,6 +33,7 @@ import { SelectComponent } from "../ant-design/select/select.component";
 
 export interface Comp {
 	label: string;
+	text: string;
 	component: Type<any>;
 }
 export interface Item {
@@ -75,30 +76,32 @@ export class CustomComponent implements OnInit {
 	libraryComponents: Comp[] = [
 		{
 			label: "Checkbox",
+			text: "Option one",
 			component: CheckboxComponent
 		},
 		{
 			label: "Mention",
+			text: "Person",
 			component: CarouselComponent
 		},
 		{
 			label: "Slider",
+			text: "Option one",
 			component: UploadComponent
 		},
 		{
-			label: "Radio",
-			component: CheckboxComponent
-		},
-		{
 			label: "Button",
+			text: "Submit",
 			component: ButtonComponent
     },
     {
-      label: "Input",
+	  label: "Input",
+	  text: "First name",
       component: InputComponent,
     },
     {
-      label: "Select",
+	  label: "Select",
+	  text: "Select option",
       component: SelectComponent,
     }
 	];
@@ -159,6 +162,9 @@ export class CustomComponent implements OnInit {
       console.log(event.item)
       // addField();
 		}
+	}
+	outputEvent($event) {
+		console.log($event)
 	}
 
 	ngAfterContentInit() {}
