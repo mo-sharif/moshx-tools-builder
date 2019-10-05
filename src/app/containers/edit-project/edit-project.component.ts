@@ -113,4 +113,8 @@ export class EditProjectComponent implements OnInit {
 	goBack() {
 		this._location.back();
 	}
+
+	outputEvent = $event => {
+		console.log($event)
+	}
 }
