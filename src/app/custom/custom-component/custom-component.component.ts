@@ -5,9 +5,17 @@ import {
 	Type,
 	OnInit,
 	ViewChild,
-	ElementRef
+	ElementRef,
+	EventEmitter,
+	Output
 } from "@angular/core";
-import {style, state, animate, transition, trigger} from '@angular/animations';
+import {
+	style,
+	state,
+	animate,
+	transition,
+	trigger
+} from "@angular/animations";
 
 import {
 	AbstractControl,
@@ -43,33 +51,35 @@ export interface Item {
 	type: string;
 }
 @Component({
-  selector: 'app-custom-component',
-  templateUrl: './custom-component.component.html',
-  styleUrls: ['./custom-component.component.css'],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [   // :enter is alias to 'void => *'
-        style({opacity:0}),
-        animate(500, style({opacity:1})) 
-      ]),
-      transition(':leave', [   // :leave is alias to '* => void'
-        animate(500, style({opacity:0})) 
-      ])
-    ])
-  ]
+	selector: "app-custom-component",
+	templateUrl: "./custom-component.component.html",
+	styleUrls: ["./custom-component.component.css"],
+	animations: [
+		trigger("fadeInOut", [
+			transition(":enter", [
+				// :enter is alias to 'void => *'
+				style({ opacity: 0 }),
+				animate(500, style({ opacity: 1 }))
+			]),
+			transition(":leave", [
+				// :leave is alias to '* => void'
+				animate(500, style({ opacity: 0 }))
+			])
+		])
+	]
 })
 export class CustomComponent implements OnInit {
-  @Input() data: any;
-  @ViewChild("fieldKey") fieldKey: ElementRef;
-  
-  projectFrom: FormGroup;
+	@Input() data: any;
+	@ViewChild("fieldKey") fieldKey: ElementRef;
+
+	@Output() outputEvent: EventEmitter<any> = new EventEmitter();
+
+	projectFrom: FormGroup;
 	controls: Array<Item> = [];
 
 	ngOnInit(): void {
-
-    this.projectFrom = this.fb.group({});
-    
-  }
+		this.projectFrom = this.fb.group({});
+	}
 
 	formComponents: Comp[] = [];
 
@@ -93,23 +103,23 @@ export class CustomComponent implements OnInit {
 			label: "Button",
 			text: "Submit",
 			component: ButtonComponent
-    },
-    {
-	  label: "Input",
-	  text: "First name",
-      component: InputComponent,
-    },
-    {
-	  label: "Select",
-	  text: "Select option",
-      component: SelectComponent,
-    }
+		},
+		{
+			label: "Input",
+			text: "First name",
+			component: InputComponent
+		},
+		{
+			label: "Select",
+			text: "Select option",
+			component: SelectComponent
+		}
 	];
 
 	constructor(private fb: FormBuilder) {
 		this.projectFrom = this.fb.group({});
-  }
-  
+	}
+
 	addField(key, value): void {
 		const id =
 			this.controls.length > 0
@@ -118,7 +128,7 @@ export class CustomComponent implements OnInit {
 
 		const control = {
 			id,
-			key: `${key || `Field${id}` }`,
+			key: `${key || `Field${id}`}`,
 			value: `${value}`,
 			type: "text"
 		};
@@ -130,17 +140,17 @@ export class CustomComponent implements OnInit {
 			//Validators.required
 		);
 		this.fieldKey.nativeElement.value = "";
-  }
+	}
 
-  removeField(i: Item, e: MouseEvent): void {
+	removeField(i: Item, e: MouseEvent): void {
 		e.preventDefault();
 		if (this.controls.length > 0) {
 			const index = this.controls.indexOf(i);
 			this.controls.splice(index, 1);
 			this.projectFrom.removeControl(i.key);
 		}
-  }
-  
+	}
+
 	drop(event: CdkDragDrop<Comp[]>) {
 		if (event.container.id === "libraryComponents") {
 			return;
@@ -158,13 +168,13 @@ export class CustomComponent implements OnInit {
 				event.container.data,
 				event.previousIndex,
 				event.currentIndex
-      );
-      console.log(event.item)
-      // addField();
+			);
+			console.log(event.item);
+			// addField();
 		}
 	}
-	outputEvent($event) {
-		console.log($event)
+	outputEmit = $event => {
+		this.outputEvent.emit($event)
 	}
 
 	ngAfterContentInit() {}
