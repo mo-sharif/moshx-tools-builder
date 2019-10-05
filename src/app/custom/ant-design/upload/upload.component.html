@@ -1,5 +1,5 @@
 <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
-	<button nz-button>
-		<i nz-icon nzType="upload"></i><span>Click to Upload</span>
+	<button nz-button (click)="onClick($event)">
+		<i nz-icon nzType="upload"></i><span>{{inputData$}}</span>
 	</button>
 </nz-upload>

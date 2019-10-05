@@ -11,7 +11,7 @@ import {
 } from "@angular/core";
 
 @Directive({
-	selector: "[add-comp]"
+	selector: "[dynamic-comp]"
 })
 export class AddComponentDirective implements OnInit, OnDestroy {
 	@Input() comp: Type<any>;
@@ -42,7 +42,8 @@ export class AddComponentDirective implements OnInit, OnDestroy {
 					cmpRef.instance.formData.subscribe((data) => this.formData.emit(data));
 				}
 				if (cmpRef.instance && cmpRef.instance.outputEvent) {
-					cmpRef.instance.outputEvent.subscribe((data) => this.outputEvent.emit(data));
+					cmpRef.instance.outputEvent.subscribe((data) => {
+						this.outputEvent.emit(data)});
 				}
 			})
 			.catch(error => console.log(error));

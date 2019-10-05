@@ -2,7 +2,8 @@
 style="width: 200px;"
 nzShowSearch
 nzAllowClear
-nzPlaceHolder="Select a person"
+nzPlaceHolder="{{inputData$}}"
+(onChange)="onChange($event)"
 >
 <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
 <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
