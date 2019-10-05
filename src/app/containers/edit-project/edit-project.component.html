@@ -35,11 +35,12 @@
 	>
 		<ng-container *ngIf="selectProject !== 'null'">
 			<ng-container
-				add-comp
+				dynamic-comp
 				[comp]="components[selectProject['type']]"
 				[selectProject$]="selectProject$"
 				[selectUiComponents$]="selectUiComponents$"
 				(formData)="updateFormData($event)"
+				(outputEvent)="outputEvent($event)"
 			></ng-container>
 		</ng-container>
 	</ng-container>
