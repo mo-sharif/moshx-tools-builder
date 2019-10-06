@@ -11,11 +11,13 @@ export interface IProjectState {
 	container: IProjectContainer[];
 	UiComponents: UiComponents;
 	updateProject: IComponentConfigs;
+	userProjects: IProject[]
 }
 
 export const initialProjectState: IProjectState = {
 	project: null,
 	selectProject: null,
+	userProjects: null,
 	container: [],
 	UiComponents: {
 		isProjectOwner: false,
