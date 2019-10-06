@@ -2,14 +2,7 @@ import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Store, select } from "@ngrx/store";
 import { of } from "rxjs";
-import {
-	switchMap,
-	map,
-	withLatestFrom,
-	catchError,
-	publishReplay,
-	refCount
-} from "rxjs/operators";
+import { switchMap, map, withLatestFrom, catchError } from "rxjs/operators";
 
 import { IAppState } from "../state/app.state";
 import {
@@ -30,7 +23,6 @@ import { selectUserList } from "../selectors/user.selector";
 
 import { SetLoading } from "../actions/loading.actions";
 import { selectLoggedInUser } from "../selectors/auth.selectors";
-
 
 @Injectable()
 export class UserEffects {
@@ -56,9 +48,9 @@ export class UserEffects {
 			return of(new AddUserSuccess(user));
 		}),
 		catchError(err => of(new GetUsersError({ error: err.message })))
-  );
-	
-  @Effect()
+	);
+
+	@Effect()
 	updateUser$ = this._actions$.pipe(
 		ofType<UpdateUser>(EUserActions.UpdateUser),
 		map(action => action.payload),
@@ -67,7 +59,7 @@ export class UserEffects {
 			return of(new UpdateUserSuccess(user));
 		}),
 		catchError(err => of(new GetUsersError({ error: err.message })))
-  );
+	);
 
 	@Effect()
 	getUsers$ = this._actions$.pipe(
@@ -76,8 +68,6 @@ export class UserEffects {
 		switchMap(([action, selectLoggedInUser]) => {
 			if (selectLoggedInUser && selectLoggedInUser.profile) {
 				return this._userService.getTeammates(selectLoggedInUser).pipe(
-					publishReplay(1),
-					refCount(),
 					switchMap((users: IUser[]) => [
 						new GetUsersSuccess(users),
 						new SetLoading(false)
@@ -85,7 +75,7 @@ export class UserEffects {
 					catchError(err => of(new GetUsersError({ error: err.message })))
 				);
 			} else {
-				return of(new GetUsersSuccess([]),new SetLoading(false))
+				return of(new GetUsersSuccess([]), new SetLoading(false));
 			}
 		})
 	);
