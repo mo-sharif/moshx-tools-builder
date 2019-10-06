@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, withLatestFrom, map, catchError } from "rxjs/operators";
+import { switchMap, withLatestFrom, map, catchError, publishReplay, refCount } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -19,28 +19,21 @@ import {
 	UpdateUiComponentsSuccess,
 	UpdateProject,
 	UpdateProjectSuccess,
-	NewProjectSuccess
+	NewProjectSuccess,
+	GetUserProjects,
+	GetUserProjectsSuccess
 } from "../actions/project.actions";
 import { SetSuccessMsg, SetErrorMsg } from "../actions/message.actions";
 
-import { IProject, Project } from "src/app/models/project.interface";
+import { Project } from "src/app/models/project.interface";
 import {
 	selectLoggedInUserUID,
 	selectLoggedInUser
 } from "../selectors/auth.selectors";
-import {
-	UpdateProfileSuccess,
-	AddUser,
-	UpdateUser
-} from "../actions/user.actions";
+import { UpdateProfileSuccess } from "../actions/user.actions";
 import { UserService } from "src/app/services/user/user.service";
 import { NavigateToRoute } from "../actions/config.actions";
-import { ProfileService } from "src/app/services/profile/profile.service";
-import {
-	EAuthActions,
-	GetUserProfileSuccess,
-	GetUserProfile
-} from "../actions/auth.actions";
+
 import { selectProject } from "../selectors/project.selector";
 import { selectUrlSegment } from "../selectors/config.selector";
 
@@ -121,36 +114,15 @@ export class ProjectEffects {
 		catchError(err => of(new SetErrorMsg(err)))
 	);
 
-	/*  Responsible for Adding or updating user */
 	@Effect()
-	getUserProfile$ = this._actions$.pipe(
-		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-		switchMap(([action, userProfile]) => {
-			return this._profileService.getUserProfile(userProfile.uid).pipe(
-				switchMap(user => {
-					if (typeof user === "undefined") {
-						return of(new AddUser(userProfile));
-					} else {
-						if (user.profile) {
-							user.profileSlug = user.profile.replace(/ /g, ".");
-						}
-						return of(new GetUserProfileSuccess(user), new UpdateUser(user));
-					}
-				}),
-				catchError(err => {
-					return of(new SetErrorMsg(`${err}`));
-				})
-			);
-		})
-	);
-
-	@Effect({ dispatch: false })
 	getUserProjects$ = this._actions$.pipe(
-		ofType<GetUserProfileSuccess>(EAuthActions.GetUserProfileSuccess),
+		ofType<GetUserProjects>(EProjectActions.GetUserProjects),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
+		publishReplay(1),
+        refCount(),
 		switchMap(([action, user]) => {
 			return this._projectService.getUserProjects(user).pipe(
+				map(projects => new GetUserProjectsSuccess(projects)),
 				catchError(err => {
 					return of(new SetErrorMsg(`${err}`));
 				})
@@ -172,6 +144,8 @@ export class ProjectEffects {
 		ofType<GetSelectedProject>(EProjectActions.GetSelectedProject),
 		withLatestFrom(this._store.pipe(select(selectUrlSegment))),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		publishReplay(1),
+        refCount(),
 		switchMap(([[action, selectUrlSegment], selectLoggedInUserUID]) => {
 			if (selectUrlSegment[1] == "new-project") {
 				let type = selectUrlSegment[2];
@@ -241,7 +215,6 @@ export class ProjectEffects {
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		switchMap(([[projectUid, uid], selectProject]) => {
-			
 			let isProjectOwner = false;
 			let projectViewToggle = false;
 			let isNewProject = true;
@@ -275,7 +248,6 @@ export class ProjectEffects {
 		private _actions$: Actions,
 		private _store: Store<IAppState>,
 		private _projectService: ProjectService,
-		private _userService: UserService,
-		private _profileService: ProfileService
+		private _userService: UserService
 	) {}
 }
