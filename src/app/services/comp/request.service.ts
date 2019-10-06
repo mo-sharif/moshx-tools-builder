@@ -5,14 +5,18 @@ import {
 	HttpHeaders
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, refCount, publishReplay } from "rxjs/operators";
 
 @Injectable({
 	providedIn: "root"
 })
 export class RequestService {
 	sendPostRequest(url, data): Observable<any> {
-		return this.http.post(url, data).pipe(catchError(this.handleError));
+		return this.http.post(url, data).pipe(
+			publishReplay(1),
+			refCount(),
+			catchError(this.handleError)
+		);
 	}
 
 	private handleError(error: HttpErrorResponse) {
