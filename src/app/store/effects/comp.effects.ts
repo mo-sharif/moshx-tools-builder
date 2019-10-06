@@ -7,7 +7,7 @@ import {
 	ECompActions,
 	SendHttpRequestSuccess
 } from "../actions/comp.actions";
-import { map, switchMap, catchError, withLatestFrom, finalize } from "rxjs/operators";
+import { map, switchMap, catchError, withLatestFrom, finalize, publishReplay, refCount } from "rxjs/operators";
 import { of } from "rxjs";
 import { SetErrorMsg, SetSuccessMsg } from "../actions/message.actions";
 import { RequestService } from "src/app/services/comp/request.service";
@@ -20,6 +20,8 @@ export class CompEffects {
 		ofType<SendHttpRequest>(ECompActions.SendHttpRequest),
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectProject))),
+		publishReplay(1),
+        refCount(),
 		switchMap(([data, project]) => {
 			if (project.componentConfigs && project.componentConfigs.httpPostUrl) {
 				return this._requestService

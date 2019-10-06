@@ -2,7 +2,7 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import { of, from } from "rxjs";
-import { switchMap, map, catchError } from "rxjs/operators";
+import { switchMap, map, catchError, refCount, publishReplay } from "rxjs/operators";
 import {
 	EAuthActions,
 	GetUserAuth,
@@ -41,6 +41,8 @@ export class AuthEffects {
 	getUserAuth$ = this._actions$.pipe(
 		ofType<GetUserAuth>(EAuthActions.GetUserAuth),
 		switchMap(() => this.authService.currentUserObservable),
+		publishReplay(1),
+        refCount(),
 		switchMap(authData => {
 			if (authData == null) {
 				return of(
