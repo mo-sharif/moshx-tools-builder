@@ -6,6 +6,7 @@ import { environment } from "../../../environments/environment";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { IUser, User } from "../../models/user.interface";
 import { IProject } from "src/app/models/project.interface";
+import { publishReplay, refCount } from "rxjs/operators";
 
 @Injectable()
 export class UserService {
@@ -14,13 +15,31 @@ export class UserService {
 	constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 
 	getUserList(): Observable<any> {
-		return this.firestore.collection("/users").valueChanges();
+		return this.firestore
+			.collection("/users")
+			.valueChanges()
+			.pipe(
+				publishReplay(1),
+				refCount()
+			);
 	}
 	getUser(uid): Observable<any> {
-		return this.firestore.collection("/users", ref => ref.where("uid", "==", uid)).valueChanges();
+		return this.firestore
+			.collection("/users", ref => ref.where("uid", "==", uid))
+			.valueChanges()
+			.pipe(
+				publishReplay(1),
+				refCount()
+			);
 	}
-	getTeammates(user: IUser): Observable<any>{
-		 return this.firestore.collection("/users", ref => ref.where("profile", "==", user.profile)).valueChanges();
+	getTeammates(user: IUser): Observable<any> {
+		return this.firestore
+			.collection("/users", ref => ref.where("profile", "==", user.profile))
+			.valueChanges()
+			.pipe(
+				publishReplay(1),
+				refCount()
+			);
 	}
 	addUser(user: IUser) {
 		return this.firestore

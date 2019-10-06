@@ -18,4 +18,8 @@ export class CheckboxComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick($event) {
+    this.outputEvent.emit($event);
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, withLatestFrom, map, catchError, publishReplay, refCount } from "rxjs/operators";
+import { switchMap, withLatestFrom, map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -118,8 +118,6 @@ export class ProjectEffects {
 	getUserProjects$ = this._actions$.pipe(
 		ofType<GetUserProjects>(EProjectActions.GetUserProjects),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-		publishReplay(1),
-        refCount(),
 		switchMap(([action, user]) => {
 			return this._projectService.getUserProjects(user).pipe(
 				map(projects => new GetUserProjectsSuccess(projects)),
@@ -144,8 +142,6 @@ export class ProjectEffects {
 		ofType<GetSelectedProject>(EProjectActions.GetSelectedProject),
 		withLatestFrom(this._store.pipe(select(selectUrlSegment))),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		publishReplay(1),
-        refCount(),
 		switchMap(([[action, selectUrlSegment], selectLoggedInUserUID]) => {
 			if (selectUrlSegment[1] == "new-project") {
 				let type = selectUrlSegment[2];

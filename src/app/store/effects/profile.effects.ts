@@ -4,7 +4,7 @@ import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { ProfileService } from "../../services/profile/profile.service";
-import { map, switchMap, withLatestFrom, catchError, refCount, publishReplay } from "rxjs/operators";
+import { map, switchMap, withLatestFrom, catchError } from "rxjs/operators";
 import { IProject } from "../../models/project.interface";
 import {
 	GetProfileFromRoute,
@@ -28,8 +28,6 @@ export class ProfileEffects {
 	loadProfileFromRoute$ = this._actions$.pipe(
 		ofType<GetProfileFromRoute>(EProfileActions.GetProfileFromRoute),
 		map(action => action.payload),
-		publishReplay(1),
-        refCount(),
 		switchMap(route => {
 			let profileName = route.replace(".", " ");
 			return this._profileService.loadProfile(profileName).pipe(
@@ -48,8 +46,6 @@ export class ProfileEffects {
 	getUserProfile$ = this._actions$.pipe(
 		ofType<GetUserProfile>(EAuthActions.GetUserProfile),
 		withLatestFrom(this._store.pipe(select(selectLoggedInUser))),
-		publishReplay(1),
-        refCount(),
 		switchMap(([action, userProfile]) => {
 			return this._profileService.getUserProfile(userProfile.uid).pipe(
 				switchMap(user => {

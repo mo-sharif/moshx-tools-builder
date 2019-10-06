@@ -6,19 +6,32 @@ import { environment } from "../../../environments/environment";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { IProject } from "../../models/project.interface";
 import { IUser } from "src/app/models/user.interface";
+import { publishReplay, refCount } from "rxjs/operators";
 
 @Injectable()
 export class ProjectService {
 	constructor(private _http: HttpClient, private firestore: AngularFirestore) {}
 
 	getProjectList(): Observable<any> {
-		return this.firestore.collection("/projects").valueChanges();
+		return this.firestore
+			.collection("/projects")
+			.valueChanges()
+			.pipe(
+				publishReplay(1),
+				refCount()
+			);
 	}
 	getProject(id): Observable<any> {
 		if (!id) {
 			return of();
 		}
-		return this.firestore.collection(`/projects/${id}`).valueChanges();
+		return this.firestore
+			.collection(`/projects/${id}`)
+			.valueChanges()
+			.pipe(
+				publishReplay(1),
+				refCount()
+			);
 	}
 	getUserProjects(user: IUser): Observable<any> {
 		if (!user.profile) {
@@ -28,15 +41,25 @@ export class ProjectService {
 			.collection(`/profiles/`)
 			.doc(user.profile)
 			.collection(`/projects/`, ref => ref.where("user", "==", user.uid))
-			.valueChanges();
+			.valueChanges()
+			.pipe(
+				publishReplay(1),
+				refCount()
+			);
 	}
 
-	GetSelectedProject([profileName, projectLifeCycle, projectName]): Observable<any> {
+	GetSelectedProject([profileName, projectLifeCycle, projectName]): Observable<
+		any
+	> {
 		return this.firestore
 			.collection(`/profiles/`)
 			.doc(profileName)
 			.collection(`/projects/`, ref => ref.where("slug", "==", projectName))
-			.valueChanges();
+			.valueChanges()
+			.pipe(
+				publishReplay(1),
+				refCount()
+			);
 	}
 
 	addProject = (project: IProject) => {
