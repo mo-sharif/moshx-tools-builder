@@ -83,7 +83,7 @@ export function projectReducers(
 				...state
 			};
 		}
-		
+
 		case EProjectActions.UpdateUiComponents: {
 			return {
 				...state
@@ -93,6 +93,17 @@ export function projectReducers(
 			return {
 				...state,
 				UiComponents: action.payload
+			};
+		}
+		case EProjectActions.GetUserProjects: {
+			return {
+				...state
+			};
+		}
+		case EProjectActions.GetUserProjectsSuccess: {
+			return {
+				...state,
+				userProjects: action.payload
 			};
 		}
 
