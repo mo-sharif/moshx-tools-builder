@@ -70,7 +70,7 @@ export interface Item {
 })
 export class CustomComponent implements OnInit {
 	@Input() data: any;
-	@ViewChild("fieldKey") fieldKey: ElementRef;
+	@ViewChild("fieldKey", {static: false}) fieldKey: ElementRef;
 
 	@Output() outputEvent: EventEmitter<any> = new EventEmitter();
 

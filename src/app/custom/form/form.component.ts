@@ -79,7 +79,7 @@ export class FormComponent implements OnInit {
 
 	@Output() formData: EventEmitter<any> = new EventEmitter();
 
-	@ViewChild("fieldKey") fieldKey: ElementRef;
+	@ViewChild("fieldKey", {static: false}) fieldKey: ElementRef;
 
 	projectFrom: FormGroup;
 	controls: Array<Item> = [];
@@ -174,7 +174,9 @@ export class FormComponent implements OnInit {
 			new FormControl(null)
 			//Validators.required
 		);
-		this.fieldKey.nativeElement.value = "";
+		if (this.fieldKey && this.fieldKey.nativeElement) {
+			this.fieldKey.nativeElement.value = "";
+		}
 	}
 
 	removeField(i: Item, e: MouseEvent): void {
