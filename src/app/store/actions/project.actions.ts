@@ -18,6 +18,7 @@ export enum EProjectActions {
 	DeleteProjectSuccess = "[Project] Delete Project Success",
     GetContainers = "[Project] Get Containers",
 	GetUserProjects = "[Project] Get User Projects",
+	GetUserProjectsSuccess = "[Project] Get User Projects Success",
 	UpdateUiComponents = "[Project] Update UI Components",
 	UpdateUiComponentsSuccess = "[Project] Update UI Components Success",
 }
@@ -38,6 +39,11 @@ export class GetSelectedProjectSuccess implements Action {
 }
 export class GetUserProjects implements Action {
     public readonly type = EProjectActions.GetUserProjects;
+}
+
+export class GetUserProjectsSuccess implements Action {
+	public readonly type = EProjectActions.GetUserProjectsSuccess;
+	constructor(public payload: IProject[]) {}
 }
 
 export class GetProjectSuccess implements Action {
@@ -106,5 +112,6 @@ export type ProjectActions =
 	| DeleteProject
 	| DeleteProjectSuccess
 	| GetUserProjects
+	| GetUserProjectsSuccess
 	| UpdateUiComponents
 	| UpdateUiComponentsSuccess;
