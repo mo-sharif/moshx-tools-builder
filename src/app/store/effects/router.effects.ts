@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
-import { switchMap, map, refCount, publishReplay } from "rxjs/operators";
+import { switchMap, map } from "rxjs/operators";
 import { of } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { IAppState } from "../state/app.state";
@@ -21,8 +21,6 @@ export class routerEffects {
 	@Effect()
 	routeChange$ = this._actions$.pipe(
 		ofType<RouterNavigationAction>(ROUTER_NAVIGATION),
-		publishReplay(1),
-        refCount(),
 		switchMap((route) => {
 			let profileName = route.payload.routerState.url.split('/')[1]
 			let projectLifeCycle = route.payload.routerState.url.split('/')[2]
