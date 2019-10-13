@@ -184,7 +184,7 @@ export class ProjectEffects {
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		switchMap(([project, selectProject]) => {
-			this._userService.updateUserFromProjectName(project);
+			this._userService.updateUserProfileFromProject(project);
 			return [
 				new UpdateProfileSuccess(project.uid),
 				new NavigateToRoute([project.profile, "projects", selectProject.title])
