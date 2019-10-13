@@ -2,9 +2,6 @@ import { Injectable } from "@angular/core";
 import { Effect, ofType, Actions } from "@ngrx/effects";
 import { switchMap, map } from "rxjs/operators";
 import { of } from "rxjs";
-import { Store, select } from "@ngrx/store";
-import { IAppState } from "../state/app.state";
-
 import {
 	CloseDrawer,
 	NavigateToRoute,
@@ -52,7 +49,6 @@ export class routerEffects {
 
 	constructor(
 		private _actions$: Actions,
-		private _store: Store<IAppState>,
 		private _router: Router
 	) {}
 }
