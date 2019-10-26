@@ -43,6 +43,7 @@ import { IAppState } from "src/app/store/state/app.state";
 import { Store, select } from "@ngrx/store";
 import { SendHttpRequest } from "src/app/store/actions/comp.actions";
 import { selectSendRequestResults } from "src/app/store/selectors/comp.selectors";
+import { UpdateProjectSuccess } from "src/app/store/actions/project.actions";
 
 export interface Comp {
 	label: string;
@@ -177,6 +178,7 @@ export class FormComponent implements OnInit {
 		if (this.fieldKey && this.fieldKey.nativeElement) {
 			this.fieldKey.nativeElement.value = "";
 		}
+		this.updateProject();
 	}
 
 	removeField(i: Item, e: MouseEvent): void {
@@ -186,7 +188,13 @@ export class FormComponent implements OnInit {
 			this.controls.splice(index, 1);
 			this.projectFrom.removeControl(i.key);
 		}
+		this.updateProject();
 	}
+
+	updateProject = () => {
+		this._store.dispatch(new UpdateProjectSuccess(this.controls))
+	}
+
 	submitForm = ($event: any, sendData: IProject) => {
 		$event.preventDefault();
 		for (const key in this.projectFrom.controls) {
