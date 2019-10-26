@@ -40,6 +40,19 @@ import { selectUrlSegment } from "../selectors/config.selector";
 @Injectable()
 export class ProjectEffects {
 	@Effect()
+	newProject$ = this._actions$.pipe(
+		ofType<NewProject>(EProjectActions.NewProject),
+		map(action => action.payload),
+		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
+		switchMap(([project, selectLoggedInUserUID]) => {
+			return of(
+				new UpdateUiComponents(selectLoggedInUserUID),
+				new NewProjectSuccess(project)
+			);
+		})
+	);
+
+	@Effect()
 	saveProject$ = this._actions$.pipe(
 		ofType<SaveProject>(EProjectActions.SaveProject),
 		map(action => action.payload),
@@ -67,18 +80,6 @@ export class ProjectEffects {
 		catchError(err => of(new SetErrorMsg(`${err}`)))
 	);
 
-	@Effect()
-	newProject$ = this._actions$.pipe(
-		ofType<NewProject>(EProjectActions.NewProject),
-		map(action => action.payload),
-		withLatestFrom(this._store.pipe(select(selectLoggedInUserUID))),
-		switchMap(([project, selectLoggedInUserUID]) => {
-			return of(
-				new UpdateUiComponents(selectLoggedInUserUID),
-				new NewProjectSuccess(project)
-			);
-		})
-	);
 	@Effect()
 	updateProject$ = this._actions$.pipe(
 		ofType<UpdateProject>(EProjectActions.UpdateProject),
@@ -184,7 +185,7 @@ export class ProjectEffects {
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		switchMap(([project, selectProject]) => {
-			this._userService.updateUserFromProjectName(project);
+			this._userService.updateUserProfileFromProject(project);
 			return [
 				new UpdateProfileSuccess(project.uid),
 				new NavigateToRoute([project.profile, "projects", selectProject.title])
