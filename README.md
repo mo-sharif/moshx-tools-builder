@@ -47,6 +47,11 @@ Find your firbase configs and plug them in environments configs
 git clone https://github.com/Mosh-Media/AngularX.git
 npm install
 ng serve -o
+
+or using Docker
+Install Docker
+Build: docker-compose -f docker-compose.yml build
+Run: docker-compose -f docker-compose.yml up
 ```
 
 
