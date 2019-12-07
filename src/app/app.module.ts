@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -36,8 +36,8 @@ import { FooterComponent } from "./components/shared/footer/footer.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HomeComponent } from "./components/home/home.component";
 import { AuthEffects } from "./store/effects/auth.effects";
-import { SideMenuComponent } from './components/shared/side-menu/side-menu.component';
-import { HeaderComponent } from './components/shared/header/header.component';
+import { SideMenuComponent } from "./components/shared/side-menu/side-menu.component";
+import { HeaderComponent } from "./components/shared/header/header.component";
 import { PageNotAllowedComponent } from "./components/page-not-allowed/page-not-allowed.component";
 
 // Ant Design
@@ -48,7 +48,9 @@ import { addComponentModule } from "./directives/addComponent.module";
 import { UserService } from "./services/user/user.service";
 import { ProfileService } from "./services/profile/profile.service";
 import { UserEffects } from "./store/effects/user.effects";
-
+import {
+	SentryErrorHandler
+} from "./services/http/http-error.interceptor";
 
 @NgModule({
 	declarations: [
@@ -70,13 +72,30 @@ import { UserEffects } from "./store/effects/user.effects";
 		HttpClientModule,
 		ReactiveFormsModule,
 		StoreModule.forRoot(appReducers),
-		EffectsModule.forRoot([ConfigEffects, AuthEffects, MessageEffects, routerEffects, ProjectEffects, UserEffects, ProfileEffects]),
+		EffectsModule.forRoot([
+			ConfigEffects,
+			AuthEffects,
+			MessageEffects,
+			routerEffects,
+			ProjectEffects,
+			UserEffects,
+			ProfileEffects
+		]),
 		StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
 		AppRoutingModule,
 		NgZorroAntdModule
 	],
-	providers: [AuthService, AuthGuard, { provide: NZ_I18N, useValue: en_US }, ProjectService, UserService, ProfileService ],
+	providers: [
+		AuthService,
+		AuthGuard,
+		{ provide: NZ_I18N, useValue: en_US },
+		ProjectService,
+		UserService,
+		ProfileService,
+		,
+		{ provide: ErrorHandler, useClass: SentryErrorHandler }
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}
