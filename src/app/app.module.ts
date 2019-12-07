@@ -48,9 +48,7 @@ import { addComponentModule } from "./directives/addComponent.module";
 import { UserService } from "./services/user/user.service";
 import { ProfileService } from "./services/profile/profile.service";
 import { UserEffects } from "./store/effects/user.effects";
-import {
-	SentryErrorHandler
-} from "./services/http/http-error.interceptor";
+import { SentryErrorHandler } from "./services/http/http-error.interceptor";
 
 @NgModule({
 	declarations: [
@@ -93,7 +91,6 @@ import {
 		ProjectService,
 		UserService,
 		ProfileService,
-		,
 		{ provide: ErrorHandler, useClass: SentryErrorHandler }
 	],
 	bootstrap: [AppComponent]

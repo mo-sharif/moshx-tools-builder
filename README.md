@@ -52,6 +52,9 @@ or using Docker
 npm run docker
 ```
 
+## Tools
+[Sentry for Browser logs ](https://sentry.io/organizations/mosh-media/)
+
 
 ## Resources
 
@@ -152,10 +155,3 @@ app
 
 ### Services -> API Logic
 - Handles communications with backend and cloud
-
-
-## Upcoming tasks
-
-- [ ] Finish Firebase integrations (Auth, database and rules)
-- [ ] Finish Playground workflow
-- [ ] Write tests
