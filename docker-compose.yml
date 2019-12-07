@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
 
-  example:
-    container_name: example
+  frontend:
+    container_name: moshx
     build:
       context: .
       dockerfile: Dockerfile
