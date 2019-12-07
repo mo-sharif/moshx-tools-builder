@@ -48,9 +48,7 @@ npm install
 ng serve -o
 
 or using Docker
-Install Docker
-Build: docker-compose -f docker-compose.yml build
-Run: docker-compose -f docker-compose.yml up
+npm run docker
 ```
 
 
