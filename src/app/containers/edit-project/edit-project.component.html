@@ -125,8 +125,11 @@
 		<button nz-button nzType="default" (click)="handleCancel()">
 			Close
 		</button>
-		<button *ngIf="selectProject$ | async as selectProject" nz-button nzType="danger" (click)="deleteProject(selectProject)">
-			Delete Project
-		</button>
+		<ng-container *ngIf="!(selectUiComponents$ | async)?.isNewProject">
+			<button *ngIf="selectProject$ | async as selectProject" nz-button nzType="danger" (click)="deleteProject(selectProject)">
+				Delete Project
+			</button>
+		</ng-container>
+	
 	</ng-template>
 </nz-modal>
