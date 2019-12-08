@@ -43,7 +43,6 @@ import { IAppState } from "src/app/store/state/app.state";
 import { Store, select } from "@ngrx/store";
 import { SendHttpRequest } from "src/app/store/actions/comp.actions";
 import { selectSendRequestResults } from "src/app/store/selectors/comp.selectors";
-import { UpdateProjectSuccess } from "src/app/store/actions/project.actions";
 
 export interface Comp {
 	label: string;
@@ -156,6 +155,11 @@ export class FormComponent implements OnInit {
 		this.projectFrom = this.fb.group({});
 	}
 
+	updateForm(key, value): void {
+		this.addField(key, value);
+		this.emitFormData();
+	}
+
 	addField(key, value): void {
 		const id =
 			this.controls.length > 0
@@ -178,7 +182,6 @@ export class FormComponent implements OnInit {
 		if (this.fieldKey && this.fieldKey.nativeElement) {
 			this.fieldKey.nativeElement.value = "";
 		}
-		this.updateProject();
 	}
 
 	removeField(i: Item, e: MouseEvent): void {
@@ -188,11 +191,6 @@ export class FormComponent implements OnInit {
 			this.controls.splice(index, 1);
 			this.projectFrom.removeControl(i.key);
 		}
-		this.updateProject();
-	}
-
-	updateProject = () => {
-		this._store.dispatch(new UpdateProjectSuccess(this.controls))
 	}
 
 	submitForm = ($event: any, sendData: IProject) => {
@@ -208,8 +206,11 @@ export class FormComponent implements OnInit {
 		this._store.dispatch(new SendHttpRequest(sendData))
 	};
 
-	emitFormData = value => {
-		this.formData.emit(value);
+	emitFormData = () => {
+		if (!this.isNewProject) {
+			this.controls.length ? this.formData.emit(this.controls) : "";
+		}
+		
 	};
 
 	drop(event: CdkDragDrop<Comp[]>) {
@@ -235,8 +236,6 @@ export class FormComponent implements OnInit {
 	ngAfterContentInit() {}
 
 	ngOnDestroy() {
-		if (!this.isNewProject) {
-			this.controls.length ? this.emitFormData(this.controls) : "";
-		}
+		this.emitFormData();
 	}
 }
