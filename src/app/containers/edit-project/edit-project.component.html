@@ -31,7 +31,7 @@
 	</nz-page-header>
 	<!-- Selected Project -->
 	<ng-container
-		*ngIf="selectProject$ | async as selectProject; else showLoading"
+		*ngIf="(selectProject$ | async) as selectProject; else showLoading"
 	>
 		<ng-container *ngIf="selectProject !== 'null'">
 			<ng-container
