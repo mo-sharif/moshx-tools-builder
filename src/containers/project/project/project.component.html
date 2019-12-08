@@ -1,0 +1,35 @@
+<div>
+	<div nz-row nzType="flex" nzJustify="space-between" nzAlign="middle">
+		<div nz-col nzSpan="24">
+			<h1 class="h1-header">
+				Your Projects
+			</h1>
+		</div>
+	</div>
+	<div nz-row nzType="flex" nzGutter="12" nzJustify="space-around" nzAlign="middle">
+		<div nz-col nzSpan="24">
+			<div nz-row nzGutter="12" [@listStagger]>
+				<div nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="12" [nzXs]="12" *ngFor="let userProject of userProjects"
+					style="margin-bottom: 10px;">
+					<nz-card class="card" (click)="navigateToProjectEmit(userProject)" [nzBordered]="false"
+						[nzTitle]="userProject.title" [nzExtra]="extraTemplate">
+						{{ userProject.type }}
+					</nz-card>
+					<ng-template #extraTemplate>
+					</ng-template>
+				</div>
+				<div nz-col [nzSpan]="6" [nzMd]="6" [nzSm]="12" [nzXs]="12" *ngIf="UiComponents?.isProjectOwner" [@listStagger]>
+					<a [routerLink]="['/home/new-project']">
+						<nz-card class="card" [nzBordered]="false" nzTitle="New Project" [nzExtra]="extraTemplate">
+							Add New Project
+						</nz-card>
+					</a>
+					<ng-template #extraTemplate>
+						<i nz-icon nzType="thunderbolt" nzTheme="twotone"></i>
+					</ng-template>
+				</div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+</div>

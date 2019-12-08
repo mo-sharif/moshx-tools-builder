@@ -1,0 +1,14 @@
+<nz-empty
+[nzNotFoundImage]="
+  'https://cdn.dribbble.com/users/734476/screenshots/4020080/artboard_20.png'
+"
+[nzNotFoundContent]="contentTpl"
+[nzNotFoundFooter]="footerTpl"
+>
+<ng-template #contentTpl>
+  <span>Login first to access this page</span>
+</ng-template>
+<ng-template #footerTpl>
+    <button nz-button nzType="primary" [routerLink]="['/home/account']">Login</button>
+  </ng-template>
+</nz-empty>

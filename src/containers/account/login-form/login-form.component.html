@@ -1,0 +1,55 @@
+<form
+	nz-form
+	[formGroup]="validateForm"
+	class="login-form"
+	(ngSubmit)="submitForm($event, validateForm.value)"
+>
+	<nz-form-item>
+		<nz-form-control>
+			<nz-input-group [nzPrefix]="prefixUser">
+				<input
+					type="email"
+					nz-input
+					formControlName="email"
+					placeholder="Email"
+				/>
+			</nz-input-group>
+			<nz-form-explain
+				*ngIf="
+					validateForm.get('email')?.dirty &&
+					validateForm.get('email')?.errors
+				"
+				>Please input your email!</nz-form-explain
+			>
+		</nz-form-control>
+	</nz-form-item>
+	<nz-form-item>
+		<nz-form-control>
+			<nz-input-group [nzPrefix]="prefixLock">
+				<input
+					type="password"
+					nz-input
+					formControlName="password"
+					placeholder="Password"
+				/>
+			</nz-input-group>
+			<nz-form-explain
+				*ngIf="
+					validateForm.get('password')?.dirty &&
+					validateForm.get('password')?.errors
+				"
+				>Please input your Password!</nz-form-explain
+			>
+		</nz-form-control>
+	</nz-form-item>
+	<nz-form-item>
+		<nz-form-control>
+			<button nz-button class="login-form-button" [nzType]="'primary'">
+				Log in
+			</button>
+			<a class="login-form-forgot" class="login-form-forgot">Forgot password</a>
+		</nz-form-control>
+	</nz-form-item>
+</form>
+<ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+<ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
