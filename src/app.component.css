@@ -1,0 +1,36 @@
+.layout {
+	height: 100%;
+}
+
+.content {
+	padding: 0 50px;
+}
+.content-inner {
+	background: #fff;
+	padding: 24px;
+	min-height: 280px;
+	box-shadow: 1px 3px 2px #e8e8e8;
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+.sidebar {
+	position: fixed;
+	z-index: 1;
+	height: 100%;
+}
+.inner-layout {
+	background: none;
+	min-height: 100%;
+}
+@media only screen and (max-width: 767px) {
+	.hide-small-screen {
+		display: none;
+	}
+	.content {
+		padding: 00 10px;
+		overflow: hidden;
+	}
+	.sidebar {
+		position: relative;
+	}
+}
