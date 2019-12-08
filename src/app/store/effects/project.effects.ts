@@ -86,11 +86,12 @@ export class ProjectEffects {
 		map(action => action.payload),
 		withLatestFrom(this._store.pipe(select(selectProject))),
 		switchMap(([project, selectProject]) => {
-			this._projectService.updateProject({
+			let updatedProject = {
 				...selectProject,
-				[selectProject.type]: { ...project }
-			});
-			return of(new UpdateProjectSuccess(project[project.type]));
+				[selectProject && selectProject.type]: { ...project }
+			};
+			this._projectService.updateProject(updatedProject);
+			return of(new UpdateProjectSuccess(updatedProject));
 		}),
 		catchError(err => of(new SetErrorMsg(`${err}`)))
 	);
