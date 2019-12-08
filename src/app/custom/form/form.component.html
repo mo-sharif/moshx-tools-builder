@@ -21,8 +21,8 @@
 		</nz-form-label>
 		<nz-form-control [nzOffset]="0" [nzMd]="12" [nzSm]="24" [nzXs]="24">
 			<input class="form-field" nz-input nzType="dashed" placeholder="Field Key" #fieldKey
-				(keyup.enter)="addField(fieldKey.value, '')" />
-			<i nz-icon class="dynamic-button" nzType="plus-circle-o" (click)="addField(fieldKey.value, '')"></i>
+				(keyup.enter)="updateForm(fieldKey.value, '')" />
+			<i nz-icon class="dynamic-button" nzType="plus-circle-o" (click)="updateForm(fieldKey.value, '')"></i>
 		</nz-form-control>
 	</nz-form-item>
 	<nz-form-item>
