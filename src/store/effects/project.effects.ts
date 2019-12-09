@@ -159,13 +159,14 @@ export class ProjectEffects {
 			) {
 				return this._projectService.GetSelectedProject(selectUrlSegment).pipe(
 					switchMap(([project]) => {
-						if (project) {
-							return of(
-								new GetSelectedProjectSuccess(project),
-								new UpdateUiComponents(project.uid)
-							);
+						console.log(project)
+						if (!project) {
+							return of(new SetErrorMsg(`Project not found`));
 						}
-						return of(new SetErrorMsg(`Project not found`));
+						return of(
+							new GetSelectedProjectSuccess(project),
+							new UpdateUiComponents(project.uid)
+						);
 					}),
 					catchError(err => {
 						return of(new SetErrorMsg(`${err}`));
