@@ -42,8 +42,8 @@ Let's get this up and running! any help is highly appreciated
 ## Get Started
 
 ```
-Signup for firebase https://console.firebase.google.com
-Find your firbase configs and plug them in environments configs
+Sign up for firebase https://console.firebase.google.com
+Find your firebase configs and paste them in src/environments 
 git clone https://github.com/Mosh-Media/AngularX.git
 npm install
 ng serve -o

@@ -26,7 +26,6 @@ bld/
 [Ll]og/
 dist/
 environments/
-src/environments/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
